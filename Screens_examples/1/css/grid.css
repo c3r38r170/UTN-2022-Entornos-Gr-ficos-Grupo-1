@@ -1,0 +1,78 @@
+.container {
+    grid-template-areas: 'header'
+        'menu'
+        'content'
+        'footer';
+    grid-template-rows: 100% 100% 100% 100%;
+}
+
+body{
+    font-family: 'lato', sans-serif;
+}
+
+.title_logo, .logo{
+   margin-left: 1em;
+}
+
+ #menu{   
+    width: 100%;   
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    width: auto\9;
+    object-fit: contain;
+}
+
+.menu {
+    grid-area: menu; 
+    width: 100%;   
+    display: flex;      
+    flex-shrink: 0;      
+  justify-content:flex-start;
+  align-items:center;  
+}
+
+.header {
+    grid-area: cabecera;    
+    width: 100%;
+    padding: 1em;
+    background-color: rgb(37, 150, 226);
+    display: flex;
+    justify-content:center;        
+}
+
+.content {
+    grid-area: contenido;    
+    height: 15em;
+}
+
+.footer {
+    grid-area: footer;   
+    position: relative;
+}
+
+.myButton {
+	box-shadow:inset 0px 1px 0px 0px #ffffff;
+	background:linear-gradient(to bottom, #ffffff 5%, #f6f6f6 100%);
+	background-color:#ffffff;
+	border-radius:18px;
+	border:1px solid #dcdcdc;
+	display:inline-block;
+	cursor:pointer;
+	color:#666666;
+	font-family:Arial;
+	font-size:16px;
+	font-weight:bold;
+	padding:11px 33px;
+	text-decoration:none;
+	text-shadow:0px 1px 0px #ffffff;
+    position:absolute;
+    top:5em;
+    left: 2em;
+}
+.myButton:hover {
+	background:linear-gradient(to bottom, #f6f6f6 5%, #ffffff 100%);
+	background-color:#f6f6f6;
+}
