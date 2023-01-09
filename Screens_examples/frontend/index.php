@@ -1,7 +1,4 @@
 
-<?php
-session_start();
-?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,15 +11,12 @@ session_start();
     <script src='../js/script.js'></script><body>
 </head>
 <body>
-  <?php require_once 'header.php'?>
-  <?php require_once 'menu.php'?>
-  
-  <div class="content">
-  <!--  <img class="logo" src="../img/fondo.jpg" alt=""> -->
-    </div>
-  
-  <?php require_once 'footer.php'?>
-  
-
+  <div class="container">
+    <?php require_once 'header.php'?>
+    <?php require_once 'menu.php'?>
+    <div class="content" style="height: 11em;">  
+    </div>  
+    <?php require_once 'footer.php'?>  
+  </div>
 </body>
 </html>

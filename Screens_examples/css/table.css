@@ -1,0 +1,125 @@
+
+table caption {
+    font-size: 1.5em;
+    margin: .5em 0 .75em;
+  }
+  
+table {
+    border: 1px solid #ccc;
+    border-collapse: collapse;
+    margin: 0;
+    padding: 0;    
+    table-layout: fixed;
+}
+
+table tr {
+    background-color: #f8f8f8;
+    border: 1px solid #ddd;
+    padding: .35em;
+}
+
+table th,
+table td {
+  padding: .625em;
+  text-align: center;
+}
+
+table th {
+    font-size: .85em;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+  }
+
+.buttons{
+    display: flex;    
+}
+
+button{
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.pagination{  
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  list-style:none;
+}
+
+.modal{  
+  position: relative;
+  position: fixed; 
+  padding-top: 20px;
+  left: 0;
+  right:0;
+  top: 0;
+  bottom: 0;
+  overflow: auto; 
+  background-color: rgb(0,0,0); 
+  background-color: rgba(0,0,0,0.4);
+  z-index: 9999; 
+  overflow-y: hidden;       
+}
+
+
+.pagination a{
+  padding: 8px 16px;
+  text-decoration: none;  
+}
+
+
+
+
+@media screen and (max-width: 600px) {
+    table {
+        margin-top: 1em;
+        
+        border: 0;
+        width: 100%;
+      }
+    
+      table caption {
+        font-size: 1.3em;
+      }
+     
+      table thead {
+        border: none;        
+        height: 1px;
+        margin: -1px;
+        overflow: hidden;
+        padding: 0;
+        position: absolute;
+        width: 1px;
+      }
+      
+      table tr {
+        border-bottom: 3px solid #ddd;
+        display: block;
+        margin-bottom: .625em;
+      }
+      
+      table td {
+        border-bottom: 1px solid #ddd;
+        display: block;
+        font-size: .8em;
+        text-align: right;
+      }
+      
+      table td::before {
+        content: attr(data-label);
+        float: left;
+        font-weight: bold;
+        text-transform: uppercase;
+      }
+      
+      table td:last-child {
+        border-bottom: 0;
+      }  
+      
+      .buttons{
+        display: flex;
+        justify-content:flex-end;
+      }
+}
+
