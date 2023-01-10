@@ -1,5 +1,5 @@
 <?php
-	function nav(...$items){
+	function nav($items){
 ?>
 <style>
 	nav-container{
@@ -45,7 +45,7 @@
 	nav-container > nav ul {
 		width: 100%;
 	}
-	nav-container > nav ul {
+	nav-container > nav li {
 		float: left;
 		display: inline;
 		position: relative;
@@ -71,7 +71,7 @@
 	nav-container > nav input {
 		display: none;
 	}
-	nav-container > nav input ~ ul{
+	nav-container > nav li input ~ ul{
 		height: auto;
 		overflow: hidden;
 		width: 170px;
@@ -80,7 +80,10 @@
 		z-index: 99;
 		display: none;
 	}
-	nav-container > nav input ~ ul > li{
+	nav-container > nav li input:checked ~ ul {
+		display: block;
+	}
+	nav-container > nav li input ~ ul > li{
 		display: block;
 		width: 100%;
 	}
@@ -111,25 +114,18 @@
 
 foreach ($items as $title => $content) {
 	if(is_string($content)){
-?>
-			<li><a href="<?=$content?>"><?=$title?></li>	
-<?php
+		echo "<li><a href=\"$content\">$title</a></li>";
 	}else{
-?>
-			<li><input type="checkbox"><span><?=$title?></span>
-				<ul>
-<?php
-		foreach ($content as $subIitle => $subContent) {
-?>
-					<li><a href="<?=$content?>"><?=$title?></li>
-<?php
+		echo"<li><input type=\"checkbox\"><span>$title</span>
+				<ul>";
+		foreach ($content as $subTitle => $subContent) {
+					echo "<li><a href=\"$subContent\">$subTitle</a></li>";
 		}
-?>	
-				</ul>
-			</li>
-<?php
+		echo"		</ul>
+			</li>";
 	}
 }
+
 ?>
 		</ul>
 	</nav>
