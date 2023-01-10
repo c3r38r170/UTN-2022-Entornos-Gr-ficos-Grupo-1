@@ -8,9 +8,10 @@
 		flex-shrink: 0;
 		justify-content: flex-start;
 		align-items: center;
+		padding: 0 1rem;
+		box-sizing: border-box;
 	}
 	nav-container > img{
-		margin-left: 1em;
 		max-width: 100%;
 		height: auto;
 		object-fit: contain;
@@ -18,7 +19,7 @@
 	nav-container > h2{
 		margin-left: 1em;
 	}
-	nav-container > nav{
+	nav{
 		background: rgb(37, 150, 226);
 		color: #FFF;
 		height: 45px;
@@ -26,7 +27,7 @@
 		border-radius: 10px;
 		width: 100%;
 	}
-	nav-container > nav > input{
+	nav > input{
 		display: none;
 		margin: 0;
 		padding: 0;
@@ -35,27 +36,32 @@
 		opacity: 0;
 		cursor: pointer;
 	}
-	nav-container > nav > label {
+	nav > label {
 		display: none;
 		line-height: 45px;
 		text-align: center;
 		position: absolute;
 		left: 35px;
 	}
-	nav-container > nav ul {
+	nav > label::before {
+		font-size: 1.6em;
+		content: "\2261";
+		margin-left: 20px;
+	}
+	nav ul {
 		width: 100%;
 	}
-	nav-container > nav li {
+	nav li {
 		float: left;
 		display: inline;
 		position: relative;
 	}
-	nav-container > nav ul, nav-container > nav li {
+	nav ul, nav li {
 		margin: 0 auto;
 		padding: 0;
 		list-style: none;
 	}
-	nav-container > nav a, nav-container > nav input + span {
+	nav a, nav input + span {
 		display: block;
 		line-height: 45px;
 		padding: 0 14px;
@@ -63,15 +69,15 @@
 		color: #FFFFFF;
 		font-size: 16px;
 	}
-	nav-container > nav a:hover
-		, nav-container > nav input + span:hover {
+	nav a:hover
+		, nav input + span:hover {
 		color: #0099CC;
 		background: #F2F2F2;
 	}
-	nav-container > nav input {
+	nav input {
 		display: none;
 	}
-	nav-container > nav li input ~ ul{
+	nav li input ~ ul{
 		height: auto;
 		overflow: hidden;
 		width: 170px;
@@ -80,10 +86,10 @@
 		z-index: 99;
 		display: none;
 	}
-	nav-container > nav li input:checked ~ ul {
+	nav li input:checked ~ ul {
 		display: block;
 	}
-	nav-container > nav li input ~ ul > li{
+	nav li input ~ ul > li{
 		display: block;
 		width: 100%;
 	}
@@ -91,7 +97,10 @@
 		content: "\25BE";
 		margin-left: 5px;
 	}
-	@media screen and (max-aspect-ratio: 13/9) {
+	@media screen and (min-aspect-ratio: 13/9) { /* Pantalla horaizontal */
+
+	}
+	@media screen and (max-aspect-ratio: 13/9) { /* Pantalla vertical */
 		nav {position:relative}
 		nav ul {background:#111;position:absolute;top:100%;right:0;left:0;z-index:3;height:auto;display:none}
 		nav input ~ ul {width:100%;position:static;}
@@ -105,7 +114,7 @@
 	}
 </style>
 <nav-container>
-	<img src="../img/utn_icono 1.png" alt="">
+	<img src="img/utn_icono 1.png" alt="">
 	<h2>UTN Frro</h2>	
 	<nav>
 		<input type="checkbox"><label></label>
