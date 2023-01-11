@@ -75,7 +75,7 @@
 	}
 	nav span::after {
 		content: "\f0d7";
-		font-family: "Font Awesome 6 Free";
+		font-family: "Font Awesome 6 Free";font-weight: bold;
 		margin-left: 5px;
 		display: inline-block;transition: transform .3s;
 	}
