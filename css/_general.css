@@ -11,3 +11,7 @@ html{
 body{
 	margin: 0;
 }
+body > div a, body > a {
+  font-weight: 400 !important;
+  color: #000 !important;
+}
