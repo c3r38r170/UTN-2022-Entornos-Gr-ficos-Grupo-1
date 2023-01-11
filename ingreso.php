@@ -41,6 +41,17 @@
 				<label for="pass">Contraseña</label>
 			</div>
 	
+<?php
+
+if(isset($_GET['errores'])){
+	$errores=json_decode(urldecode($_GET['errores']),true);
+	foreach ($errores as $error) {
+		echo "<span class=formulario_error>$error</span>";
+	}
+}
+
+?>
+
 			<input type="submit" value="Entrar" name="btn_login">
 			
 		</div>
