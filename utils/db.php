@@ -5,7 +5,7 @@ class MysqliWrapper{
 	var $error;
 
 	function __construct(){
-		$data=parse_ini_file('personalizacion.ini');
+		$data=parse_ini_file('db.ini');
 		$this->dblink = new mysqli($data['host'],$data['user'],$data['password'],$data['database']);//$dbhost, $dbuser, $dbpass, $dbname);
 		$this->dblink->set_charset("utf8");
 		register_shutdown_function(array(&$this, 'destruct'));
@@ -26,7 +26,7 @@ Query: \"$q\"
 	function prepared($query,$data){
 		if($s=$this->dblink->prepare($query)){
 			$error=false;
-			if($s->bind_param(str_repeat('s',count($data))),...$data)
+			if($s->bind_param(str_repeat('s',count($data)),...$data))
 				if($s->execute())
 					switch(strtoupper(substr($query,0,3))){
 						case 'INS':
