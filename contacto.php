@@ -13,7 +13,7 @@
 <?php
 	require_once 'template/nav-function.php';
 	nav([
-		'Ingresar'=>'login.php'
+		'Ingresar'=>'ingreso.php'
 		,'Registrarse'=>'registro.php'
 		,'Consultas'=>'http://'
 		,'Gestionar'=>[
