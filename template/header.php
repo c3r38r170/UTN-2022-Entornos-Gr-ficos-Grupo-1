@@ -6,6 +6,11 @@
 		display: flex;
 		justify-content:center;
 	}
+	@media screen and (max-aspect-ratio: 13/9) { /* Pantalla vertical */
+		header {
+			display: none;
+		}
+	}
 </style>
 <header>
 	<img src="img/utn 1.png" alt="">

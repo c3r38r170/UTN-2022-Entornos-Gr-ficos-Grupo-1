@@ -20,11 +20,9 @@
 		margin-left: 1em;
 	}
 	nav{
-		background: rgb(37, 150, 226);
 		color: #FFF;
 		height: 45px;
 		padding-left: 18px;
-		border-radius: 10px;
 		width: 100%;
 	}
 	nav > input{
@@ -68,14 +66,30 @@
 		text-decoration: none;
 		color: #FFFFFF;
 		font-size: 16px;
+		cursor: pointer;
 	}
 	nav a:hover
-		, nav input + span:hover {
+		, nav input:hover + span {
 		color: #0099CC;
 		background: #F2F2F2;
 	}
+	nav span::after {
+		content: "\f0d7";
+		font-family: "Font Awesome 6 Free";
+		margin-left: 5px;
+		display: inline-block;transition: transform .3s;
+	}
+	nav input:checked + span::after{
+		transform: rotate(-180deg);
+	}
 	nav input {
-		display: none;
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		appearance: none;
+		cursor: pointer;z-index: 1;
 	}
 	nav li input ~ ul{
 		height: auto;
@@ -93,20 +107,25 @@
 		display: block;
 		width: 100%;
 	}
-	nav span::after {
-		content: "\25BE";
-		margin-left: 5px;
-	}
-	@media screen and (min-aspect-ratio: 13/9) { /* Pantalla horaizontal */
-
+	@media screen and (min-aspect-ratio: 13/9) { /* Pantalla horizontal */
+		nav{
+			border-radius: 10px;
+			background: rgb(37, 150, 226);
+		}
 	}
 	@media screen and (max-aspect-ratio: 13/9) { /* Pantalla vertical */
 		nav {position:relative}
 		nav ul {background:#111;position:absolute;top:100%;right:0;left:0;z-index:3;height:auto;display:none}
-		nav input ~ ul {width:100%;position:static;}
-		nav input ~ ul a {padding-left:30px;}
+		nav li input ~ ul {width:100%;position:static;}
+		nav li input ~ ul a {padding-left:30px;}
 		nav li {display:block;float:none;width:auto;}
 		nav input, nav label {position:absolute;top:0;left:0;display:block}
+		nav > label{
+			background: rgb(37, 150, 226);height: 100%;border-radius: 10px;width: 100%;text-align: left;
+		}
+		nav > input:checked + label{
+			border-radius: 10px 10px 0 0;
+		}
 		nav input {z-index:4}
 		nav input:checked + label {color:white}
 		nav input:checked + label:before {content:"\00d7"}
