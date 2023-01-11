@@ -103,5 +103,17 @@ function editCom(){
    } 
 }
 
+function searchCom($com){
+   $db=new MysqliWrapper();
+   
+   $vSql = "SELECT * FROM comision WHERE numero=?";
+   $rs_result = $db->prepared($vSql,[$com]);
+
+   $coms = $rs_result->fetch_all(MYSQLI_ASSOC);
+    
+   mysqli_free_result($rs_result);
+        
+   return $coms;
+}
 
 ?>

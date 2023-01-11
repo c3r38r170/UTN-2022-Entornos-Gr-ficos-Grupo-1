@@ -1,6 +1,12 @@
 <?php
 require_once 'controladores/comisiones.php';
-$coms = selectAll();
+
+
+if (isset($_GET["search"])){
+    $coms = searchCom($_GET["search"]);
+}else{
+    $coms = selectAll();
+}
 
 ?>
 <!DOCTYPE html>
@@ -105,7 +111,16 @@ $coms = selectAll();
 		,'Sobre Nosotros'=>'contacto.php'
 	]);
 ?>
-<div class="container">
+
+<div class="container">  
+    <div class="search">
+        <form action="comisiones.php" method="GET">
+            <div class="search">
+                <input type="text" class="searchTerm" placeholder="Buscar por numero" name="search">
+                <button type="submit" class="searchButton"><i class="fa-solid fa-magnifying-glass"></i></button>     
+            </div>
+        </form>
+    </div>  
 <table>
     <caption>Listado de comisiones</caption>
     <thead>
