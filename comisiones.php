@@ -9,7 +9,7 @@ $coms = selectAll();
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link rel="stylesheet" type="text/css" href="css/form.css"/>
+	<link rel="stylesheet" type="text/css" href="css/formulario.css"/>
 	<title>Document</title>	
     <!-- Los siguientes estilos son temporales para mejorar la visualización hasta que se definan los  definitivos -->
     <style>
