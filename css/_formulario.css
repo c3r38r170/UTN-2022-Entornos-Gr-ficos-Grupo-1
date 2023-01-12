@@ -61,6 +61,12 @@
 	transition: transform .5s, color .3s;
 }
 
+.formulario_error{
+	font-size: larger;
+	font-weight: bold;
+	color: red;
+}
+
 .formulario [type="submit"]{
 	background: #087cf4;
 	color:#fff;
