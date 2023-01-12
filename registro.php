@@ -5,7 +5,7 @@
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Ingreso</title>
+	<title>Registro</title>
 	
 	<link rel="stylesheet" type="text/css" href="css/ingreso.css"/>
 </head>
@@ -27,9 +27,11 @@
 ?>
 
 <div class="formulario">
-	<form action="controladores/ingreso.php" method="post">
-		<h2 class="form_titulo">Ingreso</h2>
-		<p class="form_parrafo"> ¿No tienes cuenta? <a href="registro.php">¡Registrate!</a></p>
+	<form action="controladores/registro.php" method="post">
+		<h2 class="form_titulo">Registro</h2>
+		<p class="form_parrafo"> Complete con sus datos para registrarse</p>
+
+		<input type="hidden" name="tipo" value=1>
 
 		<div class="formulario_contenedor">
 			<div class="formulario_grupo">
@@ -39,6 +41,18 @@
 			<div class="formulario_grupo">
 				<input type="password" id="pass" name="contrasenia" placeholder="" required>
 				<label for="pass">Contraseña</label>
+			</div>
+			<div class="formulario_grupo">
+				<input type="text" name="nombre" placeholder="" required>
+				<label for="pass">Nombre/s</label>
+			</div>
+			<div class="formulario_grupo">
+				<input type="text" name="apellido" placeholder="" required>
+				<label for="pass">Apellido/s</label>
+			</div>
+			<div class="formulario_grupo">
+				<input type="text" name="email" placeholder="" required>
+				<label for="pass">E-mail</label>
 			</div>
 	
 <?php
@@ -52,7 +66,7 @@ if(isset($_GET['errores'])){
 
 ?>
 
-			<input type="submit" value="Entrar" name="btn_login">
+			<input type="submit" value="Registro" name="btn_login">
 			
 		</div>
 	</form>

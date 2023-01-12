@@ -1,12 +1,13 @@
 <?php
 
 $user = $_POST["legajo"];
-$password = $_POST["password"];
+$password = $_POST["contrasenia"];
 $errores = [];
 
 if(empty($user)){
 		$errores[]= "El campo Legajo esta vacio";
 }else{
+// TODO revisar que el legajo sea único
 if(!ctype_digit($user)){
 		$errores[]= "El campo Legajo debe ser numerico";
 }
