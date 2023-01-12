@@ -32,9 +32,15 @@ CREATE TABLE `materia` (
 DROP TABLE IF EXISTS `usuarios_tipos`;
 CREATE TABLE `usuarios_tipos` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `descripcion` int(11) NOT NULL,
+  `descripcion` varchar(20) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+INSERT INTO `usuarios_tipos` (`id`, `descripcion`) VALUES
+(1,	'Estudiante'),
+(2,	'Profesor'),
+(3,	'Administración');
 
 
 DROP TABLE IF EXISTS `materia_x_comision`;
