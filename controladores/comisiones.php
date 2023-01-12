@@ -28,8 +28,7 @@ function insertCom(){
 
     if(!ctype_alnum($name)){          
        $error = "El campo Nombre debe ser alfanumerico";
-       $_SESSION["error"] = $error;
-       header('Location: ../form_comisiones.php');       
+       header("Location: ../form_comisiones.php?error=".urlencode(json_encode($error)));      
     }
     else{
       $vSql = "SELECT * FROM comision WHERE numero=?";
@@ -38,15 +37,14 @@ function insertCom(){
 
       if($registers == 1){       
          $error = "Ya existe una comision con ese numero!";
-         $_SESSION["error"] = $error;
-         header('Location: ../form_comisiones.php');        
+         header("Location: ../form_comisiones.php?error=".urlencode(json_encode($error)));
       }else{
          $vSql = "INSERT INTO comision (numero) VALUES (?)";
          $db->prepared($vSql,[$name]);
          $success = "Comision cargada con exito!";
-         $_SESSION["success"] = $success;
-         mysqli_free_result($vResult);
-         header('Location: ../form_comisiones.php');        
+         mysqli_free_result($vResult);         
+         header("Location: ../form_comisiones.php?success=".urlencode(json_encode($success)));         
+         
       }
     }
         
@@ -80,10 +78,9 @@ function editCom(){
    session_start();           
    extract($_REQUEST);
 
-   if(!ctype_alnum($name)){          
+   if(!ctype_alnum($name)){       
       $error = "El campo Nombre debe ser alfanumerico";
-      $_SESSION["error"] = $error;
-      header('Location: ../form_comisiones.php?id='.$id.'&number='.$name);             
+      header("Location: ../form_comisiones.php?id=".$id."&number=".$name."&error=".urlencode(json_encode($error)));              
    }
    else{
      $vSql = "SELECT * FROM comision WHERE numero=?";
@@ -92,8 +89,7 @@ function editCom(){
 
      if($registers == 1){       
         $error = "Ya existe una comision con ese numero!";
-        $_SESSION["error"] = $error;
-        header('Location: ../form_comisiones.php?id='.$id.'&number='.$name);             
+        header('Location: ../form_comisiones.php?id='.$id.'&number='.$name."&error=".urlencode(json_encode($error)));                     
      }else{
         $vSql = "UPDATE comision set numero=? WHERE id=?";
         $db->prepared($vSql,[$name,$id]);
