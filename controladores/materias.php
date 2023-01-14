@@ -137,8 +137,6 @@ if(!empty($_POST["btn_up"])){
     return $materias;
 
   }
-
-  
 ?>
 
 

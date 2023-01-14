@@ -1,5 +1,6 @@
 <?php
 require_once 'controladores/materias.php';
+
 if(isset($_POST['btn_search'])){
 	$nameMateria = $_POST['search_materia'];
 	$materias = searchMaterias($nameMateria);
@@ -7,7 +8,6 @@ if(isset($_POST['btn_search'])){
 else{
 	$materias = getAllMaterias();
 }
-
 ?>
 
 <!DOCTYPE html>
@@ -63,6 +63,7 @@ else{
 </div>
 
 
+   
 <div class="container_table">
 	<table class="table">
      	<thead>
