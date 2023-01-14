@@ -78,3 +78,8 @@
 	border-radius: .5em;
 	cursor: pointer;
 }
+
+.form_link{
+    font-weight: 400;
+    color: #000;
+}
