@@ -1,7 +1,7 @@
 <?php
 require_once 'controladores/comisiones.php';
 
-if (isset($_GET["search"])){
+if (isset($_GET["search"]) && $_GET["search"]!=""){
     $coms = searchCom($_GET["search"]);
 }else{
     $coms = selectAll();
@@ -45,15 +45,18 @@ if (isset($_GET["search"])){
 	]);
 ?>
 
-<div class="container">  
-    <div class="search">
+<div class="container_search">  
+    <div class="search_box">
         <form action="comisiones.php" method="GET">
             <div class="search">
                 <input type="text" class="searchTerm" placeholder="Buscar por numero" name="search">
-                <button type="submit" class="searchButton"><i class="fa-solid fa-magnifying-glass"></i></button>     
+                <button type="submit" name="btn_search" class="btn_search">
+                    <i class="fas fa-search" data-title="Buscar" ></i>
+                </button>     
             </div>
         </form>
     </div> 
+</div>    
     <h1 class="title_list">Listado de Comisiones</h1>     
 <div class="container_table">    
 <table class="table">    
