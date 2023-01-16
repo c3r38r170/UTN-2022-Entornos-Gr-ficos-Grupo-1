@@ -63,6 +63,16 @@ table th {
     margin-bottom: 30%;
 }
 
+
+
+#edit, #delete{
+    width: 200px;
+}
+
+#column_id{
+    width: 100px;
+}
+
 @media (max-width: 1000px) {
     table {
         border:0;

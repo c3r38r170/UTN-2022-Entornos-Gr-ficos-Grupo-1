@@ -68,10 +68,10 @@ else{
 	<table class="table">
      	<thead>
      		<tr>
-     	 		<th>ID</th>
+     	 		<th id="column_id">ID</th>
      	 		<th>Nombre</th>
-     	 		<th></th>
-     	 		<th></th>
+     	 		<th id="edit"></th>           
+     	 		<th id="delete"></th>
      		</tr>
      	</thead>
         <tbody>
