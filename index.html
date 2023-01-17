@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=\, initial-scale=1.0">
+	<link rel="stylesheet" type="text/css" href="../css/_file.css">
+	<title>Document</title>
+</head>
+<body>
+
+<div class="container">
+	<div class="card">
+	  <h3>Carga de Horarios de Consulta</h3>
+	  <p> Este apartado se encuentra dedicado a la carga mediante un archivo Excel (cualquiera de sus respectivas versiones/formatos)
+		de los horarios de consulta de los docentes del Departamento de ISI.
+	  </p>
+	  <p>
+		Para facilitar el uso y carga del mismo, proporcionamos una planilla con el formato adecuado, la cual debe descargar,
+		completar y subir, mediante el siguiente enlace:
+	  </p>
+	  <a href="horarios.xlsx" download="Plantilla Horarios de Consulta.xlsx"> Descargar Planilla Horarios de Consulta</a>
+	  <div class="drop_box">
+		
+		  <h4>Selecciona un archivo aqui:</h4>
+		
+		<p>Importante: solo se soportan archivos Excel en cualquiera de sus versiones</p>
+		<form action="subido.php" enctype="multipart/form-data" method="post">
+			 <input type="file" name="archivo" accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"  required>
+			 <!-- lei en Stack Overflow que el string dentro del atributo accept permite todas las versiones de exel.
+		   TO DO: Hay que hacer casos de prueba :) -->
+			 <input type="submit" class="btn" value="Subir Archivo">
+		</form>
+	  </div>
+  
+	</div>
+  </div>
+
+</body>
+</html>
+
+
+
