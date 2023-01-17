@@ -1,47 +1,53 @@
 <?php
 
-$user = $_POST["legajo"];
-$password = $_POST["contrasenia"];
+require_once '../utils/db.php';
+
+$legajo = $_POST["legajo"];
+$contrasenia = $_POST["contrasenia"];
 $errores = [];
 
-if(empty($user)){
-		$errores[]= "El campo Legajo esta vacio";
+if(empty($legajo)){
+	$errores[]= "El campo Legajo esta vacio";
 }else{
 // TODO revisar que el legajo sea único
-if(!ctype_digit($user)){
+	if(!ctype_digit($legajo)){
 		$errores[]= "El campo Legajo debe ser numerico";
+	}
 }
+if(empty($contrasenia)){
+	$errores[]= "El campo Contraseña esta vacio";
 }
-if(empty($password)){
-		$errores[]= "El campo Contraseña esta vacio";
-}
+
 
 if(!$errores){
-
-	// TODO use MysqliWrapper
-
-	// TODO use password_hash
-
-	$query="SELECT*FROM usuario where legajo='$user' and contrasenia='$password'";
-	//ejecuto consulta
-	$result=mysqli_query($conn,$query);
-	//tomo las cantidad de filas que devolvio la consulta
-	$rows=mysqli_num_rows($result);
-
-// TODO $_SESSION
-
-	//validamos si devolvio una fila
-	if($rows > 0){
-		//hacemos un redirect a la vista correspondiente del usuario logueado
+	if(loguear($legajo,$contrasenia)){
+		// TODO $_SESSION
+		$_SESSION['usuario'] = $legajo;
+		// TO DO hacemos un redirect a la vista correspondiente del usuario logueado
 		header("location: ../index.php");
 		die;
-	}else{
+	} else{
 		$errores[]= "Error autentificacion";
 	}
-	mysqli_free_result($result);
-	mysqli_close($conn);
 }
 
 header("Location: ../ingreso.php?errores=".urlencode(json_encode($errores)));
+
+
+function loguear($legajo, $contrasenia){
+
+	$db=new MysqliWrapper();
+	$contrasenia_existente = "";
+	$sql = "SELECT * FROM usuarios where legajo= ?";
+    $resultado = $db->prepared($sql,[$legajo]);
+    $contrasenia_existente = $resultado->fetch_array()['contrasenia'];
+	mysqli_free_result($resultado);
+
+	if(password_verify($contrasenia, $contrasenia_existente)){ //validamos pass de html = pass con hash de la db
+		return true ;
+	}else{
+		return false;
+	}
+}
 
 ?>

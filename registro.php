@@ -67,6 +67,10 @@ if(isset($_GET['errores'])){
 		echo "<span class=formulario_error>$error</span>";
 	}
 }
+if(isset($_GET["success"])){
+	$success = json_decode(urldecode($_GET['success']),true);
+	echo "<span>$success</span>";
+}
 
 ?>
 
