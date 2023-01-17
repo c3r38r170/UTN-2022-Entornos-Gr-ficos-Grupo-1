@@ -24,6 +24,10 @@
 	]);
 ?>
 
+<?php require_once 'utils/breadcrumbs.php'; 
+     echo formComBreadcrumbs();
+?>
+
 <div class="formulario">
         <form action="controladores/comisiones.php" class="form" method="post">
             <h2 class="form_titulo">Comisiones</h2>            

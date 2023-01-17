@@ -5,8 +5,7 @@
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Ingreso</title>
-	
+	<title>Ingreso</title>	
 	<link rel="stylesheet" type="text/css" href="css/ingreso.css"/>
 </head>
 <body>
@@ -24,6 +23,10 @@
 		,'Sobre Nosotros'=>'contacto.php'
 	]);
 
+?>
+
+<?php require_once 'utils/breadcrumbs.php'; 
+     echo loginBreadcrumbs();
 ?>
 
 <div class="formulario">

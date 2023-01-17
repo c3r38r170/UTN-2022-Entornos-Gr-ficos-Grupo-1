@@ -1,0 +1,32 @@
+ul.breadcrumbs {
+	padding: 10px 16px;
+	list-style: none;
+    display: flex;	
+    justify-content: center;
+  }
+  
+  
+  ul.breadcrumbs li {
+	display: inline;
+	font-size: 18px;
+  }
+  
+  
+  ul.breadcrumbs li+li:before {
+	padding: 8px;
+	color: black;
+	content: "/\00a0";
+  }
+  
+  
+  ul.breadcrumbs li a {
+	color: black;
+	text-decoration: none;
+  }
+  
+  
+  ul.breadcrumbs li a:hover {
+	color: white;
+	text-decoration: none;
+    background-color: rgb(37, 150, 226);
+  }

@@ -26,6 +26,10 @@
 
 ?>
 
+<?php require_once 'utils/breadcrumbs.php'; 
+     echo registerBreadcrumbs();
+?>
+
 <div class="formulario">
 	<form action="controladores/registro.php" method="post">
 		<h2 class="form_titulo">Registro</h2>

@@ -45,6 +45,10 @@ if (isset($_GET["search"]) && $_GET["search"]!=""){
 	]);
 ?>
 
+<?php require_once 'utils/breadcrumbs.php'; 
+     echo comBreadcrumbs();
+?>
+
 <h1 class="title_list">Listado de Comisiones</h1>     
 
 <div class="container_search">  

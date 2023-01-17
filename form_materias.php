@@ -26,6 +26,10 @@
 
 ?>
 
+<?php require_once 'utils/breadcrumbs.php'; 
+     echo formMatBreadcrumbs();
+?>
+
 <div class="formulario">
 	<form action="controladores/materias.php" method="post">
 		<h2 class="form_titulo">Materias</h2>

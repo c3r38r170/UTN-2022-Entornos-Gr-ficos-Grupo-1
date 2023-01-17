@@ -51,6 +51,10 @@ else{
 
 ?>
 
+<?php require_once 'utils/breadcrumbs.php'; 
+     echo matBreadcrumbs();
+?>
+
 <h1 class="title_list">Listado de Materias</h1>
 
 <div class="container_search">

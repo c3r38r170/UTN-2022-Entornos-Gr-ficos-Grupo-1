@@ -1,5 +1,6 @@
 @import '_general.css';
 @import '_formulario.css';
+@import 'breadcrumbs.css';
 
 .form_parrafo{
 	font-weight: 300;

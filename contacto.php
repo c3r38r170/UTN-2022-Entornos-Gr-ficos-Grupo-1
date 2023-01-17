@@ -25,6 +25,10 @@
 
 ?>
 
+<?php require_once 'utils/breadcrumbs.php'; 
+     echo contactBreadcrumbs();
+?>
+
 <div class="container_form">
 	<form action="./controladores/contacto.php" method="post">
 		<h2 class="tittle">Sobre Nosotros</h2>
