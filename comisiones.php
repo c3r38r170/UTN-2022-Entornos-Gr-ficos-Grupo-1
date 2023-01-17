@@ -4,7 +4,7 @@ require_once 'controladores/comisiones.php';
 if (isset($_GET["search"]) && $_GET["search"]!=""){
     $coms = searchCom($_GET["search"]);
 }else{
-    $coms = selectAll();
+    $coms = selectComs();
 }
 
 ?>
@@ -45,6 +45,8 @@ if (isset($_GET["search"]) && $_GET["search"]!=""){
 	]);
 ?>
 
+<h1 class="title_list">Listado de Comisiones</h1>     
+
 <div class="container_search">  
     <div class="search_box">
         <form action="comisiones.php" method="GET">
@@ -57,7 +59,7 @@ if (isset($_GET["search"]) && $_GET["search"]!=""){
         </form>
     </div> 
 </div>    
-    <h1 class="title_list">Listado de Comisiones</h1>     
+    
 <div class="container_table">    
 <table class="table">    
     <thead>

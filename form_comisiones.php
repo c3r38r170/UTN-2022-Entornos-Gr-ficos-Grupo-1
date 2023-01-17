@@ -27,6 +27,7 @@
 <div class="formulario">
         <form action="controladores/comisiones.php" class="form" method="post">
             <h2 class="form_titulo">Comisiones</h2>            
+			<p class="form_parrafo"> Ingrese datos de la comision</p>
             <div class="formulario_contenedor">
                 <div class="formulario_grupo">
                     <input type="text" id="leg" name="name"  class="form_input" placeholder="" value="<?= isset($_GET['id']) ? $_GET['number'] : "" ?>" required>
@@ -36,6 +37,7 @@
                 <input type="submit" value="Guardar" name=<?= !isset($_GET['id']) ? "btn_save" : "btn_edit"?> 
 				class="form_submit" required>				
 				<input type="hidden" value="<?=isset($_GET['id']) ? $_GET['id'] : ""?>" name="id">
+				<p class="form_parrafo"><a href="comisiones.php" class="form_link">Regresar al listado</a></p>
 				  <?php
 				  if(isset($_GET['error'])){
 					$error=json_decode(urldecode($_GET['error']),true);
