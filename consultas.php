@@ -33,7 +33,7 @@ if (isset($_GET["search"]) && $_GET["search"]!=""){
 	]);
 ?>
 
-<?php require_once 'utils/breadcrumbs.php'; 
+<?php require_once 'template/breadcrumbs.php'; 
      echo consultasBreadcrumbs();
 ?>
 

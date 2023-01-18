@@ -27,7 +27,7 @@
 
 ?>
 
-<?php require_once 'utils/breadcrumbs.php'; 
+<?php require_once 'template/breadcrumbs.php'; 
      echo horariosBreadcrumbs();
 ?>
 
