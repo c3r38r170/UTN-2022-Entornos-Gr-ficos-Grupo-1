@@ -1,0 +1,112 @@
+@import '_general.css';
+
+/*Table Styles */
+
+.table-striped thead th{ 
+    text-transform: uppercase;
+    background-color: #1C2833 ;
+    color:#fff;
+    text-align: center;
+}
+
+table thead tr{
+    background-color: #1C2833 ;
+    color:#fff;
+}
+
+
+table tr {
+    border: 1px solid #A6ACAF;
+    padding: 5px;
+    background-color: #F0F3F4 ;
+    font-size: 18px;
+}
+
+
+table {
+    border: 1px solid #A6ACAF;
+    width: 100%;
+    margin: 20px auto;
+    border-collapse: collapse;
+}
+
+   table td img{
+    border-radius:10px;
+    width:100px;
+    height:auto;
+    margin:auto;    
+}
+
+
+table tr:nth-child(even) {
+    background-color: #ECF0F1;
+}
+
+
+tr:hover td{
+    background-color: #B0C4DE;
+    color: #000000;
+}
+
+table td, table th {
+    padding: 10px;
+    text-align: left;
+}
+
+table th {
+    text-transform: uppercase;
+    font-family: 20px;
+    letter-spacing: 1px;
+}
+
+.container_table{
+    margin-bottom: 30%;
+}
+
+
+
+#edit, #delete{
+    width: 200px;
+}
+
+#column_id{
+    width: 100px;
+}
+
+@media (max-width: 1000px) {
+    table {
+        border:0;
+    }
+
+    table tr {
+        margin-bottom: 10px;
+        display: block;
+        border-bottom: 2px solid #A6ACAF;
+
+    }
+
+    table td {
+        display: block;
+        text-align: right;
+        font-size: 16px;
+        border-bottom: 1px dotted #A6ACAF;
+    }
+
+    table td:last-child {
+        border-bottom: 0;
+    }
+
+    table td:before {
+        content: attr(data-label);
+        float: left;
+        text-transform: uppercase;
+        font-weight: 600;
+    }
+
+    table thead {
+        display: none;
+    }
+    .container_table{
+        margin-bottom: 80%;
+    }
+}
