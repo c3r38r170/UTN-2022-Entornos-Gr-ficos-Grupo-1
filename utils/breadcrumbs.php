@@ -44,4 +44,10 @@ function formComBreadcrumbs(){
 	return generateBreadcrumbs($breadcrumbs);
 }
 
+function horariosBreadcrumbs(){
+	$breadcrumbs = [array("link" => "horarios.php","text" => "Home"), array("link" => "#","text" => "Horarios")] ;	
+	return generateBreadcrumbs($breadcrumbs);
+}
+
+
 ?>
