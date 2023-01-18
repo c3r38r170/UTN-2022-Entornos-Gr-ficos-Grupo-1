@@ -1,0 +1,154 @@
+@import '_general.css';
+@import 'breadcrumbs.css';
+
+.container {
+    height: auto;
+    width: 100%;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    background-color: #ffffff;
+    margin: 50px auto;
+    margin-bottom: 30%;
+  }
+
+  .card {
+    border-radius: 10px;
+    box-shadow: 0 5px 10px 0 rgb(0 0 0 / 30%);
+    width: 60%;
+    background-color: #fcfcfc;
+    padding: 10px 30px 40px;
+    height: auto;
+  }
+
+  .card h3 {
+    font-size: 22px;
+    font-weight: 600;
+
+  }
+
+  .card a:hover{
+    color:#005af0;
+  }
+
+  .card p{
+    font-size: 17px;
+  }
+
+  .drop_box {
+    margin: 20px 0;
+    padding: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    border: 3px dotted #a3a3a3;
+    border-radius: 5px;
+  }
+
+  .drop_box h4 {
+    font-size: 17px;
+    font-weight: 400;
+    color: #2e2e2e;
+  }
+
+  .drop_box p {
+    margin-bottom: 20px;
+    font-size: 16;
+    color: #616A6B;
+  }
+
+  .drop_box form{
+    width: 100%;
+    margin: 20px;
+
+  }
+
+  .btn {
+    text-decoration: none;
+    background-color: #005af0;
+    color: #ffffff;
+    padding: 10px 20px;
+    border: none;
+    outline: none;
+    transition: 0.3s;
+    border-radius: 10px;
+    font-weight: 400;
+    cursor: pointer;
+  }
+
+  .btn:hover{
+    text-decoration: none;
+    background-color: #ffffff;
+    color: #005af0;
+    padding: 10px 15px;
+    border: none;
+    outline: 1px solid #010101;
+    font-weight: bold;
+  }
+  .form input {
+    margin: 10px 0;
+    width: 100%;
+    background-color: #e2e2e2;
+    border: none;
+    outline: none;
+    padding: 12px 20px;
+    border-radius: 4px;
+  }
+
+  input[type=file] {
+    width: 60%;
+    max-width: 100%;
+    color: #444;
+    padding: 5px;
+    background: #fff;
+    border-radius: 10px;
+    border: 1px solid #555;
+    margin-left: 10%;
+
+  }
+
+  input[type=file]::file-selector-button {
+    margin-right: 20px;
+    border: none;
+    background: #084cdf;
+    padding: 10px 20px;
+    border-radius: 10px;
+    color: #fff;
+    cursor: pointer;
+    transition: background .2s ease-in-out;
+  }
+
+  input[type=file]::file-selector-button:hover {
+    background: #0d45a5;
+
+  }
+
+  @media (max-width: 1000px) {
+    input[type=file] {
+      width: 100%;
+      padding: 0;
+      margin: 20px 0;
+      border: 1px solid #555;
+      margin-left: 0;
+    }
+
+    .btn{
+      width: 100%;
+    }
+
+    .container{
+        margin-bottom: 40%;
+    }
+  }
+
+  @media (max-width: 700px) {
+
+    .container{
+        margin-bottom: 70%;
+    }
+
+    input[type=file] {
+        border: none;
+      }
+  }
