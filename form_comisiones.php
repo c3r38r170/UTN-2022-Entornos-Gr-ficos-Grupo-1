@@ -9,23 +9,11 @@
 	<title>Document</title>	
 </head>
 <body>
-<?php require_once 'template/header.php'; ?>
-<?php
-	require_once 'template/nav-function.php';
-	nav([
-		'Ingresar'=>'login.php'
-		,'Registrarse'=>'registro.php'
-		,'Consultas'=>'http://'
-		,'Gestionar'=>[
-			'Usuarios'=>'usuarios.php'
-			,'Comisiones'=>'comisiones.php'
-		]
-		,'Sobre Nosotros'=>'contacto.php'
-	]);
-?>
-
-<?php require_once 'utils/breadcrumbs.php'; 
-     echo formComBreadcrumbs();
+<?php 
+    require_once 'template/header.php';
+    require_once 'template/navs/landing.php';
+		require_once 'utils/breadcrumbs.php'; 
+    echo formComBreadcrumbs();
 ?>
 
 <div class="formulario">

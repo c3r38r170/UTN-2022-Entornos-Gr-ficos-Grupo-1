@@ -9,24 +9,11 @@
 	<link rel="stylesheet" type="text/css" href="css/ingreso.css"/>
 </head>
 <body>
-<?php require_once 'template/header.php'; ?>
-<?php
-	require_once 'template/nav-function.php';
-	nav([
-		'Ingresar'=>'ingreso.php'
-		,'Registrarse'=>'registro.php'
-		,'Consultas'=>'http://'
-		,'Gestionar'=>[
-			'Usuarios'=>'usuarios.php'
-			,'Carreras'=>'carreras.php'
-		]
-		,'Sobre Nosotros'=>'contacto.php'
-	]);
-
-?>
-
-<?php require_once 'utils/breadcrumbs.php'; 
-     echo loginBreadcrumbs();
+<?php 
+    require_once 'template/header.php';
+    require_once 'template/navs/landing.php';
+		require_once 'utils/breadcrumbs.php'; 
+	  echo loginBreadcrumbs();
 ?>
 
 <div class="formulario">

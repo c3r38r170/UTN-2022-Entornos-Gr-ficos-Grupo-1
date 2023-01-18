@@ -33,26 +33,11 @@ else{
 </script>
 
 <body>
-<?php require_once './template/header.php'; ?>
-
-<?php
-	require_once './template/nav-function.php';
-	nav([
-		'Ingresar'=>'login.php'
-		,'Registrarse'=>'registro.php'
-		,'Consultas'=>'http://'
-		,'Gestionar'=>[
-			'Usuarios'=>'usuarios.php'
-			,'Comisiones'=>'comisiones.php'
-			,'Materias'=>'materias.php'
-		]
-		,'Sobre Nosotros'=>'contacto.php'
-	]);
-
-?>
-
-<?php require_once 'utils/breadcrumbs.php'; 
-     echo matBreadcrumbs();
+<?php 
+    require_once 'template/header.php';
+    require_once 'template/navs/landing.php';
+		require_once 'utils/breadcrumbs.php'; 
+    echo matBreadcrumbs();
 ?>
 
 <h1 class="title_list">Listado de Materias</h1>
