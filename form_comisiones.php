@@ -12,7 +12,7 @@
 <?php 
     require_once 'template/header.php';
     require_once 'template/navs/landing.php';
-		require_once 'utils/breadcrumbs.php'; 
+		require_once 'template/breadcrumbs.php'; 
     echo formComBreadcrumbs();
 ?>
 
