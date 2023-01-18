@@ -12,10 +12,8 @@ else{
         $rows=$excel->rows();
         return uploadFile($rows);
     }	    
-    else header("Location: ../horarios.php?error=".urlencode(json_encode("Formato con compatible!")));    
+    else header("Location: ../horarios.php?error=".urlencode(json_encode("Formato np compatible!")));    
 }
 
-echo(json_encode($rows));
-die;
 
 
