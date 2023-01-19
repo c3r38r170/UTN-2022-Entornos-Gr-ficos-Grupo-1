@@ -51,8 +51,8 @@ function delete($id){
    $vSql = "DELETE FROM comision WHERE id=?";
    if($db->prepared($vSql,[$id]))
       header('Location: ../comisiones.php');              
-   else    
-      header('Location: ../comisiones.php?error='.urlencode(json_encode("No es posible realizar esta operacion")));                 
+   else 
+      throw new Exception("No es posible realizar esta operacion");            
 }
 
 function editCom(){

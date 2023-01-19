@@ -37,12 +37,7 @@ else{
     require_once 'template/header.php';
     require_once 'template/navs/landing.php';
 		require_once 'template/breadcrumbs.php'; 
-    echo matBreadcrumbs();
-
-	if(isset($_GET['error'])){      
-		$error=json_decode(urldecode($_GET['error']),true);    	
-		echo '<script type="text/javascript">alert("'.$error.'");</script>';
-	}
+    echo matBreadcrumbs();	
 ?>
 
 <h1 class="title_list">Listado de Materias</h1>

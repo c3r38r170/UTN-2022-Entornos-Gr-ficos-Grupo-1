@@ -67,7 +67,7 @@ function getAll(){
     if($db->prepared($sql,[$id]))
       header('Location: ../materias.php'); 
     else
-      header('Location: ../comisiones.php?error='.urlencode(json_encode("No es posible realizar esta operacion")));                     
+      throw new Exception("No es posible realizar esta operacion");            
 
   }
 

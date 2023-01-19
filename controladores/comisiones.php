@@ -8,7 +8,14 @@ if(isset($_POST['btn_save']))
    insertCom();
 }
 if(isset($_POST['delete'])){
-   delete($_POST['id']);   
+   //delete($_POST['id']);   
+   try{
+      delete($_POST['id']);   
+   }catch(Exception $e){      
+      echo '<script type="text/javascript">alert("'.$e->getMessage().'");
+            window.location.href="../comisiones.php";
+            </script>';      
+   }
 }
 if(isset($_POST['btn_edit']))
 {  

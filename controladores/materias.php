@@ -8,9 +8,16 @@ if(!empty($_POST["btn_add"])){
   insertMateria();
 }
 
-if(!empty($_POST["btn_delete"])){
-  $id = $_POST['id'];
-  deleteMateria($id);   
+if(!empty($_POST["btn_delete"])){  
+  try{
+      $id = $_POST['id'];
+      deleteMateria($id);   
+  }catch(Exception $e){      
+      echo '<script type="text/javascript">alert("'.$e->getMessage().'");
+            window.location.href="../materias.php";
+            </script>';      
+   }
+
 }
 
 if(!empty($_POST["btn_up"])){
