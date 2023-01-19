@@ -15,23 +15,12 @@ if(!(
 	die;
 }
 
-$tipoNumero;
-$tipo;
-switch($tipoNumero=(int)$_POST['tipo']){
-	case 1:
-		$tipo=UsuariosTipos::Estudiante;
-		break;
-	case 2:
-		$tipo=UsuariosTipos::Profesor;
-		break;
-	case 3:
-		$tipo=UsuariosTipos::Administracion;
-		break;
-}
+$tipoNumero;=(int)$_POST['tipo']
+$tipo=numeroAUsuarioTipo($tipoNumero);
 
 session_start(['read_and_close'=>true]);
 
-if($tipo!=UsuariosTipos::Estudiante && $_SESSION['tipo']!=UsuariosTipos::Administracion){
+if($tipo!=UsuarioTipos::ESTUDIANTE && !sessionEsAdministracion()){
 	header("Location: ../ingreso.php?errores=".urlencode(json_encode(['No tinene los permisos suficientes.'])));
 	die;
 }
@@ -45,8 +34,7 @@ if(!$legajo)
 $contrasenia=trim($_POST['contrasenia']);
 if(empty($contrasenia)){
 	$errores[]= "La contraseña no debe estar vacia.";
-}
-else{
+}else{
 	$contrasenia = password_hash($contrasenia, PASSWORD_DEFAULT);
 }	
 
@@ -65,8 +53,7 @@ if(empty($email))
 if(count($errores)){
 	header("Location: ../ingreso.php?errores=".urlencode(json_encode($errores)));
 	die;
-}
-else{
+}else{
 	if(getOne($legajo)){
 		$errores[]= "El usuario ya existe.";
 		header("Location: ../registro.php?errores=".urlencode(json_encode($errores)));
@@ -87,14 +74,13 @@ function getOne($legajo){
 
 	if($registros == 1){
 		return true;
-	}
-	else{
+	}else{
 		return false;
 	}
-  }
+}
 
 
-  function insertUsuario($nombre, $apellido, $email, $legajo, $contrasenia, $tipoNumero){
+function insertUsuario($nombre, $apellido, $email, $legajo, $contrasenia, $tipoNumero){
 	$db=new MysqliWrapper();
 	$db->prepared(
 		"INSERT INTO `usuarios` (`nombre_completo`,`correo`,`legajo`,`contrasenia`,`tipo_id`) VALUES (?,?,?,?,?)"
