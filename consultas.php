@@ -12,6 +12,7 @@ require_once 'utils/getDate.php';
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">	
     <link rel="stylesheet" type="text/css" href="css/materias.css"/>
+    <link rel="stylesheet" type="text/css" href="css/_consultas.css"/>
 	<title>Document</title>	   
 </head>
 <body>
@@ -37,25 +38,40 @@ require_once 'utils/getDate.php';
     </div> 
 </div>    
  
-<!-- TODO hacer un card para mostrar esta información -->
 <?php if (isset($_GET["search"]) && ($search=trim($_GET["search"]))!=""){
     $offset=isset($_GET['offset'])?0:(int)$_GET['offset'];
     $cons = searchCon($search,$offset,11);
     $hayMas=false;
-    foreach ($cons as $i=> $row) { 
+    foreach ($cons as $i=> $row) {
         if($i==10){ // * índice 10 es elemento 11
             $hayMas=true;
             break;
         }
 ?> 
-      <p>Docente: <?php echo ($row['nombre_completo']); ?> 
-         Materia: <?php echo ($row['nombre']); ?> 
-         Comision: <?php echo ($row['numero']); ?> 
-         Fecha: <?php echo getWeekDate($row['dia_de_la_semana']); ?> 
-         Horario: <?php echo ($row['hora_desde']). ' hs'; ?> 
-         Aula: <?php echo ($row['aula']); ?> 
-      </p>            
-<?php }
+    <div class="container">
+        <div class="card">
+		    <div class="left-column">
+                <h2 class="card_title">Materia</h2> 
+                <h4> <!-- Materia --> <?php echo ($row['nombre']); ?> </h4>
+                <h3 class="card_title"> <!-- Comision --> Comisión: <?php echo ($row['numero']); ?> </h3> 
+			    <img src="img/consulta_icono_1.png"></img>
+		    </div>
+		    <div class="right-column">
+			    <h2> <!-- Docente --> Docente <?php echo ($row['nombre_completo']); ?> </h2>
+                <h3>Información básica</h3>
+			    <p>
+                    <span><!-- Fecha --> Fecha: </span> <?php echo getWeekDate($row['dia_de_la_semana']); ?>
+                    </br> 
+                    <span><!-- Horario --> Horario: </span> <?php echo ($row['hora_desde']). ' hs'; ?>
+                    </br> 
+                    <span><!-- Aula --> Aula: </span> <?php echo ($row['aula']); ?>
+                </p>
+                <button class="button_info">Más información</button>
+			    <button class="button_ins">Inscribirse</button>
+		    </div>
+	    </div>
+    </div>           
+<?php } 
 ?>
 <!-- TODO URIencode search -->
     <a class="fas fa-angle-left" <?=$offset?"href=\"?search=$search&offset=".($offset-10)."\"":""?> ></a>
@@ -63,6 +79,8 @@ require_once 'utils/getDate.php';
 <?php
 }
 ?>
+
+
 
 <?php // require_once 'template/footer.php'; ?>
 </body>

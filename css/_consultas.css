@@ -1,0 +1,139 @@
+@import '_general.css';
+@import '_buscador.css';
+@import 'tooltips.css';
+@import '_breadcrumbs.css';
+
+
+.title_list{
+    margin-top: 25px;
+    color:#1C2833;
+    font-size: 25px;
+    text-align: center;
+ }
+
+
+.footer_consulta{
+	margin-top: 30%;
+}
+
+.container{
+	display: flex;
+	justify-content: center;
+	height: auto;
+  	align-items: center;
+}
+
+.card {
+	background-color:#fff;
+	border-radius: 1rem;
+	box-shadow: 0 1rem 1rem rgba(0, 0, 0, 0.2);
+  	border: 2px solid #AEB6BF ;
+	display: flex;	
+	margin: 1.5rem;
+	overflow: hidden;
+	width: 70%;
+	height: auto;
+}
+
+.card  h2 {
+  	margin: 0;
+	color: #fff;
+}
+
+.card_title{
+	color: #000000; 
+}
+
+.left-column {	
+	color: #fff;
+	padding: 1rem;
+  	width: 30%;
+  	height: auto;
+	display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+	background: rgb(27, 143, 220);
+}
+
+.left-column img {
+	margin: auto;
+}
+
+.left-column h4 {
+	margin: 1rem 0;
+    border-radius: 10px;
+    padding: 5px;
+    color: #fff;
+	text-align: center;
+}
+
+.right-column {
+	padding: 20px;
+	width: 100%;
+  	background-color: #fcfcfc;
+	display: flex;
+    flex-direction: column;
+    align-items: start;
+    justify-content: space-between;
+}
+
+.right-column h2{	
+	margin: 0.7rem 0;
+	color: rgb(27, 143, 220); 
+}
+
+.right-column p{	
+	margin-top: 10px;
+	color: #000000; 
+	font-size: 17px;
+}
+
+.right-column span{	
+	font-weight: bold;
+}
+
+.button_ins{
+	align-self: flex-end;
+	border-radius: 2rem;
+	color: #fff;
+	font-size: 1rem;
+	padding: .8rem 1.8rem;
+	background: rgb(37, 150, 226);
+	cursor: pointer;
+	font-weight: bold;
+}
+
+.button_info{
+    border-radius: 2px;
+    color: #fff;
+    font-size: 15px;
+    padding: 10px;
+    align-self: flex-start;
+    background: rgb(37, 150, 226);
+    cursor: pointer;
+    font-weight: bold;
+}
+
+
+
+@media (max-width: 1030px) {
+	.container{
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		height:auto;
+	}
+
+	.card{
+		width: 90%;
+	}
+  }
+
+
+  @media (max-width: 500px) {
+	.button_ins{
+		align-self: flex-start;
+        margin-top: 20px;
+	}
+  }
