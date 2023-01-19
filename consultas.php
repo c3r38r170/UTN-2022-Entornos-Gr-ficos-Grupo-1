@@ -3,9 +3,6 @@
 require_once 'controladores/consultas.php';
 require_once 'utils/getDate.php';
 
-if (isset($_GET["search"]) && $_GET["search"]!=""){
-    $cons = searchCon($_GET["search"]);
-}   
 ?>
 
 <!DOCTYPE html>
@@ -40,9 +37,17 @@ if (isset($_GET["search"]) && $_GET["search"]!=""){
     </div> 
 </div>    
  
-<!-- Queda pendiente hacer un card para mostrar esta información -->
-<?php if (isset($_GET["search"]) && $_GET["search"]!=""){
-   foreach ($cons as $row) { ?> 
+<!-- TODO hacer un card para mostrar esta información -->
+<?php if (isset($_GET["search"]) && ($search=trim($_GET["search"]))!=""){
+    $offset=isset($_GET['offset'])?0:(int)$_GET['offset'];
+    $cons = searchCon($search,$offset,11);
+    $hayMas=false;
+    foreach ($cons as $i=> $row) { 
+        if($i==10){ // * índice 10 es elemento 11
+            $hayMas=true;
+            break;
+        }
+?> 
       <p>Docente: <?php echo ($row['nombre_completo']); ?> 
          Materia: <?php echo ($row['nombre']); ?> 
          Comision: <?php echo ($row['numero']); ?> 
@@ -50,7 +55,12 @@ if (isset($_GET["search"]) && $_GET["search"]!=""){
          Horario: <?php echo ($row['hora_desde']). ' hs'; ?> 
          Aula: <?php echo ($row['aula']); ?> 
       </p>            
-<?php } 
+<?php }
+?>
+<!-- TODO URIencode search -->
+    <a class="fas fa-angle-left" <?=$offset?"href=\"?search=$search&offset={$offset-10}\"":""?> ></a>
+    <a class="fas fa-angle-right" <?=$hayMas?"href=\"?search=$search&offset={$offset+10}\"":""?> ></a>
+<?php
 }
 ?>
 

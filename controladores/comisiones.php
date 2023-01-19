@@ -15,8 +15,8 @@ if(isset($_POST['btn_edit']))
    editCom();
 }
 
-function searchCom($com){
-   return search($com);
+function searchCom($com, $offset=0, $limit=10){
+   return search($com, $offset, $limit);
 }
 
 function selectComs(){

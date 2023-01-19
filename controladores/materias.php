@@ -18,8 +18,8 @@ if(!empty($_POST["btn_up"])){
   updateMateria();
 }
 
-function searchMaterias($nameMateria){
-  return search($nameMateria);
+function searchMaterias($nameMateria, $offset=0, $limit=10){
+  return search($nameMateria, $offset, $limit);
 }
 
 function getAllMaterias(){

@@ -1,8 +1,8 @@
 <?php
 require_once 'controladores/comisiones.php';
 
-if (isset($_GET["search"]) && $_GET["search"]!=""){
-    $coms = searchCom($_GET["search"]);
+if (isset($_GET["search"]) && ($search=trim($_GET["search"]))!=""){
+    $coms = searchCom($search);
 }else{
     $coms = selectComs();
 }

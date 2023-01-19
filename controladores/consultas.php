@@ -2,8 +2,8 @@
 
 require_once(realpath(dirname(__FILE__) . '/../utils/DAOs/consultaDAO.php'));
 
-function searchCon($cons){
-    return search($cons);
+function searchCon($cons, $offset=0, $limit=10){
+    return search($cons, $offset, $limit);
  }
 
 

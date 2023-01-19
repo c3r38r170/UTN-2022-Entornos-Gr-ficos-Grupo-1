@@ -105,11 +105,11 @@ function getAll(){
 
 
 
-  function search($nameMateria){
+  function search($nameMateria, $offset=0, $limit=10){
 
     $db=new MysqliWrapper();
     $name = "%$nameMateria%"; 
-    $sql = "SELECT * FROM materia WHERE nombre LIKE ?"; 
+    $sql = "SELECT * FROM materia WHERE nombre LIKE ? LIMIT $limit OFFSET $offset"; 
     $resultado = $db->prepared($sql,[$name]);
     $materias = $resultado->fetch_all(MYSQLI_ASSOC);
     mysqli_free_result($resultado);
