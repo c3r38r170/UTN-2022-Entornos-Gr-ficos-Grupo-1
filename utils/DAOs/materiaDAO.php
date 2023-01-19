@@ -64,9 +64,10 @@ function getAll(){
 
     $db=new MysqliWrapper();
     $sql = "DELETE FROM materia WHERE id=?";      
-    $db->prepared($sql,[$id]);
-
-    header('Location: ../materias.php'); 
+    if($db->prepared($sql,[$id]))
+      header('Location: ../materias.php'); 
+    else
+      header('Location: ../comisiones.php?error='.urlencode(json_encode("No es posible realizar esta operacion")));                     
 
   }
 
