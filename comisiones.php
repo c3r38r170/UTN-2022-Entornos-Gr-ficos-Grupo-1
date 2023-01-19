@@ -1,26 +1,19 @@
 <?php
 require_once 'controladores/comisiones.php';
-
-if (isset($_GET["search"]) && ($search=trim($_GET["search"]))!=""){
-    $coms = searchCom($search);
-}else{
-    $coms = selectComs();
-}
-
-?>
-<!DOCTYPE html>
+?><!DOCTYPE html>
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link rel="stylesheet" type="text/css" href="css/_formulario.css"/>
-    <link rel="stylesheet" type="text/css" href="css/materias.css"/>
+    <link rel="stylesheet" type="text/css" href="css/comisiones.css"/>
 	<title>Document</title>	   
 </head>
 
 <script>
 	function confirmAlert(){
+		return confirm("Desea eliminar el registro?");
+
 		var rta = confirm("Desea eliminar el registro?");
 		if(rta){
 			return true;
@@ -63,7 +56,26 @@ if (isset($_GET["search"]) && ($search=trim($_GET["search"]))!=""){
         </tr>
     </thead>    
     <tbody>
-        <?php foreach ($coms as $row) { ?> 
+        <?php
+        
+$offset=$_GET["offset"]??0;
+// $limit=$_GET["offset"]??10;
+
+if (isset($_GET["search"]) && ($search=trim($_GET["search"]))!=""){
+    $coms = searchCom($search,$offset);
+}else{
+    $search=''; // * Para que más abajo no genere un error al incrustarlo en las URL de navegación.
+    $coms = selectComs($offset);
+}
+
+$hayMas=false;
+
+        foreach ($coms as $i=> $row) {
+            if($i==10){ // * Índice 10 = item 11
+                $hayMas=true;
+                continue;
+            }
+            ?> 
             <tr>
                 <td data-label="Id"><?php echo ($row['id']); ?></td>
                 <td data-label="Nombre"><?php echo ($row['numero']); ?></td>
@@ -83,6 +95,10 @@ if (isset($_GET["search"]) && ($search=trim($_GET["search"]))!=""){
             </tr>
 <?php } ?>
     </tbody>
+    <tfoot><tr><td colspan="4"><div class="botones-navegacion">
+    <a class="fas fa-angle-left" <?=$offset?"href=\"?search=$search&offset=".($offset-10)."\"":""?> ></a>
+    <a class="fas fa-angle-right" <?=$hayMas?"href=\"?search=$search&offset=".($offset+10)."\"":""?> ></a>
+    </div></td></tr></tfoot>
 </table>
 <a href="form_comisiones.php" class="button_add">Cargar Comision</a>
 </div>

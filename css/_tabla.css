@@ -43,14 +43,14 @@ table tr:nth-child(even) {
 }
 
 
-tr:hover td{
+tbody tr:hover td{
     background-color: #B0C4DE;
     color: #000000;
 }
 
 table td, table th {
     padding: 10px;
-    text-align: left;
+    text-align: center;
 }
 
 table th {
