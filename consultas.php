@@ -58,8 +58,8 @@ require_once 'utils/getDate.php';
 <?php }
 ?>
 <!-- TODO URIencode search -->
-    <a class="fas fa-angle-left" <?=$offset?"href=\"?search=$search&offset={$offset-10}\"":""?> ></a>
-    <a class="fas fa-angle-right" <?=$hayMas?"href=\"?search=$search&offset={$offset+10}\"":""?> ></a>
+    <a class="fas fa-angle-left" <?=$offset?"href=\"?search=$search&offset=".($offset-10)."\"":""?> ></a>
+    <a class="fas fa-angle-right" <?=$hayMas?"href=\"?search=$search&offset=".($offset+10)."\"":""?> ></a>
 <?php
 }
 ?>
