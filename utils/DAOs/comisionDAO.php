@@ -31,11 +31,11 @@ function insertCom(){
         
 }
 
-function selectAll(){    
+function selectAll($offset,$limit){    
 
     $db=new MysqliWrapper();
 
-    $sql = "SELECT * FROM comision";      
+    $sql = "SELECT * FROM comision LIMIT $limit OFFSET $offset";
     $rs_result = $db->query($sql);    
     $coms = $rs_result->fetch_all(MYSQLI_ASSOC);
     

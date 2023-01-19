@@ -16,11 +16,11 @@ if(isset($_POST['btn_edit']))
 }
 
 function searchCom($com, $offset=0, $limit=10){
-   return search($com, $offset, $limit);
+   return search($com, $offset, $limit+1);
 }
 
-function selectComs(){
-   return selectAll();
+function selectComs($offset=0,$limit=10){
+   return selectAll($offset,$limit+1);
 }
 
 ?>
