@@ -1,7 +1,9 @@
 @import 'materias.css';
 
 .container_table{
-	width: 60%;margin:auto;
+	width: 60%;
+	margin-left: auto;	
+	margin-right: auto;
 }
 	.botones-navegacion{
 		display: flex;

@@ -10,8 +10,7 @@ require_once 'utils/getDate.php';
 <head>
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">	
-    <link rel="stylesheet" type="text/css" href="css/materias.css"/>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">	    
     <link rel="stylesheet" type="text/css" href="css/_consultas.css"/>
 	<title>Document</title>	   
 </head>
@@ -38,7 +37,7 @@ require_once 'utils/getDate.php';
     </div> 
 </div>    
  
-<?php if (isset($_GET["search"]) && ($search=trim($_GET["search"]))!=""){
+<?php if(isset($_GET["search"]) && ($search=trim($_GET["search"]))!=""){
     $offset=isset($_GET['offset'])?0:(int)$_GET['offset'];
     $cons = searchCon($search,$offset,11);
     $hayMas=false;
@@ -51,7 +50,8 @@ require_once 'utils/getDate.php';
     <div class="container">
         <div class="card">
 		    <div class="left-column">
-                <h2 class="card_title">Materia</h2> 
+                <h2 class="card_title">Materia</h2>
+                <form action="controladores/consutas.php" method="post"> <!--Lo agregué yo  -->                        
                 <h4> <!-- Materia --> <?php echo ($row['nombre']); ?> </h4>
                 <h3 class="card_title"> <!-- Comision --> Comisión: <?php echo ($row['numero']); ?> </h3> 
 			    <img src="img/consulta_icono_1.png"></img>
@@ -66,8 +66,11 @@ require_once 'utils/getDate.php';
                     </br> 
                     <span><!-- Aula --> Aula: </span> <?php echo ($row['aula']); ?>
                 </p>
-                <button class="button_info">Más información</button>
-			    <button class="button_ins">Inscribirse</button>
+                <button class="button_info">Más información</button>                
+                <button class="button_ins">Inscribirse</button>
+                <input type="hidden" value="<?=$row['id']?>" name="id"> <!--Lo agregué yo  -->                       
+                </form>
+			    
 		    </div>
 	    </div>
     </div>           
@@ -82,6 +85,6 @@ require_once 'utils/getDate.php';
 
 
 
-<?php // require_once 'template/footer.php'; ?>
+<?php require_once 'template/footer.php'; ?>
 </body>
 </html>
