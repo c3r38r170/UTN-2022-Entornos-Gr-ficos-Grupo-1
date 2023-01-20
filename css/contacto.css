@@ -33,8 +33,7 @@
     font-family: Arial;
 }
 .container_form form textarea{
-    max-width: 600px;
-    min-width: 600px;
+    max-width: 600px;    
     min-height: 140px;
     max-height: 150px;
 }
@@ -90,3 +89,28 @@ span{
     font-weight: 700;
     margin-left: 20px;
 }
+
+
+@media (max-width: 1200px) {
+
+    .container_form{
+        display: flex;
+        justify-content: center;
+        flex-direction:column;
+        align-items: center;
+        overflow-x: hidden;
+    }
+    
+    .info_form , form{
+        width:60vw;
+    }
+
+    textarea{
+        display: block;
+    width: 100%;
+    -webkit-box-sizing: border-box;
+       -moz-box-sizing: border-box;
+            box-sizing: border-box;
+    }
+}
+
