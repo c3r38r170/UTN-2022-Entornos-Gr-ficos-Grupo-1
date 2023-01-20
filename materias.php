@@ -86,7 +86,7 @@ else{
         </tbody>
    </table>
 
-   <a href="form_materias.php" class="button_add">Agregar</a>
+   <a href="form_materias.php" class="button_add">Cargar Materia</a>
 
 </div>
 
