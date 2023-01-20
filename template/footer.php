@@ -71,10 +71,10 @@
 	<div>
 		<a href="contact_us.php" tabindex="6">Sobre Nosotros</a>
 		<div>
-			<a href="#" class="fab fa-instagram"></a>
-			<a href="#" class="fab fa-facebook"></a>
-			<a href="#" class="fab fa-youtube"></a>
-			<a href="#" class="fab fa-twitter"></a>
+			<a href="#" class="fab fa-instagram" data-title="Instagram"></a>
+			<a href="#" class="fab fa-facebook" data-title="Facebook"></a>
+			<a href="#" class="fab fa-youtube" data-title="YouTube"></a>
+			<a href="#" class="fab fa-twitter" data-title="Twitter"></a>
 		</div>
 		<svg viewBox="0 0 500 150" preserveAspectRatio="none">
 			<path d="M0.00,49.99 C150.00,150.00 349.20,-49.99 500.00,49.99 L500.00,150.00 L0.00,150.00 Z" style="stroke: none; fill: #087cf4"></path>

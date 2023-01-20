@@ -1,5 +1,6 @@
 @import '_general.css';
 @import '_breadcrumbs.css';
+@import 'tooltips.css';
 /* @import '_formulario.css'; */
 
 .container_form{
