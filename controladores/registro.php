@@ -15,7 +15,7 @@ if(!(
 	die;
 }
 
-$tipoNumero;=(int)$_POST['tipo']
+$tipoNumero=(int)$_POST['tipo'];
 $tipo=numeroAUsuarioTipo($tipoNumero);
 
 session_start(['read_and_close'=>true]);
