@@ -2,7 +2,8 @@
 	footer {
 		position: absolute;
 		bottom: 0;
-		width: 100%;
+		width: 100%;		        		
+		max-height: 42vh;		
 	}
 
 	footer > div{
@@ -56,15 +57,15 @@
 		height: 100%; width: 100%; margin-top: 50px
 	}
 
-	
 	@media screen and (max-aspect-ratio: 13/9) { /* Pantalla vertical */
 		footer > div > a {
 			margin-top: 275px;
 		}
 		footer > div > div {
 			margin-left: 70%;
-		}
+		}		
 	}
+	
 </style>
 <footer>
 	<div>
