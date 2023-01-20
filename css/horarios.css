@@ -44,6 +44,7 @@
     flex-direction: column;
     border: 3px dotted #a3a3a3;
     border-radius: 5px;
+    background: #EAF2F8;
   }
 
   .drop_box h4 {
