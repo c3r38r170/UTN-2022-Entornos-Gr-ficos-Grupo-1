@@ -35,4 +35,8 @@ function numeroAUsuarioTipo($n){
 	}
 }
 
+function haIngresado(){
+	return isset($_SESSION['tipo']);
+}
+
 ?>

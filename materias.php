@@ -1,4 +1,12 @@
 <?php
+	session_start(['read_and_close'=>true]);
+	
+	require_once 'utils/usuario-tipos.php';
+	if(!sessionEsAdministracion()){
+		header('Location: ingreso.php');
+		die;
+	}
+
 require_once 'controladores/materias.php';
 
 if(isset($_POST['btn_search'])){
@@ -35,7 +43,7 @@ else{
 <body>
 <?php 
     require_once 'template/header.php';
-    require_once 'template/navs/landing.php';
+    require_once 'template/navs/adminitracion.php';
 		require_once 'template/breadcrumbs.php'; 
     echo matBreadcrumbs();	
 ?>

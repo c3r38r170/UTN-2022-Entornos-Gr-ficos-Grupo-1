@@ -1,4 +1,12 @@
-<!DOCTYPE html>
+<?php
+	session_start(['read_and_close'=>true]);
+	
+	require_once 'utils/usuario-tipos.php';
+	if(!sessionEsAdministracion()){
+		header('Location: ingreso.php');
+		die;
+	}
+?><!DOCTYPE html>
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
@@ -10,7 +18,7 @@
 <body>
 <?php 
     require_once 'template/header.php';
-    require_once 'template/navs/landing.php';
+    require_once 'template/navs/adminitracion.php';
 		require_once 'template/breadcrumbs.php'; 
     echo horariosBreadcrumbs();
 ?>
