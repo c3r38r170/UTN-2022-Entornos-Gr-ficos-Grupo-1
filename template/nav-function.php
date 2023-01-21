@@ -133,7 +133,7 @@
 	}
 </style>
 <nav-container>
-	<img src="img/utn_icono 1.png" alt="">
+	<img src="img/utn_icono 1.png" alt="Logo UTN">
 	<h2>UTN Frro</h2>	
 	<nav>
 		<input type="checkbox"><label></label>

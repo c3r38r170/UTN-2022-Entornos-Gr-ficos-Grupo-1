@@ -62,7 +62,7 @@ require_once 'utils/getDate.php';
                 <h2 class="card_title">Materia</h2>            
                 <h4> <!-- Materia --> <?php echo ($row['nombre']); ?> </h4>
                 <h3 class="card_title"> <!-- Comision --> Comisión: <?php echo ($row['numero']); ?> </h3> 
-			    <img src="img/consulta_icono_1.png"></img>
+			    <img src="img/consulta_icono_1.png" alt="Logo Consulta"></img>
 		    </div>
 		    <div class="right-column">
 			    <h2> <!-- Docente --> Docente <?php echo ($row['nombre_completo']); ?> </h2>
