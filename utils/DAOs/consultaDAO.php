@@ -8,7 +8,8 @@ function search($cons, $offset=0, $limit=10){
 
 	$sql =
 		"SELECT
-			u.nombre_completo
+		    c.id  
+			, u.nombre_completo
 			, mat.nombre
 			, com.numero
 			, c.hora_desde
@@ -33,8 +34,6 @@ function search($cons, $offset=0, $limit=10){
 		
 	return $consult;
 }
-
-
 
 
 ?>

@@ -3,7 +3,6 @@
 @import 'tooltips.css';
 @import '_breadcrumbs.css';
 
-
 .title_list{
     margin-top: 25px;
     color:#1C2833;
@@ -20,7 +19,7 @@
 	display: flex;
 	justify-content: center;
 	height: auto;
-  	align-items: center;
+  	align-items: center;	
 }
 
 .card {
@@ -113,6 +112,21 @@
     background: rgb(37, 150, 226);
     cursor: pointer;
     font-weight: bold;
+}
+
+#btns_form{
+  width: inherit;
+  display: flex;
+  justify-content: space-between;  
+}
+
+#success{
+	display: flex;
+    justify-content: center;
+    align-items: center;
+	font-size: larger;
+	font-weight: bold;
+	color: rgb(18, 192, 47);
 }
 
 
