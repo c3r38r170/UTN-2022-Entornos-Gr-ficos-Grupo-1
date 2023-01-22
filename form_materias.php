@@ -34,7 +34,7 @@
 					echo "<span class=formulario_error>$error</span>";					  
 				 }
 				  if(isset($_GET["success"])){
-					$success = json_decode(urldecode($_GET['success']),true);
+					$success = $_GET['success'];
 					echo "<span>$success</span>";
 				}
 			  	  ?>  

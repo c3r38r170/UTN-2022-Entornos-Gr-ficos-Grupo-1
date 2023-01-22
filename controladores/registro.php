@@ -59,7 +59,7 @@ if(count($errores)){
 		header("Location: ../registro.php?errores=".urlencode(json_encode($errores)));
 	} else{
 		insertUsuario($nombre, $apellido, $email, $legajo, $contrasenia, $tipoNumero);
-		$success = "¡Usuario registrado con exito!. Se encuentra listo para iniciar sesión ";
+		$success = "¡Usuario registrado con exito! Se encuentra listo para iniciar sesión ";
         header("Location: ../registro.php?success=".urlencode(json_encode($success)));
 	}
 }
