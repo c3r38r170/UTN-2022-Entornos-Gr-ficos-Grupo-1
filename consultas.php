@@ -35,9 +35,17 @@ require_once 'utils/getDate.php';
             </div>
         </form>
     </div> 
-</div>    
+</div>
+
+<?php
+
+ if(isset($_GET["success"])){
+	$success = json_decode(urldecode($_GET['success']),true);
+    echo "<span id='success'>$success</span>"; 
+ }
+
  
-<?php if(isset($_GET["search"]) && ($search=trim($_GET["search"]))!=""){
+ if(isset($_GET["search"]) && ($search=trim($_GET["search"]))!=""){
     $offset=isset($_GET['offset'])?0:(int)$_GET['offset'];
     $cons = searchCon($search,$offset,11);
     $hayMas=false;
@@ -46,15 +54,15 @@ require_once 'utils/getDate.php';
             $hayMas=true;
             break;
         }
+       $subscribed = (isSubscribed($row['id'])); 
 ?> 
     <div class="container">
         <div class="card">
 		    <div class="left-column">
-                <h2 class="card_title">Materia</h2>
-                <form action="controladores/consutas.php" method="post"> <!--Lo agregué yo  -->                        
+                <h2 class="card_title">Materia</h2>            
                 <h4> <!-- Materia --> <?php echo ($row['nombre']); ?> </h4>
                 <h3 class="card_title"> <!-- Comision --> Comisión: <?php echo ($row['numero']); ?> </h3> 
-			    <img src="img/consulta_icono_1.png"></img>
+			    <img src="img/consulta_icono_1.png" alt="Logo Consulta"></img>
 		    </div>
 		    <div class="right-column">
 			    <h2> <!-- Docente --> Docente <?php echo ($row['nombre_completo']); ?> </h2>
@@ -65,13 +73,13 @@ require_once 'utils/getDate.php';
                     <span><!-- Horario --> Horario: </span> <?php echo ($row['hora_desde']). ' hs'; ?>
                     </br> 
                     <span><!-- Aula --> Aula: </span> <?php echo ($row['aula']); ?>
-                </p>
-                <button class="button_info">Más información</button>                
-                <button class="button_ins">Inscribirse</button>
-                <input type="hidden" value="<?=$row['id']?>" name="id"> <!--Lo agregué yo  -->                       
-                </form>
-			    
-		    </div>
+                </p>                                
+                <form action="controladores/consultas.php" method="post" id="btns_form">
+                    <button class="button_info">Más información</button>                                
+                    <input type="hidden" value="<?=$row['id']?>" name="id">  
+                    <button class="button_ins" name=<?php echo $subscribed ? 'cancel' : 'ins'?>><?php echo $subscribed ? 'Cancelar Inscripcion' : 'Inscribirse'?></button>                            			    
+                </form>        
+		    </div>            
 	    </div>
     </div>           
 <?php } 
@@ -85,6 +93,6 @@ require_once 'utils/getDate.php';
 
 
 
-<?php require_once 'template/footer.php'; ?>
+<?php //require_once 'template/footer.php'; ?>
 </body>
 </html>

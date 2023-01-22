@@ -33,7 +33,7 @@ require_once 'controladores/comisiones.php';
 <body>
 <?php
     require_once 'template/header.php';
-    require_once 'template/navs/adminitracion.php';
+    require_once 'template/navs/administracion.php';
     require_once 'template/breadcrumbs.php'; 
     echo comBreadcrumbs();
 ?>

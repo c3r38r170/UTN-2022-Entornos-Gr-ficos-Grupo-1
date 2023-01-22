@@ -1,3 +1,13 @@
+<?php
+session_start(['read_and_close'=>true]);
+	
+require_once 'utils/usuario-tipos.php';
+if(!sessionEsAdministracion()){
+	header('Location: ingreso.php');
+	die;
+}
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
