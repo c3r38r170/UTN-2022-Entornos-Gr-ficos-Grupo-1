@@ -1,0 +1,17 @@
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css');
+@import url(https://fonts.googleapis.com/css?family=Lato:400,300,700);
+
+*{
+	font-family: 'lato', sans-serif;
+}
+html{
+	min-height: 100%;
+  position: relative;
+}
+body{
+	margin: 0;
+}
+body > div a, body > a {
+  font-weight: 400 !important;
+  color: #000 !important;
+}
