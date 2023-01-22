@@ -55,7 +55,7 @@ if(isset($_GET['errores'])){
 	}
 }
 if(isset($_GET["success"])){
-	$success = json_decode(urldecode($_GET['success']),true);
+	$success = $_GET['success'];
 	echo "<span>$success</span>";
 }
 

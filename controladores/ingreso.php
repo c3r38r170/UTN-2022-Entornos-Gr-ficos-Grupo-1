@@ -34,8 +34,10 @@ if(!count($errores)){
 	//validamos pass de html = pass con hash de la db
 		if(password_verify($contrasenia, $contrasenia_existente)){
 			session_start();
-			$_SESSION['usuario'] = $legajo;
+			$_SESSION['legajo'] = $legajo;
 			$_SESSION['tipo'] = numeroAUsuarioTipo((int)$usuarioRow['tipo_id']);
+			$_SESSION['nombre_completo'] = $usuarioRow['nombre_completo'];
+			$_SESSION['correo'] = $usuarioRow['correo'];
 
 			$pagina;
 			switch ($_SESSION['tipo']) {
@@ -46,7 +48,7 @@ if(!count($errores)){
 				$pagina='index.php';
 				break;
 			case UsuarioTipos::ADMINISTRACION:
-				$pagina='index.php';
+				$pagina='mi_cuenta.php';
 				break;
 			}
 			// TODO hacemos un redirect a la vista correspondiente del usuario logueado
