@@ -15,6 +15,24 @@ function searchCon($cons, $offset=0, $limit=10){
     subscribe();
  }
 
+ if(isset($_POST['cancel'])){ 
+    unsubscribe();
+ }
+
+function unSubscribe(){
+    extract($_REQUEST);    
+    $legajo = $_SESSION['legajo'];    
+    
+    $user = getUser($legajo);        
+    $instance = getInstance($id);
+
+    deleteSubscription($user['id'],$instance['id']);     
+
+    $success = "Usted ya no se encuentra suscrito a la consulta";
+    header("Location: ../consultas.php?success=".urlencode(json_encode($success)));                  
+}
+
+
 function subscribe(){
 
     extract($_REQUEST);    
