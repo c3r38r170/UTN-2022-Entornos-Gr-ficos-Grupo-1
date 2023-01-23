@@ -21,10 +21,14 @@ function search($cons, $offset=0, $limit=10){
 			INNER JOIN comision com ON com.id=mc.comision_id
 			INNER JOIN materia mat ON mat.id=mc.materia_id
 			INNER JOIN usuarios u ON u.id=c.profesor_id
-		WHERE u.nombre_completo
+		WHERE (u.nombre_completo
 			LIKE ?
 			OR mat.nombre LIKE ?
-			OR com.numero LIKE ?
+			OR com.numero LIKE ? )
+			AND c.fecha  = (
+ 				   SELECT MAX(fecha)
+    			   FROM consultas 
+					)
 		LIMIT $limit OFFSET $offset";
 
 	$rs_result = $db->prepared($sql,['%'.$cons.'%','%'.$cons.'%','%'.$cons.'%']);

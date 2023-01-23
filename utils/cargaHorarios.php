@@ -14,6 +14,10 @@ define('AULA',7);
 function uploadFile($rows){
       
     $db=new MysqliWrapper(); 
+
+	date_default_timezone_set('America/Argentina/Buenos_Aires');    
+    $date=date('Y/m/d/');
+
 	foreach ($rows as $i=>$row){
 		if($i==0)
 			continue;
@@ -24,16 +28,16 @@ function uploadFile($rows){
 	
 		$comisionID=$db
 			->prepared("SELECT id FROM comision WHERE numero = ?",[$row[COMISION]])
-			->fetch_assoc()['id'];
-	
+			->fetch_assoc()['id'];			
+		
 		$materiaID=$db
 			->prepared("SELECT id FROM materia WHERE nombre = ?",[$row[MATERIA]])
 			->fetch_assoc()['id'];
-	
+			
 		$comisionMateriaID=$db
 			->query("SELECT id FROM materia_x_comision WHERE materia_id=$materiaID AND comision_id=$comisionID")
 			->fetch_assoc()['id'];
-	
+			
 		$res=$db->prepared(
 			"INSERT INTO `consultas` (
 				materia_x_comision_id
@@ -42,10 +46,12 @@ function uploadFile($rows){
 				, aula
 				, hora_hasta
 				, dia_de_la_semana
+				, fecha
 			)
 				VALUES (
 					$comisionMateriaID
 					,$profesorID
+					,?
 					,?
 					,?
 					,?
@@ -56,6 +62,7 @@ function uploadFile($rows){
 				,$row[AULA]
 				,$row[HORA_HASTA]
 				,$row[DIA]
+				,$date
 			]
 		);
 	
