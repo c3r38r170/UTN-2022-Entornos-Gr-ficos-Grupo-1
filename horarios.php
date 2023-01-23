@@ -47,12 +47,13 @@
 			     <input type="submit" class="btn" value="Subir Archivo">
 		    </form>
             <?php
-				if(isset($_GET['error'])){
-					$error=json_decode(urldecode($_GET['error']),true);
-					echo "<span class=formulario_error>$error</span>";					  
+				if(isset($_GET['errores'])){
+					$errores=json_decode(urldecode($_GET['errores']),true);
+					foreach($errores as $error)
+						echo "<span class=formulario_error>$error</span>";					  
 				}
 				if(isset($_GET["success"])){
-					$success = $_GET['success'];
+					$success = urldecode($_GET['success']);
 					echo "<span>$success</span>";
 				}
 		    ?>  
