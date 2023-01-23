@@ -29,9 +29,15 @@ if( $excel=Shuchkin\SimpleXLSX::parse($_FILES['file']['tmp_name'],false) ){
 	
 		$legajo=trim($row[LEGAJO]);
 		$profesorID=$db
-			->prepared("SELECT id FROM usuarios WHERE legajo = ?",[$legajo]);
+			->prepared("SELECT `id`,`nombre_completo` FROM `usuarios` WHERE `legajo` = ?",[$legajo]);
 		if($profesorID){
-			$profesorID=$profesorID->fetch_assoc()['id'];
+			$profesor=$profesorID->fetch_assoc();
+
+			$profesorID=$profesor['id'];
+
+			if($profesor['nombre_completo']!=$row[NOMBRE_COMPLETO_PROFESOR]){
+				$db->prepared("UPDATE `usuarios` SET `nombre_completo` = ? WHERE `id` = ?",[$profesor['nombre_completo'],$profesorID]);
+			}
 		}else{
 			$db->prepared(
 				"INSERT INTO usuarios (
