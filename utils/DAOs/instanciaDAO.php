@@ -13,7 +13,7 @@ function getInstance($id){
             FROM instancias i  
             INNER JOIN instancias_estados ie 
             ON i.estado_id=ie.id 
-            WHERE i.id=? AND ie.descripcion 
+            WHERE i.consulta_id=? AND ie.descripcion 
              NOT LIKE 
              'Finalizada'";
 	$rs_result = $db->prepared($vSql,[$id]); 

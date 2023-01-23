@@ -49,7 +49,7 @@ function subscribe(){
 
     }                           
     else        
-        addSubscriptor($user['id'],$id); 
+        addSubscriptor($user['id'],$instance['id']); 
         ///TO DO: enviar mail al estudiante
            
     $success = "Inscripcion realizada con exito";
@@ -59,10 +59,10 @@ function subscribe(){
 function isSubscribed($idConsult){
     
     $instance = getInstance($idConsult);        
-    
+   
     $legajo = $_SESSION['legajo'];        
     $user = getUser($legajo);    
-    
+
     $subscription = getSubscription($user['id'],$instance['id']);
 
     if(empty($subscription))
