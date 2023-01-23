@@ -32,7 +32,7 @@ function createInstance($id){
     $date=date('Y/m/d/');
     
     $db->prepared($vSql,[$date,0,1,$id]);
-     
+    return $db->insert_id();
 }
 
 function addSubscriptor($idUser,$idInstance){
