@@ -42,12 +42,13 @@ if(!count($errores)){
 			$pagina;
 			switch ($_SESSION['tipo']) {
 			case UsuarioTipos::ESTUDIANTE:
-				$pagina='index.php';
+				$pagina='estudiante.php';
 				break;
 			case UsuarioTipos::PROFESOR:
-				$pagina='index.php';
+				$pagina='profesor.php';
 				break;
 			case UsuarioTipos::ADMINISTRACION:
+				//TODO agregar redireccion a un archivo administracion.php
 				$pagina='mi_cuenta.php';
 				break;
 			}

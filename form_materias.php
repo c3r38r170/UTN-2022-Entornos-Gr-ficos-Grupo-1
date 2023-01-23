@@ -21,7 +21,7 @@ if(!sessionEsAdministracion()){
 <body>
 <?php 
     require_once 'template/header.php';
-    require_once 'template/navs/landing.php';
+    require_once 'template/navs/administracion.php';
 		require_once 'template/breadcrumbs.php'; 
     echo formMatBreadcrumbs();
 ?>
