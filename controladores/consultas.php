@@ -3,6 +3,8 @@
 require_once(realpath(dirname(__FILE__) . '/../utils/DAOs/consultaDAO.php'));
 require_once(realpath(dirname(__FILE__) . '/../utils/DAOs/instanciaDAO.php'));
 require_once(realpath(dirname(__FILE__) . '/../utils/DAOs/usuarioDAO.php'));
+require_once(realpath(dirname(__FILE__) . '/../utils/DAOs/subscriptionDAO.php'));
+
 
 session_start();
 
@@ -26,7 +28,15 @@ function unSubscribe(){
     $user = getUser($legajo);        
     $instance = getInstance($id);
 
-    deleteSubscription($user['id'],$instance['id']);     
+   
+    $subscribers = getSubscribers($instance['id']);  
+
+    deleteSubscription($user['id'],$instance['id']); 
+        
+    if($subscribers[0] == 1){
+        deleteInstance($instance['id']);                    
+        ///TO DO: enviar mail al docente
+    } 
 
     $success = "Usted ya no se encuentra suscrito a la consulta";
     header("Location: ../consultas.php?success=".urlencode(json_encode($success)));                  
