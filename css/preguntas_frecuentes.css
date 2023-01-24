@@ -1,0 +1,21 @@
+@import '_general.css';
+@import '_breadcrumbs.css';
+@import 'tooltips.css';
+details{
+    background: #EAF2F8;
+    border: 1px solid rgb(37, 150, 226);
+    border-radius: 5px;
+    padding: 10px;
+    margin: 2px 10%;
+    cursor: pointer;
+  }
+
+  details summary{
+    font-size: 17px;
+    font-weight: bold;
+  }
+
+  details p{
+    font-size: 17px;
+  }
+

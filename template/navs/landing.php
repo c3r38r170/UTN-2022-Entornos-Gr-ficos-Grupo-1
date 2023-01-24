@@ -5,5 +5,6 @@
 		,'Registrarse'=>'registro.php'
 		,'Consultas'=>'consultas.php'
 		,'Sobre Nosotros'=>'contacto.php'
+		,'Preguntas Frecuentes'=>'preguntas_frecuentes.php'
 	]);
 ?>
