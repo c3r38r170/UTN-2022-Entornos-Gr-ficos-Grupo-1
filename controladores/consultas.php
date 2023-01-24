@@ -12,6 +12,12 @@ function searchCon($cons, $offset=0, $limit=10){
     return search($cons, $offset, $limit+1);
  }
 
+ function getStudentCon($offset=0, $limit=10){
+    $legajo = $_SESSION['legajo'];
+    $user = getUser($legajo);
+
+    return studentCon($user['id'],$offset=0, $limit=10); 
+ }
 
  if(isset($_POST['ins'])){ 
     subscribe();
@@ -20,6 +26,7 @@ function searchCon($cons, $offset=0, $limit=10){
  if(isset($_POST['cancel'])){ 
     unsubscribe();
  }
+
 
 function unSubscribe(){
     extract($_REQUEST);    
@@ -38,8 +45,10 @@ function unSubscribe(){
         ///TO DO: enviar mail al docente
     } 
 
+    //Redireccionamos a la pagina anterior, ya se consultas.php o mis_consultas.php
+    //strtok permite quitar el parametro search de la URL, de lo contrario no se muestra el mensaje success 
     $success = "Usted ya no se encuentra suscrito a la consulta";
-    header("Location: ../consultas.php?success=".urlencode(json_encode($success)));                  
+    header('Location: ' . strtok($_SERVER['HTTP_REFERER'], '?')."?success=".urlencode(json_encode($success)));               
 }
 
 
