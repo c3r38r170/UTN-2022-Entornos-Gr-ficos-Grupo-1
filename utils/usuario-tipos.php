@@ -1,5 +1,7 @@
 <?php
 
+// TODO estaría bueno considerar conseguir todo esto de la base de datos
+
 session_start(['read_and_close'=>true]);
 
 /* ! Para PHP 7. En PHP 8 se usa https://www.php.net/manual/en/language.types.enumerations.php */
@@ -37,6 +39,20 @@ function numeroAUsuarioTipo($n){
 
 function haIngresado(){
 	return isset($_SESSION['tipo']);
+}
+
+function numeroANombreUsuarioTipo($n){
+	switch($n){
+		case 1:
+			return "Estudiante";
+			break;
+		case 2:
+			return "Profesor";
+			break;
+		case 3:
+			return "Administrador";
+			break;
+	}
 }
 
 ?>

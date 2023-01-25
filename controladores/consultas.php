@@ -6,7 +6,7 @@ require_once(realpath(dirname(__FILE__) . '/../utils/DAOs/usuarioDAO.php'));
 require_once(realpath(dirname(__FILE__) . '/../utils/DAOs/subscriptionDAO.php'));
 
 
-session_start();
+session_start(['read_and_close'=>true]);
 
 function searchCon($cons, $offset=0, $limit=10){
     return search($cons, $offset, $limit+1);
@@ -25,7 +25,7 @@ function unSubscribe(){
     extract($_REQUEST);    
     $legajo = $_SESSION['legajo'];    
     
-    $user = getUser($legajo);        
+    $user = UsuarioDAO::getUser($legajo);        
     $instance = getInstance($id);
 
    
@@ -48,7 +48,7 @@ function subscribe(){
     extract($_REQUEST);    
     $legajo = $_SESSION['legajo'];    
     
-    $user = getUser($legajo);   
+    $user = UsuarioDAO::getUser($legajo);   
      
     $instance = getInstance($id);
 
@@ -57,9 +57,7 @@ function subscribe(){
         addSubscriptor($user['id'],$instanceID);
         ///TO DO: enviar mail al estudiante y al docente
 
-    }                           
-    else        
-        addSubscriptor($user['id'],$instance['id']); 
+    }else addSubscriptor($user['id'],$instance['id']); 
         ///TO DO: enviar mail al estudiante
            
     $success = "Inscripcion realizada con exito";
@@ -71,13 +69,11 @@ function isSubscribed($idConsult){
     $instance = getInstance($idConsult);        
    
     $legajo = $_SESSION['legajo'];        
-    $user = getUser($legajo);    
+    $user = UsuarioDAO::getUser($legajo);    
 
     $subscription = getSubscription($user['id'],$instance['id']);
 
-    if(empty($subscription))
-     return false;
-    return true; 
+    return !empty($subscription); 
 }
 
 ?>

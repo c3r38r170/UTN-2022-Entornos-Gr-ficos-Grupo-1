@@ -64,6 +64,7 @@ CREATE TABLE `usuarios` (
   `legajo` varchar(10) NOT NULL,
   `contrasenia` char(60) NOT NULL,
   `tipo_id` int(11) NOT NULL,
+  `baja` tinyint(1) DEFAULT 0 NOT NULL,
   PRIMARY KEY (`id`),
   KEY `tipo_id` (`tipo_id`),
   CONSTRAINT `usuarios_ibfk_1` FOREIGN KEY (`tipo_id`) REFERENCES `usuarios_tipos` (`id`)
