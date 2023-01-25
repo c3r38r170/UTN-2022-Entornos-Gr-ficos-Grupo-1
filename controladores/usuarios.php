@@ -18,7 +18,7 @@ if(isset($_POST['delete'])){
 			,$_POST['id']
 		]);
 
-	header('Location: /form_usuarios.php?success='.urlencode('Se ha editado la información del usuario.'));
+	header("Location: /form_usuarios.php?id={$_POST['id']}&success=".urlencode('Se ha editado la información del usuario.'));
 }
 
 ?>
