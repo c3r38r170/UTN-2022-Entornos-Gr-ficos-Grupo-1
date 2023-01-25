@@ -26,7 +26,7 @@
 ?>
 
 <div class="container_form">
-	<form action="./controladores/contacto.php" method="post">
+	<form action="controladores/mails.php" method="post">
 		<h2 class="tittle">Sobre Nosotros</h2>
 		<p class="subtittle">Complete el siguiente formulario para contactarse con nosotros</p>
 
