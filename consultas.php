@@ -82,19 +82,19 @@ require_once 'utils/usuario-tipos.php';
 			    <p>
                     <span><!-- Fecha --> Fecha: </span> <?php echo getWeekDate($row['dia_de_la_semana']); ?>
                     </br> 
-                    <span><!-- Horario --> Horario: </span> <?php echo (($instance['hora_nueva']) ? $instance['hora_nueva'] : $row['hora_desde']). ' hs'; ?>
+                    <span><!-- Horario --> Horario: </span> <?php echo ((isset($instance['hora_nueva'])) ? $instance['hora_nueva'] : $row['hora_desde']). ' hs'; ?>
                     </br> 
-                    <span><!-- Aula --> Aula: </span> <?php echo (($instance['aula_nueva']) ? $instance['aula_nueva'] : $row['aula']); ?> 
+                    <span><!-- Aula --> Aula: </span> <?php echo ((isset($instance['aula_nueva'])) ? $instance['aula_nueva'] : $row['aula']); ?> 
                     <div class="more-info" id="more-info">
-                      <span><!-- Estado --> Estado: </span> <?php echo $instance['descripcion']; ?>  
+                      <span><!-- Estado --> Estado: </span> <?php echo isset($instance['descripcion']) ? $instance['descripcion'] : 'Pendiente'; ?>  
                       </br>
-                      <span><!-- Modalidad --> Modalidad: </span> <?php echo $instance['enlace'] ? 'Virtual' : 'Presencial'; ?>  
+                      <span><!-- Modalidad --> Modalidad: </span> <?php echo isset($instance['enlace']) ? 'Virtual' : 'Presencial'; ?>  
                       </br>
-                      <?php if($instance['enlace']){?>
+                      <?php if(isset($instance['enlace'])){?>
                       <span><!-- Enlace --> Enlace: </span> <a href="<?= $instance['enlace']?>"> <?php echo $instance['enlace'] ?> </a>   
                       </br>
                       <?php } ?>
-                      <?php if($instance['motivo']){?>
+                      <?php if(isset($instance['motivo'])){?>
                       <span><!-- Motivo --> Motivo: </span> <?php echo $instance['motivo'] ?>   
                       </br>
                       <?php } ?>
