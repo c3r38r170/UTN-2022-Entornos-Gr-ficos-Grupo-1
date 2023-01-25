@@ -86,10 +86,12 @@ function subscribe(){
 function isSubscribed($idConsult){
     
     $instance = getInstance($idConsult);        
-   
+    if(empty($instance))
+      return false;
+
     $legajo = $_SESSION['legajo'];        
     $user = UsuarioDAO::getUser($legajo);    
-
+     
     $subscription = getSubscription($user['id'],$instance['id']);
 
     return !empty($subscription); 
