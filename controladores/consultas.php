@@ -18,7 +18,7 @@ function searchCon($cons, $offset=0, $limit=10){
 
  function getStudentCon($offset=0, $limit=10){
     $legajo = $_SESSION['legajo'];
-    $user = getUser($legajo);
+    $user = UsuarioDAO::getUser($legajo);
 
     return studentCon($user['id'],$offset=0, $limit=10); 
  }
