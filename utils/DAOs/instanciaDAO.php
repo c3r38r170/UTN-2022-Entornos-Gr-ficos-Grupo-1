@@ -8,6 +8,7 @@ function getInstance($id){
                  i.fecha, 
                  i.motivo, 
                  i.hora_nueva, 
+                 i.aula_nueva, 
                  i.cupo, i.enlace,
                  ie.descripcion 
             FROM instancias i  

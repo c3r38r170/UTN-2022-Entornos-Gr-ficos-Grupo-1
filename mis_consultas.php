@@ -49,6 +49,7 @@ require_once 'utils/usuario-tipos.php';
             break;
         }
        $subscribed = (isSubscribed($row['id'])); 
+       $instance = getInst($row['id']); 
 ?> 
     <div class="container">
         <div class="card">
@@ -64,24 +65,58 @@ require_once 'utils/usuario-tipos.php';
 			    <p>
                     <span><!-- Fecha --> Fecha: </span> <?php echo getWeekDate($row['dia_de_la_semana']); ?>
                     </br> 
-                    <span><!-- Horario --> Horario: </span> <?php echo ($row['hora_desde']). ' hs'; ?>
+                    <span><!-- Horario --> Horario: </span> <?php echo (($instance['hora_nueva']) ? $instance['hora_nueva'] : $row['hora_desde']). ' hs'; ?>
                     </br> 
-                    <span><!-- Aula --> Aula: </span> <?php echo ($row['aula']); ?>                    
-                </p>                               
-                <form action="controladores/consultas.php" method="post" id="btns_form">    
-                <button class="button_info" >Más información</button>                                                 
-                    <input type="hidden" value="<?=$row['id']?>" name="id">  
-                    <button class="button_ins" name=<?php echo $subscribed ? 'cancel' : 'ins'?>><?php echo $subscribed ? 'Cancelar Inscripcion' : 'Inscribirse'?></button>                            			    
-                </form>        
+                    <span><!-- Aula --> Aula: </span> <?php echo (($instance['aula_nueva']) ? $instance['aula_nueva'] : $row['aula']); ?> 
+                    <div class="more-info" id="more-info">
+                      <span><!-- Estado --> Estado: </span> <?php echo $instance['descripcion']; ?>  
+                      </br>
+                      <span><!-- Modalidad --> Modalidad: </span> <?php echo $instance['enlace'] ? 'Virtual' : 'Presencial'; ?>  
+                      </br>
+                      <?php if($instance['enlace']){?>
+                      <span><!-- Enlace --> Enlace: </span> <a href="<?= $instance['enlace']?>"> <?php echo $instance['enlace'] ?> </a>   
+                      </br>
+                      <?php } ?>
+                      <?php if($instance['motivo']){?>
+                      <span><!-- Motivo --> Motivo: </span> <?php echo $instance['motivo'] ?>   
+                      </br>
+                      <?php } ?>
+                    </div>                   
+                </p> 
+                <div id="btns_form">
+                    <button class="button_info" id="btn_info" name="btn_info" >Más información</button>                                     
+                    <form action="controladores/consultas.php" method="post">                                                             
+                        <input type="hidden" value="<?=$row['id']?>" name="id">  
+                        <button class="button_ins" name=<?php echo $subscribed ? 'cancel' : 'ins'?>><?php echo $subscribed ? 'Cancelar Inscripcion' : 'Inscribirse'?></button>                            			    
+                    </form> 
+                </div>       
 		    </div>            
 	    </div>
-    </div>           
+    </div>        
 <!-- TODO URIencode search -->
     <a class="fas fa-angle-left" <?=$offset?"href=\"?search=$search&offset=".($offset-10)."\"":""?> ></a>
     <a class="fas fa-angle-right" <?=$hayMas?"href=\"?search=$search&offset=".($offset+10)."\"":""?> ></a>
 <?php
 }
 ?>
+
+<script>
+    
+    btn_info = document.getElementsByClassName('button_info');    
+    div_info = document.querySelectorAll('.more-info');
+
+    for(let  i=0; i<btn_info.length; i++){
+        btn_info[i].addEventListener('click', () =>{
+            if(div_info[i].classList.contains('more-info')){
+                 div_info[i].classList.remove('more-info');
+                 btn_info[i].innerHTML="Menos información";
+            }else{
+                 div_info[i].classList.add('more-info');
+                 btn_info[i].innerHTML="Más información";
+            }
+        })
+    }
+</script>
 
 <?php //require_once 'template/footer.php'; ?>
 </body>

@@ -12,6 +12,10 @@ function searchCon($cons, $offset=0, $limit=10){
     return search($cons, $offset, $limit+1);
  }
 
+ function getInst($idCon){
+    return getInstance($idCon);
+ }
+
  function getStudentCon($offset=0, $limit=10){
     $legajo = $_SESSION['legajo'];
     $user = getUser($legajo);
@@ -67,10 +71,14 @@ function subscribe(){
         ///TO DO: enviar mail al estudiante y al docente
 
     }                           
-    else        
+    else if($instance['cupo'] != 0 && getSubscribers($instance['id'])[0] < $instance['cupo'])       
         addSubscriptor($user['id'],$instance['id']); 
         ///TO DO: enviar mail al estudiante
-           
+    else{
+        $errror = "La consulta ya no tiene cupos disponibles";
+        return header("Location: ../consultas.php?error=La consulta ya no tiene cupos disponibles");          
+    }
+               
     $success = "Inscripcion realizada con exito";
     header("Location: ../consultas.php?success=".urlencode(json_encode($success)));                  
 }

@@ -129,7 +129,18 @@
 	color: rgb(18, 192, 47);
 }
 
+#error{
+	display: flex;
+    justify-content: center;
+    align-items: center;
+	font-size: larger;
+	font-weight: bold;
+	color: rgb(219, 25, 25);
+}
 
+.more-info{
+	display: none;
+}
 
 @media (max-width: 1030px) {
 	.container{
@@ -142,8 +153,8 @@
 	.card{
 		width: 90%;
 	}
+	
   }
-
 
   @media (max-width: 500px) {
 	.button_ins{
