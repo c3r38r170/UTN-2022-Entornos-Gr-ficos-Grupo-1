@@ -5,29 +5,35 @@ require_once(dirname(__DIR__,1) . '\db.php');
 function getAll(){    
 
     $db=new MysqliWrapper();
+    $sql = "SELECT * FROM materia"; 
 
-    $sql = "SELECT * FROM materia";      
-    $resultado = $db->query($sql);    
-    $materias = $resultado->fetch_all(MYSQLI_ASSOC);
-    
-    mysqli_free_result($resultado);
-        
+    try{
+      $resultado = $db->query($sql);    
+      $materias = $resultado->fetch_all(MYSQLI_ASSOC); 
+      mysqli_free_result($resultado);
+    }
+    catch (Exception $e){
+      throw new Exception("No es posible mostrar el listado de materias"); 
+    }
     return $materias;
   }
 
   
   function getOneMateria($id){
-    $db=new MysqliWrapper();
-   
-    $sql = "SELECT * FROM materia WHERE id=?";
-    $resultado = $db->prepared($sql,[$id]);
-    $materia = $resultado->fetch_array();
 
-    mysqli_free_result($resultado);
-     
+    $db=new MysqliWrapper();
+    $sql = "SELECT * FROM materia WHERE id=?";
+    try{
+      $resultado = $db->prepared($sql,[$id]);
+      $materia = $resultado->fetch_array();
+      mysqli_free_result($resultado);
+    }
+    catch (Exception $e){
+      throw new Exception("No es posible obtener la materia"); 
+    }
     return $materia;
   }
-  
+
 
   function insertMateria(){
 
@@ -41,19 +47,23 @@ function getAll(){
       $cont++;      
    }
 
-    if($cont == 0){  
-      $sql = "SELECT * FROM materia WHERE nombre=?";
-      $resultado = $db->prepared($sql,[$name]);
-      $materias_filas=mysqli_num_rows($resultado);
-
-      if($materias_filas > 0){       
-        $error = "Ya existe una materia con ese nombre!";
-        header("Location: ../form_materias.php?error=".urlencode(json_encode($error)));
-      }else{
-        $vSql = "INSERT INTO materia (nombre) VALUES (?)";
-        $db->prepared($vSql,[$name]);
-        $success = "Materia cargada con exito!";
-        header("Location: ../form_materias.php?success=".urlencode(json_encode($success)));
+    if($cont == 0){       
+      try{
+        $sql = "SELECT * FROM materia WHERE nombre=?";
+        $resultado = $db->prepared($sql,[$name]);
+        $materias_filas=mysqli_num_rows($resultado);
+        if($materias_filas > 0){       
+          $error = "Ya existe una materia con ese nombre!";
+          header("Location: ../form_materias.php?error=".urlencode(json_encode($error)));
+        }else{
+          $vSql = "INSERT INTO materia (nombre) VALUES (?)";
+          $db->prepared($vSql,[$name]);
+          $success = "Materia cargada con exito!";
+          header("Location: ../form_materias.php?success=".urlencode(json_encode($success)));
+        }
+      }
+      catch (Exception $e){
+        throw new Exception("No es posible cargar la materia"); 
       }
     }
   }
@@ -90,21 +100,26 @@ function getAll(){
     }
     
 
-    if($error == 0){  
-      $sql = "SELECT * FROM materia WHERE nombre=?";
-      $resultado = $db->prepared($sql,[$name]);
-      $materias_filas=mysqli_num_rows($resultado);
-
-      if($materias_filas > 0){       
-        $error = "Ya existe una materia con ese nombre!";
-        header('Location: ../form_materias.php?id='.$id.'&name='.$name."&error=".urlencode(json_encode($error)));
-         
-      }else{
-        $vSql = "UPDATE materia set nombre=? WHERE id=?";
-        $db->prepared($vSql,[$name,$id]);
-        $success = "Materia Modificada con exito!";
-        header("Location: ../materias.php?success=".urlencode(json_encode($success))); 
+    if($error == 0){
+      try{
+        $sql = "SELECT * FROM materia WHERE nombre=?";
+        $resultado = $db->prepared($sql,[$name]);
+        $materias_filas=mysqli_num_rows($resultado);
+  
+        if($materias_filas > 0){       
+          $error = "Ya existe una materia con ese nombre!";
+          header('Location: ../form_materias.php?id='.$id.'&name='.$name."&error=".urlencode(json_encode($error)));
+           
+        }else{
+          $vSql = "UPDATE materia set nombre=? WHERE id=?";
+          $db->prepared($vSql,[$name,$id]);
+          $success = "Materia Modificada con exito!";
+          header("Location: ../materias.php?success=".urlencode(json_encode($success))); 
+        } 
       }
+      catch (Exception $e){
+        throw new Exception("No es posible actualizar la materia"); 
+      } 
     }
   }
 
@@ -114,11 +129,15 @@ function getAll(){
 
     $db=new MysqliWrapper();
     $name = "%$nameMateria%"; 
-    $sql = "SELECT * FROM materia WHERE nombre LIKE ? LIMIT $limit OFFSET $offset"; 
-    $resultado = $db->prepared($sql,[$name]);
-    $materias = $resultado->fetch_all(MYSQLI_ASSOC);
-    mysqli_free_result($resultado);
-          
+    $sql = "SELECT * FROM materia WHERE nombre LIKE ? LIMIT $limit OFFSET $offset";
+    try{
+      $resultado = $db->prepared($sql,[$name]);
+      $materias = $resultado->fetch_all(MYSQLI_ASSOC);
+      mysqli_free_result($resultado);
+    }
+    catch (Exception $e){
+      throw new Exception("No es posible buscar la materia"); 
+    }       
     return $materias;
 
   }
