@@ -99,7 +99,8 @@ CREATE TABLE `instancias` (
   `enlace` varchar(100) DEFAULT NULL,
   `estado_id` int(11) NOT NULL,
   `consulta_id` int(11) NOT NULL,
-  `aula_nueva` varchar(25) DEFAULT NULL
+  `aula_nueva` varchar(25) DEFAULT NULL,
+  `fecha_consulta` date NOT NULL
   PRIMARY KEY (`id`),
   KEY `estado_id` (`estado_id`),
   KEY `consulta_id` (`consulta_id`),
