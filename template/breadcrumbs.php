@@ -54,5 +54,10 @@ function consultasBreadcrumbs(){
 	return generateBreadcrumbs($breadcrumbs);
 }
 
+function preguntasFrecuentesBreadcrumbs(){
+	$breadcrumbs = [array("link" => "ingreso.php","text" => "Home"), array("link" => "#","text" => "Preguntas Frecuentes")] ;	
+	return generateBreadcrumbs($breadcrumbs);
+}
+
 
 ?>
