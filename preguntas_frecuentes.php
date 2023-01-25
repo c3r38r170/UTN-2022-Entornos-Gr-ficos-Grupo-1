@@ -23,17 +23,45 @@
         <summary>¿Cómo me registro?</summary>
         <p>Seleccioná la opción Registrarse en el menú principal.<br> 
             Completá el formulario con tus datos personales y presioná el botón Registo.<br> 
-            ¡Listo! Ya podés ingresar y hacer uso del sistema de consulta.</p>
+            Tener en cuenta que deberá respetar la forma en la que se le solicitan los datos proporcionados por el formulario.<br>
+            ¡Listo! Ya podés ingresar y hacer uso del sistema de consulta.
+        </p>
       </details>
 	  <!-- TODO hacer las preguntas frecuentes que se nos ocurran -->
 	  <details>
-        <summary>¿Cómo me registro?</summary>
-        <p>Seleccioná la opción Registrarse en el menú principal.<br> 
-            Completá el formulario con tus datos personales y presioná el botón Registo.<br> 
-            ¡Listo! Ya podés ingresar y hacer uso del sistema de consulta.</p>
+        <summary>¿Cómo ingreso?</summary>
+        <p>Seleccioná la opción Ingresar en el menú principal.<br>
+            Una vez registrado, completá el formulario ingresando legajo y contraseña, luego presioná el botón Entrar.<br> 
+            ¡Listo! Ya se encuentra apto para hacer uso del sistema de consulta.<br>
+            Recuerde que el paso de registrase es fundamental para poder ingresar, de lo contrario no podrá hacerlo.
+        </p>
+      </details>
+      <details>
+        <summary>¿Cómo me contacto en caso de problemas/inquietudes?</summary>
+        <p>Seleccioná la opción Sobre Nosotros en el menú principal.<br>
+            En este apartado, completá el formulario con los datos propuestos:<br>
+            - Su nombre, para poder identificarlo<br>
+            - Su correo electrónico, debido a que es el medio por el cual le contestaremos lo solicitado<br>
+            - Descripción, de la inquietud a modo de conocer su problemática  y brindarle una solución<br>
+            Luego presioná el botón Enviar.<br> 
+            ¡Listo! Su problemática/consulta ha sido enviada. En breve le responderemos.
+        </p>
+      </details>
+      <details>
+        <summary>¿Cómo busco las consultas?</summary>
+        <p>Seleccioná la opción Consultas en el menú principal.<br>
+            En la barra de búsqueda introducí  la información  de la consulta que le interesaría  obtener.<br>
+            Usted podrá  buscar por nombre de profesor, nombre de materia o número  de comisión.<br>
+            Luego apretá  el botón  de "lupa" para realizar la búsqueda y podrá  ver como se le despliega las consultas correspondientes.
+        </p>
+      </details>
+      <details>
+        <summary>¿Debo ingresar (iniciar sesión) para poder inscribirme a una consulta?</summary>
+        <p>Si, usted deberá  estar registrado e ingresar al sistema para poder inscribirse a una consulta.
+        </p>
       </details>
 </div>
 
-<?php require_once 'template/footer.php'; ?>
+<?php //require_once 'template/footer.php'; ?>
 </body>
 </html>
