@@ -32,15 +32,9 @@ CREATE TABLE `materia` (
 DROP TABLE IF EXISTS `usuarios_tipos`;
 CREATE TABLE `usuarios_tipos` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `descripcion` varchar(20) NOT NULL,
+  `descripcion` int(11) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-
-INSERT INTO `usuarios_tipos` (`id`, `descripcion`) VALUES
-(1,	'Estudiante'),
-(2,	'Profesor'),
-(3,	'Administración');
 
 
 DROP TABLE IF EXISTS `materia_x_comision`;
@@ -64,7 +58,6 @@ CREATE TABLE `usuarios` (
   `legajo` varchar(10) NOT NULL,
   `contrasenia` char(60) NOT NULL,
   `tipo_id` int(11) NOT NULL,
-  `baja` tinyint(1) DEFAULT 0 NOT NULL,
   PRIMARY KEY (`id`),
   KEY `tipo_id` (`tipo_id`),
   CONSTRAINT `usuarios_ibfk_1` FOREIGN KEY (`tipo_id`) REFERENCES `usuarios_tipos` (`id`)
@@ -80,7 +73,6 @@ CREATE TABLE `consultas` (
   `hora_hasta` time NOT NULL,
   `dia_de_la_semana` varchar(10) NOT NULL,
   `aula` varchar(25) NOT NULL,
-  `fecha` date NOT NULL
   PRIMARY KEY (`id`),
   KEY `materia_x_comision_id` (`materia_x_comision_id`),
   KEY `profesor_id` (`profesor_id`),
@@ -99,7 +91,7 @@ CREATE TABLE `instancias` (
   `enlace` varchar(100) DEFAULT NULL,
   `estado_id` int(11) NOT NULL,
   `consulta_id` int(11) NOT NULL,
-  `aula_nueva` varchar(25) DEFAULT NULL
+  `fecha_consulta` date NOT NULL
   PRIMARY KEY (`id`),
   KEY `estado_id` (`estado_id`),
   KEY `consulta_id` (`consulta_id`),
