@@ -64,10 +64,14 @@ function getAll(){
 
     $db=new MysqliWrapper();
     $sql = "DELETE FROM materia WHERE id=?";      
-    if($db->prepared($sql,[$id]))
+    try{
+      $db->prepared($sql,[$id]);
       header('Location: ../materias.php'); 
-    else
-      throw new Exception("No es posible realizar esta operacion");            
+    }
+    catch (Exception $e){
+      throw new Exception("No es posible realizar esta operacion"); 
+    }
+                 
 
   }
 
