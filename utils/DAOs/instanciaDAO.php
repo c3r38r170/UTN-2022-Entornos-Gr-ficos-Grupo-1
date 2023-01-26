@@ -86,4 +86,35 @@ function studentCon($id,$offset=0, $limit=10){
 	return $consult;
 }
 
+function pendingTeacherCon($id,$offset=0, $limit=10){
+    $db=new MysqliWrapper();
+
+    $sql =
+    "SELECT
+        c.id  
+        , u.nombre_completo
+        , mat.nombre
+        , com.numero
+        , c.hora_desde
+        , c.hora_hasta
+        , c.dia_de_la_semana
+        , c.aula
+    FROM consultas c
+        INNER JOIN materia_x_comision mc ON mc.id=c.materia_x_comision_id
+        INNER JOIN comision com ON com.id=mc.comision_id
+        INNER JOIN materia mat ON mat.id=mc.materia_id
+        INNER JOIN usuarios u ON u.id=c.profesor_id
+        INNER JOIN instancias i ON i.consulta_id=c.id  
+    WHERE i.fecha_consulta>=CURDATE() AND c.profesor_id=?
+    LIMIT $limit OFFSET $offset";
+
+    $rs_result = $db->prepared($sql,[$id]);
+    $consult = $rs_result->fetch_all(MYSQLI_ASSOC);
+	
+	$rs_result->free();
+		
+	return $consult;
+
+}
+
 ?>

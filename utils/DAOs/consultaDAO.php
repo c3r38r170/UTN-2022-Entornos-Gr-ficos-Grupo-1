@@ -2,7 +2,13 @@
 
 require_once(dirname(__DIR__,1) . '\db.php');
 
-function search($cons, $offset=0, $limit=10){	
+function search($cons, $offset=0, $limit=10,$idTeacher=0){	
+
+   
+    if($idTeacher)  
+	  $idTeacher = "AND c.profesor_id=".$idTeacher;
+    else
+	  $idTeacher = '';
 
 	$db=new MysqliWrapper();
 
@@ -29,6 +35,7 @@ function search($cons, $offset=0, $limit=10){
  				   SELECT MAX(fecha)
     			   FROM consultas 
 					)
+			".$idTeacher."		
 		LIMIT $limit OFFSET $offset";
 
 	$rs_result = $db->prepared($sql,['%'.$cons.'%','%'.$cons.'%','%'.$cons.'%']);
@@ -39,5 +46,37 @@ function search($cons, $offset=0, $limit=10){
 	return $consult;
 }
 
+function teacherCon($idTeacher,$offset=0, $limit=10){
+	$db=new MysqliWrapper();
+
+	$sql =
+		"SELECT
+		    c.id  
+			, u.nombre_completo
+			, mat.nombre
+			, com.numero
+			, c.hora_desde
+			, c.hora_hasta
+			, c.dia_de_la_semana
+			, c.aula
+		FROM consultas c
+			INNER JOIN materia_x_comision mc ON mc.id=c.materia_x_comision_id
+			INNER JOIN comision com ON com.id=mc.comision_id
+			INNER JOIN materia mat ON mat.id=mc.materia_id
+			INNER JOIN usuarios u ON u.id=c.profesor_id
+		WHERE c.profesor_id = ?
+			AND c.fecha  = (
+ 				   SELECT MAX(fecha)
+    			   FROM consultas 
+					)
+		LIMIT $limit OFFSET $offset";
+
+	$rs_result = $db->prepared($sql,[$idTeacher]);
+	$consult = $rs_result->fetch_all(MYSQLI_ASSOC);
+	
+	$rs_result->free();
+		
+	return $consult;
+} 
 
 ?>

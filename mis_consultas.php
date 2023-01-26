@@ -38,61 +38,26 @@ require_once 'utils/usuario-tipos.php';
 	$success = json_decode(urldecode($_GET['success']),true);
     echo "<span id='success'>$success</span>"; 
  }
+
     $offset=isset($_GET['offset'])?0:(int)$_GET['offset'];
-    $cons = getStudentCon($offset,11);
+ 
+    if (sessionEsEstudiante())
+        $cons = getStudentCon($offset,11);
+    elseif(sessionEsProfesor())
+        $cons = getTeacherCon($offset,11);
+
     $hayMas=false;
-    if(empty($cons))
+    if(sessionEsEstudiante() && empty($cons))
      echo '<span id="success" style="color:red">Aún no estás inscripto en ninguna consulta</span>';
     foreach ($cons as $i=> $row) {
         if($i==10){ // * índice 10 es elemento 11
             $hayMas=true;
             break;
         }
-       $subscribed = (isSubscribed($row['id'])); 
        $instance = getInst($row['id']); 
 ?> 
-    <div class="container">
-        <div class="card">
-		    <div class="left-column">
-                <h2 class="card_title">Materia</h2>            
-                <h4> <!-- Materia --> <?php echo ($row['nombre']); ?> </h4>
-                <h3 class="card_title"> <!-- Comision --> Comisión: <?php echo ($row['numero']); ?> </h3> 
-			    <img src="img/consulta_icono_1.png" alt="Logo Consulta"></img>
-		    </div>
-		    <div class="right-column">
-			    <h2> <!-- Docente --> Docente <?php echo ($row['nombre_completo']); ?> </h2>
-                <h3>Información básica</h3>
-			    <p>
-                    <span><!-- Fecha --> Fecha: </span> <?php echo getWeekDate($row['dia_de_la_semana']); ?>
-                    </br> 
-                    <span><!-- Horario --> Horario: </span> <?php echo (($instance['hora_nueva']) ? $instance['hora_nueva'] : $row['hora_desde']). ' hs'; ?>
-                    </br> 
-                    <span><!-- Aula --> Aula: </span> <?php echo (($instance['aula_nueva']) ? $instance['aula_nueva'] : $row['aula']); ?> 
-                    <div class="more-info" id="more-info">
-                      <span><!-- Estado --> Estado: </span> <?php echo $instance['descripcion']; ?>  
-                      </br>
-                      <span><!-- Modalidad --> Modalidad: </span> <?php echo $instance['enlace'] ? 'Virtual' : 'Presencial'; ?>  
-                      </br>
-                      <?php if($instance['enlace']){?>
-                      <span><!-- Enlace --> Enlace: </span> <a href="<?= $instance['enlace']?>"> <?php echo $instance['enlace'] ?> </a>   
-                      </br>
-                      <?php } ?>
-                      <?php if($instance['motivo']){?>
-                      <span><!-- Motivo --> Motivo: </span> <?php echo $instance['motivo'] ?>   
-                      </br>
-                      <?php } ?>
-                    </div>                   
-                </p> 
-                <div id="btns_form">
-                    <button class="button_info" id="btn_info" name="btn_info" >Más información</button>                                     
-                    <form action="controladores/consultas.php" method="post">                                                             
-                        <input type="hidden" value="<?=$row['id']?>" name="id">  
-                        <button class="button_ins" name=<?php echo $subscribed ? 'cancel' : 'ins'?>><?php echo $subscribed ? 'Cancelar Inscripcion' : 'Inscribirse'?></button>                            			    
-                    </form> 
-                </div>       
-		    </div>            
-	    </div>
-    </div>        
+     <?php require 'student_card.php'; ?>  
+
 <!-- TODO URIencode search -->
     <a class="fas fa-angle-left" <?=$offset?"href=\"?search=$search&offset=".($offset-10)."\"":""?> ></a>
     <a class="fas fa-angle-right" <?=$hayMas?"href=\"?search=$search&offset=".($offset+10)."\"":""?> ></a>

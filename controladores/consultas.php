@@ -4,11 +4,17 @@ require_once(realpath(dirname(__FILE__) . '/../utils/DAOs/consultaDAO.php'));
 require_once(realpath(dirname(__FILE__) . '/../utils/DAOs/instanciaDAO.php'));
 require_once(realpath(dirname(__FILE__) . '/../utils/DAOs/usuarioDAO.php'));
 require_once(realpath(dirname(__FILE__) . '/../utils/DAOs/subscriptionDAO.php'));
-
+require_once(realpath(dirname(__FILE__) . '/../utils/usuario-tipos.php'));
 
 session_start(['read_and_close'=>true]);
 
+
 function searchCon($cons, $offset=0, $limit=10){
+    if (sessionEsProfesor()){
+        $legajo = $_SESSION['legajo'];
+        $user = UsuarioDAO::getUser($legajo);
+        return search($cons, $offset, $limit+1,$user['id']);
+    }
     return search($cons, $offset, $limit+1);
  }
 
@@ -21,6 +27,20 @@ function searchCon($cons, $offset=0, $limit=10){
     $user = UsuarioDAO::getUser($legajo);
 
     return studentCon($user['id'],$offset=0, $limit=10); 
+ }
+
+ function getTeacherCon($offset=0, $limit=10){
+    $legajo = $_SESSION['legajo'];
+    $user = UsuarioDAO::getUser($legajo);
+
+    return pendingTeacherCon($user['id'],$offset=0, $limit=10); 
+ }
+
+ function teacherConAssigned(){
+    $legajo = $_SESSION['legajo'];
+    $user = UsuarioDAO::getUser($legajo);
+    
+    return teacherCon($user['id']);
  }
 
  if(isset($_POST['ins'])){ 
