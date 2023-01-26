@@ -69,7 +69,7 @@
 </style>
 <footer>
 	<div>
-		<a href="contact_us.php" tabindex="6">Sobre Nosotros</a>
+		<a href="contacto.php" tabindex="6">Sobre Nosotros</a>
 		<div>
 			<a href="#" class="fab fa-instagram" data-title="Instagram"></a>
 			<a href="#" class="fab fa-facebook" data-title="Facebook"></a>
