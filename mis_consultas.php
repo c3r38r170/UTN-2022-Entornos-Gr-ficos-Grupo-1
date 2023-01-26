@@ -26,7 +26,7 @@ require_once 'utils/usuario-tipos.php';
         require_once 'template/navs/profesor.php';
     else require_once 'template/navs/landing.php';
     require_once 'template/breadcrumbs.php'; 
-    echo consultasBreadcrumbs();
+    echo misConsultasBreadcrumbs();
 ?> 
     
 
