@@ -101,8 +101,8 @@ $hayMas=false;
 <?php } ?>
     </tbody>
     <tfoot><tr><td colspan="6"><div class="botones-navegacion">
-    <a class="fas fa-angle-left" <?=$offset?"href=\"?search=$search&offset=".($offset-10)."\"":""?> ></a>
-    <a class="fas fa-angle-right" <?=$hayMas?"href=\"?search=$search&offset=".($offset+10)."\"":""?> ></a>
+    <a class="fas fa-angle-left" data-title="Pagina Anterior"<?=$offset?"href=\"?search=$search&offset=".($offset-10)."\"":""?> ></a>
+    <a class="fas fa-angle-right" data-title="Pagina Siguiente"<?=$hayMas?"href=\"?search=$search&offset=".($offset+10)."\"":""?> ></a>
     </div></td></tr></tfoot>
 </table>
 <!-- TODO crear usuarios de 0?? -->
