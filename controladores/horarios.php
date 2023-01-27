@@ -50,7 +50,7 @@ if( $excel=Shuchkin\SimpleXLSX::parse($_FILES['file']['tmp_name'],false) ){
 					?
 					,''
 					,?
-					,".password_hash($legajo,PASSWORD_DEFAULT)."
+					,'".password_hash($legajo,PASSWORD_DEFAULT)."'
 					,2
 				)"
 				,[
