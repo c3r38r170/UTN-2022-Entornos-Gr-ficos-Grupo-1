@@ -63,6 +63,7 @@ if($editando){
 				<!-- TODO estilos de select -->
 				<select id="tipo" name="tipo_id" class="form_input" required <?= $editando ? "disabled" : "" ?>>
 					<!-- TOOD hacer dinámico? / obtener de la base de datos -->
+					<option value="" <?=(!$editando)?'selected':'' ?> disabled>Elija tipo de usuario</option>
 					<option value="1" <?= ($editando && $usuario['tipo_id']==1) ? "selected" : "" ?>>Estudiante</option>
 					<option value="2" <?= ($editando && $usuario['tipo_id']==2) ? "selected" : "" ?>>Profesor</option>
 					<option value="3" <?= ($editando && $usuario['tipo_id']==3) ? "selected" : "" ?>>Administración</option>
@@ -72,7 +73,7 @@ if($editando){
 
 			<input
 				type="submit"
-				value="Guardar"
+				value="<?= $editando ? "Guardar Cambios" : "Guardar" ?>"
 				name=<?= $editando ? "edit" : "create" ?>
 				class="form_submit"
 				required

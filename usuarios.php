@@ -106,7 +106,7 @@ $hayMas=false;
     </div></td></tr></tfoot>
 </table>
 <!-- TODO crear usuarios de 0?? -->
-<!-- <a href="form_usuarios.php" class="button_add">Cargar Usuario</a> -->
+<a href="form_usuarios.php" class="button_add">Cargar Usuario</a>
 </div>
 </div>
 <script src="https://kit.fontawesome.com/f452b46f6c.js" crossorigin="anonymous"></script>

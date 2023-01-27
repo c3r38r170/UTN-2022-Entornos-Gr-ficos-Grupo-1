@@ -19,6 +19,29 @@ if(isset($_POST['delete'])){
 		]);
 
 	header("Location: /form_usuarios.php?id={$_POST['id']}&success=".urlencode('Se ha editado la información del usuario.'));
+}elseif(isset($_POST['create'])){
+	$res=$db->prepared(
+		"INSERT INTO usuarios (
+			`nombre_completo`
+			,`correo`
+			,`legajo`
+			,`contrasenia`
+			,`tipo_id`
+		) VALUES (
+			?
+			,?
+			,?
+			,'".password_hash($_POST['contrasenia'],PASSWORD_DEFAULT)."'
+			,".(int)$_POST['tipo_id']."
+		)"
+		,[
+			$_POST['nombre_completo']
+			,$_POST['correo']
+			,$_POST['legajo']
+		]
+	);
+	$usuarioID=$db->insert_id();
+	header("Location: /form_usuarios.php?id=$usuarioID&success=".urlencode('Se ha creado el usuario.'));
 }
 
 ?>
