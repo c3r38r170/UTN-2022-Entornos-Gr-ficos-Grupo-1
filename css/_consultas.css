@@ -103,6 +103,10 @@
 	font-weight: bold;
 }
 
+.button_ins[disabled]{
+   background-color: gray;
+}
+
 .button_info{
     border-radius: 2px;
     color: #fff;
@@ -119,6 +123,8 @@
   display: flex;
   justify-content: space-between;  
 }
+
+
 
 #success{
 	display: flex;

@@ -74,7 +74,12 @@ require_once 'utils/usuario-tipos.php';
        $instance = getInst($row['id']); 
 ?> 
        <!-- TO DO: Se podría crear un Card para el Docente y en un if decidir cual mostrar -->  
-      <?php require 'student_card.php'; ?>    
+       <?php 
+          if(sessionEsEstudiante()) 
+            require 'student_card.php'; 
+          elseif(sessionEsProfesor())  
+          require 'teacher_card.php'; 
+          ?>       
 <?php } 
 ?>
 <!-- TODO URIencode search -->

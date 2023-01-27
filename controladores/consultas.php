@@ -51,6 +51,19 @@ function searchCon($cons, $offset=0, $limit=10){
     unsubscribe();
  }
 
+ if(isset($_POST['confirm'])){ 
+    confirm();
+ }
+
+ function confirm(){
+    extract($_REQUEST);    
+
+    $instance = getInstance($id);
+    confirmCon($instance['id']);
+    //TO DO: notificar a los estudiantes inscriptos
+
+    header('Location: ../consultas.php');        
+ }  
 
 function unSubscribe(){
     extract($_REQUEST);    
@@ -82,11 +95,13 @@ function subscribe(){
     $legajo = $_SESSION['legajo'];    
     
     $user = UsuarioDAO::getUser($legajo);   
-     
+
     $instance = getInstance($id);
 
     if(empty($instance)){
+
         $instanceID = createInstance($id);   
+        
         addSubscriptor($user['id'],$instanceID);
         ///TO DO: enviar mail al estudiante y al docente
 

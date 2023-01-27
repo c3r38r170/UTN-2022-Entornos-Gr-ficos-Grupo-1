@@ -37,7 +37,7 @@ function createInstance($id){
     $query = "SELECT dia_de_la_semana FROM consultas WHERE id=?";
     $rs_result = $db->prepared($query,[$id]);
     $day = mysqli_fetch_array($rs_result);
-	$rs_result->free();
+	$rs_result->free();    
 
     $vSql = "INSERT INTO instancias (fecha, cupo, estado_id,consulta_id, fecha_consulta) VALUES (?,?,?,?,?)";
     
@@ -115,6 +115,15 @@ function pendingTeacherCon($id,$offset=0, $limit=10){
 		
 	return $consult;
 
+}
+
+function confirmCon($idInstance){
+    $db=new MysqliWrapper();
+
+    $sql =
+    "UPDATE instancias SET estado_id=2 WHERE ID=?";
+    $db->prepared($sql,[$idInstance]);
+    
 }
 
 ?>
