@@ -56,8 +56,13 @@ require_once 'utils/usuario-tipos.php';
         }
        $instance = getInst($row['id']); 
 ?> 
-     <?php require 'student_card.php'; ?>  
 
+         <?php 
+          if(sessionEsEstudiante()) 
+            require 'student_card.php'; 
+          elseif(sessionEsProfesor())  
+            require 'teacher_card.php'; 
+          ?>       
 <!-- TODO URIencode search -->
     <a class="fas fa-angle-left" <?=$offset?"href=\"?search=$search&offset=".($offset-10)."\"":""?> ></a>
     <a class="fas fa-angle-right" <?=$hayMas?"href=\"?search=$search&offset=".($offset+10)."\"":""?> ></a>
