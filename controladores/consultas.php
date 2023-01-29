@@ -55,6 +55,12 @@ function searchCon($cons, $offset=0, $limit=10){
     confirm();
  }
 
+ 
+ function getSubs($offset=0, $limit=10){
+    extract($_REQUEST);    
+    return selectSubscriber($id,$offset=0, $limit=10);
+ }
+
  function confirm(){
     extract($_REQUEST);    
 

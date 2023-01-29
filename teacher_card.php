@@ -26,7 +26,10 @@
                       <?php } ?>
                       <?php if(isset($instance['motivo'])){?>
                       <span><!-- Motivo --> Motivo: </span> <?php echo $instance['motivo'] ?>   
-                      </br>
+                      </br>                      
+                      <?php } ?>
+                      <?php if(isset($instance)){?>
+                        <a id="subs" href=<?="subscribers.php?id=".$instance['id']?>>Ver estudiantes suscritos</a>                                                    
                       <?php } ?>
                     </div>                   
                 </p> 

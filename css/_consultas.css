@@ -101,10 +101,12 @@
 	background: rgb(37, 150, 226);
 	cursor: pointer;
 	font-weight: bold;
+	
 }
 
 .button_ins[disabled]{
-   background-color: gray;
+   background-color: rgb(11, 233, 41);   
+   border-radius: 80px;
 }
 
 .button_info{
@@ -147,6 +149,19 @@
 .more-info{
 	display: none;
 }
+
+#subs{		
+	cursor: pointer;
+	text-decoration: none;	
+	line-height: 3;
+	padding: .2rem 1.2rem;
+	background: rgb(37, 150, 226);
+	color: white !important;
+	box-shadow: 0 1rem 1rem rgba(0, 0, 0, 0.2);
+	border-radius: 2px;
+	border: 1px solid rgb(12, 12, 12);	
+}
+
 
 @media (max-width: 1030px) {
 	.container{

@@ -123,6 +123,13 @@ function miCuentaBreadcrumbs(){
 	return generateBreadcrumbs($breadcrumbs);
 }
 
+function subsBreadcrumbs(){
+	if (sessionEsProfesor())	    
+		$breadcrumbs = [array("link" => "profesor.php","text" => "Home"), array("link" => $_SERVER['HTTP_REFERER'],"text" => "Consultas"),array("link" => "#","text" => "Subscripciones")] ;	
+
+	return generateBreadcrumbs($breadcrumbs);
+}
+
 
 
 ?>
