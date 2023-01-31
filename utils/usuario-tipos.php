@@ -12,15 +12,15 @@ abstract class UsuarioTipos{
 }
 
 function sessionEsAdministracion(){
-	return $_SESSION['tipo']==UsuarioTipos::ADMINISTRACION;
+	return haIngresado() && $_SESSION['tipo']==UsuarioTipos::ADMINISTRACION;
 }
 
 function sessionEsEstudiante(){
-	return $_SESSION['tipo']==UsuarioTipos::ESTUDIANTE;
+	return haIngresado() && $_SESSION['tipo']==UsuarioTipos::ESTUDIANTE;
 }
 
 function sessionEsProfesor(){
-	return $_SESSION['tipo']==UsuarioTipos::PROFESOR;
+	return haIngresado() && $_SESSION['tipo']==UsuarioTipos::PROFESOR;
 }
 
 function numeroAUsuarioTipo($n){
