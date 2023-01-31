@@ -5,7 +5,7 @@ $_SESSION=[];
 setcookie(session_name(),'',time()-3600);
 session_destroy();
 
-header('Location: /ingreso.php');
+header('Location: ../ingreso.php');
 
 die;
 

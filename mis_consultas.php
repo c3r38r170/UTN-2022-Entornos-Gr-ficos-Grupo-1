@@ -59,9 +59,9 @@ require_once 'utils/usuario-tipos.php';
 
          <?php 
           if(sessionEsEstudiante()) 
-            require 'student_card.php'; 
+            require './cards/student_card.php'; 
           elseif(sessionEsProfesor())  
-            require 'teacher_card.php'; 
+            require './cards/teacher_card.php'; 
           ?>       
 <!-- TODO URIencode search -->
     <a class="fas fa-angle-left" <?=$offset?"href=\"?search=$search&offset=".($offset-10)."\"":""?> ></a>

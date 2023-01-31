@@ -76,9 +76,9 @@ require_once 'utils/usuario-tipos.php';
        <!-- TO DO: Se podría crear un Card para el Docente y en un if decidir cual mostrar -->  
        <?php 
           if(sessionEsEstudiante()) 
-            require 'student_card.php'; 
+            require './cards/student_card.php'; 
           elseif(sessionEsProfesor())  
-          require 'teacher_card.php'; 
+          require './cards/teacher_card.php'; 
           ?>       
 <?php } 
 ?>
