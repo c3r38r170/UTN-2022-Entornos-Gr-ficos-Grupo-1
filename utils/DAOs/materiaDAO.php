@@ -2,7 +2,8 @@
 
 require_once(dirname(__DIR__,1) . '\db.php');
 
-function getAll(){    
+class MateriaDAO{
+  static function getAll(){    
 
     $db=new MysqliWrapper();
     $sql = "SELECT * FROM materia"; 
@@ -15,7 +16,7 @@ function getAll(){
   }
 
   
-  function getOneMateria($id){
+  static function getOneMateria($id){
 
     $db=new MysqliWrapper();
     $sql = "SELECT * FROM materia WHERE id=?";
@@ -28,7 +29,7 @@ function getAll(){
   }
 
 
-  function insertMateria(){
+  static function insertMateria(){
 
     $db=new MysqliWrapper();
     $name = $_POST["name"];
@@ -42,8 +43,8 @@ function getAll(){
 
     if($cont == 0){             
         $sql = "SELECT * FROM materia WHERE nombre=?";        
-        if($resultado = $db->prepared($sql,[$name]);){
-          $materias_filas=mysqli_num_rows($resultado)
+        if($resultado = $db->prepared($sql,[$name])){
+          $materias_filas=mysqli_num_rows($resultado);
           if($materias_filas > 0){       
             $error = "Ya existe una materia con ese nombre!";
             header("Location: ../form_materias.php?error=".urlencode(json_encode($error)));
@@ -56,21 +57,21 @@ function getAll(){
           }          
         }else throw new Exception("No es posible cargar la materia"); 
       }
-}  
+ }  
 
 
 
-  function deleteMateria($id){
+  static function deleteMateria($id){
 
     $db=new MysqliWrapper();
     $sql = "DELETE FROM materia WHERE id=?";          
     if($db->prepared($sql,[$id]))
       header('Location: ../materias.php');     
     else throw new Exception("No es posible realizar esta operacion"); 
-    }
+  }
                  
 
-  function updateMateria(){
+  static function updateMateria(){
 
     $db=new MysqliWrapper();
     $name = $_POST["name"];
@@ -104,7 +105,7 @@ function getAll(){
 
 
 
-  function search($nameMateria, $offset=0, $limit=10){
+  static function search($nameMateria, $offset=0, $limit=10){
 
     $db=new MysqliWrapper();
     $name = "%$nameMateria%"; 
@@ -116,6 +117,6 @@ function getAll(){
     }else throw new Exception("No es posible buscar la materia");       
       return $materias;
   }
-
+}
 
 ?>

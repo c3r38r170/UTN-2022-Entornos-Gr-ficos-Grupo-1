@@ -2,7 +2,8 @@
 
 require_once(dirname(__DIR__,1) . '\db.php');
 
-function insertCom(){    
+class ComisionDAO{
+   static function insertCom(){    
     $db=new MysqliWrapper();
     session_start();           
     extract($_REQUEST);
@@ -27,11 +28,10 @@ function insertCom(){
          header("Location: ../form_comisiones.php?success=".urlencode(json_encode($success)));         
          
       }
-    }
-        
-}
+    }        
+ }
 
-function selectAll($offset,$limit){    
+   static function selectAll($offset,$limit){    
 
     $db=new MysqliWrapper();
 
@@ -42,9 +42,9 @@ function selectAll($offset,$limit){
     mysqli_free_result($rs_result);
         
     return $coms;
-}
+  }
 
-function delete($id){
+ static function delete($id){
    
    $db=new MysqliWrapper();
    
@@ -53,9 +53,9 @@ function delete($id){
       header('Location: ../comisiones.php');              
    else 
       throw new Exception("No es posible realizar esta operacion");            
-}
+ }
 
-function editCom(){
+  static function editCom(){
    $db=new MysqliWrapper();
    session_start();           
    extract($_REQUEST);
@@ -79,9 +79,9 @@ function editCom(){
         header('Location: ../comisiones.php');        
      }
    } 
-}
+  }
 
-function search($com, $offset=0, $limit=10){
+  static function search($com, $offset=0, $limit=10){
    $db=new MysqliWrapper();
    
    $vSql = "SELECT * FROM comision WHERE numero=? LIMIT $limit OFFSET $offset";
@@ -92,6 +92,6 @@ function search($com, $offset=0, $limit=10){
    mysqli_free_result($rs_result);
         
    return $coms;
+  }
 }
-
 ?>

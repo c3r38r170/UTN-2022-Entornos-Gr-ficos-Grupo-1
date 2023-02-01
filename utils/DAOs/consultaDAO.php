@@ -2,7 +2,9 @@
 
 require_once(dirname(__DIR__,1) . '\db.php');
 
-function search($cons, $offset=0, $limit=10,$idTeacher=0){	
+
+class ConsultaDAO{
+  static function search($cons, $offset=0, $limit=10,$idTeacher=0){	
 
    
     if($idTeacher)  
@@ -44,9 +46,9 @@ function search($cons, $offset=0, $limit=10,$idTeacher=0){
 	$rs_result->free();
 		
 	return $consult;
-}
+  }
 
-function teacherCon($idTeacher,$offset=0, $limit=10){
+  static function teacherCon($idTeacher,$offset=0, $limit=10){
 	$db=new MysqliWrapper();
 
 	$sql =
@@ -77,6 +79,6 @@ function teacherCon($idTeacher,$offset=0, $limit=10){
 	$rs_result->free();
 		
 	return $consult;
-} 
-
+  } 
+}
 ?>

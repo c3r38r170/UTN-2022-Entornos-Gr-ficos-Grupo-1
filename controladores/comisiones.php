@@ -5,12 +5,12 @@ require_once(realpath(dirname(__FILE__) . '/../utils/DAOs/comisionDAO.php'));
 
 if(isset($_POST['btn_save']))
 {      
-   insertCom();
+   ComisionDAO::insertCom();
 }
 if(isset($_POST['delete'])){
    //delete($_POST['id']);   
    try{
-      delete($_POST['id']);   
+      ComisionDAO::delete($_POST['id']);   
    }catch(Exception $e){      
       echo '<script type="text/javascript">alert("'.$e->getMessage().'");
             window.location.href="../comisiones.php";
@@ -19,15 +19,15 @@ if(isset($_POST['delete'])){
 }
 if(isset($_POST['btn_edit']))
 {  
-   editCom();
+   ComisionDAO::editCom();
 }
 
 function searchCom($com, $offset=0, $limit=10){
-   return search($com, $offset, $limit+1);
+   return ComisionDAO::search($com, $offset, $limit+1);
 }
 
 function selectComs($offset=0,$limit=10){
-   return selectAll($offset,$limit+1);
+   return ComisionDAO::selectAll($offset,$limit+1);
 }
 
 ?>

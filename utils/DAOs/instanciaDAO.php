@@ -2,8 +2,9 @@
 
 require_once(dirname(__DIR__,1) . '\getDate.php');
 
-//Traemos solo aquellas instancias que correspondan a consultas vigentes
-function getInstance($id){
+class InstanciaDAO{
+  //Traemos solo aquellas instancias que correspondan a consultas vigentes
+  static function getInstance($id){
 	$db=new MysqliWrapper();
     
 	$vSql = "SELECT 
@@ -28,10 +29,10 @@ function getInstance($id){
 	$rs_result->free();
 		 
 	return $cons;
-}
+  }
 
-//Al momento de crear la instancia, guardamos la fecha en la que se va a llevar a cabo la consulta
-function createInstance($id){
+  //Al momento de crear la instancia, guardamos la fecha en la que se va a llevar a cabo la consulta
+  static function createInstance($id){
     $db=new MysqliWrapper();
 
     $query = "SELECT dia_de_la_semana FROM consultas WHERE id=?";
@@ -46,16 +47,16 @@ function createInstance($id){
     
     $db->prepared($vSql,[$date,0,1,$id,getWeekDate($day['dia_de_la_semana'])]);
     return $db->insert_id();
-}
+  }
 
 
-function deleteInstance($idInstance){
+  static function deleteInstance($idInstance){
     $db=new MysqliWrapper();
     $vSql = "DELETE FROM instancias WHERE id=?";
     $db->prepared($vSql,[$idInstance]);
-}
+  }
 
-function studentCon($id,$offset=0, $limit=10){
+  static function studentCon($id,$offset=0, $limit=10){
     $db=new MysqliWrapper();
 
     $sql =
@@ -84,9 +85,9 @@ function studentCon($id,$offset=0, $limit=10){
 	$rs_result->free();
 		
 	return $consult;
-}
+  }
 
-function pendingTeacherCon($id,$offset=0, $limit=10){
+  static function pendingTeacherCon($id,$offset=0, $limit=10){
     $db=new MysqliWrapper();
 
     $sql =
@@ -115,15 +116,15 @@ function pendingTeacherCon($id,$offset=0, $limit=10){
 		
 	return $consult;
 
-}
+  }
 
-function confirmCon($idInstance){
+  static function confirmCon($idInstance){
     $db=new MysqliWrapper();
 
     $sql =
     "UPDATE instancias SET estado_id=2 WHERE ID=?";
     $db->prepared($sql,[$idInstance]);
     
+  }
 }
-
 ?>

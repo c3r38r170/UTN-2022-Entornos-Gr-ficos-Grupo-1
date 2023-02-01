@@ -13,34 +13,34 @@ function searchCon($cons, $offset=0, $limit=10){
     if (sessionEsProfesor()){
         $legajo = $_SESSION['legajo'];
         $user = UsuarioDAO::getUser($legajo);
-        return search($cons, $offset, $limit+1,$user['id']);
+        return ConsultaDAO::search($cons, $offset, $limit+1,$user['id']);
     }
-    return search($cons, $offset, $limit+1);
+    return ConsultaDAO::search($cons, $offset, $limit+1);
  }
 
  function getInst($idCon){
-    return getInstance($idCon);
+    return InstanciaDAO::getInstance($idCon);
  }
 
  function getStudentCon($offset=0, $limit=10){
     $legajo = $_SESSION['legajo'];
     $user = UsuarioDAO::getUser($legajo);
 
-    return studentCon($user['id'],$offset=0, $limit=10); 
+    return InstanciaDAO::studentCon($user['id'],$offset=0, $limit=10); 
  }
 
  function getTeacherCon($offset=0, $limit=10){
     $legajo = $_SESSION['legajo'];
     $user = UsuarioDAO::getUser($legajo);
 
-    return pendingTeacherCon($user['id'],$offset=0, $limit=10); 
+    return InstanciaDAO::pendingTeacherCon($user['id'],$offset=0, $limit=10); 
  }
 
  function teacherConAssigned(){
     $legajo = $_SESSION['legajo'];
     $user = UsuarioDAO::getUser($legajo);
     
-    return teacherCon($user['id']);
+    return ConsultaDAO::teacherCon($user['id']);
  }
 
  if(isset($_POST['ins'])){ 
@@ -58,14 +58,14 @@ function searchCon($cons, $offset=0, $limit=10){
  
  function getSubs($offset=0, $limit=10){
     extract($_REQUEST);    
-    return selectSubscriber($id,$offset=0, $limit=10);
+    return SubscriptionDAO::selectSubscriber($id,$offset=0, $limit=10);
  }
 
  function confirm(){
     extract($_REQUEST);    
 
-    $instance = getInstance($id);
-    confirmCon($instance['id']);
+    $instance = InstanciaDAO::getInstance($id);
+    InstanciaDAO::confirmCon($instance['id']);
     //TO DO: notificar a los estudiantes inscriptos
 
     header('Location: ../consultas.php');        
@@ -76,15 +76,15 @@ function unSubscribe(){
     $legajo = $_SESSION['legajo'];    
     
     $user = UsuarioDAO::getUser($legajo);        
-    $instance = getInstance($id);
+    $instance = InstanciaDAO::getInstance($id);
 
    
-    $subscribers = getSubscribers($instance['id']);  
+    $subscribers = SubscriptionDAO::getSubscribers($instance['id']);  
 
-    deleteSubscription($user['id'],$instance['id']); 
+    SubscriptionDAO::deleteSubscription($user['id'],$instance['id']); 
         
     if($subscribers[0] == 1){
-        deleteInstance($instance['id']);                    
+        InstanciaDAO::deleteInstance($instance['id']);                    
         ///TO DO: enviar mail al docente
     } 
 
@@ -102,21 +102,21 @@ function subscribe(){
     
     $user = UsuarioDAO::getUser($legajo);   
 
-    $instance = getInstance($id);
+    $instance = InstanciaDAO::getInstance($id);
 
     if(empty($instance)){
 
-        $instanceID = createInstance($id);   
+        $instanceID = InstanciaDAO::createInstance($id);   
         
-        addSubscriptor($user['id'],$instanceID);
+        SubscriptionDAO::addSubscriptor($user['id'],$instanceID);
         ///TO DO: enviar mail al estudiante y al docente
 
     }
     else if($instance['descripcion'] == 'Bloqueada por profesor'){
         return header("Location: ../consultas.php?error=No se pudo realizar la inscripción porque la consulta se encuentra bloqueada"); 
     }                           
-    else if($instance['cupo'] != 0 && getSubscribers($instance['id'])[0] < $instance['cupo'])       
-        addSubscriptor($user['id'],$instance['id']); 
+    else if($instance['cupo'] != 0 && SubscriptionDAO::getSubscribers($instance['id'])[0] < $instance['cupo'])       
+    SubscriptionDAO::addSubscriptor($user['id'],$instance['id']); 
         ///TO DO: enviar mail al estudiante
     else{
         return header("Location: ../consultas.php?error=La consulta ya no tiene cupos disponibles");          
@@ -128,14 +128,14 @@ function subscribe(){
 
 function isSubscribed($idConsult){
     
-    $instance = getInstance($idConsult);        
+    $instance = InstanciaDAO::getInstance($idConsult);        
     if(empty($instance))
       return false;
 
     $legajo = $_SESSION['legajo'];        
     $user = UsuarioDAO::getUser($legajo);    
      
-    $subscription = getSubscription($user['id'],$instance['id']);
+    $subscription = SubscriptionDAO::getSubscription($user['id'],$instance['id']);
 
     return !empty($subscription); 
 }

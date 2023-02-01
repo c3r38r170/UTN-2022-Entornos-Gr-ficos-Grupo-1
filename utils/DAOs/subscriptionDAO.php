@@ -1,15 +1,16 @@
 <?php
 
-function addSubscriptor($idUser,$idInstance){
+class SubscriptionDAO{
+  static function addSubscriptor($idUser,$idInstance){
     $db=new MysqliWrapper();
     
     $vSql = "INSERT INTO suscripciones (estudiante_id,instancia_id) VALUES (?,?)";
     if(!$db->prepared($vSql,[$idUser,$idInstance])){
         throw new Exception("error");
     }    
-}
+  }
 
-function getSubscription($idUser,$idInstance){
+  static function getSubscription($idUser,$idInstance){
     $db=new MysqliWrapper();
     
     $vSql = "SELECT * FROM suscripciones WHERE estudiante_id=? AND instancia_id=?";
@@ -19,17 +20,17 @@ function getSubscription($idUser,$idInstance){
 	$rs_result->free();
 		 
 	return $cons;
-} 
+  } 
 
-function deleteSubscription($idUser,$idInstance){
+  static function deleteSubscription($idUser,$idInstance){
     $db=new MysqliWrapper();
 
     $vSql = "DELETE FROM suscripciones WHERE estudiante_id=? AND instancia_id=?";
     $db->prepared($vSql,[$idUser,$idInstance]);
   
-}
+  }
 
-function getSubscribers($idInstance){
+  static function getSubscribers($idInstance){
 
     $db=new MysqliWrapper();
 
@@ -39,9 +40,9 @@ function getSubscribers($idInstance){
 	$rs_result->free();
 		 
 	return $arrows;    
-}
+  }
 
-function selectSubscriber($idInstance,$offset=0, $limit=10){
+   static function selectSubscriber($idInstance,$offset=0, $limit=10){
     $db=new MysqliWrapper();
 
     $vSql = "SELECT u.nombre_completo, u.legajo, u.correo FROM suscripciones s
@@ -53,7 +54,7 @@ function selectSubscriber($idInstance,$offset=0, $limit=10){
 	$rs_result->free();
 		 
 	return $arrows;    
+  }
 }
-
 
 ?>
