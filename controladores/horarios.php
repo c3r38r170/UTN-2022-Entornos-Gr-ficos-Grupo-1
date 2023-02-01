@@ -7,6 +7,8 @@ if(!is_uploaded_file($_FILES['file']['tmp_name'])){
 }
 
 require_once '../libs/SimpleXLSX.php';
+require_once('../utils/db.php');
+
 
 if( $excel=Shuchkin\SimpleXLSX::parse($_FILES['file']['tmp_name'],false) ){
 	$rows=$excel->rows();
@@ -19,10 +21,7 @@ if( $excel=Shuchkin\SimpleXLSX::parse($_FILES['file']['tmp_name'],false) ){
 	define('HORA_DESDE',5);
 	define('HORA_HASTA',6);
 	define('AULA',7);
-
-	date_default_timezone_set('America/Argentina/Buenos_Aires');	
-	$date=date('Y/m/d/');
-
+	
 	foreach ($rows as $i=>$row){
 		if($i==0) // * Títulos
 			continue;
@@ -30,11 +29,12 @@ if( $excel=Shuchkin\SimpleXLSX::parse($_FILES['file']['tmp_name'],false) ){
 		$legajo=trim($row[LEGAJO]);
 		$profesorID=$db
 			->prepared("SELECT `id`,`nombre_completo` FROM `usuarios` WHERE `legajo` = ?",[$legajo]);
+			
 		if($profesorID){
 			$profesor=$profesorID->fetch_assoc();
 
 			$profesorID=$profesor['id'];
-
+			
 			if($profesor['nombre_completo']!=$row[NOMBRE_COMPLETO_PROFESOR]){
 				$db->prepared("UPDATE `usuarios` SET `nombre_completo` = ? WHERE `id` = ?",[$profesor['nombre_completo'],$profesorID]);
 			}
@@ -132,14 +132,13 @@ if( $excel=Shuchkin\SimpleXLSX::parse($_FILES['file']['tmp_name'],false) ){
 					,?
 					,?
 					,?
-					,?
+					,now()
 				)"
 			,[
 				$row[HORA_DESDE]
 				,$row[AULA]
 				,$row[HORA_HASTA]
-				,$row[DIA]
-				,$date
+				,$row[DIA]				
 			]
 		);
 	

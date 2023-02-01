@@ -80,7 +80,7 @@ CREATE TABLE `consultas` (
   `hora_hasta` time NOT NULL,
   `dia_de_la_semana` varchar(10) NOT NULL,
   `aula` varchar(25) NOT NULL,
-  `fecha` date NOT NULL
+  `fecha` datetime NOT NULL
   PRIMARY KEY (`id`),
   KEY `materia_x_comision_id` (`materia_x_comision_id`),
   KEY `profesor_id` (`profesor_id`),
