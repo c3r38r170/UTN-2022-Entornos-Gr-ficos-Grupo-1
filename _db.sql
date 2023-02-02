@@ -80,7 +80,8 @@ CREATE TABLE `consultas` (
   `hora_hasta` time NOT NULL,
   `dia_de_la_semana` varchar(10) NOT NULL,
   `aula` varchar(25) NOT NULL,
-  `fecha` datetime NOT NULL
+  `fecha` datetime NOT NULL,
+  `enlace` varchar(100) DEFAULT NULL
   PRIMARY KEY (`id`),
   KEY `materia_x_comision_id` (`materia_x_comision_id`),
   KEY `profesor_id` (`profesor_id`),
@@ -95,8 +96,7 @@ CREATE TABLE `instancias` (
   `fecha` date NOT NULL,
   `motivo` varchar(500) DEFAULT NULL,
   `hora_nueva` time DEFAULT NULL,
-  `cupo` int(11) NOT NULL,
-  `enlace` varchar(100) DEFAULT NULL,
+  `cupo` int(11) NOT NULL,  
   `estado_id` int(11) NOT NULL,
   `consulta_id` int(11) NOT NULL,
   `aula_nueva` varchar(25) DEFAULT NULL,

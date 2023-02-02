@@ -18,10 +18,10 @@
                     <div class="more-info" id="more-info">
                       <span><!-- Estado --> Estado: </span> <?php echo isset($instance['descripcion']) ? $instance['descripcion'] : 'Pendiente'; ?>  
                       </br>
-                      <span><!-- Modalidad --> Modalidad: </span> <?php echo isset($instance['enlace']) ? 'Virtual' : 'Presencial'; ?>  
+                      <span><!-- Modalidad --> Modalidad: </span> <?php echo isset($row['enlace']) ? 'Virtual' : 'Presencial'; ?>  
                       </br>
-                      <?php if(isset($instance['enlace'])){?>
-                      <span><!-- Enlace --> Enlace: </span> <a href="<?= $instance['enlace']?>"> <?php echo $instance['enlace'] ?> </a>   
+                      <?php if(isset($instance['row'])){?>
+                      <span><!-- Enlace --> Enlace: </span> <a href="<?= $row['enlace']?>"> <?php echo $row['enlace'] ?> </a>   
                       </br>
                       <?php } ?>
                       <?php if(isset($instance['motivo'])){?>

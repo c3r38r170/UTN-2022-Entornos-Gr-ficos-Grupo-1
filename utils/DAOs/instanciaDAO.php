@@ -13,8 +13,7 @@ class InstanciaDAO{
                  i.motivo, 
                  i.hora_nueva, 
                  i.aula_nueva, 
-                 i.cupo, 
-                 i.enlace,
+                 i.cupo,                  
                  i.fecha_consulta,
                  ie.descripcion 
             FROM instancias i  
