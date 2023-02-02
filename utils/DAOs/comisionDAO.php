@@ -8,7 +8,7 @@ class ComisionDAO{
     session_start();           
     extract($_REQUEST);
 
-    if(!ctype_alnum(str_replace(' ','',$name))){          
+    if(!preg_match('/[^a-zA-Z0-9àâáçéèèêëìîíïôòóùûüÂÊÎÔúÛÄËÏÖÜÀÆæÇÉÈŒœÙñý’,. ]/', $name)){          
        $error = "El campo Nombre debe ser alfanumerico";
        header("Location: ../form_comisiones.php?error=".urlencode(json_encode($error)));      
     }
