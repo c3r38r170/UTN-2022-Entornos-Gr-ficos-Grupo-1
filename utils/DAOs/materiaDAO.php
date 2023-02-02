@@ -35,7 +35,7 @@ class MateriaDAO{
     $name = $_POST["name"];
     $cont = 0;
 
-    if(preg_match('/[^a-zA-Z0-9àâáçéèèêëìîíïôòóùûüÂÊÎÔúÛÄËÏÖÜÀÆæÇÉÈŒœÙñý’,. ]/', $name)){          
+    if(!preg_match('/[^a-zA-Z0-9àâáçéèèêëìîíïôòóùûüÂÊÎÔúÛÄËÏÖÜÀÆæÇÉÈŒœÙñý’,. ]/', $name)){          
       $error = "El campo Nombre debe ser alfanumerico";
       header("Location: ../form_materias.php?error=".urlencode(json_encode($error)));
       $cont++;      
