@@ -37,7 +37,8 @@ if( $excel=Shuchkin\SimpleXLSX::parse($_FILES['file']['tmp_name'],false) ){
 			$profesorID=$profesor['id'];
 			
 			if($profesor['nombre_completo']!=$row[NOMBRE_COMPLETO_PROFESOR]){
-				$db->prepared("UPDATE `usuarios` SET `nombre_completo` = ? WHERE `id` = ?",[$profesor['nombre_completo'],$profesorID]);
+				
+				$db->prepared("UPDATE `usuarios` SET `nombre_completo` = ? WHERE `id` = ?",[$row[NOMBRE_COMPLETO_PROFESOR],$profesorID]);
 			}
 		}else{
 			$db->prepared(
