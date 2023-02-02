@@ -21,7 +21,8 @@ if( $excel=Shuchkin\SimpleXLSX::parse($_FILES['file']['tmp_name'],false) ){
 	define('HORA_DESDE',5);
 	define('HORA_HASTA',6);
 	define('AULA',7);
-	
+	define('ENLACE',8);
+
 	foreach ($rows as $i=>$row){
 		if($i==0) // * Títulos
 			continue;
@@ -124,6 +125,7 @@ if( $excel=Shuchkin\SimpleXLSX::parse($_FILES['file']['tmp_name'],false) ){
 				, hora_hasta
 				, dia_de_la_semana
 				, fecha
+				, enlace 
 			)
 				VALUES (
 					$comisionMateriaID
@@ -133,12 +135,14 @@ if( $excel=Shuchkin\SimpleXLSX::parse($_FILES['file']['tmp_name'],false) ){
 					,?
 					,?
 					,now()
+					,?
 				)"
 			,[
 				$row[HORA_DESDE]
 				,$row[AULA]
 				,$row[HORA_HASTA]
 				,$row[DIA]				
+				,$row[ENLACE]
 			]
 		);
 	
