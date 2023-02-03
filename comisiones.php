@@ -42,13 +42,11 @@ require_once 'controladores/comisiones.php';
 
 <div class="container_search">  
     <div class="search_box">
-        <form action="comisiones.php" method="GET">
-            <div class="search">
+        <form action="comisiones.php" method="GET">            
                 <input type="text" class="searchTerm" placeholder="Buscar por numero" name="search">
                 <button type="submit" name="btn_search" class="btn_search">
                     <i class="fas fa-search" data-title="Buscar" ></i>
-                </button>     
-            </div>
+                </button>                 
         </form>
     </div> 
 </div>    
@@ -57,10 +55,10 @@ require_once 'controladores/comisiones.php';
 <table class="table">    
     <thead>
         <tr>
-            <td><b>Id</b></td>
-            <td><b>Numero</b></td>
-            <td></td>
-            <td></td>
+            <th id="column_id"><b>Id</b></th>
+            <th><b>Numero</b></th>
+            <th id="edit"></th>
+            <th id="delete"></th>
         </tr>
     </thead>    
     <tbody>
@@ -87,7 +85,7 @@ $hayMas=false;
             <tr>
                 <td data-label="Id"><?php echo ($row['id']); ?></td>
                 <td data-label="Nombre"><?php echo ($row['numero']); ?></td>
-                <td data-label="Editar"> <div class="buttons">
+                <td data-label="Editar"> 
                     <form action="form_comisiones.php" method="get">                        
                         <input type="submit" value="Editar" class="button_actions"></input>  
                         <input type="hidden" value="<?=$row['id']?>" name="id">
@@ -112,6 +110,6 @@ $hayMas=false;
 </div>
 </div>
 <script src="https://kit.fontawesome.com/f452b46f6c.js" crossorigin="anonymous"></script>
-<?php // require_once 'template/footer.php'; ?>
+<?php  require_once 'template/footer.php'; ?>
 </body>
 </html>
