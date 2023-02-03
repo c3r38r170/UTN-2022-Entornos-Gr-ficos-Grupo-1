@@ -18,15 +18,17 @@ require_once 'utils/getDate.php';
 <?php 
 require_once 'template/header.php';
 require_once 'utils/usuario-tipos.php';
-    if(sessionEsAdministracion())
-        require_once 'template/navs/administracion.php';
-    else if (sessionEsEstudiante())
-        require_once 'template/navs/estudiante.php';
-    else if (sessionEsProfesor())
-        require_once 'template/navs/profesor.php';
-    else require_once 'template/navs/landing.php';
-    require_once 'template/breadcrumbs.php'; 
-    echo consultasBreadcrumbs();
+
+if(sessionEsAdministracion())
+    require_once 'template/navs/administracion.php';
+else if (sessionEsEstudiante())
+    require_once 'template/navs/estudiante.php';
+else if (sessionEsProfesor())
+    require_once 'template/navs/profesor.php';
+else require_once 'template/navs/landing.php';
+
+require_once 'template/breadcrumbs.php'; 
+echo consultasBreadcrumbs();
 ?> 
     
 
@@ -47,22 +49,27 @@ require_once 'utils/usuario-tipos.php';
 
 <?php
 
+// TODO responsive
+
+/* 
  if(isset($_GET["success"])){
 	$success = json_decode(urldecode($_GET['success']),true);
     echo "<span id='success'>$success</span>"; 
  }
-
- if(isset($_GET["error"])){
+ */
+/*  if(isset($_GET["error"])){
     echo "<span id='error'>".$_GET["error"]."</span>"; 
- }
+ } */
 
- $offset=isset($_GET['offset'])?0:(int)$_GET['offset'];
+ $offset=$_GET['offset']??0;
 
  if(isset($_GET["search"]) && ($search=trim($_GET["search"]))!=""){
     $cons = searchCon($search,$offset,11);
  }else{
     $search='';
-    $cons = teacherConAssigned($offset);
+    $cons = /* sessionEsProfesor()?
+        teacherConAssigned($offset)
+        : */getAll($offset);
  }       
        
     $hayMas=false;
@@ -73,13 +80,80 @@ require_once 'utils/usuario-tipos.php';
         }       
        $instance = getInst($row['id']); 
 ?> 
-       <!-- TO DO: Se podría crear un Card para el Docente y en un if decidir cual mostrar -->  
-       <?php 
-          if(sessionEsEstudiante()) 
-            require './cards/student_card.php'; 
-          elseif(sessionEsProfesor())  
-          require './cards/teacher_card.php'; 
-          ?>       
+       <div class="container">
+        <div class="card">
+		    <div class="left-column">
+                <h2 class="card_title">Materia</h2>            
+                <h4> <!-- Materia --> <?=($row['nombre'])?> </h4>
+                <h3 class="card_title"> <!-- Comision --> Comisión: <?=($row['numero'])?> </h3> 
+			    <img src="img/consulta_icono_1.png" alt="Logo Consulta"></img>
+		    </div>
+		    <div class="right-column">
+			    <h2> <!-- Docente --> Docente <?=($row['nombre_completo'])?> </h2>
+                <h3>Información básica</h3>
+			    <p>
+                    <span><!-- Fecha --> Fecha: </span> <?=$instance['fecha']??getWeekDate($row['dia_de_la_semana'])?>
+                    </br> 
+                    <span><!-- Horario --> Horario: </span> <?=substr($instance['hora_nueva']??$row['hora_desde'],0,5) . ' hs'?>
+                    </br> 
+                    <span><!-- Aula --> Aula: </span> <?=$instance['aula_nueva']??$row['aula']?> 
+                    <div class="more-info" id="more-info">
+                      <span><!-- Estado --> Estado: </span> <?=$instance['descripcion']??'Pendiente' ?>  
+                      </br>
+                      <span><!-- Modalidad --> Modalidad: </span> <?=$row['enlace']??'Presencial' ?>  
+                      </br>
+                      <?php if(isset($row['enlace'])){?>
+                      <span><!-- Enlace --> Enlace: </span> <a href="<?= $row['enlace']?>"> <?=$row['enlace'] ?> </a>   
+                      </br>
+                      <?php } ?>
+                      <?php if(isset($instance['motivo'])){?>
+                      <span><!-- Motivo --> Motivo: </span> <?=$instance['motivo'] ?>   
+                      </br>
+                      <?php } ?>
+                    </div>                   
+                </p> 
+                <div id="btns_form">
+                    <!-- TODO está bueno pero ¿vale la pena? -->
+                    <button class="button_info" id="btn_info" name="btn_info" >Más información</button>
+                    <?php
+                    // TODO sin ingresar, que haya un botón de ingresar para suscribirse
+                    // TODO administrador: editar?
+                        if(haIngresado()){
+                            switch ($_SESSION['tipo']) {
+                            case UsuarioTipos::ESTUDIANTE:
+                                $subscribed = (isSubscribed($row['id']));
+                            ?>
+                            <form action="controladores/consultas.php" method="post">                                                             
+                                <input type="hidden" value="<?=$row['id']?>" name="id">  
+                                <button class="button_ins" name=<?=$subscribed ? 'cancel' : 'ins'?> ><?=$subscribed ? 'Cancelar Inscripcion' : 'Inscribirse'?></button>                            			    
+                            </form>
+                            <?php
+                                break;
+                            case UsuarioTipos::PROFESOR:
+                                // if($instance){
+                            ?>                                                                
+                            <form action="controladores/consultas.php" method="post">                                                             
+                                <input type="hidden" value="<?=$row['id']?>" name="id">     
+                                <!-- TODO usar constantes como en UsuarioTipos, InstanciaEstados o algo así -->
+                                <button
+                                    class="button_ins"
+                                    name="confirm"
+                                    value=<?=$instance['id']??0?>
+                                    <?=(isset($instance['estado']) && $instance['estado']=="Confirmada") ? 'disabled' : ''?>
+                                >
+                                    <?=(isset($instance['estado']) && $instance['estado']=="Confirmada") ? 'Confirmada' : 'Confirmar Consulta' ?>
+                                </button>                            			    
+                            </form>
+                            <?php 
+                                // }
+                                break;
+                            }
+                        }
+                    ?>
+                </div>       
+		    </div>            
+	    </div>
+    </div>
 <?php } 
 ?>
 <!-- TODO URIencode search -->
@@ -91,6 +165,7 @@ require_once 'utils/usuario-tipos.php';
     btn_info = document.getElementsByClassName('button_info');    
     div_info = document.querySelectorAll('.more-info');
 
+    // TODO sacar script en linea, hacer una sola funcion
     for(let  i=0; i<btn_info.length; i++){
         btn_info[i].addEventListener('click', () =>{
             if(div_info[i].classList.contains('more-info')){

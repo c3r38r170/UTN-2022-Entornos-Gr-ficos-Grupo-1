@@ -4,50 +4,53 @@ require_once(dirname(__DIR__,1) . '\getDate.php');
 
 class InstanciaDAO{
   //Traemos solo aquellas instancias que correspondan a consultas vigentes
-  static function getInstance($id){
-	$db=new MysqliWrapper();
-    
-	$vSql = "SELECT 
-                 i.id, 
-                 i.fecha, 
-                 i.motivo, 
-                 i.hora_nueva, 
-                 i.aula_nueva, 
-                 i.cupo,                  
-                 i.fecha_consulta,
-                 ie.descripcion 
-            FROM instancias i  
-            INNER JOIN instancias_estados ie 
-            ON i.estado_id=ie.id 
-            WHERE i.consulta_id=? AND
-            i.fecha_consulta>=CURDATE()";
+  static function getInstance($consultaId){
+    $db=new MysqliWrapper();
+      
+    // TODO Renombrar ie.descripcion a "estado" en todos lados
+    $vSql = "SELECT 
+                  i.id, 
+                  i.fecha, 
+                  i.motivo, 
+                  i.hora_nueva, 
+                  i.aula_nueva, 
+                  i.cupo,                  
+                  i.fecha_consulta,
+                  ie.descripcion,
+                  ie.descripcion AS estado
+              FROM instancias i  
+              INNER JOIN instancias_estados ie 
+              ON i.estado_id=ie.id 
+              WHERE i.consulta_id=? AND
+              i.fecha_consulta>=CURDATE()";
 
-	$rs_result = $db->prepared($vSql,[$id]); 
-	$cons = $rs_result->fetch_array();
-	 
-	$rs_result->free();
-		 
-	return $cons;
+    $rs_result = $db->prepared($vSql,[$consultaId]); 
+    if($rs_result){
+      $cons = $rs_result->fetch_assoc();
+      
+      $rs_result->free();
+        
+      return $cons;
+    }else return null;
   }
 
   //Al momento de crear la instancia, guardamos la fecha en la que se va a llevar a cabo la consulta
-  static function createInstance($id){
+  static function createInstance($consultaId){
     $db=new MysqliWrapper();
 
-    $query = "SELECT dia_de_la_semana FROM consultas WHERE id=?";
-    $rs_result = $db->prepared($query,[$id]);
-    $day = mysqli_fetch_array($rs_result);
-	$rs_result->free();    
+    $rs_result=$db->query("SELECT dia_de_la_semana FROM consultas WHERE id=".$consultaId);
+    $day=$rs_result->fetch_assoc();
+  	$rs_result->free();    
 
-    $vSql = "INSERT INTO instancias (fecha, cupo, estado_id,consulta_id, fecha_consulta) VALUES (?,?,?,?,?)";
+    // TODO cupo y estado_id por default en la base de datos. que el cupo sea algo humano tipo 5-10
+    $vSql = "INSERT INTO instancias (fecha, cupo, estado_id,consulta_id) VALUES (?,5,1,?)";
     
-    date_default_timezone_set('America/Argentina/Buenos_Aires');    
-    $date=date('Y/m/d/');
-    
-    $db->prepared($vSql,[$date,0,1,$id,getWeekDate($day['dia_de_la_semana'])]);
+    $db->prepared($vSql,[getWeekDate($day['dia_de_la_semana']),$consultaId]);
+    die(getWeekDate($day['dia_de_la_semana']));
+    die('iid='.$db->insert_id());
+    // die($db->dblink->error);
     return $db->insert_id();
   }
-
 
   static function deleteInstance($idInstance){
     $db=new MysqliWrapper();
