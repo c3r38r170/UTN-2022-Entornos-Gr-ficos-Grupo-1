@@ -23,6 +23,12 @@ CREATE TABLE `instancias_estados` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
+INSERT INTO `instancias_estados` (`id`, `descripcion`) VALUES
+(1,	'Pendiente'),
+(2,	'Confirmada'),
+(3,	'Bloqueada por el profesor');
+
+
 DROP TABLE IF EXISTS `materia`;
 CREATE TABLE `materia` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
