@@ -1,6 +1,6 @@
 <?php
 
-require_once 'utils/db.php';
+require_once $_SERVER['DOCUMENT_ROOT'].'/utils/db.php';
 
 class UsuarioDAO{
     static function getUser($leg){
