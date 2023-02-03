@@ -18,7 +18,7 @@
     echo preguntasFrecuentesBreadcrumbs();
 ?>
 
-<div>
+<div id="faq">
 	<details>
         <summary>¿Cómo me registro?</summary>
         <p>Seleccioná la opción Registrarse en el menú principal.<br> 
@@ -62,6 +62,6 @@
       </details>
 </div>
 
-<?php //require_once 'template/footer.php'; ?>
+<?php require_once 'template/footer.php'; ?>
 </body>
 </html>
