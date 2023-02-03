@@ -1,5 +1,7 @@
 -- Adminer 4.8.1 MySQL 5.5.5-10.4.12-MariaDB dump
 
+-- TODO Intentar usar utf8mb4
+
 SET NAMES utf8;
 SET time_zone = '+00:00';
 SET foreign_key_checks = 0;
@@ -8,7 +10,7 @@ SET sql_mode = 'NO_AUTO_VALUE_ON_ZERO';
 DROP TABLE IF EXISTS `comision`;
 CREATE TABLE `comision` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `numero` varchar(10) NOT NULL,
+  `numero` varchar(10) CHARACTER SET ascii COLLATE ascii_bin NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -32,7 +34,7 @@ CREATE TABLE `materia` (
 DROP TABLE IF EXISTS `usuarios_tipos`;
 CREATE TABLE `usuarios_tipos` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `descripcion` varchar(20) NOT NULL,
+  `descripcion` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_spanish_ci NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -59,10 +61,10 @@ CREATE TABLE `materia_x_comision` (
 DROP TABLE IF EXISTS `usuarios`;
 CREATE TABLE `usuarios` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `nombre_completo` varchar(50) NOT NULL,
-  `correo` varchar(50) NOT NULL,
-  `legajo` varchar(10) NOT NULL,
-  `contrasenia` char(60) NOT NULL,
+  `nombre_completo` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_spanish_ci NOT NULL,
+  `correo` varchar(50) CHARACTER SET ascii COLLATE ascii_bin NOT NULL,
+  `legajo` varchar(10) CHARACTER SET ascii COLLATE ascii_bin NOT NULL,
+  `contrasenia` char(60) CHARACTER SET ascii COLLATE ascii_bin NOT NULL,
   `tipo_id` int(11) NOT NULL,
   `baja` tinyint(1) DEFAULT 0 NOT NULL,
   PRIMARY KEY (`id`),
@@ -78,8 +80,8 @@ CREATE TABLE `consultas` (
   `profesor_id` int(11) NOT NULL,
   `hora_desde` time NOT NULL,
   `hora_hasta` time NOT NULL,
-  `dia_de_la_semana` varchar(10) NOT NULL,
-  `aula` varchar(25) NOT NULL,
+  `dia_de_la_semana` varchar(10) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+  `aula` varchar(25) CHARACTER SET utf8mb4 COLLATE utf8mb4_spanish_ci NOT NULL,
   `fecha` datetime NOT NULL,
   `enlace` varchar(100) DEFAULT NULL
   PRIMARY KEY (`id`),
