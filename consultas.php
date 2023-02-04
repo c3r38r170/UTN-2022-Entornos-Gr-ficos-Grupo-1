@@ -91,7 +91,7 @@ echo consultasBreadcrumbs();
 		    <div class="right-column">
 			    <h2> <!-- Docente --> Docente <?=($row['nombre_completo'])?> </h2>
                 <h3>Información básica</h3>
-			    <p>
+			    <p>                    
                     <span><!-- Fecha --> Fecha: </span> <?=$instance['fecha']??getWeekDate($row['dia_de_la_semana'])?>
                     </br> 
                     <span><!-- Horario --> Horario: </span> <?=substr($instance['hora_nueva']??$row['hora_desde'],0,5) . ' hs'?>
@@ -110,6 +110,9 @@ echo consultasBreadcrumbs();
                       <span><!-- Motivo --> Motivo: </span> <?=$instance['motivo'] ?>   
                       </br>
                       <?php } ?>
+                      <?php if(isset($instance) && $_SESSION['tipo'] == UsuarioTipos::PROFESOR){?>
+                        <a id="subs" href=<?="subscribers.php?id=".$instance['id']?>>Ver estudiantes suscritos</a>                                                    
+                      <?php }?>
                     </div>                   
                 </p> 
                 <div id="btns_form">
