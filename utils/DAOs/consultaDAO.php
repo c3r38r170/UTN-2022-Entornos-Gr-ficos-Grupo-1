@@ -68,6 +68,10 @@ static function getAll($offset=0, $limit=10){
 			INNER JOIN comision com ON com.id=mc.comision_id
 			INNER JOIN materia mat ON mat.id=mc.materia_id
 			INNER JOIN usuarios u ON u.id=c.profesor_id
+		WHERE c.fecha  = (
+					SELECT MAX(fecha)
+					FROM consultas 
+				)	
 		LIMIT $limit OFFSET $offset";
 
 	$rs_result = $db->query($sql);
