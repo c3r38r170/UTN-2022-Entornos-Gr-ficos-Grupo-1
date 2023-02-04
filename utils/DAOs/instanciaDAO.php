@@ -46,9 +46,6 @@ class InstanciaDAO{
     $vSql = "INSERT INTO instancias (fecha, cupo, estado_id,consulta_id) VALUES (?,5,1,?)";
     
     $db->prepared($vSql,[getWeekDate($day['dia_de_la_semana']),$consultaId]);
-    die(getWeekDate($day['dia_de_la_semana']));
-    die('iid='.$db->insert_id());
-    // die($db->dblink->error);
     return $db->insert_id();
   }
 
