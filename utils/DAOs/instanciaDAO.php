@@ -111,9 +111,9 @@ class InstanciaDAO{
     $rs_result = $db->prepared($sql,[$id]);
     $consult = $rs_result->fetch_all(MYSQLI_ASSOC);
 	
-	$rs_result->free();
-		
-	return $consult;
+    $rs_result->free();
+      
+    return $consult;
 
   }
 

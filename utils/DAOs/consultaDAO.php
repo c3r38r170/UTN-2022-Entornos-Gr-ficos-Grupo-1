@@ -12,6 +12,9 @@ class ConsultaDAO{
 
 		$db=new MysqliWrapper();
 
+		// * Como pensamos en mostrar las consultas de acá a una semana, en una semana todas las consultas se van a dar, así que mostramos todas.
+		// * Después, al confirmar o suscribirse o lo que sea que se haga primero, la instancia se genera con el próximo día de consulta, que debería ser dentro de la próxima semana.
+
 		$sql =
 			"SELECT
 					c.id  
