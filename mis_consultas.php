@@ -1,5 +1,9 @@
 <?php
 
+require_once 'utils/usuario-tipos.php';
+if (!sessionEsEstudiante()){
+    header('Location: ingreso.php');
+}
 require_once 'controladores/consultas.php';
 require_once 'utils/getDate.php';
 
@@ -16,17 +20,13 @@ require_once 'utils/getDate.php';
 </head>
 <body>
 <?php 
+
 require_once 'template/header.php';
-require_once 'utils/usuario-tipos.php';
-    if(sessionEsAdministracion())
-        require_once 'template/navs/administracion.php';
-    else if (sessionEsEstudiante())
-        require_once 'template/navs/estudiante.php';
-    else if (sessionEsProfesor())
-        require_once 'template/navs/profesor.php';
-    else require_once 'template/navs/landing.php';
-    require_once 'template/breadcrumbs.php'; 
-    echo misConsultasBreadcrumbs();
+
+require_once 'template/navs/estudiante.php';
+
+echo misConsultasBreadcrumbs();
+
 ?> 
     
 
@@ -41,14 +41,11 @@ require_once 'utils/usuario-tipos.php';
 
     $offset=isset($_GET['offset'])?0:(int)$_GET['offset'];
  
-    if (sessionEsEstudiante())
-        $cons = getStudentCon($offset,11);
-    elseif(sessionEsProfesor())
-        $cons = getTeacherCon($offset,11);
+    $cons = getStudentCon($offset,11);
+    if(empty($cons))
+     echo '<span id="success" style="color:red">Aún no estás inscripto en ninguna consulta</span>';
 
     $hayMas=false;
-    if(sessionEsEstudiante() && empty($cons))
-     echo '<span id="success" style="color:red">Aún no estás inscripto en ninguna consulta</span>';
     foreach ($cons as $i=> $row) {
         if($i==10){ // * índice 10 es elemento 11
             $hayMas=true;
@@ -57,13 +54,47 @@ require_once 'utils/usuario-tipos.php';
        $instance = getInst($row['id']); 
 ?> 
 
-         <?php 
-          if(sessionEsEstudiante()) 
-            require './cards/student_card.php'; 
-          elseif(sessionEsProfesor())  
-            require './cards/teacher_card.php'; 
-          ?>       
+<div class="container">
+    <div class="card">
+        <div class="left-column">
+            <h2 class="card_title">Materia</h2>
+            <!-- ! materia_nombre y comision_numero van a fallar hasta que se suba form_consultas, ya que con ese se subiria el cambio de nombres en el DAO -->
+            <h4> <!-- Materia --> <?=$row['materia_nombre']?> </h4>
+            <h3 class="card_title"> <!-- Comision --> Comisión: <?= ($row['comision_numero'])?> </h3> 
+            <img src="img/consulta_icono_1.png" alt="Logo Consulta"></img>
+        </div>
+        <div class="right-column">
+            <h2> <!-- Docente --> Docente <?= ($row['nombre_completo'])?> </h2>
+            <h3>Información básica</h3>
+            <p>
+                <span><!-- Fecha --> Fecha: </span> <?= getWeekDate($row['dia_de_la_semana'])?>
+                </br> 
+                <span><!-- Horario --> Horario: </span> <?= ((isset($instance['hora_nueva'])) ? $instance['hora_nueva'] : $row['hora_desde']). ' hs'?>
+                </br> 
+                <span><!-- Aula --> Aula: </span> <?= ((isset($instance['aula_nueva'])) ? $instance['aula_nueva'] : $row['aula'])?> 
+                <div class="more-info" id="more-info">
+                    <span><!-- Estado --> Estado: </span> <?=$instance['descripcion'] ?>  
+                    </br>
+                    <span><!-- Modalidad --> Modalidad: </span> <?= isset($row['enlace']) ? 'Virtual' : 'Presencial'?>  
+                    </br>
+                    <?php if(isset($row['enlace'])){?>
+                    <span><!-- Enlace --> Enlace: </span> <a href="<?= $row['enlace']?>"> <?= $row['enlace'] ?> </a>   
+                    </br>
+                    <?php } ?>
+                </div>                   
+            </p> 
+            <div id="btns_form">
+                <button class="button_info" id="btn_info" name="btn_info" >Más información</button>                                     
+                <form action="controladores/consultas.php" method="post">                                                             
+                    <input type="hidden" value="<?=$row['id']?>" name="id">  
+                    <button class="button_ins" name=cancel>Cancelar Inscripcion</button>                            			    
+                </form> 
+            </div>       
+        </div>            
+    </div>
+</div>        
 <!-- TODO URIencode search -->
+<!-- TODO traer flechas de consultas.php cuando se hagan -->
     <a class="fas fa-angle-left" <?=$offset?"href=\"?search=$search&offset=".($offset-10)."\"":""?> ></a>
     <a class="fas fa-angle-right" <?=$hayMas?"href=\"?search=$search&offset=".($offset+10)."\"":""?> ></a>
 <?php
@@ -88,6 +119,6 @@ require_once 'utils/usuario-tipos.php';
     }
 </script>
 
-<?php //require_once 'template/footer.php'; ?>
+<?php require_once 'template/footer.php'; ?>
 </body>
 </html>

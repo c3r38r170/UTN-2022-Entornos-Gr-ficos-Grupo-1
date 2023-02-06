@@ -43,6 +43,7 @@
 				como una continuacion de la Universidad Obrera Nacional. Es la unica universidad del pais
 				con una organizacion federal y cuya estructura academica tiene a las ingenierias como objetivo prioritario
 		</p>
+		<!-- TODO teléfono y horarios reales -->
 		<label class="texts_phone">Telefono:</label>
 		<p class="texts_number">
 			+1 (877) 747-9986
