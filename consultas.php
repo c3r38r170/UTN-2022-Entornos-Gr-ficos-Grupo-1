@@ -119,7 +119,6 @@ echo consultasBreadcrumbs();
                     <!-- TODO está bueno pero ¿vale la pena? -->
                     <button class="button_info" id="btn_info" name="btn_info" >Más información</button>
                     <?php
-                    // TODO sin ingresar, que haya un botón de ingresar para suscribirse
                     // TODO administrador: editar?
                         if(haIngresado()){
                             switch ($_SESSION['tipo']) {
@@ -151,6 +150,10 @@ echo consultasBreadcrumbs();
                                 // }
                                 break;
                             }
+                        }else{
+                    ?>
+                        <a href="ingreso.php"><button class=button_ins>Ingresá para inscribirte</button></a>
+                    <?php
                         }
                     ?>
                 </div>       
