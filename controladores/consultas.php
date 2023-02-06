@@ -10,22 +10,27 @@ session_start(['read_and_close'=>true]);
 
 // * Uso general
 
-// TODO default limit 11, ver si no afecta en ningun lado
-function searchCon($cons, $offset=0, $limit=10){
+// TODO ver si default limit 11 no afecta en ningun lado
+function searchCon($consulta, $offset=0, $limit=10+1){
     if (sessionEsProfesor()){
         $legajo = $_SESSION['legajo'];
         $user = UsuarioDAO::getUser($legajo);
-        return ConsultaDAO::search($cons, $offset, $limit+1,$user['id']);
+        return ConsultaDAO::search($consulta, $offset, $limit,$user['id']);
     }
-    return ConsultaDAO::search($cons, $offset, $limit+1);
+    return ConsultaDAO::search($consulta, $offset, $limit);
 }
 
  function getInst($idCon){
     return InstanciaDAO::getInstance($idCon);
  }
 
- function getAll($offset=0, $limit=11){
-    return ConsultaDAO::getAll($offset, $limit);
+ function getAll($offset=0, $limit=10+1){
+    $parametros=[$offset, $limit];
+    if(sessionEsProfesor()){
+        // TODO ¿el legajo no está en la session? podríamos considerarlo, ya que es un identificador y se usa a cada rato
+        $parametros[]=UsuarioDAO::getUser($_SESSION['legajo'])['id'];
+    }
+    return ConsultaDAO::getAll(...$parametros);
  }
  
 // * Estudiante

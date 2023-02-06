@@ -4,7 +4,7 @@ require_once(dirname(__DIR__,1) . '\db.php');
 
 
 class ConsultaDAO{
-  static function search($cons, $offset=0, $limit=10,$idTeacher=0){	
+  static function search($cons, $offset=0, $limit=10, $idTeacher=0){	
 
 		$idTeacher = $idTeacher?
 			"AND c.profesor_id=".$idTeacher
@@ -39,7 +39,7 @@ class ConsultaDAO{
 					SELECT MAX(fecha)
 					FROM consultas 
 				)
-				".$idTeacher."		
+				$idTeacher
 			LIMIT $limit OFFSET $offset";
 
 		$rs_result = $db->prepared($sql,['%'.$cons.'%','%'.$cons.'%','%'.$cons.'%']);
@@ -52,7 +52,7 @@ class ConsultaDAO{
 		}else return [];
   }
 
-static function getAll($offset=0, $limit=10){
+static function getAll($offset=0, $limit=10, $idTeacher=0){
 	
 	$db=new MysqliWrapper();
 
@@ -75,6 +75,11 @@ static function getAll($offset=0, $limit=10){
 					SELECT MAX(fecha)
 					FROM consultas 
 				)	
+		".(
+			$idTeacher?
+				"AND c.profesor_id=".$idTeacher
+				:''
+		)."
 		LIMIT $limit OFFSET $offset";
 
 	$rs_result = $db->query($sql);
