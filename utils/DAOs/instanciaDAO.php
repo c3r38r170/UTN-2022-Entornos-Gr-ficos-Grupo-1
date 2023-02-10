@@ -35,25 +35,23 @@ class InstanciaDAO{
   }
 
   //Al momento de crear la instancia, guardamos la fecha en la que se va a llevar a cabo la consulta
-  static function createInstance($consultaId){
-    $db=new MysqliWrapper();
+  static function createInstance($id){    
+      $db=new MysqliWrapper();
+  
+      $query = "SELECT dia_de_la_semana FROM consultas WHERE id=?";
+      $rs_result = $db->prepared($query,[$id]);
+      $day = mysqli_fetch_array($rs_result);
+      $rs_result->free();    
 
-    $rs_result=$db->query("SELECT dia_de_la_semana FROM consultas WHERE id=".$consultaId);
-    $day=$rs_result->fetch_assoc();
-  	$rs_result->free();    
-
-    // TODO cupo y estado_id por default en la base de datos. que el cupo sea algo humano tipo 5-10
-    $vSql = "INSERT INTO instancias (fecha, cupo, estado_id,consulta_id) VALUES (?,5,1,?)";
-    
-    $db->prepared($vSql,[getWeekDate($day['dia_de_la_semana']),$consultaId]);
-    return $db->insert_id();
-  }
-
-  static function deleteInstance($idInstance){
-    $db=new MysqliWrapper();
-    $vSql = "DELETE FROM instancias WHERE id=?";
-    $db->prepared($vSql,[$idInstance]);
-  }
+      $vSql = "INSERT INTO instancias (fecha, cupo, estado_id,consulta_id, fecha_consulta) VALUES (?,?,?,?,?)";
+      
+      date_default_timezone_set('America/Argentina/Buenos_Aires');    
+      $date=date('Y/m/d/');
+      
+      $db->prepared($vSql,[$date,0,1,$id,getWeekDate($day['dia_de_la_semana'])]);
+      
+      return $db->insert_id();
+    }    
 
   static function studentCon($id,$offset=0, $limit=10){
     $db=new MysqliWrapper();
@@ -68,6 +66,8 @@ class InstanciaDAO{
         , c.hora_hasta
         , c.dia_de_la_semana
         , c.aula
+        , c.fecha
+			  , c.enlace
     FROM consultas c
         INNER JOIN materia_x_comision mc ON mc.id=c.materia_x_comision_id
         INNER JOIN comision com ON com.id=mc.comision_id
@@ -99,6 +99,8 @@ class InstanciaDAO{
         , c.hora_hasta
         , c.dia_de_la_semana
         , c.aula
+        , c.fecha
+		  	, c.enlace
     FROM consultas c
         INNER JOIN materia_x_comision mc ON mc.id=c.materia_x_comision_id
         INNER JOIN comision com ON com.id=mc.comision_id

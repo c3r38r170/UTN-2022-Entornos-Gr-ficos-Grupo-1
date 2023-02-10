@@ -24,6 +24,7 @@ require_once 'utils/getDate.php';
 require_once 'template/header.php';
 
 require_once 'template/navs/estudiante.php';
+require_once 'template/breadcrumbs.php'; 
 
 echo misConsultasBreadcrumbs();
 
@@ -51,7 +52,7 @@ echo misConsultasBreadcrumbs();
             $hayMas=true;
             break;
         }
-       $instance = getInst($row['id']); 
+       $instance = getInst($row['id']);        
 ?> 
 
 <div class="container">
@@ -59,8 +60,8 @@ echo misConsultasBreadcrumbs();
         <div class="left-column">
             <h2 class="card_title">Materia</h2>
             <!-- ! materia_nombre y comision_numero van a fallar hasta que se suba form_consultas, ya que con ese se subiria el cambio de nombres en el DAO -->
-            <h4> <!-- Materia --> <?=$row['materia_nombre']?> </h4>
-            <h3 class="card_title"> <!-- Comision --> Comisión: <?= ($row['comision_numero'])?> </h3> 
+            <h4> <!-- Materia --> <?=$row['nombre']?> </h4>
+            <h3 class="card_title"> <!-- Comision --> Comisión: <?= ($row['numero'])?> </h3> 
             <img src="img/consulta_icono_1.png" alt="Logo Consulta"></img>
         </div>
         <div class="right-column">
@@ -119,6 +120,6 @@ echo misConsultasBreadcrumbs();
     }
 </script>
 
-<?php require_once 'template/footer.php'; ?>
+<?php //require_once 'template/footer.php'; ?>
 </body>
 </html>

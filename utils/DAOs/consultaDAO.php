@@ -25,6 +25,7 @@ class ConsultaDAO{
 				, c.hora_hasta
 				, c.dia_de_la_semana
 				, c.aula
+				, c.fecha
 				, c.enlace
 			FROM consultas c
 				INNER JOIN materia_x_comision mc ON mc.id=c.materia_x_comision_id
@@ -66,6 +67,8 @@ static function getAll($offset=0, $limit=10, $idTeacher=0){
 			, c.hora_hasta
 			, c.dia_de_la_semana
 			, c.aula
+			, c.fecha
+			, c.enlace
 		FROM consultas c
 			INNER JOIN materia_x_comision mc ON mc.id=c.materia_x_comision_id
 			INNER JOIN comision com ON com.id=mc.comision_id
@@ -103,6 +106,7 @@ static function teacherCon($idTeacher,$offset=0, $limit=10){
 			, c.hora_hasta
 			, c.dia_de_la_semana
 			, c.aula
+			, c.fecha
 			, c.enlace
 		FROM consultas c
 			INNER JOIN materia_x_comision mc ON mc.id=c.materia_x_comision_id
