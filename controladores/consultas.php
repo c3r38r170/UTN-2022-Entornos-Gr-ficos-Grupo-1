@@ -5,6 +5,7 @@ require_once(realpath(dirname(__FILE__) . '/../utils/DAOs/instanciaDAO.php'));
 require_once(realpath(dirname(__FILE__) . '/../utils/DAOs/usuarioDAO.php'));
 require_once(realpath(dirname(__FILE__) . '/../utils/DAOs/subscriptionDAO.php'));
 require_once(realpath(dirname(__FILE__) . '/../utils/usuario-tipos.php'));
+require_once(realpath(dirname(__FILE__) . '/../controladores/mails.php'));
 
 session_start(['read_and_close'=>true]);
 
@@ -63,13 +64,17 @@ function searchCon($consulta, $offset=0, $limit=10+1){
 
     date_default_timezone_set('America/Argentina/Buenos_Aires');
     $today = date('Y-m-d H:i:s');
-    
+        
+
     if($insDate>=$today){
         SubscriptionDAO::deleteSubscription($user['id'],$instance['id']); 
         
         if($subscribers[0] == 1){
-            InstanciaDAO::deleteInstance($instance['id']);                    
             ///TO DO: enviar mail al docente
+            notifyTeacher($instance['id']);
+
+            InstanciaDAO::deleteInstance($instance['id']);                                            
+            
         } 
     
         //Redireccionamos a la pagina anterior, ya se consultas.php o mis_consultas.php

@@ -127,5 +127,25 @@ static function teacherCon($idTeacher,$offset=0, $limit=10){
 		
 	return $consult;
   } 
+
+  static function conInfo($conId){
+	$db=new MysqliWrapper();
+	
+		$sql =
+		"SELECT
+			mat.nombre
+			, com.numero			
+		FROM consultas c
+			INNER JOIN materia_x_comision mc ON mc.id=c.materia_x_comision_id
+			INNER JOIN comision com ON com.id=mc.comision_id
+			INNER JOIN materia mat ON mat.id=mc.materia_id			
+		WHERE c.id = ?";			
+	$rs_result = $db->prepared($sql,[$conId]);
+	$consult = $rs_result->fetch_all(MYSQLI_ASSOC);
+
+	$rs_result->free();
+		
+	return $consult;
+  }
 }
 ?>

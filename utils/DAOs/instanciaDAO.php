@@ -14,7 +14,8 @@ class InstanciaDAO{
                   i.motivo, 
                   i.hora_nueva, 
                   i.aula_nueva, 
-                  i.cupo,                  
+                  i.cupo,
+                  i.consulta_id,                   
                   i.fecha_consulta,
                   ie.descripcion,
                   ie.descripcion AS estado
