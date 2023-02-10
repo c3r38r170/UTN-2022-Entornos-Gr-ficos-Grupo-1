@@ -57,17 +57,30 @@ function searchCon($consulta, $offset=0, $limit=10+1){
    
     $subscribers = SubscriptionDAO::getSubscribers($instance['id']);  
 
-    SubscriptionDAO::deleteSubscription($user['id'],$instance['id']); 
-        
-    if($subscribers[0] == 1){
-        InstanciaDAO::deleteInstance($instance['id']);                    
-        ///TO DO: enviar mail al docente
-    } 
+    //Validamos que no hayan pasado mas de 24hs desde la inscripcion
+    $subscription = SubscriptionDAO::getSubscription($user['id'],$instance['id']);
+    $insDate=date("Y-m-d H:i:s",(strtotime($subscription['fecha_hora'])+24 * 60 * 60));
 
-    //Redireccionamos a la pagina anterior, ya se consultas.php o mis_consultas.php
-    //strtok permite quitar el parametro search de la URL, de lo contrario no se muestra el mensaje success 
-    $success = "Usted ya no se encuentra suscrito a la consulta";
-    header('Location: ' . strtok($_SERVER['HTTP_REFERER'], '?')."?success=".urlencode(json_encode($success)));               
+    date_default_timezone_set('America/Argentina/Buenos_Aires');
+    $today = date('Y-m-d H:i:s');
+    
+    if($insDate>=$today){
+        SubscriptionDAO::deleteSubscription($user['id'],$instance['id']); 
+        
+        if($subscribers[0] == 1){
+            InstanciaDAO::deleteInstance($instance['id']);                    
+            ///TO DO: enviar mail al docente
+        } 
+    
+        //Redireccionamos a la pagina anterior, ya se consultas.php o mis_consultas.php
+        //strtok permite quitar el parametro search de la URL, de lo contrario no se muestra el mensaje success 
+        $success = "Usted ya no se encuentra suscrito a la consulta";
+        header('Location: ' . strtok($_SERVER['HTTP_REFERER'], '?')."?success=".urlencode(json_encode($success)));              
+    }else{
+        $error = "Lo sentimos, pero ya pasó el límite de 24hs para realizar esta operación";
+        header('Location: ' . strtok($_SERVER['HTTP_REFERER'], '?')."?error=".urlencode(json_encode($error)));                
+    }    
+            
 }
 
 function subscribe(){

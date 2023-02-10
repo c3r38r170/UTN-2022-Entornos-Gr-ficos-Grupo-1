@@ -127,5 +127,10 @@ class InstanciaDAO{
     $db->prepared($sql,[$idInstance]);
     
   }
+
+  static function deleteInstance($idInstance){
+    $db=new MysqliWrapper();
+    $vSql = "DELETE FROM instancias WHERE id=?";
+  }  
 }
 ?>

@@ -40,6 +40,10 @@ echo misConsultasBreadcrumbs();
     echo "<span id='success'>$success</span>"; 
  }
 
+ if(isset($_GET["error"])){
+    echo "<span id='error'>".$_GET["error"]."</span>"; 
+ } 
+ 
     $offset=$_GET['offset']??0;
  
     $cons = getStudentCon($offset,11);
