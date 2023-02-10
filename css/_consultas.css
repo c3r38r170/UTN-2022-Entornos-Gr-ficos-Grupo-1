@@ -2,6 +2,7 @@
 @import '_buscador.css';
 @import 'tooltips.css';
 @import '_breadcrumbs.css';
+@import '_navegacion.css';
 
 .title_list{
     margin-top: 25px;
@@ -193,7 +194,7 @@
 	.card{
 		flex-direction: column;
 	}
-	.left-column{
+	.left-column{		
 		width: 100%;
 		align-items:center;        
 	}

@@ -1,0 +1,13 @@
+.botones-navegacion{
+    display: flex;
+    justify-content: space-around;
+}
+    .botones-navegacion a{
+        font-weight: 900 !important; /* ! Esto debería ser el mismo que da font-awesome. */
+
+        font-size: larger;
+        text-decoration: none;
+    }
+        .botones-navegacion a:not(:any-link){
+            color:grey !important;
+        }
