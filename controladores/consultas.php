@@ -69,9 +69,8 @@ function searchCon($consulta, $offset=0, $limit=10+1){
     if($insDate>=$today){
         SubscriptionDAO::deleteSubscription($user['id'],$instance['id']); 
         
-        if($subscribers[0] == 1){
-            ///TO DO: enviar mail al docente
-            notifyTeacher($instance['id']);
+        if($subscribers[0] == 1){            
+            notifyTeacher($instance['id'], " no ");
 
             InstanciaDAO::deleteInstance($instance['id']);                                            
             
@@ -102,15 +101,18 @@ function subscribe(){
         $instanceID = InstanciaDAO::createInstance($id);   
         
         SubscriptionDAO::addSubscriptor($user['id'],$instanceID);
+        notifyTeacher($instance['id']);
+        notifySubsStudent($instance,$user);
         ///TO DO: enviar mail al estudiante y al docente
 
     }
     else if($instance['descripcion'] == 'Bloqueada por profesor'){
         return header("Location: ../consultas.php?error=No se pudo realizar la inscripción porque la consulta se encuentra bloqueada"); 
     }                           
-    else if($instance['cupo'] != 0 && SubscriptionDAO::getSubscribers($instance['id'])[0] < $instance['cupo'])       
-    SubscriptionDAO::addSubscriptor($user['id'],$instance['id']); 
-        ///TO DO: enviar mail al estudiante
+    else if($instance['cupo'] != 0 && SubscriptionDAO::getSubscribers($instance['id'])[0] < $instance['cupo']){
+        SubscriptionDAO::addSubscriptor($user['id'],$instance['id']); 
+        notifySubsStudent($instance,$user);
+    }           
     else{
         return header("Location: ../consultas.php?error=La consulta ya no tiene cupos disponibles");          
     }
@@ -172,6 +174,7 @@ if(isset($_POST['ins'])){
     }
 
     InstanciaDAO::confirmCon($confirm);
+    notifyStudents($confirm);
     //TO DO: notificar a los estudiantes inscriptos
 
     // TODO volver a donde estaba

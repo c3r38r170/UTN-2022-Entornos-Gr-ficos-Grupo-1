@@ -4,7 +4,7 @@ class SubscriptionDAO{
   static function addSubscriptor($idUser,$idInstance){
     $db=new MysqliWrapper();
     
-    $vSql = "INSERT INTO suscripciones (estudiante_id,instancia_id) VALUES (?,?)";
+    $vSql = "INSERT INTO suscripciones (estudiante_id,instancia_id,fecha_hora) VALUES (?,?,now())";
     if(!$db->prepared($vSql,[$idUser,$idInstance])){
         throw new Exception("error");
     }    
@@ -54,6 +54,20 @@ class SubscriptionDAO{
 	$rs_result->free();
 		 
 	return $arrows;    
+  }
+
+  static function selectAllSubscribers($idInstance){
+    $db=new MysqliWrapper();
+
+    $vSql = "SELECT u.nombre_completo, u.legajo, u.correo FROM suscripciones s
+             INNER JOIN usuarios u ON u.id=s.estudiante_id                 
+             WHERE instancia_id=?";
+           
+    $rs_result =  $db->prepared($vSql,[$idInstance]);
+    $arrows = $rs_result->fetch_all(MYSQLI_ASSOC);
+	  $rs_result->free();
+		 
+	  return $arrows;    
   }
 }
 
