@@ -25,6 +25,10 @@ function searchCon($consulta, $offset=0, $limit=10+1){
     return InstanciaDAO::getInstance($idCon);
  }
 
+ function getCon($idCon){
+    return ConsultaDAO::conInfo($idCon);
+ }
+
  function getAll($offset=0, $limit=10+1){
     $parametros=[$offset, $limit];
     if(sessionEsProfesor()){
@@ -162,8 +166,16 @@ if(isset($_POST['ins'])){
     unsubscribe();
  }
 
+ if(isset($_POST['edit_con'])){                  
+    InstanciaDAO::updateInstance($_REQUEST);
+    
+    $success = "Los datos de la consulta se actualizaron con exito";
+    header("Location: ../form_consulta.php?id=".$_POST['id']."&success=".urlencode(json_encode($success)));                 
+ }
+
  if(isset($_POST['confirm'])){ 
     // TODO ver si es profesor
+    
 
     extract($_REQUEST);
     // * $confirm es la ID de la instancia; $id, de la consulta

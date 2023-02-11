@@ -1,0 +1,31 @@
+@import '_general.css';
+@import '_formulario.css';
+@import '_breadcrumbs.css';
+@import 'tooltips.css';
+
+.formulario_grupo > textarea{
+	width: 100%;
+	background: none;
+	color: #706c6c;
+	font-size: 1rem;
+	padding: .6em .3em;
+	border: none;
+	outline: none;
+	border-bottom: 1px solid #5757577e;
+}
+label{
+	font-size: 20px;
+	color:black;
+	cursor: pointer;	
+}
+
+small{
+	color:rgb(59, 57, 57);
+}
+
+textarea {
+	width: 500px;
+	height: 200px;
+	resize: none;
+	border: 1px solid #5757577e !important;
+  }

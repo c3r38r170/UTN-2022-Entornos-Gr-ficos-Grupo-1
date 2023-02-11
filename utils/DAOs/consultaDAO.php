@@ -132,20 +132,27 @@ static function teacherCon($idTeacher,$offset=0, $limit=10){
 	$db=new MysqliWrapper();
 	
 		$sql =
-		"SELECT
+		"SELECT		    
 			mat.nombre
 			, com.numero			
+			, c.aula
+			, c.hora_desde
+			, c.hora_hasta
+			, c.enlace
+			, c.fecha 
+			, c.dia_de_la_semana
 		FROM consultas c
 			INNER JOIN materia_x_comision mc ON mc.id=c.materia_x_comision_id
 			INNER JOIN comision com ON com.id=mc.comision_id
 			INNER JOIN materia mat ON mat.id=mc.materia_id			
 		WHERE c.id = ?";			
 	$rs_result = $db->prepared($sql,[$conId]);
-	$consult = $rs_result->fetch_all(MYSQLI_ASSOC);
+	$consult = $rs_result->fetch_assoc();
 
 	$rs_result->free();
 		
 	return $consult;
   }
+  
 }
 ?>

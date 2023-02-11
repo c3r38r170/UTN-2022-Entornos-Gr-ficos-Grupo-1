@@ -33,6 +33,7 @@
 	overflow: hidden;
 	width: 70%;
 	height: auto;
+	position: relative;
 }
 
 .card  h2 {
@@ -163,8 +164,20 @@
 	border: 1px solid rgb(12, 12, 12);	
 }
 
+.edit_btn{
+	background:none;
+	border: none;
+	font-size: 1.5em;
+	color:rgb(37, 150, 226);
+	position:absolute;
+	top:0px;
+	right: 4px;
+	cursor: pointer;
+}
+
 
 @media (max-width: 1030px) {
+	
 	.container{
 		flex-direction: column;
 		justify-content: center;
@@ -191,6 +204,10 @@
 
 
   @media (max-width: 400px) {
+	.edit_btn {
+		color: white;
+	}
+
 	.card{
 		flex-direction: column;
 	}

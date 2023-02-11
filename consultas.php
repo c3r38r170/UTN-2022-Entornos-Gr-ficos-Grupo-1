@@ -76,6 +76,7 @@ echo consultasBreadcrumbs();
             break;
         }       
        $instance = getInst($row['id']); 
+       
 ?> 
        <div class="container">
         <div class="card">
@@ -113,7 +114,7 @@ echo consultasBreadcrumbs();
                     </div>                   
                 </p> 
                 <div id="btns_form">
-                    <!-- TODO está bueno pero ¿vale la pena? -->
+                    <!-- TODO está bueno pero ¿vale la pena? -->                          
                     <button class="button_info" id="btn_info" name="btn_info" >Más información</button>
                     <?php
                     // TODO administrador: editar?
@@ -129,8 +130,15 @@ echo consultasBreadcrumbs();
                             <?php
                                 break;
                             case UsuarioTipos::PROFESOR:
-                                // if($instance){
-                            ?>                                                                
+                                if($instance){
+                            ?>
+                            <form action="form_consulta.php" method="get">                        
+                                <button type="submit" class="button_actions edit_btn">
+                                <i class="fa-solid fa-pen-to-square"></i>
+                                </button>  
+                                <input type="hidden" value="<?=$row['id']?>" name="id">                        
+                            </form>                                                                
+                                 <?php }?>
                             <form action="controladores/consultas.php" method="post">                                                             
                                 <input type="hidden" value="<?=$row['id']?>" name="id">     
                                 <!-- TODO usar constantes como en UsuarioTipos, InstanciaEstados o algo así -->
@@ -153,7 +161,7 @@ echo consultasBreadcrumbs();
                     <?php
                         }
                     ?>
-                </div>       
+                </div>                
 		    </div>            
 	    </div>
     </div>

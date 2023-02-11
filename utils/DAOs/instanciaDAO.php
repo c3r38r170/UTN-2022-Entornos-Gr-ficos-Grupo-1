@@ -133,5 +133,23 @@ class InstanciaDAO{
     $db=new MysqliWrapper();
     $vSql = "DELETE FROM instancias WHERE id=?";
   }  
+
+  static function updateInstance($instance){
+
+    $string = strtotime($instance['datetime']);
+    $date = date('Y/m/d/', $string);
+    $time = date('H:i:s A', $string);   
+
+    $db=new MysqliWrapper();
+    $sql = "UPDATE instancias SET
+              motivo = IFNULL(?, motivo), 
+              cupo = IFNULL(?, cupo), 
+              hora_nueva = IFNULL(?,hora_nueva), 
+              fecha_consulta = IFNULL(?,fecha_consulta), 
+              aula_nueva = IFNULL(?, aula_nueva)  
+            WHERE id = ?";
+    
+    $rs_result = $db->prepared($sql,[$instance['motivo'],$instance['cupo'],$time,$date,$instance['aula'],$instance['idInstance']]);          
+  }
 }
 ?>

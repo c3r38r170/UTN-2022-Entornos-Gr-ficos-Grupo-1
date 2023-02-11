@@ -130,6 +130,10 @@ function subsBreadcrumbs(){
 	return generateBreadcrumbs($breadcrumbs);
 }
 
-
+function formConBreadcrumbs(){
+	if(sessionEsAdministracion() || sessionEsProfesor())	
+	$breadcrumbs = [array("link" => "ingreso.php","text" => "Home"),array("link" => "consultas.php","text" => "Consultas") ,array("link" => "#","text" => "Editar Consulta")] ;	
+	return generateBreadcrumbs($breadcrumbs);	
+}
 
 ?>
