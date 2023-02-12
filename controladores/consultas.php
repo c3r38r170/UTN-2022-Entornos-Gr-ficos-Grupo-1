@@ -194,7 +194,7 @@ if(isset($_POST['ins'])){
     }
      
     InstanciaDAO::confirmCon($confirm);
-    notifyStudents($confirm);
+    notifyStudents($confirm,$instance['cupo']);
     //TO DO: notificar a los estudiantes inscriptos
 
     // TODO volver a donde estaba
