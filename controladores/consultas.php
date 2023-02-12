@@ -110,14 +110,14 @@ function subscribe(){
         ///TO DO: enviar mail al estudiante y al docente
 
     }
-    else if($instance['descripcion'] == 'Bloqueada por profesor'){
+    else if($instance['descripcion'] == 'Bloqueada'){
         return header("Location: ../consultas.php?error=No se pudo realizar la inscripción porque la consulta se encuentra bloqueada"); 
     }                           
     else if($instance['cupo'] != 0 && SubscriptionDAO::getSubscribers($instance['id'])[0] < $instance['cupo']){
         SubscriptionDAO::addSubscriptor($user['id'],$instance['id']); 
         notifySubsStudent($instance,$user);
     }           
-    else{
+    else if($instance['cupo'] != 0){
         return header("Location: ../consultas.php?error=La consulta ya no tiene cupos disponibles");          
     }
                
@@ -184,7 +184,7 @@ if(isset($_POST['ins'])){
         // TODO Añadir robustez a cuando viene 0 pero la instancia existe... según la fecha... quizá esto mate el proposito de mandar la id
         $confirm=InstanciaDAO::createInstance($id);
     }
-
+     
     InstanciaDAO::confirmCon($confirm);
     notifyStudents($confirm);
     //TO DO: notificar a los estudiantes inscriptos

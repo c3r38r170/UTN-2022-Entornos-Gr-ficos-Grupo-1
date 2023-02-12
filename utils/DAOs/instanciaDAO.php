@@ -139,6 +139,7 @@ class InstanciaDAO{
     $string = strtotime($instance['datetime']);
     $date = date('Y/m/d/', $string);
     $time = date('H:i:s A', $string);   
+    $state = isset($instance['blocking']) ? 3 : 1; 
 
     $db=new MysqliWrapper();
     $sql = "UPDATE instancias SET
@@ -146,10 +147,11 @@ class InstanciaDAO{
               cupo = IFNULL(?, cupo), 
               hora_nueva = IFNULL(?,hora_nueva), 
               fecha_consulta = IFNULL(?,fecha_consulta), 
-              aula_nueva = IFNULL(?, aula_nueva)  
+              aula_nueva = IFNULL(?, aula_nueva),                
+              estado_id = IFNULL(?, estado_id)
             WHERE id = ?";
     
-    $rs_result = $db->prepared($sql,[$instance['motivo'],$instance['cupo'],$time,$date,$instance['aula'],$instance['idInstance']]);          
+    $rs_result = $db->prepared($sql,[$instance['motivo'],$instance['cupo'],$time,$date,$instance['aula'],$state,$instance['idInstance']]);          
   }
 }
 ?>

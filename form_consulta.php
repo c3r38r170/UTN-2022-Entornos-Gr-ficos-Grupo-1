@@ -69,12 +69,12 @@ $instance = getInst($id);
                     <span class="form_linea"></span>
                 </div>                 
                 <div>                                        
-                  <input type="checkbox" name="block" id="">    
+                  <input type="checkbox" name="blocking" id="blocking" <?= $instance['descripcion']=='Bloqueada' ? 'checked' : ""?>>    
                   <label for="" class="form_label">Bloquear Consulta</label><br/>                  
                 </div>                
                 <input type="submit" value="Guardar" name="edit_con" class="form_submit" required>				                
 				<input type="hidden" value="<?=$id?>" name="id">
-                <input type="hidden" value="<?=$instance['id']?>" name="idInstance">
+                <input type="hidden" value="<?=$instance['id']?>" name="idInstance">                
 				<p class="form_parrafo"><a href="consultas.php" class="form_link">Regresar al listado</a></p>
 				  <?php
 				  if(isset($_GET['error'])){
@@ -92,18 +92,31 @@ $instance = getInst($id);
 <script>
 function validate(){    
     let newDate = {date: (document.getElementById('datetime').value).split('T')[0],
-                   hour: (document.getElementById('datetime').value).split('T')[1]};
+                   hour: (document.getElementById('datetime').value).split('T')[1],
+                   reason : (document.getElementById('motivo').value),
+                   blocking: (document.getElementById('blocking').checked)
+                };
                
     let oldDate = { date: "<?=$instance['fecha_consulta']?>",
-                    hour: "<?=isset($instance) ? $instance['hora_nueva'] : $con['hora_desde']?>".substr(0, 5)};
-
-    let reason =  (document.getElementById('motivo').value);
-
-    if((newDate.date != oldDate.date || newDate.hour != oldDate.hour) && reason == ""){
+                    hour: "<?=isset($instance) ? $instance['hora_nueva'] : $con['hora_desde']?>".substr(0, 5),
+                    reason: "<?=$instance['motivo']?>"};
+                    
+    if((newDate.date != oldDate.date || newDate.hour != oldDate.hour) && newDate.reason.split(' ').join('') == ""){
         alert('Por favor ingrese el motivo del cambio');        
         return false;
-    }                        
-    else return true;       
+    }
+    
+    if(newDate.reason != oldDate.reason && newDate.date == oldDate.date && newDate.hour == oldDate.hour && !newDate.blocking){
+        alert('El ingreso de un motivo debe responder a un cambio de fecha/hora o bien a un bloqueo de la consulta');        
+        return false;
+    }
+
+    if(newDate.blocking && newDate.reason.split(' ').join('') == ""){
+        alert('Por favor ingrese el motivo del bloqueo de la consulta');        
+        return false;
+    }
+
+    return true;       
 }
 </script>
 <?php require_once 'template/footer.php'; ?>
