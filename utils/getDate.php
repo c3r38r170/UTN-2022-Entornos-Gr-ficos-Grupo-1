@@ -20,5 +20,14 @@ function getWeekDate($day){
     return $result; 
 }
 
+//Esta funcion devuelve la fecha correspondiente al proximo sabado a partir de una fecha dada
+//Se utiliza para limitar la fecha en la cual el docente puede postergar la consulta
+function getSaturday($weekday) {
+    $weekday = strtolower($weekday);
+    $weekday_num = date('N', strtotime($weekday));
+    $saturday = strtotime('next saturday', strtotime($weekday));
+   
+    return date('Y-m-d', $saturday);
+  }
 
 ?>

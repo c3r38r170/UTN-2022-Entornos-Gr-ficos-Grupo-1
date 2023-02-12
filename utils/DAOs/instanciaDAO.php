@@ -47,6 +47,7 @@ class InstanciaDAO{
                   i.hora_nueva, 
                   i.aula_nueva, 
                   i.cupo,
+                  i.consulta_id,
                   i.fecha_consulta,
                   i.estado_id,
                   ie.descripcion,
@@ -71,8 +72,13 @@ class InstanciaDAO{
   }
 
   //Al momento de crear la instancia, guardamos la fecha en la que se va a llevar a cabo la consulta
-  static function createInstance($consultaId){
-    $db=new MysqliWrapper();
+  static function createInstance($id){    
+      $db=new MysqliWrapper();
+  
+      $query = "SELECT dia_de_la_semana FROM consultas WHERE id=?";
+      $rs_result = $db->prepared($query,[$id]);
+      $day = mysqli_fetch_array($rs_result);
+      $rs_result->free();    
 
     $rs_result=$db->query("SELECT dia_de_la_semana FROM consultas WHERE id=".$consultaId);
     $day=$rs_result->fetch_assoc();
@@ -81,6 +87,7 @@ class InstanciaDAO{
     // TODO cupo y estado_id por default en la base de datos. que el cupo sea algo humano tipo 5-10
     $vSql = "INSERT INTO instancias (fecha_consulta, cupo, estado_id,consulta_id,fecha) VALUES (?,5,1,?)";
     
+    date_default_timezone_set('America/Argentina/Buenos_Aires');    
     $db->prepared($vSql,[getWeekDate($day['dia_de_la_semana']),$consultaId,date('Y-m-d')]);
     return $db->insert_id();
   }
@@ -104,6 +111,8 @@ class InstanciaDAO{
         , c.hora_hasta
         , c.dia_de_la_semana
         , c.aula
+        , c.fecha
+			  , c.enlace
     FROM consultas c
         INNER JOIN materia_x_comision mc ON mc.id=c.materia_x_comision_id
         INNER JOIN comision com ON com.id=mc.comision_id
@@ -135,6 +144,8 @@ class InstanciaDAO{
         , c.hora_hasta
         , c.dia_de_la_semana
         , c.aula
+        , c.fecha
+		  	, c.enlace
     FROM consultas c
         INNER JOIN materia_x_comision mc ON mc.id=c.materia_x_comision_id
         INNER JOIN comision com ON com.id=mc.comision_id
@@ -160,6 +171,26 @@ class InstanciaDAO{
     "UPDATE instancias SET estado_id=2 WHERE ID=?";
     $db->prepared($sql,[$idInstance]);
     
+  }
+
+  static function updateInstance($instance){
+
+    $string = strtotime($instance['datetime']);
+    $date = date('Y/m/d/', $string);
+    $time = date('H:i:s A', $string);   
+    $state = isset($instance['blocking']) ? 3 : 1; 
+
+    $db=new MysqliWrapper();
+    $sql = "UPDATE instancias SET
+              motivo = IFNULL(?, motivo), 
+              cupo = IFNULL(?, cupo), 
+              hora_nueva = IFNULL(?,hora_nueva), 
+              fecha_consulta = IFNULL(?,fecha_consulta), 
+              aula_nueva = IFNULL(?, aula_nueva),                
+              estado_id = IFNULL(?, estado_id)
+            WHERE id = ?";
+    
+    $rs_result = $db->prepared($sql,[$instance['motivo'],$instance['cupo'],$time,$date,$instance['aula'],$state,$instance['idInstance']]);          
   }
 }
 ?>

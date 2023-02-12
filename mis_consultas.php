@@ -15,7 +15,8 @@ require_once 'utils/getDate.php';
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">	    
-    <link rel="stylesheet" type="text/css" href="css/_consultas.css"/>
+    <link rel="shortcut icon" type="image/x-icon" href="img/favicon.png">
+    <link rel="stylesheet" type="text/css" href="css/_consultas.css"/>    
 	<title>Consultas</title>	   
 </head>
 <body>
@@ -24,6 +25,7 @@ require_once 'utils/getDate.php';
 require_once 'template/header.php';
 
 require_once 'template/navs/estudiante.php';
+require_once 'template/breadcrumbs.php'; 
 
 echo misConsultasBreadcrumbs();
 
@@ -39,7 +41,11 @@ echo misConsultasBreadcrumbs();
     echo "<span id='success'>$success</span>"; 
  }
 
-    $offset=isset($_GET['offset'])?0:(int)$_GET['offset'];
+ if(isset($_GET["error"])){
+    echo "<span id='error'>".$_GET["error"]."</span>"; 
+ } 
+ 
+    $offset=$_GET['offset']??0;
  
     $cons = getStudentCon($offset,11);
     if(empty($cons))
@@ -51,7 +57,7 @@ echo misConsultasBreadcrumbs();
             $hayMas=true;
             break;
         }
-       $instance = getInst($row['id']); 
+       $instance = getInst($row['id']);        
 ?> 
 
 <div class="container">
@@ -93,9 +99,10 @@ echo misConsultasBreadcrumbs();
     </div>
 </div>        
 <!-- TODO URIencode search -->
-<!-- TODO traer flechas de consultas.php cuando se hagan -->
+<div class="botones-navegacion">
     <a class="fas fa-angle-left" <?=$offset?"href=\"?search=$search&offset=".($offset-10)."\"":""?> ></a>
     <a class="fas fa-angle-right" <?=$hayMas?"href=\"?search=$search&offset=".($offset+10)."\"":""?> ></a>
+</div>    
 <?php
 }
 ?>
@@ -117,7 +124,7 @@ echo misConsultasBreadcrumbs();
         })
     }
 </script>
-
-<?php require_once 'template/footer.php'; ?>
+<script src="https://kit.fontawesome.com/f452b46f6c.js" crossorigin="anonymous"></script>
+<?php //require_once 'template/footer.php'; ?>
 </body>
 </html>

@@ -5,6 +5,7 @@ require_once(realpath(dirname(__FILE__) . '/../utils/DAOs/instanciaDAO.php'));
 require_once(realpath(dirname(__FILE__) . '/../utils/DAOs/usuarioDAO.php'));
 require_once(realpath(dirname(__FILE__) . '/../utils/DAOs/subscriptionDAO.php'));
 require_once(realpath(dirname(__FILE__) . '/../utils/usuario-tipos.php'));
+require_once(realpath(dirname(__FILE__) . '/../controladores/mails.php'));
 
 session_start(['read_and_close'=>true]);
 
@@ -22,6 +23,10 @@ function searchCon($consulta, $offset=0, $limit=10+1){
 
  function getInst($idCon){
     return InstanciaDAO::getInstance($idCon);
+ }
+
+ function getCon($idCon){
+    return ConsultaDAO::conInfo($idCon);
  }
 
  function getAll($offset=0, $limit=10+1){
@@ -56,19 +61,35 @@ function searchCon($consulta, $offset=0, $limit=10+1){
    
     $subscribers = SubscriptionDAO::getSubscribers($instance['id']);  
 
-    SubscriptionDAO::deleteSubscription($_SESSION['id'],$instance['id']); 
+    //Validamos que no hayan pasado mas de 24hs desde la inscripcion
+    $subscription = SubscriptionDAO::getSubscription($user['id'],$instance['id']);
+    $insDate=date("Y-m-d H:i:s",(strtotime($subscription['fecha_hora'])+24 * 60 * 60));
+
+    date_default_timezone_set('America/Argentina/Buenos_Aires');
+    $today = date('Y-m-d H:i:s');
+        
+
+    if($insDate>=$today){
+        SubscriptionDAO::deleteSubscription($user['id'],$instance['id']); 
         
     // TODO && !editado, si tiene algún dato puesto por el profesor, alugo de los campos NULL como truthy
-    if($subscribers[0] == 1){
-        InstanciaDAO::deleteInstance($instance['id']);                    
-        ///TO DO: enviar mail al docente
-    } 
+        if($subscribers[0] == 1){            
+            notifyTeacher($instance['id'], " no ");
 
-    //Redireccionamos a la pagina anterior, ya se consultas.php o mis_consultas.php
-    //strtok permite quitar el parametro search de la URL, de lo contrario no se muestra el mensaje success 
-    $success = "Usted ya no se encuentra suscrito a la consulta";
-    // TODO urlencode(json_encode ?? verificar
-    header('Location: ' . strtok($_SERVER['HTTP_REFERER'], '?')."?success=".urlencode(json_encode($success)));               
+            InstanciaDAO::deleteInstance($instance['id']);                                            
+            
+        } 
+    
+        //Redireccionamos a la pagina anterior, ya se consultas.php o mis_consultas.php
+        //strtok permite quitar el parametro search de la URL, de lo contrario no se muestra el mensaje success 
+        $success = "Usted ya no se encuentra suscrito a la consulta";
+        header('Location: ' . strtok($_SERVER['HTTP_REFERER'], '?')."?success=".urlencode(json_encode($success)));              
+    }else{
+        // TODO urlencode(json_encode ?? verificar
+        $error = "Lo sentimos, pero ya pasó el límite de 24hs para realizar esta operación";
+        header('Location: ' . strtok($_SERVER['HTTP_REFERER'], '?')."?error=".urlencode(json_encode($error)));                
+    }    
+            
 }
 
 function subscribe(){
@@ -85,16 +106,19 @@ function subscribe(){
         $instanceID = InstanciaDAO::createInstance($id);   
         
         SubscriptionDAO::addSubscriptor($user['id'],$instanceID);
+        notifyTeacher($instance['id']);
+        notifySubsStudent($instance,$user);
         ///TO DO: enviar mail al estudiante y al docente
 
     }
-    else if($instance['descripcion'] == 'Bloqueada por profesor'){
+    else if($instance['descripcion'] == 'Bloqueada'){
         return header("Location: ../consultas.php?error=No se pudo realizar la inscripción porque la consulta se encuentra bloqueada"); 
     }                           
-    else if($instance['cupo'] != 0 && SubscriptionDAO::getSubscribers($instance['id'])[0] < $instance['cupo'])       
-    SubscriptionDAO::addSubscriptor($user['id'],$instance['id']); 
-        ///TO DO: enviar mail al estudiante
-    else{
+    else if($instance['cupo'] != 0 && SubscriptionDAO::getSubscribers($instance['id'])[0] < $instance['cupo']){
+        SubscriptionDAO::addSubscriptor($user['id'],$instance['id']); 
+        notifySubsStudent($instance,$user);
+    }           
+    else if($instance['cupo'] != 0){
         return header("Location: ../consultas.php?error=La consulta ya no tiene cupos disponibles");          
     }
                
@@ -143,18 +167,35 @@ if(isset($_POST['ins'])){
     unsubscribe();
  }
 
+ if(isset($_POST['edit_con'])){                  
+    InstanciaDAO::updateInstance($_REQUEST);
+    
+    $success = "Los datos de la consulta se actualizaron con exito";
+    header("Location: ../form_consulta.php?id=".$_POST['id']."&success=".urlencode(json_encode($success)));                 
+ }
+
  if(isset($_POST['confirm'])){ 
     // TODO ver si es profesor
+    
 
     extract($_REQUEST);
     // * $confirm es la ID de la instancia; $id, de la consulta
+    $instance = InstanciaDAO::getInstance($id); 
+    if($instance['descripcion'] == 'Bloqueada'){
+        $error = "No se puede confirmar una consulta que se encuentre bloqueada";
+        header("Location: ../consultas.php?error=".urlencode(json_encode($error)));                 
+        exit;
+    }
+    
+    
 
     if(!(int)$confirm){
         // TODO Añadir robustez a cuando viene 0 pero la instancia existe... según la fecha... quizá esto mate el proposito de mandar la id
         $confirm=InstanciaDAO::createInstance($id);
     }
-
+     
     InstanciaDAO::confirmCon($confirm);
+    notifyStudents($confirm,$instance['cupo']);
     //TO DO: notificar a los estudiantes inscriptos
 
     // TODO volver a donde estaba
