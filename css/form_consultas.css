@@ -1,0 +1,3 @@
+.mostrar-enlace + div{
+	display: block !important;
+}

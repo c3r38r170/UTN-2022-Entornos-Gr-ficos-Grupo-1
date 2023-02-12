@@ -2,8 +2,49 @@
 
 require_once(dirname(__DIR__,1) . '\db.php');
 
+// TODO DRY en las partes comunes de las consultas. quizá una funcion contruirSelect($where):string o select($where,$parametros : array|null):array
 
 class ConsultaDAO{
+	static function getById(int $id){
+		$db=new MysqliWrapper();
+
+		$sql =
+			"SELECT
+					c.id  
+				, c.profesor_id
+				, u.nombre_completo
+				, mc.materia_id
+				, mat.nombre as nombre_materia
+				, mc.comision_id
+				, com.numero as numero_comision
+				, c.hora_desde
+				, c.hora_hasta
+				, c.dia_de_la_semana
+				, c.aula
+				, c.enlace
+			FROM consultas c
+				INNER JOIN materia_x_comision mc ON mc.id=c.materia_x_comision_id
+				INNER JOIN comision com ON com.id=mc.comision_id
+				INNER JOIN materia mat ON mat.id=mc.materia_id
+				INNER JOIN usuarios u ON u.id=c.profesor_id
+			WHERE 
+				c.id=$id
+				AND c.fecha  = (
+					SELECT MAX(fecha)
+					FROM consultas 
+				)
+			LIMIT 1";
+
+		$rs_result = $db->query($sql);
+		if($rs_result && $rs_result->num_rows){
+			$consult = $rs_result->fetch_assoc();
+			
+			$rs_result->free();
+				
+			return $consult;
+		}else return null;
+	}
+
   static function search($cons, $offset=0, $limit=10, $idTeacher=0){	
 
 		$idTeacher = $idTeacher?
@@ -19,8 +60,10 @@ class ConsultaDAO{
 			"SELECT
 					c.id  
 				, u.nombre_completo
-				, mat.nombre
-				, com.numero
+				, mc.materia_id
+				, mat.nombre as nombre_materia
+				, mc.comision_id
+				, com.numero as numero_comision
 				, c.hora_desde
 				, c.hora_hasta
 				, c.dia_de_la_semana
@@ -33,8 +76,8 @@ class ConsultaDAO{
 				INNER JOIN usuarios u ON u.id=c.profesor_id
 			WHERE (
 				u.nombre_completo LIKE ?
-				OR mat.nombre LIKE ?
-				OR com.numero LIKE ? )
+				OR mat.nombre as nombre_materia LIKE ?
+				OR com.numero as numero_comision LIKE ? )
 				AND c.fecha  = (
 					SELECT MAX(fecha)
 					FROM consultas 
@@ -43,6 +86,7 @@ class ConsultaDAO{
 			LIMIT $limit OFFSET $offset";
 
 		$rs_result = $db->prepared($sql,['%'.$cons.'%','%'.$cons.'%','%'.$cons.'%']);
+		// TODO realizar el mismo chequeo en getAll y teacherCon
 		if($rs_result){
 			$consult = $rs_result->fetch_all(MYSQLI_ASSOC);
 			
@@ -52,76 +96,80 @@ class ConsultaDAO{
 		}else return [];
   }
 
-static function getAll($offset=0, $limit=10, $idTeacher=0){
-	
-	$db=new MysqliWrapper();
-
-	$sql =
-		"SELECT
-		    c.id
-			, u.nombre_completo
-			, mat.nombre
-			, com.numero
-			, c.hora_desde
-			, c.hora_hasta
-			, c.dia_de_la_semana
-			, c.aula
-		FROM consultas c
-			INNER JOIN materia_x_comision mc ON mc.id=c.materia_x_comision_id
-			INNER JOIN comision com ON com.id=mc.comision_id
-			INNER JOIN materia mat ON mat.id=mc.materia_id
-			INNER JOIN usuarios u ON u.id=c.profesor_id
-		WHERE c.fecha  = (
-					SELECT MAX(fecha)
-					FROM consultas 
-				)	
-		".(
-			$idTeacher?
-				"AND c.profesor_id=".$idTeacher
-				:''
-		)."
-		LIMIT $limit OFFSET $offset";
-
-	$rs_result = $db->query($sql);
-	$consult = $rs_result->fetch_all(MYSQLI_ASSOC);
-	
-	$rs_result->free();
+	static function getAll($offset=0, $limit=10, $idTeacher=0){
 		
-	return $consult;
-}
+		$db=new MysqliWrapper();
 
-static function teacherCon($idTeacher,$offset=0, $limit=10){
-	$db=new MysqliWrapper();
+		$sql =
+			"SELECT
+					c.id
+				, u.nombre_completo
+				, mc.materia_id
+				, mat.nombre as nombre_materia
+				, mc.comision_id
+				, com.numero as numero_comision
+				, c.hora_desde
+				, c.hora_hasta
+				, c.dia_de_la_semana
+				, c.aula
+			FROM consultas c
+				INNER JOIN materia_x_comision mc ON mc.id=c.materia_x_comision_id
+				INNER JOIN comision com ON com.id=mc.comision_id
+				INNER JOIN materia mat ON mat.id=mc.materia_id
+				INNER JOIN usuarios u ON u.id=c.profesor_id
+			WHERE c.fecha  = (
+						SELECT MAX(fecha)
+						FROM consultas 
+					)	
+			".(
+				$idTeacher?
+					"AND c.profesor_id=".$idTeacher
+					:''
+			)."
+			LIMIT $limit OFFSET $offset";
 
-	$sql =
-		"SELECT
-		    c.id  
-			, u.nombre_completo
-			, mat.nombre
-			, com.numero
-			, c.hora_desde
-			, c.hora_hasta
-			, c.dia_de_la_semana
-			, c.aula
-			, c.enlace
-		FROM consultas c
-			INNER JOIN materia_x_comision mc ON mc.id=c.materia_x_comision_id
-			INNER JOIN comision com ON com.id=mc.comision_id
-			INNER JOIN materia mat ON mat.id=mc.materia_id
-			INNER JOIN usuarios u ON u.id=c.profesor_id
-		WHERE c.profesor_id = ?
-			AND c.fecha  = (
- 				   SELECT MAX(fecha)
-    			   FROM consultas 
-					)
-		LIMIT $limit OFFSET $offset";
-
-	$rs_result = $db->prepared($sql,[$idTeacher]);
-	$consult = $rs_result->fetch_all(MYSQLI_ASSOC);
-	
-	$rs_result->free();
+		$rs_result = $db->query($sql);
+		$consult = $rs_result->fetch_all(MYSQLI_ASSOC);
 		
-	return $consult;
+		$rs_result->free();
+			
+		return $consult;
+	}
+
+	static function teacherCon($idTeacher,$offset=0, $limit=10){
+		$db=new MysqliWrapper();
+
+		$sql =
+			"SELECT
+					c.id  
+				, u.nombre_completo
+				, mc.materia_id
+				, mat.nombre as nombre_materia
+				, mc.comision_id
+				, com.numero as numero_comision
+				, c.hora_desde
+				, c.hora_hasta
+				, c.dia_de_la_semana
+				, c.aula
+				, c.enlace
+			FROM consultas c
+				INNER JOIN materia_x_comision mc ON mc.id=c.materia_x_comision_id
+				INNER JOIN comision com ON com.id=mc.comision_id
+				INNER JOIN materia mat ON mat.id=mc.materia_id
+				INNER JOIN usuarios u ON u.id=c.profesor_id
+			WHERE c.profesor_id = ?
+				AND c.fecha  = (
+						SELECT MAX(fecha)
+							FROM consultas 
+						)
+			LIMIT $limit OFFSET $offset";
+
+		$rs_result = $db->prepared($sql,[$idTeacher]);
+		$consult = $rs_result->fetch_all(MYSQLI_ASSOC);
+		
+		$rs_result->free();
+			
+		return $consult;
   } 
 }
 ?>

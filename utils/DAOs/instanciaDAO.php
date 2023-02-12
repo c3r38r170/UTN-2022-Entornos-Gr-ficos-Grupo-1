@@ -4,6 +4,38 @@ require_once(dirname(__DIR__,1) . '\getDate.php');
 
 class InstanciaDAO{
   //Traemos solo aquellas instancias que correspondan a consultas vigentes
+  static function getById(int $instanciaID){
+    $db=new MysqliWrapper();
+      
+    $vSql = "SELECT 
+                  i.`id`, 
+                  i.fecha, 
+                  i.motivo, 
+                  i.hora_nueva, 
+                  i.aula_nueva, 
+                  i.cupo,
+                  i.fecha_consulta,
+                  i.estado_id,
+                  i.consulta_id,
+                  ie.descripcion AS estado,
+                  IFNULL(SUM(sus.instancia_id),0) as suscritos
+              FROM instancias i
+                INNER JOIN `instancias_estados` ie
+                  ON i.estado_id=ie.id
+                LEFT JOIN suscripciones sus
+                  ON i.id=sus.instancia_id
+              WHERE i.id=$instanciaID";
+
+    $rs_result = $db->query($vSql); 
+    if($rs_result){
+      $cons = $rs_result->fetch_assoc();
+      
+      $rs_result->free();
+        
+      return $cons;
+    }else return null;
+  }
+
   static function getInstance($consultaId){
     $db=new MysqliWrapper();
       
@@ -14,13 +46,17 @@ class InstanciaDAO{
                   i.motivo, 
                   i.hora_nueva, 
                   i.aula_nueva, 
-                  i.cupo,                  
+                  i.cupo,
                   i.fecha_consulta,
+                  i.estado_id,
                   ie.descripcion,
-                  ie.descripcion AS estado
-              FROM instancias i  
-              INNER JOIN instancias_estados ie 
-              ON i.estado_id=ie.id 
+                  ie.descripcion AS estado,
+                  IFNULL(SUM(sus.instancia_id),0) as suscritos
+              FROM instancias i
+                INNER JOIN `instancias_estados` ie
+                  ON i.estado_id=ie.id
+                LEFT JOIN suscripciones sus
+                  ON i.id=sus.instancia_id
               WHERE i.consulta_id=? AND
               i.fecha_consulta>=CURDATE()";
 
@@ -43,9 +79,9 @@ class InstanciaDAO{
   	$rs_result->free();    
 
     // TODO cupo y estado_id por default en la base de datos. que el cupo sea algo humano tipo 5-10
-    $vSql = "INSERT INTO instancias (fecha, cupo, estado_id,consulta_id) VALUES (?,5,1,?)";
+    $vSql = "INSERT INTO instancias (fecha_consulta, cupo, estado_id,consulta_id,fecha) VALUES (?,5,1,?)";
     
-    $db->prepared($vSql,[getWeekDate($day['dia_de_la_semana']),$consultaId]);
+    $db->prepared($vSql,[getWeekDate($day['dia_de_la_semana']),$consultaId,date('Y-m-d')]);
     return $db->insert_id();
   }
 
@@ -81,9 +117,9 @@ class InstanciaDAO{
     $rs_result = $db->prepared($sql,[$id]);
     $consult = $rs_result->fetch_all(MYSQLI_ASSOC);
 	
-	$rs_result->free();
-		
-	return $consult;
+    $rs_result->free();
+      
+    return $consult;
   }
 
   static function pendingTeacherCon($id,$offset=0, $limit=10){

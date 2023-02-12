@@ -16,6 +16,7 @@ require_once 'utils/getDate.php';
 </head>
 <body>
 <?php 
+
 require_once 'template/header.php';
 require_once 'utils/usuario-tipos.php';
 
@@ -29,10 +30,12 @@ else require_once 'template/navs/landing.php';
 
 require_once 'template/breadcrumbs.php'; 
 echo consultasBreadcrumbs();
-?> 
-    
+
+?>
 
 <h1 class="title_list">Buscar Consultas</h1>     
+
+<!-- TODO if profesor, esconder? -->
 
 <div class="container_search">  
     <div class="search_box">
@@ -51,15 +54,16 @@ echo consultasBreadcrumbs();
 
 // TODO responsive
 
-/* 
  if(isset($_GET["success"])){
-	$success = json_decode(urldecode($_GET['success']),true);
+	$success = urldecode($_GET['success']);
     echo "<span id='success'>$success</span>"; 
  }
- */
-/*  if(isset($_GET["error"])){
-    echo "<span id='error'>".$_GET["error"]."</span>"; 
- } */
+
+if(isset($_GET['errores'])){
+    $errores=json_decode(urldecode($_GET['errores']),true);
+    foreach($errores as $error)
+        echo "<span class=formulario_error>$error</span>";					  
+}
 
  $offset=$_GET['offset']??0;
 
@@ -67,9 +71,7 @@ echo consultasBreadcrumbs();
     $cons = searchCon($search,$offset,11);
  }else{
     $search='';
-    $cons = /* sessionEsProfesor()?
-        teacherConAssigned($offset)
-        : */getAll($offset);
+    $cons =getAll($offset);
  }       
        
     $hayMas=false;
@@ -84,35 +86,47 @@ echo consultasBreadcrumbs();
         <div class="card">
 		    <div class="left-column">
                 <h2 class="card_title">Materia</h2>            
-                <h4> <!-- Materia --> <?=($row['nombre'])?> </h4>
-                <h3 class="card_title"> <!-- Comision --> Comisión: <?=($row['numero'])?> </h3> 
+                <h4> <!-- Materia --> <?=($row['nombre_materia'])?> </h4>
+                <h3 class="card_title"> <!-- Comision --> Comisión: <?=($row['numero_comision'])?> </h3> 
 			    <img src="img/consulta_icono_1.png" alt="Logo Consulta"></img>
 		    </div>
 		    <div class="right-column">
 			    <h2> <!-- Docente --> Docente <?=($row['nombre_completo'])?> </h2>
                 <h3>Información básica</h3>
 			    <p>                    
-                    <span><!-- Fecha --> Fecha: </span> <?=$instance['fecha']??getWeekDate($row['dia_de_la_semana'])?>
+                    <span><!-- Fecha --> Fecha: </span> <?=$instance['fecha_consulta']??getWeekDate($row['dia_de_la_semana'])?>
                     </br> 
                     <span><!-- Horario --> Horario: </span> <?=substr($instance['hora_nueva']??$row['hora_desde'],0,5) . ' hs'?>
                     </br> 
-                    <span><!-- Aula --> Aula: </span> <?=$instance['aula_nueva']??$row['aula']?> 
+                    <span><!-- Aula --> Aula: </span> <?=$instance['aula_nueva']??$row['aula']?>
+                    <?php
+                        if(sessionEsProfesor() && $instance['estado_id']==2){
+                    ?>
+                    </br> 
+                    <span> Suscritos: </span> <?=$instance['suscritos']?> / <?=$instance['cupo']?>
+                    <?php
+                        }
+                    ?>
+
                     <div class="more-info" id="more-info">
-                      <span><!-- Estado --> Estado: </span> <?=$instance['descripcion']??'Pendiente' ?>  
-                      </br>
-                      <span><!-- Modalidad --> Modalidad: </span> <?=$row['enlace']??'Presencial' ?>  
-                      </br>
-                      <?php if(isset($row['enlace'])){?>
-                      <span><!-- Enlace --> Enlace: </span> <a href="<?= $row['enlace']?>"> <?=$row['enlace'] ?> </a>   
-                      </br>
-                      <?php } ?>
-                      <?php if(isset($instance['motivo'])){?>
-                      <span><!-- Motivo --> Motivo: </span> <?=$instance['motivo'] ?>   
-                      </br>
-                      <?php } ?>
-                      <?php if(isset($instance) && $_SESSION['tipo'] == UsuarioTipos::PROFESOR){?>
-                        <a id="subs" href=<?="subscribers.php?id=".$instance['id']?>>Ver estudiantes suscritos</a>                                                    
-                      <?php }?>
+                        <span><!-- Estado --> Estado: </span> <?=$instance['descripcion']??'Pendiente' ?>  
+                        </br>
+                        <span><!-- Modalidad --> Modalidad: </span> <?=$row['enlace']??'Presencial' ?>  
+                        </br>
+                        <?php
+                    //   ! definición de $enlace
+                        if($enlace = ($instance['enlace']??$row['enlace']??null)){
+                        ?>
+                        <span><!-- Enlace --> Enlace: </span> <a href="<?= $row['enlace']?>"> <?=$row['enlace'] ?> </a>   
+                        </br>
+                        <?php } ?>
+                        <?php if( (sessionEsAdministracion() || sessionEsProfesor()) && isset($instance['motivo'])){?>
+                        <span><!-- Motivo --> Motivo de <?=$instance['estado_id']==3?'bloqueo':'cambio'?>: </span> <?=$instance['motivo'] ?>
+                        </br>
+                        <?php } ?>
+                        <?php if(isset($instance) && (int)$instance['suscritos'] && $_SESSION['tipo'] == UsuarioTipos::PROFESOR){?>
+                            <a id="subs" href=<?="subscribers.php?id=".$instance['id']?>>Ver estudiantes suscritos</a>                                                    
+                        <?php }?>
                     </div>                   
                 </p> 
                 <div id="btns_form">
@@ -132,7 +146,6 @@ echo consultasBreadcrumbs();
                             <?php
                                 break;
                             case UsuarioTipos::PROFESOR:
-                                // if($instance){
                             ?>                                                                
                             <form action="controladores/consultas.php" method="post">                                                             
                                 <input type="hidden" value="<?=$row['id']?>" name="id">     
@@ -144,10 +157,10 @@ echo consultasBreadcrumbs();
                                     <?=(isset($instance['estado']) && $instance['estado']=="Confirmada") ? 'disabled' : ''?>
                                 >
                                     <?=(isset($instance['estado']) && $instance['estado']=="Confirmada") ? 'Confirmada' : 'Confirmar Consulta' ?>
-                                </button>                            			    
+                                </button>
+                                <a href="form_consultas.php?id=<?=$row['id']?>"><button type=button class="button_ins fas fa-pencil"></button></a>
                             </form>
                             <?php 
-                                // }
                                 break;
                             }
                         }else{
@@ -185,6 +198,6 @@ echo consultasBreadcrumbs();
     }
 </script>
 
-<?php //require_once 'template/footer.php'; ?>
+<?php require_once 'template/footer.php'; ?>
 </body>
 </html>
