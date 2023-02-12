@@ -179,6 +179,14 @@ if(isset($_POST['ins'])){
 
     extract($_REQUEST);
     // * $confirm es la ID de la instancia; $id, de la consulta
+    $instance = InstanciaDAO::getInstance($id); 
+    if($instance['descripcion'] == 'Bloqueada'){
+        $error = "No se puede confirmar una consulta que se encuentre bloqueada";
+        header("Location: ../consultas.php?error=".urlencode(json_encode($error)));                 
+        exit;
+    }
+    
+    
 
     if(!(int)$confirm){
         // TODO Añadir robustez a cuando viene 0 pero la instancia existe... según la fecha... quizá esto mate el proposito de mandar la id
