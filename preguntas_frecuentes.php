@@ -12,10 +12,19 @@
 </head>
 <body>
 <?php 
-    require_once 'template/header.php';
-	require_once 'template/navs/landing.php';
-	require_once 'template/breadcrumbs.php'; 
-    echo preguntasFrecuentesBreadcrumbs();
+require_once 'template/header.php';
+require_once 'utils/usuario-tipos.php';
+
+if(sessionEsAdministracion())
+  require_once 'template/navs/administracion.php';
+else if (sessionEsEstudiante())
+  require_once 'template/navs/estudiante.php';
+else if (sessionEsProfesor())
+  require_once 'template/navs/profesor.php';
+else require_once 'template/navs/landing.php';
+
+require_once 'template/breadcrumbs.php'; 
+echo preguntasFrecuentesBreadcrumbs();
 ?>
 
 <div id="faq">
