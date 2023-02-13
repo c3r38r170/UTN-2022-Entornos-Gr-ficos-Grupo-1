@@ -71,8 +71,8 @@
 	<div>
 		<a href="contacto.php" tabindex="6">Sobre Nosotros</a>
 		<div>
-			<a href="#" class="fab fa-instagram" data-title="Instagram"></a>
-			<a href="#" class="fab fa-facebook" data-title="Facebook"></a>
+			<a href="https://www.instagram.com/utnros.sistemas/?hl=es" target="_blank" class="fab fa-instagram" data-title="Instagram"></a>
+			<a href="https://www.facebook.com/utnros.sistemas/?locale=es_LA" target="_blank" class="fab fa-facebook" data-title="Facebook"></a>
 			<a href="#" class="fab fa-youtube" data-title="YouTube"></a>
 			<a href="#" class="fab fa-twitter" data-title="Twitter"></a>
 		</div>
