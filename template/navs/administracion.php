@@ -10,6 +10,7 @@
 			,'Horarios Consultas'=>'horarios.php'
 		]
 		,'Sobre Nosotros'=>'contacto.php'
+		,'Ayuda Administrador'=>'ayuda.php'
 		,'Preguntas Frecuentes'=>'preguntas_frecuentes.php'
 		,'Cerrar Sesión'=>'controladores/cierre-sesion.php'
 	]);
