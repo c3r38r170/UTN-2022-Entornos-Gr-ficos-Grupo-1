@@ -136,4 +136,16 @@ function formConBreadcrumbs(){
 	return generateBreadcrumbs($breadcrumbs);	
 }
 
+
+function ayudaBreadcrumbs(){
+	if(sessionEsAdministracion())
+	//TODO agregar en "Home" el link del home del administrador
+		$breadcrumbs = [array("link" => "ingreso.php","text" => "Home"), array("link" => "#","text" => "Ayuda Administrador")] ;
+	else if (sessionEsEstudiante())
+		$breadcrumbs = [array("link" => "estudiante.php","text" => "Home"), array("link" => "#","text" => "Ayuda Estudiante")] ;
+	else if (sessionEsProfesor())
+		$breadcrumbs = [array("link" => "profesor.php","text" => "Home"), array("link" => "#","text" => "Ayuda Profesor")] ;	
+
+	return generateBreadcrumbs($breadcrumbs);
+}
 ?>
