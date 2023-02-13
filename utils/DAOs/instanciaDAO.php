@@ -105,8 +105,8 @@ class InstanciaDAO{
     "SELECT
         c.id  
         , u.nombre_completo
-        , mat.nombre
-        , com.numero
+        , mat.nombre AS nombre_materia
+        , com.numero AS numero_comision
         , c.hora_desde
         , c.hora_hasta
         , c.dia_de_la_semana
