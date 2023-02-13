@@ -16,7 +16,7 @@ require_once 'controladores/comisiones.php';
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" type="image/x-icon" href="img/favicon.png">
     <link rel="stylesheet" type="text/css" href="css/comisiones.css"/>
-	<title>Document</title>	   
+	<title>Comisiones</title>	   
 </head>
 
 <script>

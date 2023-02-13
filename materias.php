@@ -27,7 +27,7 @@ else{
 	<script src="https://kit.fontawesome.com/eb496ab1a0.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" type="text/css" href="css/materias.css"/>
 	<link rel="shortcut icon" type="image/x-icon" href="img/favicon.png">
-    <title>Listado Materias</title>
+    <title>Materias</title>
 </head>
 
 <script>

@@ -14,7 +14,7 @@
 	<meta name="viewport" content="width=\, initial-scale=1.0">
 	<link rel="shortcut icon" type="image/x-icon" href="img/favicon.png">
 	<link rel="stylesheet" type="text/css" href="css/horarios.css">
-	<title>Horarios</title>
+	<title>Horarios Consultas</title>
 </head>
 <body>
 <?php 
