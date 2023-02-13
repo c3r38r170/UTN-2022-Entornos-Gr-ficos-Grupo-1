@@ -39,7 +39,7 @@ echo ayudaBreadcrumbs();
 if(sessionEsAdministracion()){ 
 ?>  
 	<details>
-    <summary>¿Como cargo los Horarios de Consulta?</summary>
+    <summary>¿Cómo cargo los Horarios de Consulta?</summary>
       <p>Seleccioná la opción Gestionar en el menú principal y luego la opcion Horarios de Consulta.<br> 
         Descargá la Plantilla con los horarios mediante el link proporcionado en dicha página.<br> 
         Una vez realizado el paso anterior, procedé a presionar el boton Seleccionar archivo para elegirlo de su computadora.<br>
@@ -48,11 +48,25 @@ if(sessionEsAdministracion()){
       </p>
   </details>
   <details>
-    <summary>¿Es Admin?</summary>
-      <p>Seleccioná la opción Registrarse en el menú principal.<br> 
-        Completá el formulario con tus datos personales y presioná el botón Registo.<br> 
+    <summary>¿Cómo cargo / edito / elimino Materias?</summary>
+    <p>Seleccioná la opción Gestionar en el menú principal y luego la opcion Materias.<br> 
+        En este apartado, prodrá acceder al listado de materias cargadas en el sistema.<br> 
+        Seleccioná el botón deseado (cargar / editar / eliminar) del listado.<br> 
+        Luego, completá el formulario con los datos requeridos según lo seleccionado y presioná el botón Guardar.<br> 
         Tener en cuenta que deberá respetar la forma en la que se le solicitan los datos proporcionados por el formulario.<br>
-        ¡Listo! Ya podés ingresar y hacer uso del sistema de consulta.
+        En caso que desee eliminar, no debera completar ningun formulario, solo aceptar la alerta de confirmacion de eliminacion.<br>
+        ¡Listo! La/s materias han sido actualizadas.
+      </p>
+  </details>
+  <details>
+    <summary>¿Cómo cargo / edito / elimino Comisiones?</summary>
+    <p>Seleccioná la opción Gestionar en el menú principal y luego la opcion Comisiones.<br> 
+        En este apartado, prodrá acceder al listado de comisiones cargadas en el sistema.<br> 
+        Seleccioná el botón deseado (cargar / editar / eliminar) del listado.<br> 
+        Luego, completá el formulario con los datos requeridos según lo seleccionado y presioná el botón Guardar.<br> 
+        Tener en cuenta que deberá respetar la forma en la que se le solicitan los datos proporcionados por el formulario.<br>
+        En caso que desee eliminar, no debera completar ningun formulario, solo aceptar la alerta de confirmacion de eliminacion.<br>
+        ¡Listo! La/s comisiones han sido actualizadas.
       </p>
   </details>
 <?php 
