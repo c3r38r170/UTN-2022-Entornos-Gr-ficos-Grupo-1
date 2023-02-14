@@ -86,7 +86,7 @@ require_once 'utils/getDate.php';
 						this.parentNode.classList[(+this.value)?'add':'remove']('mostrar-enlace');
 					};
 				</script>
-				<label for="modalidad">Modalidad</label>
+				<!-- <label for="modalidad">Modalidad</label> -->
 			</div>
 			<div class="formulario_grupo" style="display:none;">
 				<input type="text" id="enlace" name="enlace" class="form_input" placeholder="" value="<?= $instancia['enlace'] ?? $consulta['enlace']?:'' ?>">
