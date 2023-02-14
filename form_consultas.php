@@ -18,7 +18,7 @@ if(!sessionEsProfesor()){
 	<link rel="stylesheet" type="text/css" href="css/ingreso.css"/>
 	<link rel="stylesheet" type="text/css" href="css/form_consultas.css"/>
 
-	<title>Document</title>	
+	<title>Consulta</title>	
 </head>
 <body>
 <?php 
