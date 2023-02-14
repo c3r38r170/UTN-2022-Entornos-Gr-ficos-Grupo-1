@@ -191,6 +191,10 @@
 	
   }
 
+  footer{
+	height: 1vh;			
+  }
+
   @media (max-width: 600px) {
 	.button_ins{
 		align-self: flex-start;
