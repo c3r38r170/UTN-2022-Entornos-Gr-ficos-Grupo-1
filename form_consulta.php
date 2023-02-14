@@ -39,7 +39,7 @@ $instance = getInst($id);
             <p>En caso de bloquear o modificar la fecha/horario de la consulta, deberá indicar el motivo del cambio</p>            			
             <div class="formulario_contenedor">
                 <div class="formulario_grupo">                     
-                    <input type="number" id="cupo" name="cupo"  class="form_input" placeholder="" value="<?= $instance['cupo'] ?>">
+                    <input type="number" id="cupo" name="cupo"  min=0 class="form_input" placeholder="" value="<?= $instance['cupo'] ?>">
                     <label for="" class="form_label">Cupo</label>
                     <span class="form_linea"></span>
                     <small>En caso de no ingresar un numero se asume que la consulta tiene cupo ilimitado</small>
