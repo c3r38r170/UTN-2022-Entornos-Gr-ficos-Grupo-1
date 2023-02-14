@@ -37,7 +37,16 @@ echo ayudaBreadcrumbs();
 <?php 
 //TODO cargar todos las preguntas para cada tipo de usuario, las siguientes son a modo de tener datos para mostrar
 if(sessionEsAdministracion()){ 
-?>  
+?> 
+<details>
+    <summary>¿Cómo edito mi cuenta?</summary>
+      <p>Seleccioná la opción Mi Cuenta en el menú principal.<br> 
+        Aqui encontrará los datos de su cuenta, usted podra modificar los campos disponibles si lo desea.<br> 
+        Tener en cuenta que deberá respetar la forma en la que se le solicitan los datos proporcionados por el formulario.<br>
+        Hace click en Actualizar Datos para confirmar la mofidificación de la cuenta .<br>
+        ¡Listo! Su cuenta ha sido actualizada.
+      </p>
+  </details>
 	<details>
     <summary>¿Cómo cargo los Horarios de Consulta?</summary>
       <p>Seleccioná la opción Gestionar en el menú principal y luego la opcion Horarios de Consulta.<br> 
@@ -69,44 +78,82 @@ if(sessionEsAdministracion()){
         ¡Listo! La/s comisiones han sido actualizadas.
       </p>
   </details>
+  <details>
+    <summary>¿Cómo cargo / edito / elimino Usuarios?</summary>
+    <p>Seleccioná la opción Gestionar en el menú principal y luego la opcion Usuarios.<br> 
+        En este apartado, prodrá acceder al listado de usuarios cargados en el sistema.<br> 
+        Seleccioná el botón deseado (cargar / editar / eliminar) del listado.<br> 
+        Luego, completá el formulario con los datos requeridos según lo seleccionado y presioná el botón Guardar.<br> 
+        Tener en cuenta que deberá respetar la forma en la que se le solicitan los datos proporcionados por el formulario.<br>
+        En caso que desee eliminar, no debera completar ningun formulario, solo aceptar la alerta de confirmacion de eliminacion.<br>
+        ¡Listo! El/os usuarios han sido actualizados.
+      </p>
+  </details>
+  <details>
+        <summary>¿Cómo busco las materias / usuarios / comisiones?</summary>
+        <p>Seleccioná la opción Materias / Usuarios / Comisiones en el menú principal.<br>
+        Aqui prodrá visualizar el listado correspondiente a lo seleccionado en el menu principal.<br> 
+        Si existen dudas acerca de su funcionamiento, acudir a Preguntas Frecuentes ¿Cómo busco las consultas?, debido a que es similar, solo que debe ingresar lo pedido en el buscador dependiendo de si busca una materia, comision o usuario.<br>
+        </p>
+      </details>
 <?php 
 }
 else if (sessionEsEstudiante()){
 ?>
-	<details>
-    <summary>¿Es Estudiante?</summary>
-      <p>Seleccioná la opción Registrarse en el menú principal.<br> 
-        Completá el formulario con tus datos personales y presioná el botón Registo.<br> 
+<details>
+    <summary>¿Cómo edito mi cuenta?</summary>
+      <p>Seleccioná la opción Mi Cuenta en el menú principal.<br> 
+        Aqui encontrará los datos de su cuenta, usted podra modificar los campos disponibles si lo desea.<br> 
         Tener en cuenta que deberá respetar la forma en la que se le solicitan los datos proporcionados por el formulario.<br>
-        ¡Listo! Ya podés ingresar y hacer uso del sistema de consulta.
+        Hace click en Actualizar Datos para confirmar la mofidificación de la cuenta .<br>
+        ¡Listo! Su cuenta ha sido actualizada.
+      </p>
+  </details> 
+  <details>
+    <summary>¿Cómo me inscribo a una consulta?</summary>
+      <p>Seleccioná la opción Consultas en el menú principal.<br> 
+        Aqui prodrá visualizar el listado de las consultas, haciendo click en el boton Mas Informacion encontrará mas datos como estado y modalidad.<br> 
+        Recordá que existe un buscador de consultas en la parte superior del listado, para mas detalle sobre el mismo acudir a Preguntas Frecuentes.<br>
+        Una vez que encontró la consulta deseada, hace click en el botón Inscribirse.<br>
+        ¡Listo! Ya te encontrás inscripto en la consulta.
       </p>
   </details>
   <details>
-    <summary>¿Es Estudiante?</summary>
-      <p>Seleccioná la opción Registrarse en el menú principal.<br> 
-        Completá el formulario con tus datos personales y presioná el botón Registo.<br> 
-        Tener en cuenta que deberá respetar la forma en la que se le solicitan los datos proporcionados por el formulario.<br>
-        ¡Listo! Ya podés ingresar y hacer uso del sistema de consulta.
+    <summary>¿Cómo visualizo las consultas a las que me inscribí?</summary>
+      <p>Seleccioná la opción Mis Consultas en el menú principal.<br> 
+        Aqui prodrá visualizar las consultas en las que esta inscripto.<br> 
       </p>
   </details>
 <?php 
 }
 else if (sessionEsProfesor()){
 ?>
-	<details>
-    <summary>¿Es Profesor?</summary>
-      <p>Seleccioná la opción Registrarse en el menú principal.<br> 
-        Completá el formulario con tus datos personales y presioná el botón Registo.<br> 
+<details>
+    <summary>¿Cómo edito mi cuenta?</summary>
+      <p>Seleccioná la opción Mi Cuenta en el menú principal.<br> 
+        Aqui encontrará los datos de su cuenta, usted podra modificar los campos disponibles si lo desea.<br> 
         Tener en cuenta que deberá respetar la forma en la que se le solicitan los datos proporcionados por el formulario.<br>
-        ¡Listo! Ya podés ingresar y hacer uso del sistema de consulta.
+        Hace click en Actualizar Datos para confirmar la mofidificación de la cuenta .<br>
+        ¡Listo! Su cuenta ha sido actualizada.
+      </p>
+  </details> 
+  <details>
+  <summary>¿Cómo confirmo una consulta?</summary>
+      <p>Seleccioná la opción Consultas en el menú principal.<br>
+        Aqui prodrá visualizar el listado de las consultas, haciendo click en el boton Mas Informacion encontrará mas datos como estado y modalidad.<br> 
+        Recordá que existe un buscador de consultas en la parte superior del listado, para mas detalle sobre el mismo acudir a Preguntas Frecuentes.<br> 
+        Hace click en Confirmar Consulta para confirmar la consulta elegida.<br>
       </p>
   </details>
   <details>
-    <summary>¿Es Profesor?</summary>
-      <p>Seleccioná la opción Registrarse en el menú principal.<br> 
-        Completá el formulario con tus datos personales y presioná el botón Registo.<br> 
+  <summary>¿Cómo modifico una consulta?</summary>
+      <p>Seleccioná la opción Consultas en el menú principal.<br>
+        Aqui prodrá visualizar el listado de las consultas, haciendo click en el boton Mas Informacion encontrará mas datos como estado y modalidad.<br> 
+        Recordá que existe un buscador de consultas en la parte superior del listado, para mas detalle sobre el mismo acudir a Preguntas Frecuentes.<br> 
+        Hace click en el icono del lapiz para modificar la consulta elegida.<br>
+        Luego, completá el formulario con los datos requeridos según lo seleccionado y presioná el botón Guardar Cambios.<br> 
         Tener en cuenta que deberá respetar la forma en la que se le solicitan los datos proporcionados por el formulario.<br>
-        ¡Listo! Ya podés ingresar y hacer uso del sistema de consulta.
+        ¡Listo! La consulta ha sido modificada.
       </p>
   </details>
 <?php 

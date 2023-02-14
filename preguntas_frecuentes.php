@@ -61,7 +61,9 @@ echo preguntasFrecuentesBreadcrumbs();
         <p>Seleccioná la opción Consultas en el menú principal.<br>
             En la barra de búsqueda introducí  la información  de la consulta que le interesaría  obtener.<br>
             Usted podrá  buscar por nombre de profesor, nombre de materia o número  de comisión.<br>
-            Luego apretá  el botón  de "lupa" para realizar la búsqueda y podrá  ver como se le despliega las consultas correspondientes.
+            Luego apretá  el botón  de "lupa" para realizar la búsqueda y podrá  ver como se le despliega las consultas correspondientes.<br>
+            Sin hacer uso del buscador, podra buscar manualmente haciendo clik en las flechas con orientacion izquierda y derecha (Pagina anterior y Pagina siguiente respectivamente)
+            ubicadas al final del listado para navegar por las distintas paginas hasta encontrar la deseada.
         </p>
       </details>
       <details>
