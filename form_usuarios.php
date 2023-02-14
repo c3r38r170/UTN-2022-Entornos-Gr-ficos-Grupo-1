@@ -18,7 +18,7 @@ if(!sessionEsAdministracion()){
 	<!-- TODO css propio-->
 	<link rel="shortcut icon" type="image/x-icon" href="img/favicon.png">
 	<link rel="stylesheet" type="text/css" href="css/ingreso.css"/>
-	<title>Document</title>	
+	<title>Usuario</title>	
 </head>
 <body>
 <?php 
@@ -70,7 +70,7 @@ if($editando){
 					<option value="2" <?= ($editando && $usuario['tipo_id']==2) ? "selected" : "" ?>>Profesor</option>
 					<option value="3" <?= ($editando && $usuario['tipo_id']==3) ? "selected" : "" ?>>Administración</option>
 				</select>
-				<label for="tipo">Rol</label>
+				
 			</div>
 
 			<input

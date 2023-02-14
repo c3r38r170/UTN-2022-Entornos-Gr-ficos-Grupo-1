@@ -32,7 +32,7 @@
 	color: #5757577e;
 }
 
-.formulario_grupo > input{
+.formulario_grupo > input, select{
 	width: 100%;
 	background: none;
 	color: #706c6c;
