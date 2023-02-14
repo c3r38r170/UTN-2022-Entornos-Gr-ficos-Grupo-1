@@ -56,6 +56,12 @@ function formUserBreadcrumbs(){
 	return generateBreadcrumbs($breadcrumbs);
 }
 
+function formConsBreadcrumbs(){
+	if(sessionEsProfesor())
+	$breadcrumbs = [array("link" => "profesor.php","text" => "Home"),array("link" => "consultas.php","text" => "Consultas") ,array("link" => "#","text" => "Formulario Consulta")] ;	
+	return generateBreadcrumbs($breadcrumbs);
+}
+
 
 function horariosBreadcrumbs(){
 	if(sessionEsAdministracion())

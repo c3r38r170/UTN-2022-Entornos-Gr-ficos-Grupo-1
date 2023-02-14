@@ -26,11 +26,7 @@ if(!sessionEsProfesor()){
 require_once 'template/header.php';
 require_once 'template/navs/profesor.php';
 require_once 'template/breadcrumbs.php'; 
-generateBreadcrumbs([
-	["link" => "profesor.php","text" => "Home"]
-	,["link" => "consultas.php","text" => "Consultas"]
-	,["link" => "#","text" => "Formulario Consultas"]
-]);
+echo formConsBreadcrumbs();
 
 $consultaID=(int)$_GET['id'];
 
