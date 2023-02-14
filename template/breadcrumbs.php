@@ -40,15 +40,22 @@ function userBreadcrumbs(){
 
 function formMatBreadcrumbs(){
 	if(sessionEsAdministracion())
-	$breadcrumbs = [array("link" => "administrador.php","text" => "Home"),array("link" => "materias.php","text" => "Materias") ,array("link" => "#","text" => "Cargar Materias")] ;	
+	$breadcrumbs = [array("link" => "administrador.php","text" => "Home"),array("link" => "materias.php","text" => "Materias") ,array("link" => "#","text" => "Formulario Materias")] ;	
 	return generateBreadcrumbs($breadcrumbs);
 }
 
 function formComBreadcrumbs(){
 	if(sessionEsAdministracion())
-	$breadcrumbs = [array("link" => "administrador.php","text" => "Home"),array("link" => "comisiones.php","text" => "Comisiones") ,array("link" => "#","text" => "Cargar Comisiones")] ;	
+	$breadcrumbs = [array("link" => "administrador.php","text" => "Home"),array("link" => "comisiones.php","text" => "Comisiones") ,array("link" => "#","text" => "Formulario Comisiones")] ;	
 	return generateBreadcrumbs($breadcrumbs);
 }
+
+function formUserBreadcrumbs(){
+	if(sessionEsAdministracion())
+	$breadcrumbs = [array("link" => "administrador.php","text" => "Home"),array("link" => "usuarios.php","text" => "Usuarios") ,array("link" => "#","text" => "Formulario Usuarios")] ;	
+	return generateBreadcrumbs($breadcrumbs);
+}
+
 
 function horariosBreadcrumbs(){
 	if(sessionEsAdministracion())

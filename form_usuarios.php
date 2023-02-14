@@ -23,13 +23,9 @@ if(!sessionEsAdministracion()){
 <body>
 <?php 
 	require_once 'template/header.php';
-	require_once 'template/navs/administracion.php';
-	require_once 'template/breadcrumbs.php'; 
-	generateBreadcrumbs([
-		["link" => "ingreso.php","text" => "Home"]
-		,["link" => "usuarios.php","text" => "Usuarios"]
-		,["link" => "#","text" => "Formulario Usuarios"]
-	]);
+    require_once 'template/navs/administracion.php';
+		require_once 'template/breadcrumbs.php'; 
+    echo formUserBreadcrumbs();
 ?>
 
 <?php
