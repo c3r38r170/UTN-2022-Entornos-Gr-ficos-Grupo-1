@@ -69,7 +69,7 @@ $instance = getInst($id);
                     <span class="form_linea"></span>
                 </div>                 
                 <div>                                        
-                  <input type="checkbox" name="blocking" id="blocking" <?= $instance['descripcion']=='Bloqueada' ? 'checked' : ""?>>    
+                  <input data-title="Una consulta bloqueada impide a los estudiantes inscribirse a la misma" type="checkbox" name="blocking" id="blocking" <?= $instance['descripcion']=='Bloqueada' ? 'checked' : ""?>>    
                   <label for="" class="form_label">Bloquear Consulta</label><br/>                  
                 </div>                
                 <input type="submit" value="Guardar" name="edit_con" class="form_submit" required>				                
