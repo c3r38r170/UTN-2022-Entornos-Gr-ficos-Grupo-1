@@ -9,13 +9,6 @@
 
 require_once 'controladores/materias.php';
 
-if(isset($_POST['btn_search'])){
-	$nameMateria = $_POST['search_materia'];
-	$materias = searchMaterias($nameMateria);
-}
-else{
-	$materias = getAllMaterias();
-}
 ?>
 
 <!DOCTYPE html>
@@ -73,7 +66,24 @@ else{
      		</tr>
      	</thead>
         <tbody>
-            <?php foreach ($materias as $fila) { ?>
+<?php			
+$offset=$_GET["offset"]??0;
+
+if(isset($_GET["search"]) && ($search=trim($_GET["search"]))!=""){	
+	$materias = searchMaterias($search,$offset);
+}
+else{
+	$search='';
+	$materias = getAllMaterias($offset);
+}
+$hayMas=false;			
+
+                foreach ($materias as $i=> $fila) { 
+				if($i==10){ // * Índice 10 = item 11
+                $hayMas=true;
+                continue;
+               }
+			   ?>
      	        <tr>
      	  	        <td data-label="ID"><?php echo ($fila["id"])?></td>
      	  	        <td data-label="Nombre"><?php echo ($fila["nombre"])?></td>
@@ -93,7 +103,11 @@ else{
      	        </tr>
 			<?php } ?>
         </tbody>
-   </table>
+		<tfoot><tr><td colspan="4"><div class="botones-navegacion">
+	    <a class="fas fa-angle-left" data-title="Pagina Anterior"<?=$offset?"href=\"?search=$search&offset=".($offset-10)."\"":""?> ></a>
+	    <a class="fas fa-angle-right" data-title="Pagina Siguiente"<?=$hayMas?"href=\"?search=$search&offset=".($offset+10)."\"":""?> ></a>
+	    </div></td></tr></tfoot>
+</table>
 
    <a href="form_materias.php" class="button_add">Cargar Materia</a>
 

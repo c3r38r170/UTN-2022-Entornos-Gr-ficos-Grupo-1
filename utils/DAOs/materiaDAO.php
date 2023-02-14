@@ -3,10 +3,10 @@
 require_once(dirname(__DIR__,1) . '\db.php');
 
 class MateriaDAO{
-  static function getAll(){    
+  static function getAll($offset,$limit){    
 
     $db=new MysqliWrapper();
-    $sql = "SELECT * FROM materia"; 
+    $sql = "SELECT * FROM materia LIMIT $limit OFFSET $offset"; 
     if($resultado = $db->query($sql)){    
       $materias = $resultado->fetch_all(MYSQLI_ASSOC); 
       mysqli_free_result($resultado);

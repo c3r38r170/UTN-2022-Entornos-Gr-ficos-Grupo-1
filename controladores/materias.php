@@ -46,9 +46,9 @@ function searchMaterias($nameMateria, $offset=0, $limit=10){
  }
 }
 
-function getAllMaterias(){
+function getAllMaterias($offset=0,$limit=10){
   try{
-    return MateriaDAO::getAll();   
+    return MateriaDAO::getAll($offset,$limit+1);   
   }catch(Exception $e){   
     echo '<script type="text/javascript">alert("'.$e->getMessage().'");
           window.location.href="'.$_SERVER['HTTP_REFERER'].'";
