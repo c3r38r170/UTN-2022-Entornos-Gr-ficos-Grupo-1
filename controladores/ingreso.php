@@ -50,7 +50,7 @@ if(!count($errores)){
 				break;
 			case UsuarioTipos::ADMINISTRACION:
 				//TODO agregar redireccion a un archivo administracion.php
-				$pagina='mi_cuenta.php';
+				$pagina='administrador.php';
 				break;
 			}
 			// TODO hacemos un redirect a la vista correspondiente del usuario logueado

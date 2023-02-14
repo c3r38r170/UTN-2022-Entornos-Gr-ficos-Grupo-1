@@ -22,50 +22,43 @@ function registerBreadcrumbs(){
 
 function comBreadcrumbs(){
 	if(sessionEsAdministracion())
-	//TODO agregar en "Home" el link del home del administrador
-	$breadcrumbs = [array("link" => "ingreso.php","text" => "Home"), array("link" => "#","text" => "Comisiones")] ;	
+	$breadcrumbs = [array("link" => "administrador.php","text" => "Home"), array("link" => "#","text" => "Comisiones")] ;	
 	return generateBreadcrumbs($breadcrumbs);
 }
 
 function matBreadcrumbs(){
 	if(sessionEsAdministracion())
-	//TODO agregar en "Home" el link del home del administrador
-	$breadcrumbs = [array("link" => "ingreso.php","text" => "Home"), array("link" => "#","text" => "Materias")] ;	
+	$breadcrumbs = [array("link" => "administrador.php","text" => "Home"), array("link" => "#","text" => "Materias")] ;	
 	return generateBreadcrumbs($breadcrumbs);
 }
 
 function userBreadcrumbs(){
 	if(sessionEsAdministracion())
-	//TODO agregar en "Home" el link del home del administrador
-	$breadcrumbs = [array("link" => "ingreso.php","text" => "Home"), array("link" => "#","text" => "Usuarios")] ;	
+	$breadcrumbs = [array("link" => "administrador.php","text" => "Home"), array("link" => "#","text" => "Usuarios")] ;	
 	return generateBreadcrumbs($breadcrumbs);
 }
 
 function formMatBreadcrumbs(){
 	if(sessionEsAdministracion())
-	//TODO agregar en "Home" el link del home del administrador
-	$breadcrumbs = [array("link" => "ingreso.php","text" => "Home"),array("link" => "materias.php","text" => "Materias") ,array("link" => "#","text" => "Cargar Materias")] ;	
+	$breadcrumbs = [array("link" => "administrador.php","text" => "Home"),array("link" => "materias.php","text" => "Materias") ,array("link" => "#","text" => "Cargar Materias")] ;	
 	return generateBreadcrumbs($breadcrumbs);
 }
 
 function formComBreadcrumbs(){
 	if(sessionEsAdministracion())
-	//TODO agregar en "Home" el link del home del administrador
-	$breadcrumbs = [array("link" => "ingreso.php","text" => "Home"),array("link" => "comisiones.php","text" => "Comisiones") ,array("link" => "#","text" => "Cargar Comisiones")] ;	
+	$breadcrumbs = [array("link" => "administrador.php","text" => "Home"),array("link" => "comisiones.php","text" => "Comisiones") ,array("link" => "#","text" => "Cargar Comisiones")] ;	
 	return generateBreadcrumbs($breadcrumbs);
 }
 
 function horariosBreadcrumbs(){
 	if(sessionEsAdministracion())
-	//TODO agregar en "Home" el link del home del administrador
-	$breadcrumbs = [array("link" => "ingreso.php","text" => "Home"), array("link" => "#","text" => "Horarios Consultas")] ;	
+	$breadcrumbs = [array("link" => "administrador.php","text" => "Home"), array("link" => "#","text" => "Horarios Consultas")] ;	
 	return generateBreadcrumbs($breadcrumbs);
 }
 
 function preguntasFrecuentesBreadcrumbs(){
 	if(sessionEsAdministracion())
-	//TODO agregar en "Home" el link del home del administrador
-		$breadcrumbs = [array("link" => "ingreso.php","text" => "Home"), array("link" => "#","text" => "Preguntas Frecuentes")] ;
+		$breadcrumbs = [array("link" => "administrador.php","text" => "Home"), array("link" => "#","text" => "Preguntas Frecuentes")] ;
 	else if (sessionEsEstudiante())
 		$breadcrumbs = [array("link" => "estudiante.php","text" => "Home"), array("link" => "#","text" => "Preguntas Frecuentes")] ;
 	else if (sessionEsProfesor())
@@ -86,8 +79,7 @@ function misConsultasBreadcrumbs(){
 
 function consultasBreadcrumbs(){
 	if(sessionEsAdministracion())
-	//TODO agregar en "Home" el link del home del administrador
-		$breadcrumbs = [array("link" => "ingreso.php","text" => "Home"), array("link" => "#","text" => "Consultas")] ;
+		$breadcrumbs = [array("link" => "administrador.php","text" => "Home"), array("link" => "#","text" => "Consultas")] ;
 	else if (sessionEsEstudiante())
 		$breadcrumbs = [array("link" => "estudiante.php","text" => "Home"), array("link" => "#","text" => "Consultas")] ;
 	else if (sessionEsProfesor())
@@ -100,8 +92,7 @@ function consultasBreadcrumbs(){
 
 function contactBreadcrumbs(){
 	if(sessionEsAdministracion())
-	//TODO agregar en "Home" el link del home del administrador
-		$breadcrumbs = [array("link" => "ingreso.php","text" => "Home"), array("link" => "#","text" => "Contacto")] ;
+		$breadcrumbs = [array("link" => "administrador.php","text" => "Home"), array("link" => "#","text" => "Contacto")] ;
 	else if (sessionEsEstudiante())
 		$breadcrumbs = [array("link" => "estudiante.php","text" => "Home"), array("link" => "#","text" => "Contacto")] ;
 	else if (sessionEsProfesor())
@@ -113,8 +104,7 @@ function contactBreadcrumbs(){
 
 function miCuentaBreadcrumbs(){
 	if(sessionEsAdministracion())
-	//TODO agregar en "Home" el link del home del administrador
-		$breadcrumbs = [array("link" => "ingreso.php","text" => "Home"), array("link" => "#","text" => "Mi cuenta")] ;
+		$breadcrumbs = [array("link" => "administrador.php","text" => "Home"), array("link" => "#","text" => "Mi cuenta")] ;
 	else if (sessionEsEstudiante())
 		$breadcrumbs = [array("link" => "estudiante.php","text" => "Home"), array("link" => "#","text" => "Mi cuenta")] ;
 	else if (sessionEsProfesor())
@@ -139,8 +129,7 @@ function formConBreadcrumbs(){
 
 function ayudaBreadcrumbs(){
 	if(sessionEsAdministracion())
-	//TODO agregar en "Home" el link del home del administrador
-		$breadcrumbs = [array("link" => "ingreso.php","text" => "Home"), array("link" => "#","text" => "Ayuda Administrador")] ;
+		$breadcrumbs = [array("link" => "administrador.php","text" => "Home"), array("link" => "#","text" => "Ayuda Administrador")] ;
 	else if (sessionEsEstudiante())
 		$breadcrumbs = [array("link" => "estudiante.php","text" => "Home"), array("link" => "#","text" => "Ayuda Estudiante")] ;
 	else if (sessionEsProfesor())
