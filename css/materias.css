@@ -75,3 +75,9 @@
   .button_actions:active {
     transform: scale(0.9);
   }
+
+  .container_table{	
+    width: 60%;
+    margin-left: auto;	
+    margin-right: auto;
+  }
