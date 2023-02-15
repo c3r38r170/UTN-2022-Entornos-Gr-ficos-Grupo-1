@@ -132,7 +132,7 @@ echo "<span id='error'>".$_GET["error"]."</span>";
                         <span><!-- Motivo --> Motivo de <?=$instance['estado_id']==3?'bloqueo':'cambio'?>: </span> <?=$instance['motivo'] ?>
                         </br>
                         <?php } ?>
-                        <?php if(isset($instance) && (int)$instance['suscritos'] && $_SESSION['tipo'] == UsuarioTipos::PROFESOR){?>
+                        <?php if(haIngresado() && isset($instance) && (int)$instance['suscritos'] && $_SESSION['tipo'] == UsuarioTipos::PROFESOR){?>
                             <a id="subs" href=<?="subscribers.php?id=".$instance['id']?>>Ver estudiantes suscritos</a>                                                    
                         <?php }?>
                     </div>                   
