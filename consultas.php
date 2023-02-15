@@ -123,7 +123,9 @@ echo "<span id='error'>".$_GET["error"]."</span>";
                     //   ! definición de $enlace
                         if($enlace = ($instance['enlace']??$row['enlace']??null)){
                         ?>
-                        <span><!-- Enlace --> Enlace: </span> <a href="<?= $row['enlace']?>"> <?=$row['enlace'] ?> </a>   
+                          <?php if(haIngresado()){ ?>
+                        <span><!-- Enlace --> Enlace: </span> <a href="<?= $row['enlace']?>"> <?=$row['enlace'] ?> </a>
+                           <?php } ?>   
                         </br>
                         <?php } ?>
                         <?php if( (sessionEsAdministracion() || sessionEsProfesor()) && isset($instance['motivo'])){?>
