@@ -24,3 +24,11 @@ details{
     margin-bottom: 10%;
   }
 
+  @media (max-width: 900px) {
+
+    #faq{    
+      padding-bottom: 12em;
+      margin-bottom: 35%;
+    }
+}
+
