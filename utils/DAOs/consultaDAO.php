@@ -78,8 +78,8 @@ class ConsultaDAO{
 				INNER JOIN usuarios u ON u.id=c.profesor_id
 			WHERE (
 				u.nombre_completo LIKE ?
-				OR mat.nombre as nombre_materia LIKE ?
-				OR com.numero as numero_comision LIKE ? )
+				OR mat.nombre LIKE ?
+				OR com.numero LIKE ? )
 				AND u.`baja`<>1
 				AND c.fecha  = (
 					SELECT MAX(fecha)
