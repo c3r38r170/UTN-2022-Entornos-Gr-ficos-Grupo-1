@@ -174,23 +174,90 @@ class InstanciaDAO{
   }
 
   static function updateInstance($instance){
+    
+    if(!isset($instance['id'])){
+      return ['Datos inválidos.'];
+    }
+    try{
+        if(!sessionEsProfesor() || ConsultaDAO::getById($instance['consultaID'])['profesor_id'] != $_SESSION['id'])
+            return ['No tiene permisos para realizar esta acción.'];
+    }catch(Exception $e){
+        return ['Datos inválidos.'];
+        die;
+    }
 
+    
+    $fechaConsulta=substr($instance['fecha-hora'],0,10);
+    $hora=substr($instance['fecha-hora'],11,15);
+    /* Versión alternativa:
     $string = strtotime($instance['datetime']);
     $date = date('Y/m/d/', $string);
-    $time = date('H:i:s A', $string);   
-    $state = isset($instance['blocking']) ? 3 : 1; 
+    $time = date('H:i:s A', $string);
+    */
 
-    $db=new MysqliWrapper();
-    $sql = "UPDATE instancias SET
-              motivo = IFNULL(?, motivo), 
-              cupo = IFNULL(?, cupo), 
-              hora_nueva = IFNULL(?,hora_nueva), 
-              fecha_consulta = IFNULL(?,fecha_consulta), 
-              aula_nueva = IFNULL(?, aula_nueva),                
-              estado_id = IFNULL(?, estado_id)
-            WHERE id = ?";
+    // ! Definición de $instanciaID
+    if($instanciaID=(int)$instance['id']){
+        try{
+            if (InstanciaDAO::getById($instance['id'])['consulta_id'] != $instance['consultaID']){
+                return ['Datos inválidos.'];
+                die;
+            }
+        }catch(Exception $e){
+            return ['Datos inválidos.'];
+            die;
+        }
+        
+        $res=$db->prepared(
+            "UPDATE `instancias` SET
+                fecha_consulta=IFNULL(?,fecha_consulta)
+                ,hora_nueva=IFNULL(?,hora_nueva)
+                ,aula_nueva=IFNULL(?, aula_nueva)
+                ,enlace=IFNULL(?, enlace)
+                ,cupo=IFNULL(?, cupo)
+                ,motivo=IFNULL(?, motivo)
+                ,estado_id = IFNULL(?, estado_id)
+            WHERE id=".$instanciaID
+        ,[
+            $fechaConsulta
+            ,$hora
+            ,$instance['aula']
+            ,trim($instance['enlace'])?:NULL
+            ,$instance['cupo']
+            ,trim($instance['motivo'])?:NULL
+            ,isset($instance['blocking']) ? 3 : 1
+        ]);
+    }else{
+        $res=$db->prepared(
+            "INSERT INTO `instancias` (
+                fecha
+                ,fecha_consulta
+                ,hora_nueva
+                ,aula_nueva
+                ,enlace
+                ,cupo
+                ,motivo
+            ) VALUES (
+                '".date('Y-m-d')."'
+                ,?
+                ,?
+                ,?
+                ,?
+                ,".((int)$instance['cupo'])."
+                ,?
+            )"
+            ,[
+                $fechaConsulta
+                ,$hora
+                ,$instance['aula']
+                ,trim($instance['enlace'])?:NULL
+                ,trim($instance['motivo'])?:NULL
+            ]
+        );
+
+    }
     
-    $rs_result = $db->prepared($sql,[$instance['motivo'],$instance['cupo'],$time,$date,$instance['aula'],$state,$instance['idInstance']]);          
+    return $res? [] : ['Datos inválidos.'];
+
   }
 }
 ?>

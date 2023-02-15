@@ -167,13 +167,6 @@ if(isset($_POST['ins'])){
     unsubscribe();
  }
 
- if(isset($_POST['edit_con'])){                  
-    InstanciaDAO::updateInstance($_REQUEST);
-    
-    $success = "Los datos de la consulta se actualizaron con exito";
-    header("Location: ../form_consulta.php?id=".$_POST['id']."&success=".urlencode(json_encode($success)));                 
- }
-
  if(isset($_POST['confirm'])){ 
     // TODO ver si es profesor
     
@@ -203,93 +196,17 @@ if(isset($_POST['ins'])){
  }
 
 if(isset($_POST['edit'])){
-
-    if(!isset($_POST['id'])){
-        header('Location: ../consultas.php?errores='.urlencode(json_encode(['Datos inválidos.'])));
-        die;
-    }
-    try{
-        if(!sessionEsProfesor() || ConsultaDAO::getById($_POST['consultaID'])['profesor_id'] != $_SESSION['id'])
-            header('Location: ../consultas.php?errores='.urlencode(json_encode(['No tiene permisos para realizar esta acción.'])));
-    }catch(Exception $e){
-        header('Location: ../consultas.php?errores='.urlencode(json_encode(['Datos inválidos.'])));
-        die;
-    }
-
     
-    $fechaConsulta=substr($_POST['fecha-hora'],0,10);
-    $hora=substr($_POST['fecha-hora'],11,15);
-
-    // ! Definición de $instanciaID
-    if($instanciaID=(int)$_POST['id']){
-        try{
-            if (InstanciaDAO::getById($_POST['id'])['consulta_id'] != $_POST['consultaID']){
-                // TODO mandar con los parámetros anteriores
-                header('Location: ../consultas.php?errores='.urlencode(json_encode(['Datos inválidos.'])));
-                die;
-            }
-        }catch(Exception $e){
-            header('Location: ../consultas.php?errores='.urlencode(json_encode(['Datos inválidos.'])));
-            die;
-        }
-        
-    // TODO solo actualizar lo cambiado?
-
-        $res=$db->prepared(
-            "UPDATE `instancias` SET
-                fecha_consulta=?
-                ,hora_nueva=?
-                ,aula_nueva=?
-                ,enlace=?
-                ,cupo=?
-                ,motivo=?
-            WHERE id=".$instanciaID
-        ,[
-            $fechaConsulta
-            ,$hora
-            ,$_POST['aula']
-            ,trim($_POST['enlace'])?:NULL
-            ,$_POST['cupo']
-            ,trim($_POST['motivo'])?:NULL
-        ]);
-    }else{
-        $res=$db->prepared(
-            "INSERT INTO `instancias` (
-                fecha
-                ,fecha_consulta
-                ,hora_nueva
-                ,aula_nueva
-                ,enlace
-                ,cupo
-                ,motivo
-            ) VALUES (
-                '".date('Y-m-d')."'
-                ,?
-                ,?
-                ,?
-                ,?
-                ,".((int)$_POST['cupo'])."
-                ,?
-            )"
-            ,[
-                $fechaConsulta
-                ,$hora
-                ,$_POST['aula']
-                ,trim($_POST['enlace'])?:NULL
-                ,trim($_POST['motivo'])?:NULL
-            ]
-        );
-
-    }
+    $errores=InstanciaDAO::updateInstance($_REQUEST);
     
     // TODO DRY
-    if($res){
+    // TODO mandar con los parámetros anteriores
+    if(empty($errores)){
         header('Location: ../consultas.php?success='.urlencode('Datos actualizados.'));
     }else{
         header('Location: ../consultas.php?errores='.urlencode(json_encode(['Datos inválidos.'])));
     }
-    die;
-
+    die;  
 }
 
 ?>
