@@ -72,14 +72,9 @@ class InstanciaDAO{
   }
 
   //Al momento de crear la instancia, guardamos la fecha en la que se va a llevar a cabo la consulta
-  static function createInstance($id){    
-      $db=new MysqliWrapper();
+  static function createInstance($consultaId){    
+    $db=new MysqliWrapper();
   
-      $query = "SELECT dia_de_la_semana FROM consultas WHERE id=?";
-      $rs_result = $db->prepared($query,[$id]);
-      $day = mysqli_fetch_array($rs_result);
-      $rs_result->free();    
-
     $rs_result=$db->query("SELECT dia_de_la_semana FROM consultas WHERE id=".$consultaId);
     $day=$rs_result->fetch_assoc();
   	$rs_result->free();    
