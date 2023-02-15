@@ -23,34 +23,38 @@ Query: \"$q\"
 		}
 		return $result;
 	}
-	function prepared($query,$data){
-		if($s=$this->dblink->prepare($query)){
+	function prepared($query,$data){		
+		if($s=$this->dblink->prepare($query)){			
 			$error=false;
 			if($s->bind_param(str_repeat('s',count($data)),...$data))
 				if($s->execute())
 					switch(strtoupper(substr($query,0,3))){
-						case 'INS':
-						case 'UPD':
-						case 'DEL':
+						case 'INS':							
+						case 'UPD':							
+							return ($s->error)? 0 : 1;
+						case 'DEL':														
 							$data=$s->affected_rows;
 							$s->close();
 							return $data;
 							break;
-						case 'SEL':
+						case 'SEL':							
 							$data=$s->get_result();
 							$s->close();
 							return $data?:false;
 							break;
 						default:
 							$this->error='Not prepared statement-supported query type.';
-							break;
-					}
-				else $error=true;
+							break;					
+					}					
+				else $error=true;			    
 			else $error=true;
-			if($error)
-				$this->error=$s->error;
+			if($error){
+				$this->error=$s->error;								
+			}
+			var_dump('hola');die;    								 			
 			return false;
-		}else $this->error=$this->dblink->error;
+		}else $this->error=$this->dblink->error;				
+		var_dump('hola');die;    								 			
 		return false;
 	}
 	
