@@ -30,7 +30,7 @@ if(!isset($_POST['correo']) || !($correo=trim($_POST["correo"]))){
 }
 
 if(count($errores)){
-	header('Location: /mi_cuenta.php?errores='.urlencode(json_encode($errores)));
+	header('Location: ../mi_cuenta.php?errores='.urlencode(json_encode($errores)));
 	die;
 }else{
 	require_once '../utils/db.php';
@@ -53,8 +53,8 @@ if(count($errores)){
 	if($res){
 		$_SESSION['nombre_completo']=$nombre;
 		$_SESSION['correo']=$correo;
-
-		header('Location: /mi_cuenta.php?success='.urlencode('Se han actualizado los datos de la cuenta.'));
+		
+		header('Location: ../mi_cuenta.php?success='.urlencode('Se han actualizado los datos de la cuenta.'));
 		die;
 	}
 }
