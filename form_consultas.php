@@ -18,40 +18,6 @@ if(!sessionEsProfesor()){
 	<link rel="shortcut icon" type="image/x-icon" href="img/favicon.png">
 	<link rel="stylesheet" type="text/css" href="css/form_consultas.css"/>
 	
-	<script>
-		function validate(){    
-				let newDate = {date: (document.getElementById('fecha-hora').value).split('T')[0],
-											hour: (document.getElementById('fecha-hora').value).split('T')[1],
-											reason : (document.getElementById('motivo').value),
-											blocking: (document.getElementById('blocking').checked)
-										};
-									
-				let oldDate = { date: "<?=$instance['fecha_consulta']?>",
-												hour: "<?=isset($instance) ? $instance['hora_nueva'] : $con['hora_desde']?>".substr(0, 5),
-												reason: "<?=$instance['motivo']?>"};
-												
-				if((newDate.date != oldDate.date || newDate.hour != oldDate.hour) && newDate.reason.split(' ').join('') == ""){
-						alert('Por favor ingrese el motivo del cambio');        
-						return false;
-				}
-				
-				if(newDate.reason != oldDate.reason && newDate.date == oldDate.date && newDate.hour == oldDate.hour && !newDate.blocking){
-						alert('El ingreso de un motivo debe responder a un cambio de fecha/hora o bien a un bloqueo de la consulta');        
-						return false;
-				}
-
-				if(newDate.blocking && newDate.reason.split(' ').join('') == ""){
-						alert('Por favor ingrese el motivo del bloqueo de la consulta');        
-						return false;
-				}
-
-				return true;
-		}
-	</script>
-
-	<title>Consulta</title>	
-</head>
-<body>
 <?php 
 
 require_once 'template/header.php';
@@ -75,6 +41,41 @@ if($consulta['profesor_id'] != $_SESSION['id']){
 require_once 'utils/getDate.php';
 
 ?>
+
+	<script>
+		function validate(){    
+				let newDate = {date: (document.getElementById('fecha-hora').value).split('T')[0],
+											hour: (document.getElementById('fecha-hora').value).split('T')[1],
+											reason : (document.getElementById('motivo').value),
+											blocking: (document.getElementById('blocking').checked)
+										};
+									
+				let oldDate = { date: "<?=$instancia['fecha_consulta']?>",
+												hour: "<?=isset($instancia) ? $instancia['hora_nueva'] : $consulta['hora_desde']?>".substr(0, 5),
+												reason: "<?=$instancia['motivo']?>"};
+												
+				if((newDate.date != oldDate.date || newDate.hour != oldDate.hour) && newDate.reason.split(' ').join('') == ""){
+						alert('Por favor ingrese el motivo del cambio');        
+						return false;
+				}
+				
+				if(newDate.reason != oldDate.reason && newDate.date == oldDate.date && newDate.hour == oldDate.hour && !newDate.blocking){
+						alert('El ingreso de un motivo debe responder a un cambio de fecha/hora o bien a un bloqueo de la consulta');        
+						return false;
+				}
+
+				if(newDate.blocking && newDate.reason.split(' ').join('') == ""){
+						alert('Por favor ingrese el motivo del bloqueo de la consulta');        
+						return false;
+				}
+
+				return true;
+		}
+	</script>
+
+	<title>Consulta</title>	
+</head>
+<body>
 <div class="formulario">
 	<form action="controladores/consultas.php" class="form" method="post" onsubmit="return validate()">
 		<input type="hidden" value="<?=$instancia['id']??0?>" name="id">
@@ -122,7 +123,7 @@ require_once 'utils/getDate.php';
 				<!-- <label for="modalidad">Modalidad</label> -->
 			</div>
 			<div class="formulario_grupo" style="display:none;">
-				<input type="text" id="enlace" name="enlace" class="form_input" placeholder="" value="<?= $instancia['enlace'] ?? $consulta['enlace']?:'' ?>">
+				<input type="text" id="enlace" name="enlace" class="form_input <?= isset($instancia['enlace']) ? 'mostrar-enlace' : '' ?>" placeholder="" value="<?= $instancia['enlace'] ?? $consulta['enlace']?:'' ?>">
 				<label for="enlace" class="form_label">Enlace</label>
 			</div>
 			<div class="formulario_grupo">
@@ -135,7 +136,7 @@ require_once 'utils/getDate.php';
 					placeholder=""
 					value="<?= $instancia['cupo'] ?? 5 ?>"
 					required
-					min="1"
+					min="0"
 				>
 				<label for="cupo" class="form_label">Cupo</label>
 					<small>En caso de no ingresar un numero se asume que la consulta tiene cupo ilimitado</small>
@@ -149,7 +150,7 @@ require_once 'utils/getDate.php';
 			</div>
 			
 			<div>
-				<input data-title="Una consulta bloqueada impide a los estudiantes inscribirse a la misma" type="checkbox" name="blocking" id="blocking" <?= $instance['descripcion']=='Bloqueada' ? 'checked' : ""?>>    
+				<input data-title="Una consulta bloqueada impide a los estudiantes inscribirse a la misma" type="checkbox" name="blocking" id="blocking" <?= $instancia['descripcion']=='Bloqueada' ? 'checked' : ""?>>    
 				<label for="blocking" class="form_label">Bloquear Consulta</label><br/>
 			</div>
 
