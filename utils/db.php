@@ -50,11 +50,9 @@ Query: \"$q\"
 			else $error=true;
 			if($error){
 				$this->error=$s->error;								
-			}
-			var_dump('hola');die;    								 			
+			}			
 			return false;
-		}else $this->error=$this->dblink->error;				
-		var_dump('hola');die;    								 			
+		}else $this->error=$this->dblink->error;						
 		return false;
 	}
 	
