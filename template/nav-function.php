@@ -116,7 +116,7 @@
 	@media screen and (max-aspect-ratio: 13/9) { /* Pantalla vertical */
 		nav {position:relative}
 		nav ul {background:#111;position:absolute;top:100%;right:0;left:0;z-index:3;height:auto;display:none}
-		nav li input ~ ul {width:100%;position:static;}
+		nav li input ~ ul {width:100%;position: inherit;}
 		nav li input ~ ul a {padding-left:30px;}
 		nav li {display:block;float:none;width:auto;}
 		nav input, nav label {position:absolute;top:0;left:0;display:block}
