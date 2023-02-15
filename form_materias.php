@@ -30,10 +30,11 @@ if(!sessionEsAdministracion()){
 	<form action="controladores/materias.php" method="post">
 		<h2 class="form_titulo">Materias</h2>
 		<p class="form_parrafo"> Ingrese datos de la materia</p>
+		<p class="form_campos_requeridos"> * Campo requerido</p>
 		<div class="formulario_contenedor">
 			<div class="formulario_grupo">
 			<input type="text" id="np" name="name"  class="form_input" placeholder="" value="<?= isset($_GET['id']) ? $_GET['name'] : "" ?>" required>
-				<label for="nm">Nombre</label>
+				<label for="nm">Nombre <span class="campos_requeridos"> * </span></label>
 			</div>	
 			<input type="submit" value="Guardar" name=<?= !isset($_GET['id']) ? "btn_add" : "btn_up"?> required>
 			<input type="hidden" value="<?=isset($_GET['id']) ? $_GET['id'] : ""?>" name="id">

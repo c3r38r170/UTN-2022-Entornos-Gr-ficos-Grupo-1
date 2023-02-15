@@ -46,6 +46,7 @@
 	<form action="controladores/mi_cuenta.php" method="post">
 		<h2 class="form_titulo">Mi cuenta</h2>
 		<p class="form_parrafo"> Los datos de su cuenta. Puede cambiar los campos disponibles si lo desea.</p>
+		<p class="form_campos_requeridos"> * Campos requeridos</p>
 
 		<div class="formulario_contenedor">
 			<div class="formulario_grupo">
@@ -53,20 +54,20 @@
 				<label for="leg">Legajo</label>
 			</div>
 			<div class="formulario_grupo">
-				<input type="password" id="pass" name="contrasenia" placeholder="">
-				<label for="pass">Cambiar contraseña</label>
+				<input type="password" id="pass" name="contrasenia" placeholder="" required>
+				<label for="pass">Cambiar contraseña <span class="campos_requeridos"> * </span></label>
 			</div>
 			<div class="formulario_grupo">
-				<input type="password" id="rep_pass" name="repetir_contrasenia" placeholder="">
-				<label for="rep_pass">Repetir contraseña</label>
+				<input type="password" id="rep_pass" name="repetir_contrasenia" placeholder="" required>
+				<label for="rep_pass">Repetir contraseña <span class="campos_requeridos"> * </span></label>
 			</div>
 			<div class="formulario_grupo">
 				<input type="text" name="nombre_completo" id="nombre_completo" placeholder="" value="<?=$_SESSION['nombre_completo']?>" required>
-				<label for="nombre_completo">Nombre/s y Apellido/s</label>
+				<label for="nombre_completo">Nombre/s y Apellido/s <span class="campos_requeridos"> * </span></label>
 			</div>
 			<div class="formulario_grupo">
 				<input type="text" name="correo" id="correo" placeholder="" value="<?=$_SESSION['correo']?>" required>
-				<label for="correo">E-mail</label>
+				<label for="correo">E-mail <span class="campos_requeridos"> * </span></label>
 			</div>
 	
 <?php
