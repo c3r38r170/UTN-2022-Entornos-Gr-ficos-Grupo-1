@@ -123,7 +123,7 @@ require_once 'utils/getDate.php';
 				<!-- <label for="modalidad">Modalidad</label> -->
 			</div>
 			<div class="formulario_grupo" style="display:none;">
-				<input type="text" id="enlace" name="enlace" class="form_input <?= isset($instancia['enlace']) ? 'mostrar-enlace' : '' ?>" placeholder="" value="<?= $instancia['enlace'] ?? $consulta['enlace']?:'' ?>">
+				<input type="text" id="enlace" name="enlace" class="form_input <?= $virtual ? 'mostrar-enlace' : '' ?>" placeholder="" value="<?= $instancia['enlace'] ?? $consulta['enlace']?:'' ?>">
 				<label for="enlace" class="form_label">Enlace</label>
 			</div>
 			<div class="formulario_grupo">
