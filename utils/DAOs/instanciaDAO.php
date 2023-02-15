@@ -82,7 +82,7 @@ class InstanciaDAO{
   	$rs_result->free();    
 
     // TODO cupo y estado_id por default en la base de datos. que el cupo sea algo humano tipo 5-10
-    $vSql = "INSERT INTO instancias (fecha_consulta, cupo, estado_id,consulta_id,fecha) VALUES (?,5,1,?)";
+    $vSql = "INSERT INTO instancias (fecha_consulta, cupo, estado_id,consulta_id,fecha) VALUES (?,5,1,?,?)";
     
     date_default_timezone_set('America/Argentina/Buenos_Aires');    
     $db->prepared($vSql,[getWeekDate($day['dia_de_la_semana']),$consultaId,date('Y-m-d')]);
@@ -225,7 +225,7 @@ class InstanciaDAO{
             ,$instance['aula']
             ,trim($instance['enlace'])?:NULL
             ,$instance['cupo']
-            ,trim($instance['motivo'])?:NULL                        
+            ,trim($instance['motivo'])?:NULL
             ,$state
         ]);
     }else{
@@ -237,8 +237,8 @@ class InstanciaDAO{
                 ,aula_nueva
                 ,enlace
                 ,cupo
-                ,motivo 
-                ,estado_id               
+                ,motivo
+                ,estado_id
             ) VALUES (
                 '".date('Y-m-d')."'
                 ,?

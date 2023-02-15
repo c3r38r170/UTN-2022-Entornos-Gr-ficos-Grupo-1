@@ -54,7 +54,7 @@
         $subs = SubscriptionDAO::selectAllSubscribers($idInstance);
         $to="";
         foreach ($subs as $row){
-            $to.= $row["correo"].", ";            
+            $to.= $row["correo"].", ";
         }
         $subject = "Consulta UTN Frro";
 
@@ -62,7 +62,16 @@
         if(count($subs)>$cupo)
             $warning=" Sin embargo, tenga en cuenta que la cantidad actual de estudiantes inscriptos supera al cupo establecido por el docente, por lo que se recomienda cambiar de consulta, en caso de ser posible."; 
 
-        $message="Le informamos que la consulta de la materia ".$con['nombre']." de la comisión ".$con['numero']. "programada para la fecha ".$instance['fecha_consulta']. "acaba de ser confirmada por el docente.".$warning;
+        $instance=InstanciaDAO::getById($idInstance);
+        $con= ConsultaDAO::conInfo($instance['consulta_id']);
+        $message="Le informamos que la consulta de la materia "
+            .$con['nombre']
+            ." de la comisión "
+            .$con['numero']
+            . "programada para la fecha "
+            .$instance['fecha_consulta']
+            . "acaba de ser confirmada por el docente."
+            .$warning;
         
         mail($to, $subject, $message);        
     }

@@ -67,7 +67,7 @@ if(isset($_GET['errores'])){
 }
  
 if(isset($_GET["error"])){
-echo "<span id='error'>".$_GET["error"]."</span>"; 
+    echo "<span id='error'>".$_GET["error"]."</span>"; 
 } 
 
  $offset=$_GET['offset']??0;

@@ -167,29 +167,31 @@ if(isset($_POST['ins'])){
     unsubscribe();
  }
 
- if(isset($_POST['confirm'])){ 
-    // TODO ver si es profesor
+ if(isset($_POST['confirm'])){
+
+    if(!sessionEsProfesor()){
+        header("Location: ../consultas.php?error=".urlencode("No tiene permiso para realizar esta acción."));   
+    }
     
 
     extract($_REQUEST);
-    // * $confirm es la ID de la instancia; $id, de la consulta
-    $instance = InstanciaDAO::getInstance($id); 
-    if($instance['descripcion'] == 'Bloqueada'){
-        $error = "No se puede confirmar una consulta que se encuentre bloqueada";
-        header("Location: ../consultas.php?error=".urlencode(json_encode($error)));                 
-        exit;
-    }
-    
-    
+    // ! $confirm es la ID de la instancia; $id, de la consulta
 
     if(!(int)$confirm){
         // TODO Añadir robustez a cuando viene 0 pero la instancia existe... según la fecha... quizá esto mate el proposito de mandar la id
         $confirm=InstanciaDAO::createInstance($id);
     }
-     
+
+    $instance = InstanciaDAO::getInstance($confirm); 
+    
+    if($instance['descripcion'] == 'Bloqueada'){
+        $error = "No se puede confirmar una consulta que se encuentre bloqueada";
+        header("Location: ../consultas.php?error=".urlencode($error));
+        exit;
+    }
+
     InstanciaDAO::confirmCon($confirm);
     notifyStudents($confirm,$instance['cupo']);
-    //TO DO: notificar a los estudiantes inscriptos
 
     // TODO volver a donde estaba
     header('Location: ../consultas.php'); 
