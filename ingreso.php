@@ -21,15 +21,16 @@
 	<form action="controladores/ingreso.php" method="post">
 		<h2 class="form_titulo">Ingreso</h2>
 		<p class="form_parrafo"> ¿No tienes cuenta? <a href="registro.php">¡Registrate!</a></p>
+		<p class="form_campos_requeridos"> * Campos requeridos</p>
 
 		<div class="formulario_contenedor">
 			<div class="formulario_grupo">
 				<input type="text" id="leg" name="legajo" placeholder="" required>
-				<label for="leg">Legajo</label>
+				<label for="leg">Legajo <span class="campos_requeridos"> * </span></label>
 			</div>
 			<div class="formulario_grupo">
 				<input type="password" id="pass" name="contrasenia" placeholder="" required>
-				<label for="pass">Contraseña</label>
+				<label for="pass">Contraseña <span class="campos_requeridos"> * </span></label>
 			</div>
 	
 <?php

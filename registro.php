@@ -21,29 +21,30 @@
 	<form action="controladores/registro.php" method="post">
 		<h2 class="form_titulo">Registro</h2>
 		<p class="form_parrafo"> Complete con sus datos para registrarse</p>
+		<p class="form_campos_requeridos"> * Campos requeridos</p>
 
 		<input type="hidden" name="tipo" value=1>
 
 		<div class="formulario_contenedor">
 			<div class="formulario_grupo">
 				<input type="text" id="leg" name="legajo" placeholder="" required>
-				<label for="leg">Legajo</label>
+				<label for="leg">Legajo <span class="campos_requeridos"> * </span></label>
 			</div>
 			<div class="formulario_grupo">
 				<input type="password" id="pass" name="contrasenia" placeholder="" required>
-				<label for="pass">Contraseña</label>
+				<label for="pass">Contraseña <span class="campos_requeridos"> * </span></label>
 			</div>
 			<div class="formulario_grupo">
 				<input type="text" name="nombre" placeholder="" required>
-				<label for="pass">Nombre/s</label>
+				<label for="pass">Nombre/s <span class="campos_requeridos"> * </span></label>
 			</div>
 			<div class="formulario_grupo">
 				<input type="text" name="apellido" placeholder="" required>
-				<label for="pass">Apellido/s</label>
+				<label for="pass">Apellido/s<span class="campos_requeridos"> * </span> </label>
 			</div>
 			<div class="formulario_grupo">
 				<input type="text" name="email" placeholder="" required>
-				<label for="pass">E-mail</label>
+				<label for="pass">E-mail <span class="campos_requeridos"> * </span></label>
 			</div>
 	
 <?php

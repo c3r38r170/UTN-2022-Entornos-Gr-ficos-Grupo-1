@@ -30,10 +30,11 @@ if(!sessionEsAdministracion()){
         <form action="controladores/comisiones.php" class="form" method="post">
             <h2 class="form_titulo">Comisiones</h2>            
 			<p class="form_parrafo"> Ingrese datos de la comision</p>
+			<p class="form_campos_requeridos"> * Campo requerido</p>
             <div class="formulario_contenedor">
                 <div class="formulario_grupo">
                     <input type="text" id="leg" name="name"  class="form_input" placeholder="" value="<?= isset($_GET['id']) ? $_GET['number'] : "" ?>" required>
-                    <label for="" class="form_label">Nombre</label>
+                    <label for="" class="form_label">Nombre <span class="campos_requeridos"> * </span></label>
                     <span class="form_linea"></span>
                 </div>                
                 <input type="submit" value="Guardar" name=<?= !isset($_GET['id']) ? "btn_save" : "btn_edit"?> 

@@ -29,6 +29,7 @@ class ConsultaDAO{
 				INNER JOIN usuarios u ON u.id=c.profesor_id
 			WHERE 
 				c.id=$id
+				AND u.`baja`<>1
 				AND c.fecha  = (
 					SELECT MAX(fecha)
 					FROM consultas 
@@ -77,12 +78,13 @@ class ConsultaDAO{
 				INNER JOIN usuarios u ON u.id=c.profesor_id
 			WHERE (
 				u.nombre_completo LIKE ?
-				OR mat.nombre as nombre_materia LIKE ?
-				OR com.numero as numero_comision LIKE ? )
+				OR mat.nombre LIKE ?
+				OR com.numero LIKE ? )
+				AND u.`baja`<>1
 				AND c.fecha  = (
 					SELECT MAX(fecha)
 					FROM consultas 
-				)
+				)				
 				$idTeacher
 			LIMIT $limit OFFSET $offset";
 
@@ -103,7 +105,7 @@ class ConsultaDAO{
 
 		$sql =
 			"SELECT
-					c.id
+				c.id
 				, u.nombre_completo
 				, mc.materia_id
 				, mat.nombre as nombre_materia
@@ -113,6 +115,7 @@ class ConsultaDAO{
 				, c.hora_hasta
 				, c.dia_de_la_semana
 				, c.aula
+				, c.enlace
 			FROM consultas c
 				INNER JOIN materia_x_comision mc ON mc.id=c.materia_x_comision_id
 				INNER JOIN comision com ON com.id=mc.comision_id
@@ -122,6 +125,8 @@ class ConsultaDAO{
 						SELECT MAX(fecha)
 						FROM consultas 
 					)	
+				AND
+				u.`baja`<>1	
 			".(
 				$idTeacher?
 					"AND c.profesor_id=".$idTeacher
@@ -159,6 +164,7 @@ class ConsultaDAO{
 				INNER JOIN materia mat ON mat.id=mc.materia_id
 				INNER JOIN usuarios u ON u.id=c.profesor_id
 			WHERE c.profesor_id = ?
+			    AND u.`baja`<>1
 				AND c.fecha  = (
 						SELECT MAX(fecha)
 							FROM consultas 

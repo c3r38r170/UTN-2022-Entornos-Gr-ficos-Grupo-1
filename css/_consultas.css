@@ -175,6 +175,13 @@
 	cursor: pointer;
 }
 
+.link:link{
+	color: blue !important;
+}
+
+.link:hover{	
+	color:black !important;
+}
 
 @media (max-width: 1030px) {
 	
@@ -194,6 +201,7 @@
   footer{
 	height: 1vh;			
   }
+
 
   @media (max-width: 600px) {
 	.button_ins{

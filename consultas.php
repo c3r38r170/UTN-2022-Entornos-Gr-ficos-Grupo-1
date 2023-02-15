@@ -116,21 +116,23 @@ echo "<span id='error'>".$_GET["error"]."</span>";
 
                     <div class="more-info" id="more-info">
                         <span><!-- Estado --> Estado: </span> <?=$instance['descripcion']??'Pendiente' ?>  
-                        </br>
-                        <span><!-- Modalidad --> Modalidad: </span> <?=$row['enlace']??'Presencial' ?>  
+                        </br>                        
+                        <span><!-- Modalidad --> Modalidad: </span> <?=isset($row['enlace'])? 'Virtual' : 'Presencial' ?>  
                         </br>
                         <?php
                     //   ! definición de $enlace
                         if($enlace = ($instance['enlace']??$row['enlace']??null)){
                         ?>
-                        <span><!-- Enlace --> Enlace: </span> <a href="<?= $row['enlace']?>"> <?=$row['enlace'] ?> </a>   
+                          <?php if(haIngresado()){ ?>
+                        <span><!-- Enlace --> Enlace: </span> <a class="link" target="_blank" href="<?= $row['enlace']?>"> <?=$row['enlace'] ?> </a>
+                           <?php } ?>   
                         </br>
                         <?php } ?>
                         <?php if( (sessionEsAdministracion() || sessionEsProfesor()) && isset($instance['motivo'])){?>
                         <span><!-- Motivo --> Motivo de <?=$instance['estado_id']==3?'bloqueo':'cambio'?>: </span> <?=$instance['motivo'] ?>
                         </br>
                         <?php } ?>
-                        <?php if(isset($instance) && (int)$instance['suscritos'] && $_SESSION['tipo'] == UsuarioTipos::PROFESOR){?>
+                        <?php if(haIngresado() && isset($instance) && (int)$instance['suscritos'] && $_SESSION['tipo'] == UsuarioTipos::PROFESOR){?>
                             <a id="subs" href=<?="subscribers.php?id=".$instance['id']?>>Ver estudiantes suscritos</a>                                                    
                         <?php }?>
                     </div>                   

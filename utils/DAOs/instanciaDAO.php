@@ -1,6 +1,8 @@
 <?php
 
 require_once(dirname(__DIR__,1) . '\getDate.php');
+require_once(dirname(__DIR__,1) . '\db.php');
+
 
 class InstanciaDAO{
   //Traemos solo aquellas instancias que correspondan a consultas vigentes
@@ -116,6 +118,7 @@ class InstanciaDAO{
         INNER JOIN instancias i ON i.consulta_id=c.id
         INNER JOIN suscripciones s ON s.estudiante_id=? AND s.instancia_id=i.id        
     WHERE i.fecha_consulta>=CURDATE()
+    AND u.`baja`<>1
     LIMIT $limit OFFSET $offset";
 
     $rs_result = $db->prepared($sql,[$id]);
@@ -148,6 +151,7 @@ class InstanciaDAO{
         INNER JOIN usuarios u ON u.id=c.profesor_id
         INNER JOIN instancias i ON i.consulta_id=c.id  
     WHERE i.fecha_consulta>=CURDATE() AND c.profesor_id=?
+    AND u.`baja`<>1
     LIMIT $limit OFFSET $offset";
 
     $rs_result = $db->prepared($sql,[$id]);
@@ -169,7 +173,8 @@ class InstanciaDAO{
   }
 
   static function updateInstance($instance){
-    
+    $db=new MysqliWrapper();
+
     if(!isset($instance['id'])){
       return ['Datos inválidos.'];
     }
@@ -184,7 +189,8 @@ class InstanciaDAO{
     
     $fechaConsulta=substr($instance['fecha-hora'],0,10);
     $hora=substr($instance['fecha-hora'],11,15);
-    
+    // TODO default in DB.
+    $state = isset($instance['blocking']) ? 3 : 1;     
     /* Versión alternativa:
     $string = strtotime($instance['datetime']);
     $date = date('Y/m/d/', $string);
@@ -219,8 +225,8 @@ class InstanciaDAO{
             ,$instance['aula']
             ,trim($instance['enlace'])?:NULL
             ,$instance['cupo']
-            ,trim($instance['motivo'])?:NULL
-            ,isset($instance['blocking']) ? 3 : 1
+            ,trim($instance['motivo'])?:NULL                        
+            ,$state
         ]);
     }else{
         $res=$db->prepared(
@@ -231,7 +237,8 @@ class InstanciaDAO{
                 ,aula_nueva
                 ,enlace
                 ,cupo
-                ,motivo
+                ,motivo 
+                ,estado_id               
             ) VALUES (
                 '".date('Y-m-d')."'
                 ,?
@@ -240,6 +247,7 @@ class InstanciaDAO{
                 ,?
                 ,".((int)$instance['cupo'])."
                 ,?
+                ,?
             )"
             ,[
                 $fechaConsulta
@@ -247,6 +255,7 @@ class InstanciaDAO{
                 ,$instance['aula']
                 ,trim($instance['enlace'])?:NULL
                 ,trim($instance['motivo'])?:NULL
+                ,$state
             ]
         );
 

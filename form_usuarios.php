@@ -44,24 +44,25 @@ if($editando){
 		<input type="hidden" value="<?=isset($_GET['id']) ? $_GET['id'] : ""?>" name="id">
 		<h2 class="form_titulo">Usuarios</h2>            
 		<p class="form_parrafo"> Datos del usuario </p>
+		<p class="form_campos_requeridos"> * Campos requeridos</p>
 		<div class="formulario_contenedor">
 			<div class="formulario_grupo">
 				<input type="text" id="leg" name="legajo" class="form_input" placeholder="" value="<?= $editando ? $usuario['legajo'] : "" ?>" required <?= $editando ? "disabled" : "" ?>>
-				<label for="leg" class="form_label">Legajo</label>
+				<label for="leg" class="form_label">Legajo <span class="campos_requeridos"> * </span></label>
 			</div>
 			<div class="formulario_grupo">
 				<input type="text" id="nombre" name="nombre_completo" class="form_input" placeholder="" value="<?= $editando ? $usuario['nombre_completo'] : "" ?>" required>
-				<label for="nombre" class="form_label">Nombre Completo</label>
+				<label for="nombre" class="form_label">Nombre Completo <span class="campos_requeridos"> * </span></label>
 			</div>
 			<div class="formulario_grupo">
 				<input type="text" id="correo" name="correo" class="form_input" placeholder="" value="<?= $editando ? $usuario['correo'] : "" ?>" required>
-				<label for="correo" class="form_label">Correo Electrónico</label>
+				<label for="correo" class="form_label">Correo Electrónico <span class="campos_requeridos"> * </span></label>
 			</div>
 			<div class="formulario_grupo">
 				<!-- TODO estilos de select -->
 				<select id="tipo" name="tipo_id" class="form_input" required <?= $editando ? "disabled" : "" ?>>
 					<!-- TOOD hacer dinámico? / obtener de la base de datos -->
-					<option value="" <?=(!$editando)?'selected':'' ?> disabled>Elija tipo de usuario</option>
+					<option value="" <?=(!$editando)?'selected':'' ?> disabled>Elija tipo de usuario <span class="campos_requeridos"> * </span> </option>
 					<option value="1" <?= ($editando && $usuario['tipo_id']==1) ? "selected" : "" ?>>Estudiante</option>
 					<option value="2" <?= ($editando && $usuario['tipo_id']==2) ? "selected" : "" ?>>Profesor</option>
 					<option value="3" <?= ($editando && $usuario['tipo_id']==3) ? "selected" : "" ?>>Administración</option>

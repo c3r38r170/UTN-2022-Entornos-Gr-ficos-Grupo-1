@@ -48,6 +48,7 @@ class SubscriptionDAO{
     $vSql = "SELECT u.nombre_completo, u.legajo, u.correo FROM suscripciones s
              INNER JOIN usuarios u ON u.id=s.estudiante_id                 
              WHERE instancia_id=?
+             AND u.`baja`<>1
              LIMIT $limit OFFSET $offset";
     $rs_result =  $db->prepared($vSql,[$idInstance]);
     $arrows = $rs_result->fetch_all(MYSQLI_ASSOC);
@@ -61,7 +62,8 @@ class SubscriptionDAO{
 
     $vSql = "SELECT u.nombre_completo, u.legajo, u.correo FROM suscripciones s
              INNER JOIN usuarios u ON u.id=s.estudiante_id                 
-             WHERE instancia_id=?";
+             WHERE instancia_id=?
+             AND u.`baja`<>1";
            
     $rs_result =  $db->prepared($vSql,[$idInstance]);
     $arrows = $rs_result->fetch_all(MYSQLI_ASSOC);
