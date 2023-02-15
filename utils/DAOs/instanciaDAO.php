@@ -176,6 +176,7 @@ class InstanciaDAO{
   }
 
   static function updateInstance($instance){
+    $db=new MysqliWrapper();
     
     if(!isset($instance['id'])){
       return ['Datos inválidos.'];
