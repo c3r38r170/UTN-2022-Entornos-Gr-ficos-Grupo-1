@@ -124,7 +124,7 @@ echo "<span id='error'>".$_GET["error"]."</span>";
                         if($enlace = ($instance['enlace']??$row['enlace']??null)){
                         ?>
                           <?php if(haIngresado()){ ?>
-                        <span><!-- Enlace --> Enlace: </span> <a href="<?= $row['enlace']?>"> <?=$row['enlace'] ?> </a>
+                        <span><!-- Enlace --> Enlace: </span> <a class="link" target="_blank" href="<?= $row['enlace']?>"> <?=$row['enlace'] ?> </a>
                            <?php } ?>   
                         </br>
                         <?php } ?>
