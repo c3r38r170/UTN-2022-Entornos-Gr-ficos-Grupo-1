@@ -42,18 +42,18 @@ require_once 'utils/getDate.php';
 
 ?>
 
-	<script>
-        function validate(){    
+	<script>							
+        function validate(){    			
 				let newDate = {date: (document.getElementById('fecha-hora').value).split('T')[0],
 											hour: (document.getElementById('fecha-hora').value).split('T')[1],
 											reason : (document.getElementById('motivo').value),
 											blocking: (document.getElementById('blocking').checked)
-										};
-									
-				let oldDate = { date: "<?=$instancia['fecha_consulta']?>",
-												hour: "<?=isset($instancia) ? $instancia['hora_nueva'] : $consulta['hora_desde']?>".substr(0, 5),
-												reason: "<?=$instancia['motivo']?>"};
-												
+										};														
+				let oldDate = { date: "<?= isset($instancia['id']) ? $instancia['fecha_consulta'] : getWeekDate($consulta['dia_de_la_semana']) ?>",
+												hour: "<?= isset($instancia['id']) ? $instancia['hora_nueva'] : $consulta['hora_desde']?>".substr(0, 5),
+												reason: "<?= isset($instancia['motivo']) ? $instancia['motivo'] : ''?>"};
+	
+				
 				if((newDate.date != oldDate.date || newDate.hour != oldDate.hour) && newDate.reason.split(' ').join('') == ""){
 						alert('Por favor ingrese el motivo del cambio');        
 						return false;
