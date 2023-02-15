@@ -1,6 +1,8 @@
 <?php
 
 require_once(dirname(__DIR__,1) . '\getDate.php');
+require_once(dirname(__DIR__,1) . '\db.php');
+
 
 class InstanciaDAO{
   //Traemos solo aquellas instancias que correspondan a consultas vigentes
