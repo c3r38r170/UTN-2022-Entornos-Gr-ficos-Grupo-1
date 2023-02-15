@@ -83,11 +83,11 @@ function searchCon($consulta, $offset=0, $limit=10+1){
         //Redireccionamos a la pagina anterior, ya se consultas.php o mis_consultas.php
         //strtok permite quitar el parametro search de la URL, de lo contrario no se muestra el mensaje success 
         $success = "Usted ya no se encuentra suscrito a la consulta";
-        header('Location: ' . strtok($_SERVER['HTTP_REFERER'], '?')."?success=".urlencode(json_encode($success)));              
+        header('Location: ' . strtok($_SERVER['HTTP_REFERER'], '?')."?success=".urlencode($success));              
     }else{
         // TODO urlencode(json_encode ?? verificar
         $error = "Lo sentimos, pero ya pasó el límite de 24hs para realizar esta operación";
-        header('Location: ' . strtok($_SERVER['HTTP_REFERER'], '?')."?error=".urlencode(json_encode($error)));                
+        header('Location: ' . strtok($_SERVER['HTTP_REFERER'], '?')."?error=".urlencode($error));                
     }    
             
 }
@@ -203,7 +203,7 @@ if(isset($_POST['edit'])){
     // TODO mandar con los parámetros anteriores
     if(empty($errores)){
         header('Location: ../consultas.php?success='.urlencode('Datos actualizados.'));
-    }else{
+    }else{        
         header('Location: ../consultas.php?errores='.urlencode(json_encode(['Datos inválidos.'])));
     }
     die;  
