@@ -1,6 +1,7 @@
 <?php
 
 require_once 'controladores/consultas.php';
+require_once 'controladores/periodos.php';
 require_once 'utils/getDate.php';
 
 ?>
@@ -55,38 +56,57 @@ echo consultasBreadcrumbs();
 
 // TODO responsive
 
- if(isset($_GET["success"])){
-	$success = urldecode($_GET['success']);
-    echo "<span id='success'>$success</span>"; 
- }
+    if(isset($_GET["success"])){
+        $success = urldecode($_GET['success']);
+        echo "<span id='success'>$success</span>"; 
+    }
 
-if(isset($_GET['errores'])){
-    $errores=json_decode(urldecode($_GET['errores']),true);
-    foreach($errores as $error)
-        echo "<span class=formulario_error>$error</span>";					  
-}
- 
-if(isset($_GET["error"])){
-    echo "<span id='error'>".$_GET["error"]."</span>"; 
-} 
+    if(isset($_GET['errores'])){
+        $errores=json_decode(urldecode($_GET['errores']),true);
+        foreach($errores as $error)
+            echo "<span class=formulario_error>$error</span>";					  
+    }
+    
+    if(isset($_GET["error"])){
+        echo "<span id='error'>".$_GET["error"]."</span>"; 
+    } 
 
- $offset=$_GET['offset']??0;
+    $offset=$_GET['offset']??0;
 
- if(isset($_GET["search"]) && ($search=trim($_GET["search"]))!=""){
-    $cons = searchCon($search,$offset,11);
- }else{
-    $search='';
-    $cons =getAll($offset);
- }       
-       
+    // ! Definición de $cons
+    if(isset($_GET["search"]) && ($search=trim($_GET["search"]))!=""){
+        $cons = searchCon($search,$offset,11);
+    }else{
+        $search='';
+        $cons =getAll($offset);
+    }
+    
+    $periodoActual=PeriodoControlador::periodoActual();
+    if(!$periodoActual){
+        $cons=[];
+        ?>
+        <p id=success>Actualmente no se están dando clases de consulta.</p>
+        <?php
+    }
+    
     $hayMas=false;
     foreach ($cons as $i=> $row) {
         if($i==10){ // * índice 10 es elemento 11
             $hayMas=true;
             break;
-        }       
+        }
+
        $instance = getInst($row['id']); 
        
+        $fecha=$instance['fecha_consulta']??getWeekDate($row['dia_de_la_semana']);
+        
+        $dateFecha=date($fecha);
+        if(
+            $dateFecha < date($periodoActual['inicio'])
+            || date($periodoActual['fin']) < $dateFecha
+        ){
+            continue;
+        }
 ?> 
        <div class="container">
         <div class="card">
@@ -100,7 +120,7 @@ if(isset($_GET["error"])){
 			    <h2> <!-- Docente --> Docente <?=($row['nombre_completo'])?> </h2>
                 <h3>Información básica</h3>
 			    <p>                    
-                    <span><!-- Fecha --> Fecha: </span> <?=$instance['fecha_consulta']??getWeekDate($row['dia_de_la_semana'])?>
+                    <span><!-- Fecha --> Fecha: </span> <?=$fecha?>
                     </br> 
                     <span><!-- Horario --> Horario: </span> <?=substr($instance['hora_nueva']??$row['hora_desde'],0,5) . ' hs'?>
                     </br> 
@@ -123,15 +143,19 @@ if(isset($_GET["error"])){
                     //   ! definición de $enlace
                         if($enlace = ($instance['enlace']??$row['enlace']??null)){
                         ?>
-                          <?php if(haIngresado()){ ?>
-                        <span><!-- Enlace --> Enlace: </span> <a class="link" target="_blank" href="<?= $row['enlace']?>"> <?=$row['enlace'] ?> </a>
-                           <?php } ?>   
-                        </br>
-                        <?php } ?>
+                            <?php if(haIngresado()){ ?>
+                            <span><!-- Enlace --> Enlace: </span> <a class="link" target="_blank" href="<?= $row['enlace']?>"> <?=$row['enlace'] ?> </a>
+                            <?php } ?>   
+                            </br>
+                        <?php
+                        }
+                        ?>
+
                         <?php if( (sessionEsAdministracion() || sessionEsProfesor()) && isset($instance['motivo'])){?>
                         <span><!-- Motivo --> Motivo de <?=$instance['estado_id']==3?'bloqueo':'cambio'?>: </span> <?=$instance['motivo'] ?>
                         </br>
                         <?php } ?>
+
                         <?php if(haIngresado() && isset($instance) && (int)$instance['suscritos'] && $_SESSION['tipo'] == UsuarioTipos::PROFESOR){?>
                             <a id="subs" href=<?="subscribers.php?id=".$instance['id']?>>Ver estudiantes suscritos</a>                                                    
                         <?php }?>

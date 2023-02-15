@@ -23,6 +23,14 @@ SET time_zone = "+00:00";
 
 -- --------------------------------------------------------
 --
+-- Volcado de datos para la tabla `periodos`
+--
+
+INSERT INTO `periodos` (`inicio`, `fin`) VALUES
+('2023-01-01',	'2023-12-31');
+
+-- --------------------------------------------------------
+--
 -- Volcado de datos para la tabla `comision`
 --
 
