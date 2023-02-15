@@ -84,8 +84,8 @@ $hayMas=false;
             <tr>
                 <td data-label="Legajo"><?= ($usuario['legajo']); ?></td>
                 <td data-label="Nombre Completo"><?= ($usuario['nombre_completo']) ?></td>
-                <td data-label="Nombre Completo"><?= numeroANombreUsuarioTipo($usuario['tipo_id']) ?></td>
-                <td data-label="Nombre Completo"><?= ($usuario['correo']) ?></td>
+                <td data-label="Nivel de Acceso"><?= numeroANombreUsuarioTipo($usuario['tipo_id']) ?></td>
+                <td data-label="Correo Electrónico"><?= ($usuario['correo']) ?></td>
                 <td data-label="Editar"> <div class="buttons">
                     <form action="form_usuarios.php" method="get">                        
                         <input type="submit" value="Editar" class="button_actions"></input>  

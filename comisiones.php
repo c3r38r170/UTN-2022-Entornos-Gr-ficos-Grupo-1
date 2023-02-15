@@ -85,7 +85,7 @@ $hayMas=false;
             ?> 
             <tr>
                 <td data-label="Id"><?php echo ($row['id']); ?></td>
-                <td data-label="Nombre"><?php echo ($row['numero']); ?></td>
+                <td data-label="Numero"><?php echo ($row['numero']); ?></td>
                 <td data-label="Editar"> 
                     <form action="form_comisiones.php" method="get">                        
                         <input type="submit" value="Editar" class="button_actions"></input>  
