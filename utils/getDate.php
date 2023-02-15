@@ -5,7 +5,7 @@
 
 // TODO tildes
 date_default_timezone_set('America/Argentina/Buenos_Aires');
-$days = array('Lunes' => 1, 'Martes' => 2, 'Miercoles' => 3, 'Jueves' => 4, 'Viernes' => 5, 'Sabado' => 6, 'Domingo' => 7);
+$days = array('Lunes' => 1, 'Martes' => 2, 'Miércoles' => 3, 'Jueves' => 4, 'Viernes' => 5, 'Sábado' => 6, 'Domingo' => 7);
 
 
 function getWeekDate($day){    

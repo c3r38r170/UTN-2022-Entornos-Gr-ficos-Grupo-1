@@ -85,7 +85,7 @@ CREATE TABLE `consultas` (
   `materia_x_comision_id` int(11) NOT NULL,
   `profesor_id` int(11) NOT NULL,
   `hora_desde` time NOT NULL,
-  `hora_hasta` time NOT NULL,
+  `hora_hasta` time DEFAULT NULL,
   `dia_de_la_semana` varchar(10) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
   `aula` varchar(25) CHARACTER SET utf8mb4 COLLATE utf8mb4_spanish_ci NOT NULL,
   `fecha` datetime NOT NULL,

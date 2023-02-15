@@ -189,6 +189,7 @@ class InstanciaDAO{
     
     $fechaConsulta=substr($instance['fecha-hora'],0,10);
     $hora=substr($instance['fecha-hora'],11,15);
+    
     /* Versión alternativa:
     $string = strtotime($instance['datetime']);
     $date = date('Y/m/d/', $string);

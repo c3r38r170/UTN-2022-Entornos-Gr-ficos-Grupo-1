@@ -126,6 +126,15 @@
 
   }
 
+  .success{
+    display: flex;
+      justify-content: center;
+      align-items: center;
+    font-size: larger;
+    font-weight: bold;
+    color: rgb(18, 192, 47);
+  }
+  
   @media (max-width: 1000px) {
     input[type=file] {
       width: 100%;

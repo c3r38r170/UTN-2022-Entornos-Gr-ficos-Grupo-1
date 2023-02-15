@@ -22,6 +22,11 @@
     require_once 'template/navs/administracion.php';
 		require_once 'template/breadcrumbs.php'; 
     echo horariosBreadcrumbs();
+
+		if(isset($_GET["success"])){
+			$success = urldecode($_GET['success']);
+			echo "<p class=success>$success</p>";
+		}
 ?>
 
 <div class="container">
@@ -37,11 +42,10 @@
 	  <a href="./docs/horarios.xlsx" download="Plantilla Horarios de Consulta.xlsx"> Descargar Planilla Horarios de Consulta</a>
 	  <div class="drop_box">
 		  <h4>Selecciona un archivo aqui:</h4>
-		    <p>Importante: solo se soportan archivos Excel en cualquiera de sus versiones.</p>
+		    <p>Importante: solo se soportan archivos <b>Excel 2007+</b> (.xlsx)</p>
 		    <form action="controladores/horarios.php" enctype="multipart/form-data" method="post">
-			    <input type="file" name="file" accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"  required>
-			    <!-- lei en Stack Overflow que el string dentro del atributo accept permite todas las versiones de exel.
-		         TODO: Hay que hacer casos de prueba, respecto a lo de arriba 
+			    <input type="file" name="file" accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" required>
+			    <!--
                  TODO: Limpiar horarios.xlsx para que sea una plantilla sin datos
                  TODO: Testear que el archivo se suba correctamente
                 -->
@@ -51,11 +55,7 @@
 							if(isset($_GET['errores'])){
 								$errores=json_decode(urldecode($_GET['errores']),true);
 								foreach($errores as $error)
-									echo "<span class=formulario_error>$error</span>";					  
-							}
-							if(isset($_GET["success"])){
-								$success = urldecode($_GET['success']);
-								echo "<span>$success</span>";
+									echo "<span class=formulario_error>$error</span>";
 							}
 		    		?>  
 	  </div>

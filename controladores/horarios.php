@@ -31,7 +31,7 @@ if( $excel=Shuchkin\SimpleXLSX::parse($_FILES['file']['tmp_name'],false) ){
 		$profesorID=$db
 			->prepared("SELECT `id`,`nombre_completo` FROM `usuarios` WHERE `legajo` = ?",[$legajo]);
 			
-		if($profesorID){
+		if($profesorID && $profesorID->num_rows){
 			$profesor=$profesorID->fetch_assoc();
 
 			$profesorID=$profesor['id'];
@@ -67,7 +67,7 @@ if( $excel=Shuchkin\SimpleXLSX::parse($_FILES['file']['tmp_name'],false) ){
 		$nuevaComision=false;
 		$comisionID=$db
 			->prepared("SELECT id FROM comision WHERE numero = ?",[$comision]);
-		if($comisionID){
+		if($comisionID && $comisionID->num_rows){
 			$comisionID=$comisionID->fetch_assoc()['id'];
 		}else{
 			$db->prepared(
@@ -104,12 +104,12 @@ if( $excel=Shuchkin\SimpleXLSX::parse($_FILES['file']['tmp_name'],false) ){
 			$nuevaMateria=true;
 			$materiaID=$db->insert_id();
 		}
-			
+		
 		if(
 			$nuevaComision
 			|| $nuevaMateria
 			// ! Definición de $comisionMateriaID
-			|| !( $comisionMateriaID=$db->query("SELECT id FROM materia_x_comision WHERE materia_id=$materiaID AND comision_id=$comisionID") )
+			|| !( $comisionMateriaID=$db->query("SELECT id FROM materia_x_comision WHERE materia_id=$materiaID AND comision_id=$comisionID") )->num_rows
 		){
 			$db->query("INSERT INTO `materia_x_comision` (`materia_id`,`comision_id`) VALUES ($materiaID,$comisionID)");
 			$comisionMateriaID=$db->insert_id();
@@ -141,7 +141,7 @@ if( $excel=Shuchkin\SimpleXLSX::parse($_FILES['file']['tmp_name'],false) ){
 			,[
 				$row[HORA_DESDE]
 				,$row[AULA]
-				,$row[HORA_HASTA]
+				,$row[HORA_HASTA]?:NULL
 				,$row[DIA]				
 				,$row[ENLACE]
 			]
@@ -149,6 +149,7 @@ if( $excel=Shuchkin\SimpleXLSX::parse($_FILES['file']['tmp_name'],false) ){
 	
 		if(!$res){
 			header("Location: ../horarios.php?errores=".urlencode(json_encode(["Ha ocurrido un problema. Intente nuevamente más tarde."])));
+			die;
 		}
 	}
 	
