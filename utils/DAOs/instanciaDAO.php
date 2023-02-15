@@ -174,14 +174,13 @@ class InstanciaDAO{
 
   static function updateInstance($instance){
     $db=new MysqliWrapper();
-
-    if(!isset($instance['id'])){
+    if(!isset($instance['id'])){      
       return ['Datos inválidos.'];
     }
     try{
         if(!sessionEsProfesor() || ConsultaDAO::getById($instance['consultaID'])['profesor_id'] != $_SESSION['id'])
             return ['No tiene permisos para realizar esta acción.'];
-    }catch(Exception $e){
+    }catch(Exception $e){      
         return ['Datos inválidos.'];
         die;
     }
@@ -198,7 +197,7 @@ class InstanciaDAO{
     */
 
     // ! Definición de $instanciaID
-    if($instanciaID=(int)$instance['id']){
+    if($instanciaID=(int)$instance['id']){      
         try{
             if (InstanciaDAO::getById($instance['id'])['consulta_id'] != $instance['consultaID']){
                 return ['Datos inválidos.'];
@@ -228,7 +227,7 @@ class InstanciaDAO{
             ,trim($instance['motivo'])?:NULL
             ,$state
         ]);
-    }else{
+    }else{      
         $res=$db->prepared(
             "INSERT INTO `instancias` (
                 fecha
@@ -239,6 +238,7 @@ class InstanciaDAO{
                 ,cupo
                 ,motivo
                 ,estado_id
+                ,consulta_id
             ) VALUES (
                 '".date('Y-m-d')."'
                 ,?
@@ -246,6 +246,7 @@ class InstanciaDAO{
                 ,?
                 ,?
                 ,".((int)$instance['cupo'])."
+                ,?
                 ,?
                 ,?
             )"
@@ -256,9 +257,9 @@ class InstanciaDAO{
                 ,trim($instance['enlace'])?:NULL
                 ,trim($instance['motivo'])?:NULL
                 ,$state
+                ,$instance['consultaID']
             ]
-        );
-
+        );        
     }
     
     return $res? [] : ['Datos inválidos.'];
