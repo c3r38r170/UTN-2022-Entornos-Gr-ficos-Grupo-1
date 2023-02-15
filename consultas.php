@@ -116,8 +116,8 @@ echo "<span id='error'>".$_GET["error"]."</span>";
 
                     <div class="more-info" id="more-info">
                         <span><!-- Estado --> Estado: </span> <?=$instance['descripcion']??'Pendiente' ?>  
-                        </br>
-                        <span><!-- Modalidad --> Modalidad: </span> <?=$row['enlace']??'Presencial' ?>  
+                        </br>                        
+                        <span><!-- Modalidad --> Modalidad: </span> <?=isset($row['enlace'])? 'Virtual' : 'Presencial' ?>  
                         </br>
                         <?php
                     //   ! definición de $enlace
