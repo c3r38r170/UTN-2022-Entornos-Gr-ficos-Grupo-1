@@ -43,7 +43,7 @@ require_once 'utils/getDate.php';
 ?>
 
 	<script>
-		function validate(){    
+        function validate(){    
 				let newDate = {date: (document.getElementById('fecha-hora').value).split('T')[0],
 											hour: (document.getElementById('fecha-hora').value).split('T')[1],
 											reason : (document.getElementById('motivo').value),
@@ -72,6 +72,7 @@ require_once 'utils/getDate.php';
 				return true;
 		}
 	</script>
+	
 
 	<title>Consulta</title>	
 </head>
@@ -108,7 +109,7 @@ require_once 'utils/getDate.php';
 			<?php
 				$virtual=(bool)($instancia['enlace']??$consulta['enlace']);
 			?>
-			<div class="formulario_grupo">
+			<div class="formulario_grupo" id="mod">
 				<!-- TODO estilos de select -->
 				<select id="modalidad" class="form_input" required>
 					<option value="" disabled>Elija modalidad</option>
@@ -173,10 +174,18 @@ require_once 'utils/getDate.php';
 		echo "<span>$success</span>";
 	}
 ?>
+<?php	   
+		if(isset($consulta['enlace'])){			
+	?>	     
+		 <script>
+		let linkInput = document.getElementById('mod');
+		linkInput.classList.add('mostrar-enlace');		
+		</script>
+	<?php  } ?>
 		</div>
 	</form>
 </div>
-
+	
 <?php require_once 'template/footer.php'; ?>
 </body>
 </html>
