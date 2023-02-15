@@ -183,12 +183,18 @@ echo "<span id='error'>".$_GET["error"]."</span>";
 ?>
 
 
-
+<?php
+if(!empty($cons)){
+?>
 <!-- TODO URIencode search -->
 <div class="botones-navegacion">
     <a class="fas fa-angle-left" data-title="Pagina Anterior"<?=$offset?"href=\"?search=$search&offset=".($offset-10)."\"":""?> ></a>
     <a class="fas fa-angle-right" data-title="Pagina Siguiente"<?=$hayMas?"href=\"?search=$search&offset=".($offset+10)."\"":""?> ></a>
-</div>    
+</div> 
+<?php
+}
+?>
+
 <script>
     
     btn_info = document.getElementsByClassName('button_info');    
