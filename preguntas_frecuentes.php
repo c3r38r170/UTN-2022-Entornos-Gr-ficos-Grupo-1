@@ -68,7 +68,7 @@ echo preguntasFrecuentesBreadcrumbs();
       </details>
       <details>
         <summary>¿Debo ingresar (iniciar sesión) para poder inscribirme a una consulta?</summary>
-        <p>Si, usted deberá  estar registrado e ingresar al sistema para poder inscribirse a una consulta.
+        <p>Sí, usted deberá  estar registrado e ingresar al sistema para poder inscribirse a una consulta.
         </p>
       </details>
 </div>

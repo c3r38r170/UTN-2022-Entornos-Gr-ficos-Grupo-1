@@ -97,15 +97,17 @@ echo misConsultasBreadcrumbs();
             </div>       
         </div>            
     </div>
-</div>        
+</div> 
+
+<?php
+}
+?>
 <!-- TODO URIencode search -->
 <div class="botones-navegacion">
     <a class="fas fa-angle-left" <?=$offset?"href=\"?search=$search&offset=".($offset-10)."\"":""?> ></a>
     <a class="fas fa-angle-right" <?=$hayMas?"href=\"?search=$search&offset=".($offset+10)."\"":""?> ></a>
 </div>    
-<?php
-}
-?>
+
 
 <script>
     
@@ -125,6 +127,6 @@ echo misConsultasBreadcrumbs();
     }
 </script>
 <script src="https://kit.fontawesome.com/f452b46f6c.js" crossorigin="anonymous"></script>
-<?php //require_once 'template/footer.php'; ?>
+<?php require_once 'template/footer.php'; ?>
 </body>
 </html>
