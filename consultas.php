@@ -116,15 +116,20 @@ if(isset($_GET["error"])){
 
                     <div class="more-info" id="more-info">
                         <span><!-- Estado --> Estado: </span> <?=$instance['descripcion']??'Pendiente' ?>  
-                        </br>                        
-                        <span><!-- Modalidad --> Modalidad: </span> <?=isset($row['enlace'])? 'Virtual' : 'Presencial' ?>  
+                        </br>   
+                        <?php
+				            $virtual=(bool)($instance['enlace']??$row['enlace']);
+                            
+                            $enlace=($instance['enlace']??$row['enlace']);
+			            ?>                     
+                        <span><!-- Modalidad --> Modalidad: </span> <?=$virtual ? 'Virtual' : 'Presencial' ?>  
                         </br>
                         <?php
                     //   ! definición de $enlace
-                        if($enlace = ($instance['enlace']??$row['enlace']??null)){
+                        if($virtual){
                         ?>
                           <?php if(haIngresado()){ ?>
-                        <span><!-- Enlace --> Enlace: </span> <a class="link" target="_blank" href="<?= $row['enlace']?>"> <?=$row['enlace'] ?> </a>
+                        <span><!-- Enlace --> Enlace: </span> <a class="link" target="_blank" href="<?= $enlace?>"> <?=$enlace ?> </a>
                            <?php } ?>   
                         </br>
                         <?php } ?>
