@@ -1,0 +1,25 @@
+@import 'materias.css';
+@import '_navegacion.css';
+
+.container_table{	
+	width: 60%;
+	margin-left: auto;	
+	margin-right: auto;
+}
+
+#nuevoPeriodo{
+	margin: auto;
+	display: flex;
+}
+
+#tabla{
+	width: initial;
+}
+
+.campos_requeridos::after{
+	content: '*';
+}
+
+td{
+	white-space: nowrap;
+}

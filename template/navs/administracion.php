@@ -8,6 +8,7 @@
 			,'Materias'=>'materias.php'
 			,'Consultas'=>'consultas.php'
 			,'Horarios Consultas'=>'horarios.php'
+			,'Períodos de Actividad'=>'periodos.php'
 		]
 		,'Sobre Nosotros'=>'contacto.php'
 		,'Ayuda Administrador'=>'ayuda.php'

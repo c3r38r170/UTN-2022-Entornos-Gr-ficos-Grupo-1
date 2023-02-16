@@ -94,7 +94,7 @@
 	nav li input ~ ul{
 		height: auto;
 		overflow: hidden;
-		width: 170px;
+		width: 200px;
 		background: #444444;
 		position: absolute;
 		z-index: 99;

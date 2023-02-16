@@ -43,9 +43,9 @@ class InstanciaDAO{
       
     // TODO Renombrar ie.descripcion a "estado" en todos lados
     $vSql = "SELECT 
-                  i.id, 
-                  i.fecha, 
-                  i.motivo, 
+                  i.id,
+                  i.fecha,
+                  i.motivo,
                   i.hora_nueva, 
                   i.aula_nueva, 
                   i.cupo,

@@ -119,7 +119,7 @@ echo consultasBreadcrumbs();
 		    <div class="right-column">
 			    <h2> <!-- Docente --> Docente <?=($row['nombre_completo'])?> </h2>
                 <h3>Información básica</h3>
-			    <p>                    
+			    <p>
                     <span><!-- Fecha --> Fecha: </span> <?=$fecha?>
                     </br> 
                     <span><!-- Horario --> Horario: </span> <?=substr($instance['hora_nueva']??$row['hora_desde'],0,5) . ' hs'?>
