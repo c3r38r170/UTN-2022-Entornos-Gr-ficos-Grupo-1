@@ -1,6 +1,8 @@
 <?php
 
-require_once $_SERVER['DOCUMENT_ROOT'].'/utils/DAOs/periodoDAO.php';
+
+require_once(realpath(dirname(__FILE__) . '/../utils/DAOs/periodoDAO.php'));
+//require_once $_SERVER['DOCUMENT_ROOT'].'/utils/DAOs/periodoDAO.php';
 
 class PeriodoControlador{
 	static function periodoActual(){
@@ -21,12 +23,12 @@ class PeriodoControlador{
 
 if(isset($_POST['crear'])){
 	PeriodoControlador::crear($_REQUEST);
-	header('Location: /periodos.php');
+	header('Location: ../periodos.php');
 }
 
 if(isset($_POST['delete'])){
 	PeriodoControlador::eliminar($_REQUEST);
-	header('Location: /periodos.php');
+	header('Location: ../periodos.php');
 }
 
 ?>
