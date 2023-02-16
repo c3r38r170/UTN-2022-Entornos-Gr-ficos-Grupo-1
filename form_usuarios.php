@@ -17,7 +17,7 @@ if(!sessionEsAdministracion()){
 	
 	<!-- TODO css propio-->
 	<link rel="shortcut icon" type="image/x-icon" href="img/favicon.png">
-	<link rel="stylesheet" type="text/css" href="css/ingreso.css"/>
+	<link rel="stylesheet" type="text/css" href="css/ingreso.css">
 	<title>Usuario</title>	
 </head>
 <body>

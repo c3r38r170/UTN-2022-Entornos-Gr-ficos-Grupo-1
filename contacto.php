@@ -9,7 +9,7 @@
 	<link rel="shortcut icon" type="image/x-icon" href="img/favicon.png">
 	<title>Contacto</title>
 	
-	<link rel="stylesheet" type="text/css" href="css/contacto.css"/>
+	<link rel="stylesheet" type="text/css" href="css/contacto.css">
 </head>
 <body>
 <?php 

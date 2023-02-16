@@ -122,7 +122,7 @@
     font-weight: bold;
 }
 
-#btns_form{
+#btns_form,.btns_form{
   width: inherit;
   display: flex;
   justify-content: space-between;  
@@ -152,7 +152,7 @@
 	display: none;
 }
 
-#subs{		
+.subs,#subs{		
 	cursor: pointer;
 	text-decoration: none;	
 	line-height: 3;
@@ -208,7 +208,7 @@
 		align-self: flex-start;
         margin-top: 20px;
 	}
-	#btns_form{
+	#btns_form,.btns_form{
 		display: flex;
 		flex-direction: column;
 	}
