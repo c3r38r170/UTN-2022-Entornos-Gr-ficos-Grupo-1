@@ -88,13 +88,13 @@ $hayMas=false;
                 <td data-label="Correo Electrónico"><?= ($usuario['correo']) ?></td>
                 <td data-label="Editar"> <div class="buttons">
                     <form action="form_usuarios.php" method="get">                        
-                        <input type="submit" value="Editar" class="button_actions"></input>  
+                        <input type="submit" value="Editar" class="button_actions">
                         <input type="hidden" value="<?=$usuario['id']?>" name="id">
                     </form>
                 </td>        
                 <td data-label="Eliminar">
                     <form action="controladores/usuarios.php" method="post">
-                        <input type="submit" value="Eliminar" onclick='return confirmAlert()' name="delete" class="button_actions"></input>  
+                        <input type="submit" value="Eliminar" onclick='return confirmAlert()' name="delete" class="button_actions">  
                         <input type="hidden" value="<?=$usuario['id']?>" name="id">
                     </form>
                 </td>    

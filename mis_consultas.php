@@ -73,18 +73,18 @@ echo misConsultasBreadcrumbs();
             <h3>Información básica</h3>
             <p>
                 <span><!-- Fecha --> Fecha: </span> <?= getWeekDate($row['dia_de_la_semana'])?>
-                </br> 
+                <br> 
                 <span><!-- Horario --> Horario: </span> <?= ((isset($instance['hora_nueva'])) ? $instance['hora_nueva'] : $row['hora_desde']). ' hs'?>
-                </br> 
+                <br> 
                 <span><!-- Aula --> Aula: </span> <?= ((isset($instance['aula_nueva'])) ? $instance['aula_nueva'] : $row['aula'])?> 
                 <div class="more-info" id="more-info">
                     <span><!-- Estado --> Estado: </span> <?=$instance['descripcion'] ?>  
-                    </br>
+                    <br>
                     <span><!-- Modalidad --> Modalidad: </span> <?= isset($row['enlace']) ? 'Virtual' : 'Presencial'?>  
-                    </br>
+                    <br>
                     <?php if(isset($row['enlace'])){?>
                     <span><!-- Enlace --> Enlace: </span> <a href="<?= $row['enlace']?>"> <?= $row['enlace'] ?> </a>   
-                    </br>
+                    <br>
                     <?php } ?>
                 </div>                   
             </p> 

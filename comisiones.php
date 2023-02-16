@@ -88,14 +88,14 @@ $hayMas=false;
                 <td data-label="Numero"><?php echo ($row['numero']); ?></td>
                 <td data-label="Editar"> 
                     <form action="form_comisiones.php" method="get">                        
-                        <input type="submit" value="Editar" class="button_actions"></input>  
+                        <input type="submit" value="Editar" class="button_actions"> 
                         <input type="hidden" value="<?=$row['id']?>" name="id">
                         <input type="hidden" value="<?=$row['numero']?>" name="number">
                     </form>
                 </td>        
                 <td data-label="Eliminar">
                     <form action="controladores/comisiones.php" method="post">
-                        <input type="submit" value="Eliminar" onclick='return confirmAlert()' name="delete" class="button_actions"></input>  
+                        <input type="submit" value="Eliminar" onclick='return confirmAlert()' name="delete" class="button_actions">  
                         <input type="hidden" value="<?=$row['id']?>" name="id">                        
                     </form>
                 </td>    
