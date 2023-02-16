@@ -49,6 +49,7 @@ class InstanciaDAO{
                   i.hora_nueva, 
                   i.aula_nueva, 
                   i.cupo,
+                  i.enlace,
                   i.consulta_id,
                   i.fecha_consulta,
                   i.estado_id,
