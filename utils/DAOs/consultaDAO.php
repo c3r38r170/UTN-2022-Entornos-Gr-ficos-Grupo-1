@@ -1,6 +1,6 @@
 <?php
 
-require_once(dirname(__DIR__,1) . '\db.php');
+require_once(dirname(__DIR__,1) . '/db.php');
 
 // TODO DRY en las partes comunes de las consultas. quizá una funcion contruirSelect($where):string o select($where,$parametros : array|null):array
 

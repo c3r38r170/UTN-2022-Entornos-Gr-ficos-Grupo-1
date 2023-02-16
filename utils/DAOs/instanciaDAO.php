@@ -1,7 +1,7 @@
 <?php
 
-require_once(dirname(__DIR__,1) . '\getDate.php');
-require_once(dirname(__DIR__,1) . '\db.php');
+require_once(dirname(__DIR__,1) . '/getDate.php');
+require_once(dirname(__DIR__,1) . '/db.php');
 
 
 class InstanciaDAO{
