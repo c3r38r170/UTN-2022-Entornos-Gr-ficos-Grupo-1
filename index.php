@@ -52,5 +52,4 @@ if(isset($_GET['errores'])){
 
 <?php require_once 'template/footer.php'; ?>
 </body>
-
 </html>
