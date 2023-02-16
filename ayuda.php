@@ -3,7 +3,7 @@
 	
 	require_once 'utils/usuario-tipos.php';
 	if(!haIngresado()){
-		header('Location: ingreso.php');
+		header('Location: index.php');
 		die;
 	}
 ?><!DOCTYPE html>

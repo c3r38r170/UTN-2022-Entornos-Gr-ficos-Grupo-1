@@ -3,7 +3,7 @@
 	
 	require_once 'utils/usuario-tipos.php';
 	if(!sessionEsEstudiante()){
-		header('Location: ingreso.php');
+		header('Location: index.php');
 		die;
 	}
 ?>

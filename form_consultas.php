@@ -3,7 +3,7 @@ session_start(['read_and_close'=>true]);
 	
 require_once 'utils/usuario-tipos.php';
 if(!sessionEsProfesor()){
-	header('Location: ingreso.php');
+	header('Location: index.php');
 	die;
 }
 

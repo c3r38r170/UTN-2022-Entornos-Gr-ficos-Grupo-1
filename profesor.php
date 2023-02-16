@@ -1,7 +1,7 @@
 <?php
 	require_once 'utils/usuario-tipos.php';
 	if(!sessionEsProfesor()){
-		header('Location: ingreso.php');
+		header('Location: index.php');
 		die;
 	}
 ?>

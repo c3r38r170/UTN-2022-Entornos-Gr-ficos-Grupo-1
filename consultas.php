@@ -198,7 +198,7 @@ echo consultasBreadcrumbs();
                             }
                         }else{
                     ?>
-                        <a href="ingreso.php"><button class=button_ins>Ingresá para inscribirte</button></a>
+                        <a href="index.php"><button class=button_ins>Ingresá para inscribirte</button></a>
                     <?php
                         }
                     ?>

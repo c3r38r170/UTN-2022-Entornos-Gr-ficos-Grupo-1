@@ -11,12 +11,12 @@ function generateBreadcrumbs($breadcrumbs){
 }
 
 function loginBreadcrumbs(){
-	$breadcrumbs = [array("link" => "ingreso.php","text" => "Home"), array("link" => "#","text" => "Ingreso")] ;	
+	$breadcrumbs = [array("link" => "index.php","text" => "Home"), array("link" => "#","text" => "Ingreso")] ;	
 	return generateBreadcrumbs($breadcrumbs);
 }
 
 function registerBreadcrumbs(){
-	$breadcrumbs = [array("link" => "ingreso.php","text" => "Home"), array("link" => "#","text" => "Registrarse")] ;	
+	$breadcrumbs = [array("link" => "index.php","text" => "Home"), array("link" => "#","text" => "Registrarse")] ;	
 	return generateBreadcrumbs($breadcrumbs);
 }
 
@@ -76,7 +76,7 @@ function preguntasFrecuentesBreadcrumbs(){
 		$breadcrumbs = [array("link" => "estudiante.php","text" => "Home"), array("link" => "#","text" => "Preguntas Frecuentes")] ;
 	else if (sessionEsProfesor())
 		$breadcrumbs = [array("link" => "profesor.php","text" => "Home"), array("link" => "#","text" => "Preguntas Frecuentes")] ;
-	else $breadcrumbs = [array("link" => "ingreso.php","text" => "Home"), array("link" => "#","text" => "Preguntas Frecuentes")] ;	
+	else $breadcrumbs = [array("link" => "index.php","text" => "Home"), array("link" => "#","text" => "Preguntas Frecuentes")] ;	
 
 	return generateBreadcrumbs($breadcrumbs);
 }
@@ -97,7 +97,7 @@ function consultasBreadcrumbs(){
 		$breadcrumbs = [array("link" => "estudiante.php","text" => "Home"), array("link" => "#","text" => "Consultas")] ;
 	else if (sessionEsProfesor())
 		$breadcrumbs = [array("link" => "profesor.php","text" => "Home"), array("link" => "#","text" => "Consultas")] ;
-	else $breadcrumbs = [array("link" => "ingreso.php","text" => "Home"), array("link" => "#","text" => "Consultas")] ;	
+	else $breadcrumbs = [array("link" => "index.php","text" => "Home"), array("link" => "#","text" => "Consultas")] ;	
 
 	return generateBreadcrumbs($breadcrumbs);
 }
@@ -110,7 +110,7 @@ function contactBreadcrumbs(){
 		$breadcrumbs = [array("link" => "estudiante.php","text" => "Home"), array("link" => "#","text" => "Contacto")] ;
 	else if (sessionEsProfesor())
 		$breadcrumbs = [array("link" => "profesor.php","text" => "Home"), array("link" => "#","text" => "Contacto")] ;
-	else $breadcrumbs = [array("link" => "ingreso.php","text" => "Home"), array("link" => "#","text" => "Contacto")] ;	
+	else $breadcrumbs = [array("link" => "index.php","text" => "Home"), array("link" => "#","text" => "Contacto")] ;	
 
 	return generateBreadcrumbs($breadcrumbs);
 }
@@ -135,7 +135,7 @@ function subsBreadcrumbs(){
 
 function formConBreadcrumbs(){
 	if(sessionEsAdministracion() || sessionEsProfesor())	
-	$breadcrumbs = [array("link" => "ingreso.php","text" => "Home"),array("link" => "consultas.php","text" => "Consultas") ,array("link" => "#","text" => "Editar Consulta")] ;	
+	$breadcrumbs = [array("link" => "index.php","text" => "Home"),array("link" => "consultas.php","text" => "Consultas") ,array("link" => "#","text" => "Editar Consulta")] ;	
 	return generateBreadcrumbs($breadcrumbs);	
 }
 

@@ -63,6 +63,6 @@ if(!count($errores)){
 	}
 }
 
-header("Location: ../ingreso.php?errores=".urlencode(json_encode($errores)));
+header("Location: ../index.php?errores=".urlencode(json_encode($errores)));
 
 ?>

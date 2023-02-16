@@ -11,7 +11,7 @@ if(!(
 	&& isset($_POST['apellido'])
 	&& isset($_POST['email'])
 )){
-	header("Location: ../ingreso.php?errores=".urlencode(json_encode(['Faltan datos.'])));
+	header("Location: ../index.php?errores=".urlencode(json_encode(['Faltan datos.'])));
 	die;
 }
 
@@ -21,7 +21,7 @@ $tipo=numeroAUsuarioTipo($tipoNumero);
 session_start(['read_and_close'=>true]);
 
 if($tipo!=UsuarioTipos::ESTUDIANTE && !sessionEsAdministracion()){
-	header("Location: ../ingreso.php?errores=".urlencode(json_encode(['No tinene los permisos suficientes.'])));
+	header("Location: ../index.php?errores=".urlencode(json_encode(['No tinene los permisos suficientes.'])));
 	die;
 }
 
@@ -51,7 +51,7 @@ if(empty($email))
 	$errores[]= "El correo electrónico no debe estar vacio.";
 
 if(count($errores)){
-	header("Location: ../ingreso.php?errores=".urlencode(json_encode($errores)));
+	header("Location: ../index.php?errores=".urlencode(json_encode($errores)));
 	die;
 }else{
 	if(getOne($legajo)){

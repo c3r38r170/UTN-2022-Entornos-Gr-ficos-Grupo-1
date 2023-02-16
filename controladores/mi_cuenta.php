@@ -11,7 +11,7 @@ require_once '../utils/usuario-tipos.php';
 $errores = [];
 
 if(!haIngresado()){
-	header('Location: ingreso.php');
+	header('Location: index.php');
 }
 
 // ! Definición de $contrasenia

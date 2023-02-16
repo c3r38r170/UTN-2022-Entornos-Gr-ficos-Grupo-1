@@ -18,7 +18,7 @@
 ?>
 
 <div class="formulario">
-	<form action="controladores/ingreso.php" method="post">
+	<form action="controladores/index.php" method="post">
 		<h2 class="form_titulo">Ingreso</h2>
 		<p class="form_parrafo"> ¿No tienes cuenta? <a href="registro.php">¡Registrate!</a></p>
 		<p class="form_campos_requeridos"> * Campos requeridos</p>

@@ -2,7 +2,7 @@
 
 require_once 'utils/usuario-tipos.php';
 if (!sessionEsEstudiante()){
-    header('Location: ingreso.php');
+    header('Location: index.php');
 }
 require_once 'controladores/consultas.php';
 require_once 'utils/getDate.php';
