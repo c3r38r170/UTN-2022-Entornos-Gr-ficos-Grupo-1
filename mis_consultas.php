@@ -36,17 +36,17 @@ echo misConsultasBreadcrumbs();
 
 <?php
 
- if(isset($_GET["success"])){
-	$success = json_decode(urldecode($_GET['success']),true);
+ if(isset($_GET["success"]) && !empty($_GET["success"])){
+	$success = urldecode($_GET['success']);
     echo "<span id='success'>$success</span>"; 
  }
 
- if(isset($_GET["error"])){
-    echo "<span id='error'>".$_GET["error"]."</span>"; 
+ if(isset($_GET["error"]) && !empty($_GET["success"])){
+    echo "<span id='error'>".urldecode($_GET["error"])."</span>"; 
  } 
  
     $offset=$_GET['offset']??0;
- 
+
     $cons = getStudentCon($offset,11);
     if(empty($cons))
      echo '<span id="success" style="color:red">Aún no estás inscripto en ninguna consulta</span>';
@@ -74,15 +74,15 @@ echo misConsultasBreadcrumbs();
             <p>
                 <span><!-- Fecha --> Fecha: </span> <?= getWeekDate($row['dia_de_la_semana'])?>
                 <br> 
-                <span><!-- Horario --> Horario: </span> <?= ((isset($instance['hora_nueva'])) ? $instance['hora_nueva'] : $row['hora_desde']). ' hs'?>
+                <span><!-- Horario --> Horario: </span> <?= (($instance['hora_nueva'])?? $row['hora_desde']). ' hs'?>
                 <br> 
-                <span><!-- Aula --> Aula: </span> <?= ((isset($instance['aula_nueva'])) ? $instance['aula_nueva'] : $row['aula'])?> 
+                <span><!-- Aula --> Aula: </span> <?= ($instance['aula_nueva'] ?? $row['aula'])?> 
                 <div class="more-info" id="more-info">
                     <span><!-- Estado --> Estado: </span> <?=$instance['descripcion'] ?>  
                     <br>
-                    <span><!-- Modalidad --> Modalidad: </span> <?= isset($row['enlace']) ? 'Virtual' : 'Presencial'?>  
+                    <span><!-- Modalidad --> Modalidad: </span> <?= (isset($row['enlace']) && !empty($row["enlace"])) ? 'Virtual' : 'Presencial'?>  
                     <br>
-                    <?php if(isset($row['enlace'])){?>
+                    <?php if(isset($row['enlace']) && !empty($row["enlace"])){?>
                     <span><!-- Enlace --> Enlace: </span> <a href="<?= $row['enlace']?>"> <?= $row['enlace'] ?> </a>   
                     <br>
                     <?php } ?>

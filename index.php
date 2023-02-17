@@ -35,7 +35,7 @@
 	
 <?php
 
-if(isset($_GET['errores'])){
+if(isset($_GET['errores']) && ! empty($_GET['errores'])){
 	$errores=json_decode(urldecode($_GET['errores']),true);
 	foreach ($errores as $error) {
 		echo "<span class=formulario_error>$error</span>";

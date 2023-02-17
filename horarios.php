@@ -23,7 +23,7 @@
 		require_once 'template/breadcrumbs.php'; 
     echo horariosBreadcrumbs();
 
-		if(isset($_GET["success"])){
+		if(isset($_GET["success"]) && !empty($_GET["success"])){
 			$success = urldecode($_GET['success']);
 			echo "<p class=success>$success</p>";
 		}
@@ -52,7 +52,7 @@
 			     <input type="submit" class="btn" value="Subir Archivo">
 		    </form>
             <?php
-							if(isset($_GET['errores'])){
+							if(isset($_GET['errores']) && !empty($_GET['errores'])){
 								$errores=json_decode(urldecode($_GET['errores']),true);
 								foreach($errores as $error)
 									echo "<span class=formulario_error>$error</span>";

@@ -38,7 +38,7 @@ function numeroAUsuarioTipo($n){
 }
 
 function haIngresado(){
-	return isset($_SESSION['tipo']);
+	return isset($_SESSION['tipo']) && !empty($_SESSION["tipo"]);
 }
 
 function numeroANombreUsuarioTipo($n){

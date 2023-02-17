@@ -21,11 +21,13 @@ class PeriodoControlador{
 
 // POST handlers
 
+// * Solo nos interesa saber la existencia, no el valor.
 if(isset($_POST['crear'])){
 	PeriodoControlador::crear($_REQUEST);
 	header('Location: ../periodos.php');
 }
 
+// * Solo nos interesa saber la existencia, no el valor.
 if(isset($_POST['delete'])){
 	PeriodoControlador::eliminar($_REQUEST);
 	header('Location: ../periodos.php');

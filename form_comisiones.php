@@ -37,18 +37,20 @@ if(!sessionEsAdministracion()){
                     <label for="" class="form_label">Nombre <span class="campos_requeridos"> * </span></label>
                     <span class="form_linea"></span>
                 </div>                
-                <input type="submit" value="Guardar" name=<?= !isset($_GET['id']) ? "btn_save" : "btn_edit"?> 
+                <input type="submit" value="Guardar" name=<?= isset($_GET['id']) ? "btn_edit" : "btn_save"?> 
 				class="form_submit" required>				
-				<input type="hidden" value="<?=isset($_GET['id']) ? $_GET['id'] : ""?>" name="id">
+				<input type="hidden" value="<?=$_GET['id'] ?? ""?>" name="id">
 				<p class="form_parrafo"><a href="comisiones.php" class="form_link">Regresar al listado</a></p>
 				  <?php
-				  if(isset($_GET['error'])){
-					$error=json_decode(urldecode($_GET['error']),true);
-					echo "<span class=formulario_error>$error</span>";					  
+				  if(isset($_GET['error']) && !empty($_GET["error"])){
+						$error=json_decode(urldecode($_GET['error']),true);
+						if(!empty($error)){
+							echo "<span class=formulario_error>$error</span>";					  
+					}
 				 }
-				  if(isset($_GET["success"])){
-					$success = $_GET['success'];
-					echo "<span>$success</span>";
+				if(isset($_GET["success"]) && !empty($_GET["success"])){
+					$success = urldecode($_GET['success']);
+						echo "<span>$success</span>";
 				}
 			  	  ?>      			
             </div>

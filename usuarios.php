@@ -37,7 +37,7 @@
     <div class="search_box">
         <form action="" method="GET">
             <div class="search">
-                <input type="text" class="searchTerm" placeholder="Buscar por nombre o legajo" name="search"  value="<?= isset($_GET['search']) ? $_GET['search'] : "" ?>">
+                <input type="text" class="searchTerm" placeholder="Buscar por nombre o legajo" name="search"  value="<?= $_GET['search'] ?? "" ?>">
                 <button type="submit" class="btn_search">
                     <i class="fas fa-search" data-title="Buscar" ></i>  
                 </button>     

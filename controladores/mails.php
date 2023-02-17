@@ -6,6 +6,7 @@
     require_once(realpath(dirname(__FILE__) . '/../utils/DAOs/instanciaDAO.php'));
 
     //para enviar el correo en "sobre nosotros"
+// * Solo nos interesa saber la existencia, no el valor.
     if(isset($_POST["btn_contact"])){
 
         //TODO crear un mail para que lleguen las consultas del apartado sobre nosotros

@@ -2,11 +2,12 @@
 
 require_once(realpath(dirname(__FILE__) . '/../utils/DAOs/comisionDAO.php'));
 
-
+// * Solo nos interesa saber la existencia, no el valor.
 if(isset($_POST['btn_save']))
 {      
    ComisionDAO::insertCom();
 }
+// * Solo nos interesa saber la existencia, no el valor.
 if(isset($_POST['delete'])){
    //delete($_POST['id']);   
    try{
@@ -17,6 +18,7 @@ if(isset($_POST['delete'])){
             </script>';      
    }
 }
+// * Solo nos interesa saber la existencia, no el valor.
 if(isset($_POST['btn_edit']))
 {  
    ComisionDAO::editCom();

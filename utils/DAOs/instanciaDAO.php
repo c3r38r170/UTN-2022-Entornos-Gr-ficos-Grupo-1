@@ -175,7 +175,7 @@ class InstanciaDAO{
 
   static function updateInstance($instance){
     $db=new MysqliWrapper();
-    if(!isset($instance['id'])){      
+    if(!isset($instance['id']) || !empty($instance["id"])){      
       return ['Datos inválidos.'];
     }
     try{
@@ -190,6 +190,7 @@ class InstanciaDAO{
     $fechaConsulta=substr($instance['fecha-hora'],0,10);
     $hora=substr($instance['fecha-hora'],11,15);
     // TODO default in DB.
+    // * Solo nos interesa saber la existencia, no el valor.
     $state = isset($instance['blocking']) ? 3 : 1;     
     /* Versión alternativa:
     $string = strtotime($instance['datetime']);
