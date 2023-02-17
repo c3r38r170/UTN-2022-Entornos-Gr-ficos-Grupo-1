@@ -175,6 +175,10 @@
 	cursor: pointer;
 }
 
+.card{
+	overflow: auto;
+}
+
 .link:link{
 	color: blue !important;
 }
