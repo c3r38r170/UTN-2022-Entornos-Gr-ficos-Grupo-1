@@ -101,13 +101,17 @@ echo misConsultasBreadcrumbs();
 
 <?php
 }
+
+if(!empty($cons)){
 ?>
 <!-- TODO URIencode search -->
 <div class="botones-navegacion">
     <a class="fas fa-angle-left" <?=$offset?"href=\"?search=$search&offset=".($offset-10)."\"":""?> ></a>
     <a class="fas fa-angle-right" <?=$hayMas?"href=\"?search=$search&offset=".($offset+10)."\"":""?> ></a>
 </div>    
-
+<?php
+}
+?>
 
 <script>
     

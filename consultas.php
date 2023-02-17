@@ -153,7 +153,7 @@ echo consultasBreadcrumbs();
                         <br>
                         <?php } ?>
                         <?php if( (sessionEsAdministracion() || sessionEsProfesor()) && isset($instance['motivo'])){?>
-                        <span><!-- Motivo --> Motivo de <?=$instance['estado_id']==3?'bloqueo':'cambio'?>: </span> <?=$instance['motivo'] ?>
+                        <span><!-- Motivo --> Motivo de <?=$instance['estado_id']==3?'bloqueo':'cambio'?>: </span> <p id="reason"><?=$instance['motivo'] ?></p>
                         <br>
                         <?php } ?>
 
