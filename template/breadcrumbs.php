@@ -128,7 +128,7 @@ function miCuentaBreadcrumbs(){
 
 function subsBreadcrumbs(){
 	if (sessionEsProfesor())	    
-		$breadcrumbs = [array("link" => "profesor.php","text" => "Home"), array("link" => $_SERVER['HTTP_REFERER'],"text" => "Consultas"),array("link" => "#","text" => "Subscripciones")] ;	
+		$breadcrumbs = [array("link" => "profesor.php","text" => "Home"), array("link" => $_SERVER['HTTP_REFERER'],"text" => "Consultas"),array("link" => "#","text" => "Suscripciones")] ;	
 
 	return generateBreadcrumbs($breadcrumbs);
 }
