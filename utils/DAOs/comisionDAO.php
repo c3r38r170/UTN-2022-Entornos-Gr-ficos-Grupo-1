@@ -5,10 +5,10 @@ require_once(dirname(__DIR__,1) . '/db.php');
 class ComisionDAO{
    static function insertCom(){    
     $db=new MysqliWrapper();
-    session_start();           
-    extract($_REQUEST);
-
-    if(!preg_match('/[^a-zA-Z0-9àâáçéèèêëìîíïôòóùûüÂÊÎÔúÛÄËÏÖÜÀÆæÇÉÈŒœÙñý’,. ]/', $name)){          
+    session_start();   
+    extract($_POST);
+    
+    if(!preg_match('/^[a-zA-Z0-9áéíóúñÑ]+$/u', $name)){          
        $error = "El campo Nombre debe ser alfanumerico";
        header("Location: ../form_comisiones.php?error=".urlencode(json_encode($error)));      
     }
@@ -58,7 +58,7 @@ class ComisionDAO{
   static function editCom(){
    $db=new MysqliWrapper();
    session_start();           
-   extract($_REQUEST);
+   extract($_POST);
 
    if(!ctype_alnum($name)){       
       $error = "El campo Nombre debe ser alfanumerico";
