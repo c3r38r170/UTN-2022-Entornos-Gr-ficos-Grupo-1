@@ -48,12 +48,12 @@ function searchCon($consulta, $offset=0, $limit=10+1){
  }
 
  function getSubs($offset=0, $limit=10){
-    extract($_REQUEST);    
+    extract($_GET);    
     return SubscriptionDAO::selectSubscriber($id,$offset=0, $limit=10);
  }
 
  function unSubscribe(){
-    extract($_REQUEST);    
+    extract($_POST);    
     $legajo = $_SESSION['legajo'];    
     
     $instance = InstanciaDAO::getInstance($id);
@@ -94,7 +94,7 @@ function searchCon($consulta, $offset=0, $limit=10+1){
 
 function subscribe(){
 
-    extract($_REQUEST);    
+    extract($_POST);    
     $legajo = $_SESSION['legajo'];    
     
     $user = UsuarioDAO::getUser($legajo);   
@@ -174,7 +174,7 @@ if(isset($_POST['ins'])){
     }
     
 
-    extract($_REQUEST);
+    extract($_POST);
     // ! $confirm es la ID de la instancia; $id, de la consulta
 
     if(!(int)$confirm){
@@ -199,7 +199,7 @@ if(isset($_POST['ins'])){
 
 if(isset($_POST['edit'])){
     
-    $errores=InstanciaDAO::updateInstance($_REQUEST);
+    $errores=InstanciaDAO::updateInstance($_POST);
     
     // TODO DRY
     // TODO mandar con los parámetros anteriores
