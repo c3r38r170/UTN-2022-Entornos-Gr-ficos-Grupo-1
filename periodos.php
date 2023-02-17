@@ -26,16 +26,15 @@ require_once 'controladores/periodos.php';
 		}
 
 		function nuevoPeriodo(){
-			// let df=document.createElement("div");
 			let df=document.createElement('TR');
 			document.querySelector('tbody').prepend(df);
 			df.innerHTML=`
 						<td>
-							<input type=date name="inicio" form=nuevo required>
+							<input type=date name="inicio" form=nuevo required oninput="document.getElementById('fin').min=this.value">
 							<span class=campos_requeridos></span>
 						</td>
 						<td>
-							<input type=date name="fin" form=nuevo required>
+							<input type=date name="fin" id="fin" form=nuevo required>
 							<span class=campos_requeridos></span>
 						</td>
 						<td>
