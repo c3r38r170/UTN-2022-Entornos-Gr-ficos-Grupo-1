@@ -44,7 +44,7 @@ require_once 'controladores/comisiones.php';
 <div class="container_search">  
     <div class="search_box">
         <form action="comisiones.php" method="GET">            
-                <input type="text" class="searchTerm" placeholder="Buscar por numero" name="search">
+                <input type="text" class="searchTerm" placeholder="Buscar por numero" name="search" value="<?= isset($_GET['search']) ? $_GET['search'] : "" ?>">
                 <button type="submit" name="btn_search" class="btn_search">
                     <i class="fas fa-search" data-title="Buscar" ></i>
                 </button>                 

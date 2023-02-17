@@ -46,8 +46,8 @@ require_once 'controladores/materias.php';
 
 <div class="container_search">
     <div class="search_box">
-        <form action="materias.php"  method="post">
-            <input type="text" name="search_materia" placeholder="Ingresar nombre de la materia...">
+        <form action="materias.php"  method="GET">
+            <input type="text" name="search" placeholder="Buscar por nombre" value="<?= isset($_GET['search']) ? $_GET['search'] : "" ?>">
 			<button type="submit" name="btn_search" class="btn_search" ><i class="fas fa-search" data-title="Buscar" ></i></button>
         </form>
     </div>

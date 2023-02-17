@@ -43,7 +43,7 @@ echo consultasBreadcrumbs();
     <div class="search_box">
         <form action="consultas.php" method="GET">
             <div class="search">
-                <input type="text" class="searchTerm" placeholder="Buscar por Profesor, Materia o Comision" name="search">
+                <input type="text" class="searchTerm" placeholder="Buscar por Profesor, Materia o Comision" name="search" value="<?= isset($_GET['search']) ? $_GET['search'] : "" ?>">
                 <button type="submit" class="btn_search">
                     <i class="fas fa-search" data-title="Buscar" ></i>
                 </button>     
