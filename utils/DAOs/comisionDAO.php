@@ -83,9 +83,10 @@ class ComisionDAO{
 
   static function search($com, $offset=0, $limit=10){
    $db=new MysqliWrapper();
-   
-   $vSql = "SELECT * FROM comision WHERE numero=? LIMIT $limit OFFSET $offset";
-   $rs_result = $db->prepared($vSql,[$com]);
+   $comi = "%$com%"; 
+
+   $vSql = "SELECT * FROM comision WHERE numero LIKE ? LIMIT $limit OFFSET $offset";
+   $rs_result = $db->prepared($vSql,[$comi]);
 
    $coms = $rs_result->fetch_all(MYSQLI_ASSOC);
     
