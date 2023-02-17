@@ -50,6 +50,7 @@
     
     .search_box input{
         width: 80%;
+        font-size: 15px;
     }
     
 }
