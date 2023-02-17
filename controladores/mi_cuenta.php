@@ -54,8 +54,17 @@ if(count($errores)){
 		$_SESSION['nombre_completo']=$nombre;
 		$_SESSION['correo']=$correo;
 		
-		header('Location: ../mi_cuenta.php?success='.urlencode('Se han actualizado los datos de la cuenta.'));
-		die;
+		if(sessionEsAdministracion()){
+			header('Location: ../administrador.php?success='.urlencode('Se han actualizado los datos de la cuenta con éxito.'));
+			die;
+		} else if(sessionEsProfesor()){
+			header('Location: ../profesor.php?success='.urlencode('Se han actualizado los datos de la cuenta con éxito.'));
+			die;
+		}else if(sessionEsEstudiante()){
+			header('Location: ../estudiante.php?success='.urlencode('Se han actualizado los datos de la cuenta con éxito.'));
+			die;
+		}
+
 	}
 }
 
