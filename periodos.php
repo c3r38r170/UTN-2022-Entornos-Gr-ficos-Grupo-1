@@ -90,7 +90,7 @@ require_once 'controladores/periodos.php';
 							<tr>
 									<td data-label="Inicio"><?php echo ($row['inicio']); ?></td>
 									<td data-label="Fin"><?php echo ($row['fin']); ?></td>
-									<td data-label="Eliminar">
+									<td data-label="">
 											<form action="controladores/periodos.php" method="post">
 												<input type="hidden" name="inicio" value="<?=$row['inicio']?>">
 												<input type="hidden" name="fin" value="<?=$row['fin']?>">
