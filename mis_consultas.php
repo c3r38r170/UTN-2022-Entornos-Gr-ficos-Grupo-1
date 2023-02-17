@@ -2,7 +2,7 @@
 
 require_once 'utils/usuario-tipos.php';
 if (!sessionEsEstudiante()){
-    header('Location: ingreso.php');
+    header('Location: index.php');
 }
 require_once 'controladores/consultas.php';
 require_once 'utils/getDate.php';
@@ -16,7 +16,7 @@ require_once 'utils/getDate.php';
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">	    
     <link rel="shortcut icon" type="image/x-icon" href="img/favicon.png">
-    <link rel="stylesheet" type="text/css" href="css/_consultas.css"/>    
+    <link rel="stylesheet" type="text/css" href="css/_consultas.css">    
 	<title>Consultas</title>	   
 </head>
 <body>
@@ -73,18 +73,18 @@ echo misConsultasBreadcrumbs();
             <h3>Información básica</h3>
             <p>
                 <span><!-- Fecha --> Fecha: </span> <?= getWeekDate($row['dia_de_la_semana'])?>
-                </br> 
+                <br> 
                 <span><!-- Horario --> Horario: </span> <?= ((isset($instance['hora_nueva'])) ? $instance['hora_nueva'] : $row['hora_desde']). ' hs'?>
-                </br> 
+                <br> 
                 <span><!-- Aula --> Aula: </span> <?= ((isset($instance['aula_nueva'])) ? $instance['aula_nueva'] : $row['aula'])?> 
                 <div class="more-info" id="more-info">
                     <span><!-- Estado --> Estado: </span> <?=$instance['descripcion'] ?>  
-                    </br>
+                    <br>
                     <span><!-- Modalidad --> Modalidad: </span> <?= isset($row['enlace']) ? 'Virtual' : 'Presencial'?>  
-                    </br>
+                    <br>
                     <?php if(isset($row['enlace'])){?>
                     <span><!-- Enlace --> Enlace: </span> <a href="<?= $row['enlace']?>"> <?= $row['enlace'] ?> </a>   
-                    </br>
+                    <br>
                     <?php } ?>
                 </div>                   
             </p> 
@@ -97,15 +97,17 @@ echo misConsultasBreadcrumbs();
             </div>       
         </div>            
     </div>
-</div>        
+</div> 
+
+<?php
+}
+?>
 <!-- TODO URIencode search -->
 <div class="botones-navegacion">
     <a class="fas fa-angle-left" <?=$offset?"href=\"?search=$search&offset=".($offset-10)."\"":""?> ></a>
     <a class="fas fa-angle-right" <?=$hayMas?"href=\"?search=$search&offset=".($offset+10)."\"":""?> ></a>
 </div>    
-<?php
-}
-?>
+
 
 <script>
     
@@ -125,6 +127,6 @@ echo misConsultasBreadcrumbs();
     }
 </script>
 <script src="https://kit.fontawesome.com/f452b46f6c.js" crossorigin="anonymous"></script>
-<?php //require_once 'template/footer.php'; ?>
+<?php require_once 'template/footer.php'; ?>
 </body>
 </html>

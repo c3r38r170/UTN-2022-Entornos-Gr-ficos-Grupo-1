@@ -13,7 +13,7 @@ require_once 'utils/getDate.php';
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" type="image/x-icon" href="img/favicon.png">	    
-    <link rel="stylesheet" type="text/css" href="css/_consultas.css"/>
+    <link rel="stylesheet" type="text/css" href="css/_consultas.css">
 	<title>Consultas</title>	       
 </head>
 <body>
@@ -43,7 +43,7 @@ echo consultasBreadcrumbs();
     <div class="search_box">
         <form action="consultas.php" method="GET">
             <div class="search">
-                <input type="text" class="searchTerm" placeholder="Buscar por Profesor, Materia o Comision" name="search">
+                <input type="text" class="searchTerm" placeholder="Buscar por Profesor, Materia o Comision" name="search" value="<?= isset($_GET['search']) ? $_GET['search'] : "" ?>">
                 <button type="submit" class="btn_search">
                     <i class="fas fa-search" data-title="Buscar" ></i>
                 </button>     
@@ -114,57 +114,57 @@ echo consultasBreadcrumbs();
                 <h2 class="card_title">Materia</h2>            
                 <h4> <!-- Materia --> <?=($row['nombre_materia'])?> </h4>
                 <h3 class="card_title"> <!-- Comision --> Comisión: <?=($row['numero_comision'])?> </h3> 
-			    <img src="img/consulta_icono_1.png" alt="Logo Consulta"></img>
+			    <img src="img/consulta_icono_1.png" alt="Logo Consulta">
 		    </div>
 		    <div class="right-column">
 			    <h2> <!-- Docente --> Docente <?=($row['nombre_completo'])?> </h2>
                 <h3>Información básica</h3>
 			    <p>
                     <span><!-- Fecha --> Fecha: </span> <?=$fecha?>
-                    </br> 
+                    <br>
                     <span><!-- Horario --> Horario: </span> <?=substr($instance['hora_nueva']??$row['hora_desde'],0,5) . ' hs'?>
-                    </br> 
+                    <br>
                     <span><!-- Aula --> Aula: </span> <?=$instance['aula_nueva']??$row['aula']?>
                     <?php
                         if(sessionEsProfesor() && $instance['estado_id']==2){
                     ?>
-                    </br> 
+                    <br>
                     <span> Suscritos: </span> <?=$instance['suscritos']?> / <?=$instance['cupo']?>
                     <?php
                         }
                     ?>
 
-                    <div class="more-info" id="more-info">
+                    <div class="more-info">
                         <span><!-- Estado --> Estado: </span> <?=$instance['descripcion']??'Pendiente' ?>  
-                        </br>   
+                        <br>   
                         <?php
 				            $virtual=(bool)($instance['enlace']??$row['enlace']);
                             
                             $enlace=($instance['enlace']??$row['enlace']);
-			            ?>                     
+			            ?>
                         <span><!-- Modalidad --> Modalidad: </span> <?=$virtual ? 'Virtual' : 'Presencial' ?>  
-                        </br>
+                        <br>
                         <?php
                         if($virtual){
                         ?>
                           <?php if(haIngresado()){ ?>
                         <span><!-- Enlace --> Enlace: </span> <a class="link" target="_blank" href="<?= $enlace?>"> <?=$enlace ?> </a>
                            <?php } ?>   
-                        </br>
+                        <br>
                         <?php } ?>
                         <?php if( (sessionEsAdministracion() || sessionEsProfesor()) && isset($instance['motivo'])){?>
                         <span><!-- Motivo --> Motivo de <?=$instance['estado_id']==3?'bloqueo':'cambio'?>: </span> <?=$instance['motivo'] ?>
-                        </br>
+                        <br>
                         <?php } ?>
 
                         <?php if(haIngresado() && isset($instance) && (int)$instance['suscritos'] && $_SESSION['tipo'] == UsuarioTipos::PROFESOR){?>
-                            <a id="subs" href=<?="subscribers.php?id=".$instance['id']?>>Ver estudiantes suscritos</a>                                                    
+                            <a class="subs" href=<?="subscribers.php?id=".$instance['id']?>>Ver estudiantes suscritos</a>                                                    
                         <?php }?>
                     </div>                   
                 </p> 
-                <div id="btns_form">
+                <div class="btns_form">
                     <!-- TODO está bueno pero ¿vale la pena? -->                          
-                    <button class="button_info" id="btn_info" name="btn_info" >Más información</button>
+                    <button class="button_info" name="btn_info" >Más información</button>
                     <?php
                     // TODO administrador: editar?
                         if(haIngresado()){
@@ -198,7 +198,7 @@ echo consultasBreadcrumbs();
                             }
                         }else{
                     ?>
-                        <a href="ingreso.php"><button class=button_ins>Ingresá para inscribirte</button></a>
+                        <a href="index.php"><button class=button_ins>Ingresá para inscribirte</button></a>
                     <?php
                         }
                     ?>

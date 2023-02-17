@@ -3,7 +3,7 @@
 	
 	require_once 'utils/usuario-tipos.php';
 	if(!sessionEsAdministracion()){
-		header('Location: ingreso.php');
+		header('Location: index.php');
 		die;
 	}
     
@@ -15,7 +15,7 @@ require_once 'controladores/comisiones.php';
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" type="image/x-icon" href="img/favicon.png">
-    <link rel="stylesheet" type="text/css" href="css/comisiones.css"/>
+    <link rel="stylesheet" type="text/css" href="css/comisiones.css">
 	<title>Comisiones</title>	   
 </head>
 
@@ -44,7 +44,7 @@ require_once 'controladores/comisiones.php';
 <div class="container_search">  
     <div class="search_box">
         <form action="comisiones.php" method="GET">            
-                <input type="text" class="searchTerm" placeholder="Buscar por numero" name="search">
+                <input type="text" class="searchTerm" placeholder="Buscar por numero" name="search" value="<?= isset($_GET['search']) ? $_GET['search'] : "" ?>">
                 <button type="submit" name="btn_search" class="btn_search">
                     <i class="fas fa-search" data-title="Buscar" ></i>
                 </button>                 
@@ -88,14 +88,14 @@ $hayMas=false;
                 <td data-label="Numero"><?php echo ($row['numero']); ?></td>
                 <td data-label="Editar"> 
                     <form action="form_comisiones.php" method="get">                        
-                        <input type="submit" value="Editar" class="button_actions"></input>  
+                        <input type="submit" value="Editar" class="button_actions"> 
                         <input type="hidden" value="<?=$row['id']?>" name="id">
                         <input type="hidden" value="<?=$row['numero']?>" name="number">
                     </form>
                 </td>        
                 <td data-label="Eliminar">
                     <form action="controladores/comisiones.php" method="post">
-                        <input type="submit" value="Eliminar" onclick='return confirmAlert()' name="delete" class="button_actions"></input>  
+                        <input type="submit" value="Eliminar" onclick='return confirmAlert()' name="delete" class="button_actions">  
                         <input type="hidden" value="<?=$row['id']?>" name="id">                        
                     </form>
                 </td>    

@@ -1,6 +1,6 @@
 <?php
 
-    require_once(dirname(__DIR__,1) . '\utils\db.php');
+    require_once(dirname(__DIR__,1) . '/utils/db.php');
     require_once(realpath(dirname(__FILE__) . '/../utils/DAOs/consultaDAO.php'));
     require_once(realpath(dirname(__FILE__) . '/../utils/DAOs/subscriptionDAO.php'));
     require_once(realpath(dirname(__FILE__) . '/../utils/DAOs/instanciaDAO.php'));

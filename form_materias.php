@@ -3,7 +3,7 @@ session_start(['read_and_close'=>true]);
 	
 require_once 'utils/usuario-tipos.php';
 if(!sessionEsAdministracion()){
-	header('Location: ingreso.php');
+	header('Location: index.php');
 	die;
 }
 
@@ -16,7 +16,7 @@ if(!sessionEsAdministracion()){
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Materia</title>
 	<link rel="shortcut icon" type="image/x-icon" href="img/favicon.png">
-	<link rel="stylesheet" type="text/css" href="css/form_materias.css"/>
+	<link rel="stylesheet" type="text/css" href="css/form_materias.css">
 </head>
 <body>
 <?php 

@@ -3,7 +3,7 @@
 	
 	require_once 'utils/usuario-tipos.php';
 	if(!sessionEsProfesor()){
-		header('Location: ingreso.php');
+		header('Location: index.php');
 		die;
 	}
     
@@ -14,9 +14,9 @@ require_once 'controladores/consultas.php';
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="css/comisiones.css"/>
+    <link rel="stylesheet" type="text/css" href="css/comisiones.css">
     <link rel="shortcut icon" type="image/x-icon" href="img/favicon.png">
-	<title>Document</title>	   
+	<title>Suscripciones</title>	   
 </head>
 <body>
 <?php
@@ -71,6 +71,6 @@ $hayMas=false;
 </div>
 </div>
 <script src="https://kit.fontawesome.com/f452b46f6c.js" crossorigin="anonymous"></script>
-<?php // require_once 'template/footer.php'; ?>
+<?php  require_once 'template/footer.php'; ?>
 </body>
 </html>

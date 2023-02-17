@@ -1,6 +1,6 @@
 <?php
 
-require_once(dirname(__DIR__,1) . '\db.php');
+require_once(dirname(__DIR__,1) . '/db.php');
 
 class PeriodoDAO{
 	static function periodoActual(){

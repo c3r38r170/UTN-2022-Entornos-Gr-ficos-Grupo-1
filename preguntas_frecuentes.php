@@ -8,7 +8,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Preguntas Frecuentes</title>
 	<link rel="shortcut icon" type="image/x-icon" href="img/favicon.png">
-	<link rel="stylesheet" type="text/css" href="css/preguntas_frecuentes.css"/>
+	<link rel="stylesheet" type="text/css" href="css/preguntas_frecuentes.css">
 </head>
 <body>
 <?php 
@@ -68,7 +68,7 @@ echo preguntasFrecuentesBreadcrumbs();
       </details>
       <details>
         <summary>¿Debo ingresar (iniciar sesión) para poder inscribirme a una consulta?</summary>
-        <p>Si, usted deberá  estar registrado e ingresar al sistema para poder inscribirse a una consulta.
+        <p>Sí, usted deberá  estar registrado e ingresar al sistema para poder inscribirse a una consulta.
         </p>
       </details>
 </div>

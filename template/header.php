@@ -13,5 +13,5 @@
 	}
 </style>
 <header>
-	<img src="img/utn 1.png" alt="Imagen Encabezado">
+	<img src="img/utn1.png" alt="Imagen Encabezado">
 </header>

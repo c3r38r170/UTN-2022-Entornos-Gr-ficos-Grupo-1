@@ -3,7 +3,7 @@
 	
 	require_once 'utils/usuario-tipos.php';
 	if(!sessionEsAdministracion()){
-		header('Location: ingreso.php');
+		header('Location: index.php');
 		die;
 	}
     
@@ -13,7 +13,7 @@
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="css/usuarios.css"/>
+    <link rel="stylesheet" type="text/css" href="css/usuarios.css">
     <link rel="shortcut icon" type="image/x-icon" href="img/favicon.png">
 	<title>Administración de Usuarios</title>	   
 </head>
@@ -37,7 +37,7 @@
     <div class="search_box">
         <form action="" method="GET">
             <div class="search">
-                <input type="text" class="searchTerm" placeholder="Buscar por nombre o legajo" name="search">
+                <input type="text" class="searchTerm" placeholder="Buscar por nombre o legajo" name="search"  value="<?= isset($_GET['search']) ? $_GET['search'] : "" ?>">
                 <button type="submit" class="btn_search">
                     <i class="fas fa-search" data-title="Buscar" ></i>  
                 </button>     
@@ -88,13 +88,13 @@ $hayMas=false;
                 <td data-label="Correo Electrónico"><?= ($usuario['correo']) ?></td>
                 <td data-label="Editar"> <div class="buttons">
                     <form action="form_usuarios.php" method="get">                        
-                        <input type="submit" value="Editar" class="button_actions"></input>  
+                        <input type="submit" value="Editar" class="button_actions">
                         <input type="hidden" value="<?=$usuario['id']?>" name="id">
                     </form>
                 </td>        
                 <td data-label="Eliminar">
                     <form action="controladores/usuarios.php" method="post">
-                        <input type="submit" value="Eliminar" onclick='return confirmAlert()' name="delete" class="button_actions"></input>  
+                        <input type="submit" value="Eliminar" onclick='return confirmAlert()' name="delete" class="button_actions">  
                         <input type="hidden" value="<?=$usuario['id']?>" name="id">
                     </form>
                 </td>    

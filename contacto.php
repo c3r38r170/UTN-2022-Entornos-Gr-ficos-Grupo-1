@@ -9,7 +9,7 @@
 	<link rel="shortcut icon" type="image/x-icon" href="img/favicon.png">
 	<title>Contacto</title>
 	
-	<link rel="stylesheet" type="text/css" href="css/contacto.css"/>
+	<link rel="stylesheet" type="text/css" href="css/contacto.css">
 </head>
 <body>
 <?php 
@@ -32,7 +32,7 @@
 		<p class="subtittle">Complete el siguiente formulario para contactarse con nosotros</p>
 		<p class="form_campos_requeridos"> * Campos requeridos</p>
 
-		<input type="text" name="mail" placeholder="Email * " class="campo" required > </input>
+		<input type="text" name="mail" placeholder="Email * " class="campo" required >
 		<input type="text" name="name" placeholder="Nombre * " class="campo" required>
 		<textarea name="description" placeholder="Descripcion * " required></textarea>
 
