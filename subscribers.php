@@ -21,7 +21,7 @@ require_once 'controladores/consultas.php';
 <body>
 <?php
     require_once 'template/header.php';
-    require_once 'template/navs/administracion.php';
+    require_once 'template/navs/profesor.php';
     require_once 'template/breadcrumbs.php'; 
     echo subsBreadcrumbs();
 ?>
@@ -68,6 +68,7 @@ $hayMas=false;
     <a class="fas fa-angle-right" data-title="Pagina Siguiente"<?=$hayMas?"href=\"?search=$search&offset=".($offset+10)."\"":""?> ></a>
     </div></td></tr></tfoot>
 </table>
+<p class="form_parrafo"><a href="consultas.php" class="form_link">Regresar al listado de consultas</a></p>
 </div>
 </div>
 <script src="https://kit.fontawesome.com/f452b46f6c.js" crossorigin="anonymous"></script>
