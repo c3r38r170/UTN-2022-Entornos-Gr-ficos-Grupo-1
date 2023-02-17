@@ -5,6 +5,7 @@ if (!sessionEsEstudiante()){
     header('Location: index.php');
 }
 require_once 'controladores/consultas.php';
+require_once 'controladores/periodos.php';
 require_once 'utils/getDate.php';
 
 ?>
@@ -30,11 +31,13 @@ require_once 'template/breadcrumbs.php';
 echo misConsultasBreadcrumbs();
 
 ?> 
-    
-
-<h1 class="title_list">Mis Consultas</h1>     
-
+    <h1 class="title_list">Mis Consultas</h1>
 <?php
+
+$periodoActual=PeriodoControlador::periodoActual();
+if(!$periodoActual){
+    echo '<p id=success>Actualmente no se están dando clases de consulta.</p>';
+}else{
 
  if(isset($_GET["success"]) && !empty($_GET["success"])){
 	$success = urldecode($_GET['success']);
@@ -52,38 +55,51 @@ echo misConsultasBreadcrumbs();
      echo '<span id="success" style="color:red">Aún no estás inscripto en ninguna consulta</span>';
 
     $hayMas=false;
-    foreach ($cons as $i=> $row) {
+    foreach ($cons as $i=> $consulta) {
         if($i==10){ // * índice 10 es elemento 11
             $hayMas=true;
             break;
         }
-       $instance = getInst($row['id']);        
+       $instance = getInst($consulta['id']);
+       
+        $fecha=$instance['fecha_consulta']??getWeekDate($consulta['dia_de_la_semana']);
+        $dateFecha=date($fecha);
+        if(
+            $dateFecha < date($periodoActual['inicio'])
+            || date($periodoActual['fin']) < $dateFecha
+        ){
+            continue;
+        }
 ?> 
 
 <div class="container">
     <div class="card">
         <div class="left-column">
             <h2 class="card_title">Materia</h2>
-            <h4> <!-- Materia --> <?=$row['nombre_materia']?> </h4>
-            <h3 class="card_title"> <!-- Comision --> Comisión: <?= ($row['numero_comision'])?> </h3> 
+            <h4> <!-- Materia --> <?=$consulta['nombre_materia']?> </h4>
+            <h3 class="card_title"> <!-- Comision --> Comisión: <?= ($consulta['numero_comision'])?> </h3> 
             <img src="img/consulta_icono_1.png" alt="Logo Consulta"></img>
         </div>
         <div class="right-column">
-            <h2> <!-- Docente --> Docente <?= ($row['nombre_completo'])?> </h2>
+            <h2> <!-- Docente --> Docente <?= ($consulta['nombre_completo'])?> </h2>
             <h3>Información básica</h3>
             <p>
-                <span><!-- Fecha --> Fecha: </span> <?= getWeekDate($row['dia_de_la_semana'])?>
+                <span><!-- Fecha --> Fecha: </span> <?= $fecha?>
                 <br> 
-                <span><!-- Horario --> Horario: </span> <?= (($instance['hora_nueva'])?? $row['hora_desde']). ' hs'?>
+                <span><!-- Horario --> Horario: </span> <?= (($instance['hora_nueva'])?? $consulta['hora_desde']). ' hs'?>
                 <br> 
-                <span><!-- Aula --> Aula: </span> <?= ($instance['aula_nueva'] ?? $row['aula'])?> 
+                <span><!-- Aula --> Aula: </span> <?= ($instance['aula_nueva'] ?? $consulta['aula'])?> 
                 <div class="more-info" id="more-info">
                     <span><!-- Estado --> Estado: </span> <?=$instance['descripcion'] ?>  
                     <br>
-                    <span><!-- Modalidad --> Modalidad: </span> <?= (isset($row['enlace']) && !empty($row["enlace"])) ? 'Virtual' : 'Presencial'?>  
+                    <?php
+                        $enlace=$instance['enlace']??$consulta['enlace'];
+                        $virtual=!empty($enlace);
+                    ?>
+                    <span><!-- Modalidad --> Modalidad: </span> <?= $virtual ? 'Virtual' : 'Presencial'?>  
                     <br>
-                    <?php if(isset($row['enlace']) && !empty($row["enlace"])){?>
-                    <span><!-- Enlace --> Enlace: </span> <a href="<?= $row['enlace']?>"> <?= $row['enlace'] ?> </a>   
+                    <?php if($virtual){?>
+                    <span><!-- Enlace --> Enlace: </span> <a href="<?= $enlace?>"> <?= $enlace ?> </a>   
                     <br>
                     <?php } ?>
                 </div>                   
@@ -91,7 +107,7 @@ echo misConsultasBreadcrumbs();
             <div id="btns_form">
                 <button class="button_info" id="btn_info" name="btn_info" >Más información</button>                                     
                 <form action="controladores/consultas.php" method="post">                                                             
-                    <input type="hidden" value="<?=$row['id']?>" name="id">  
+                    <input type="hidden" value="<?=$consulta['id']?>" name="id">  
                     <button class="button_ins" name=cancel>Cancelar Inscripcion</button>                            			    
                 </form> 
             </div>       
@@ -100,14 +116,22 @@ echo misConsultasBreadcrumbs();
 </div> 
 
 <?php
+
 }
+
+if(!empty($cons)){
+
 ?>
 <!-- TODO URIencode search -->
-<div class="botones-navegacion">
-    <a class="fas fa-angle-left" <?=$offset?"href=\"?search=$search&offset=".($offset-10)."\"":""?> ></a>
-    <a class="fas fa-angle-right" <?=$hayMas?"href=\"?search=$search&offset=".($offset+10)."\"":""?> ></a>
-</div>    
+    <div class="botones-navegacion">
+        <a class="fas fa-angle-left" <?=$offset?"href=\"?search=$search&offset=".($offset-10)."\"":""?> ></a>
+        <a class="fas fa-angle-right" <?=$hayMas?"href=\"?search=$search&offset=".($offset+10)."\"":""?> ></a>
+    </div> 
+<?php
 
+}
+
+?>
 
 <script>
     
@@ -126,6 +150,9 @@ echo misConsultasBreadcrumbs();
         })
     }
 </script>
+<?php
+}
+?>
 <script src="https://kit.fontawesome.com/f452b46f6c.js" crossorigin="anonymous"></script>
 <?php require_once 'template/footer.php'; ?>
 </body>

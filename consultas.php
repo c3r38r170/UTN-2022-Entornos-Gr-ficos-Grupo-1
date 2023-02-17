@@ -81,6 +81,7 @@ echo consultasBreadcrumbs();
         $cons =getAll($offset);
     }
     
+    // TODO evitar hacer toda la lógica si no es época de clase.
     $periodoActual=PeriodoControlador::periodoActual();
     if(!$periodoActual){
         $cons=[];
