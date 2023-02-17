@@ -22,7 +22,7 @@ if(empty($contrasenia)){
 
 if(!count($errores)){
 	$contrasenia_existente = "";
-	$sql = "SELECT * FROM usuarios where legajo= ?";
+	$sql = "SELECT * FROM usuarios where legajo= ? LIMIT 1";
 	$resultado = $db->prepared($sql,[$legajo]);
 	if(!($resultado && $resultado->num_rows)){
 		$errores[]="Legajo incorrecto";
