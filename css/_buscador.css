@@ -43,14 +43,12 @@
 }
 
 @media (max-width: 1000px) {
-
-    .search_box{
-        width: 90%;
+    .search{
+        display: flex;
+        flex-wrap:nowrap;
     }
     
-    .search_box input{
-        width: 80%;
+    .search_box input{      
         font-size: 15px;
-    }
-    
+    }       
 }
