@@ -61,7 +61,7 @@ require_once 'controladores/periodos.php';
 
 	<h1 class="title_list">Listado de Períodos</h1>     
 
-	<button class="fas fa-plus button_actions" onclick="nuevoPeriodo()" id=nuevoPeriodo></button>
+	<button data-title="Agregar" class="fas fa-plus button_actions" onclick="nuevoPeriodo()" id=nuevoPeriodo></button>
 			
 	<div class="container_table">    
 		<table class="table" id=tabla>    
