@@ -17,6 +17,8 @@ if(!haIngresado()){
 // ! Definición de $contrasenia
 if(!isset($_POST['contrasenia']) || !($contrasenia=trim($_POST["contrasenia"]))){
 	$errores[] = 'Ingrese contraseña.';
+}else if (strlen($contrasenia) <= 6){
+	$errores[]= "La contraseña es demasiado corta. Debe contener mas de 6 caracteres";
 }
 
 // ! Definición de $nombre

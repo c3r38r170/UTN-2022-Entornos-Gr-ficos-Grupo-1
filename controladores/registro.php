@@ -11,7 +11,7 @@ if(!(
 	&& isset($_POST['apellido'])
 	&& isset($_POST['email'])
 )){
-	header("Location: ../index.php?errores=".urlencode(json_encode(['Faltan datos.'])));
+	header("Location: ../registro.php?errores=".urlencode(json_encode(['Faltan datos.'])));
 	die;
 }
 
@@ -34,7 +34,10 @@ if(!$legajo)
 $contrasenia=trim($_POST['contrasenia']);
 if(empty($contrasenia)){
 	$errores[]= "La contraseña no debe estar vacia.";
-}else{
+}else if (strlen($contrasenia) <= 6){
+	$errores[]= "La contraseña es demasiado corta. Debe contener mas de 6 caracteres";
+}
+else{
 	$contrasenia = password_hash($contrasenia, PASSWORD_DEFAULT);
 }	
 
@@ -51,7 +54,7 @@ if(empty($email))
 	$errores[]= "El correo electrónico no debe estar vacio.";
 
 if(count($errores)){
-	header("Location: ../index.php?errores=".urlencode(json_encode($errores)));
+	header("Location: ../registro.php?errores=".urlencode(json_encode($errores)));
 	die;
 }else{
 	if(getOne($legajo)){

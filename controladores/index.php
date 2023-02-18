@@ -17,6 +17,8 @@ if(empty($legajo)){
 }
 if(empty($contrasenia)){
 	$errores[]= "El campo Contraseña esta vacio";
+}else if (strlen($contrasenia) <= 6){
+	$errores[]= "La contraseña es demasiado corta. Debe contener mas de 6 caracteres";
 }
 
 
