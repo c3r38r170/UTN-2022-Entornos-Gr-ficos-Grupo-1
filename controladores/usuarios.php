@@ -12,9 +12,9 @@ if(isset($_POST['delete'])){
 		SET
 			`nombre_completo`=?
 			,`correo`=?
-		WHERE `id`=?",[
-			$_POST['correo']
-			,$_POST['nombre_completo']
+		WHERE `id`=?",[			
+			$_POST['nombre_completo']
+			,$_POST['correo']
 			,$_POST['id']
 		]);
 
