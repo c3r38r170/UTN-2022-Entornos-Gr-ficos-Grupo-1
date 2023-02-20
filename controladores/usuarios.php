@@ -2,13 +2,10 @@
 
 require_once '../utils/db.php';
 
-// * Solo nos interesa saber la existencia, no el valor.
 if(isset($_POST['delete'])){
 	// * baja lógica
 	$db->prepared("UPDATE `usuarios` SET `baja`=1 WHERE `id`=?",[$_POST['id']]);
-	header('Location: /usuarios.php');
-
-// * Solo nos interesa saber la existencia, no el valor.
+	header('Location: ../usuarios.php');
 }elseif(isset($_POST['edit'])){
 	$db->prepared(
 		"UPDATE `usuarios`
@@ -21,9 +18,8 @@ if(isset($_POST['delete'])){
 			,$_POST['id']
 		]);
 
-	header("Location: /form_usuarios.php?id={$_POST['id']}&success=".urlencode('Se ha editado la información del usuario.'));
-	
-// * Solo nos interesa saber la existencia, no el valor.
+		header("Location: ../usuarios.php");        
+
 }elseif(isset($_POST['create'])){
 	$res=$db->prepared(
 		"INSERT INTO usuarios (
@@ -46,7 +42,7 @@ if(isset($_POST['delete'])){
 		]
 	);
 	$usuarioID=$db->insert_id();
-	header("Location: /form_usuarios.php?id=$usuarioID&success=".urlencode('Se ha creado el usuario.'));
+	header("Location: ../form_usuarios.php?id=$usuarioID&success=".urlencode('Se ha creado el usuario.'));
 }
 
 ?>
