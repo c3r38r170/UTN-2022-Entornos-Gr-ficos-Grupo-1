@@ -17,9 +17,9 @@ if(empty($legajo)){
 }
 if(empty($contrasenia)){
 	$errores[]= "El campo Contraseña esta vacio";
-}else if (strlen($contrasenia) <= 6){
+}/*else if (strlen($contrasenia) <= 6){
 	$errores[]= "La contraseña es demasiado corta. Debe contener mas de 6 caracteres";
-}
+}*/
 
 
 if(!count($errores)){
@@ -34,7 +34,7 @@ if(!count($errores)){
 		mysqli_free_result($resultado);
 
 	//validamos pass de html = pass con hash de la db
-		if(password_verify($contrasenia, $contrasenia_existente)){
+		if($contrasenia_existente != "" && password_verify($contrasenia, $contrasenia_existente)){
 			session_start();
 			$_SESSION['id'] = (int)$usuarioRow['id'];
 			$_SESSION['legajo'] = $legajo;
