@@ -100,9 +100,8 @@ function subscribe(){
     $user = UsuarioDAO::getUser($legajo);   
 
     $instance = InstanciaDAO::getInstance($id);
-
-    if(empty($instance)){
-
+    
+    if($instance['id']==null){        
         $instanceID = InstanciaDAO::createInstance($id);   
         
         SubscriptionDAO::addSubscriptor($user['id'],$instanceID);
@@ -159,17 +158,14 @@ function isSubscribed($idConsult){
 
 //  * Controlador por redirección 
 
-// * Solo nos interesa saber la existencia, no el valor.
 if(isset($_POST['ins'])){ 
     subscribe();
  }
 
-// * Solo nos interesa saber la existencia, no el valor.
  if(isset($_POST['cancel'])){ 
     unsubscribe();
  }
 
-// * Solo nos interesa saber la existencia, no el valor.
  if(isset($_POST['confirm'])){
 
     if(!sessionEsProfesor()){
@@ -200,7 +196,6 @@ if(isset($_POST['ins'])){
     header('Location: ../consultas.php'); 
  }
 
-// * Solo nos interesa saber la existencia, no el valor.
 if(isset($_POST['edit'])){
     
     $errores=InstanciaDAO::updateInstance($_POST);
