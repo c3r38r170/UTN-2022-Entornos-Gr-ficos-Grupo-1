@@ -81,8 +81,7 @@
             .$instance['fecha_consulta']
             . " acaba de ser confirmada por el docente."
             .$warning;
-        
-        var_dump('Para '.$to.' Mensaje: '.$message);die;   
+                
         mail($to, $subject, $message, $headers);        
     }
 
