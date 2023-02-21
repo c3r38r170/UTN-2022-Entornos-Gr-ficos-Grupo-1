@@ -55,7 +55,7 @@ class InstanciaDAO{
                   i.estado_id,
                   ie.descripcion,
                   ie.descripcion AS estado,
-                  IFNULL(SUM(sus.instancia_id),0) as suscritos
+                  IFNULL(COUNT(sus.instancia_id),0) as suscritos
               FROM instancias i
                 INNER JOIN `instancias_estados` ie
                   ON i.estado_id=ie.id
