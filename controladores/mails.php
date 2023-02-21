@@ -31,6 +31,7 @@
         
         $to=getTeacherEmail($instance['id']);
         $con= ConsultaDAO::conInfo($instance['consulta_id']);
+        $headers = 'From: entornosgraficos2023@gmail.com';
         
         $subject = "Consulta UTN Frro";
         $message = "Estimado docente, 
@@ -38,7 +39,7 @@
                     
                     Muchas gracias";
         
-        mail($to, $subject, $message);
+        mail($to, $subject, $message, $headers);
     }
 
     function notifySubsStudent($instanceID,$user){
@@ -49,10 +50,11 @@
         $to=$user['correo'];
         $con= ConsultaDAO::conInfo($instance['consulta_id']);
         $subject = "Consulta UTN Frro";
+        $headers = 'From: entornosgraficos2023@gmail.com';
 
         $message="Le informamos que usted acaba de suscribirse a la consulta de la materia ".$con['nombre']." de la comisión ".$con['numero']. " programada para la fecha ".$instance['fecha_consulta']. ". Le recordamos que tiene hasta 24hs para dar de baja la suscripción.";
                 
-        mail($to, $subject, $message);
+        mail($to, $subject, $message, $headers);
     }
 
 
@@ -63,6 +65,7 @@
             $to.= $row["correo"].", ";
         }
         $subject = "Consulta UTN Frro";
+        $headers = 'From: entornosgraficos2023@gmail.com';
 
         $warning="";
         if(count($subs)>$cupo && $cupo!=0)
@@ -80,7 +83,7 @@
             .$warning;
         
         var_dump('Para '.$to.' Mensaje: '.$message);die;   
-        mail($to, $subject, $message);        
+        mail($to, $subject, $message, $headers);        
     }
 
     function getTeacherEmail($idInstance){
