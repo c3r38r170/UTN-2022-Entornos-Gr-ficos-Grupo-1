@@ -57,17 +57,18 @@ function searchCon($consulta, $offset=0, $limit=10+1){
     $legajo = $_SESSION['legajo'];    
     
     $instance = InstanciaDAO::getInstance($id);
-
+    $user = UsuarioDAO::getUser($legajo);   
    
     $subscribers = SubscriptionDAO::getSubscribers($instance['id']);  
 
     //Validamos que no hayan pasado mas de 24hs desde la inscripcion
     $subscription = SubscriptionDAO::getSubscription($user['id'],$instance['id']);
     $insDate=date("Y-m-d H:i:s",(strtotime($subscription['fecha_hora'])+24 * 60 * 60));
-
+    
+    
     date_default_timezone_set('America/Argentina/Buenos_Aires');
     $today = date('Y-m-d H:i:s');
-        
+    
 
     if($insDate>=$today){
         SubscriptionDAO::deleteSubscription($user['id'],$instance['id']); 
