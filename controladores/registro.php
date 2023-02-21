@@ -86,8 +86,8 @@ function getOne($legajo){
 function insertUsuario($nombre, $apellido, $email, $legajo, $contrasenia, $tipoNumero){
 	$db=new MysqliWrapper();
 	$db->prepared(
-		"INSERT INTO `usuarios` (`nombre_completo`,`correo`,`legajo`,`contrasenia`,`tipo_id`) VALUES (?,?,?,?,?)"
-		,[$nombre.' '.$apellido,$email,$legajo,$contrasenia,$tipoNumero]
+		"INSERT INTO `usuarios` (`nombre_completo`,`correo`,`legajo`,`contrasenia`,`tipo_id`,`baja`) VALUES (?,?,?,?,?,?)"
+		,[$nombre.' '.$apellido,$email,$legajo,$contrasenia,$tipoNumero,0]
 	);
   }
 ?>
