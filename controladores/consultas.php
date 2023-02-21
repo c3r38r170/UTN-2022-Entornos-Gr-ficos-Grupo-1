@@ -106,8 +106,8 @@ function subscribe(){
         $instanceID = InstanciaDAO::createInstance($id);   
         
         SubscriptionDAO::addSubscriptor($user['id'],$instanceID);
-        notifyTeacher($instance['id']);
-        notifySubsStudent($instance,$user);
+        notifyTeacher($instanceID);
+        notifySubsStudent($instanceID,$user);
         ///TO DO: enviar mail al estudiante y al docente
 
     }
@@ -116,7 +116,7 @@ function subscribe(){
     }                           
     else if($instance['cupo'] != 0 && SubscriptionDAO::getSubscribers($instance['id'])[0] < $instance['cupo']){
         SubscriptionDAO::addSubscriptor($user['id'],$instance['id']); 
-        notifySubsStudent($instance,$user);
+        notifySubsStudent($instance['id'],$user);
     }           
     else if($instance['cupo'] != 0){
         return header("Location: ../consultas.php?error=La consulta ya no tiene cupos disponibles");          

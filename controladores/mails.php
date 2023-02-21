@@ -6,7 +6,6 @@
     require_once(realpath(dirname(__FILE__) . '/../utils/DAOs/instanciaDAO.php'));
 
     //para enviar el correo en "sobre nosotros"
-// * Solo nos interesa saber la existencia, no el valor.
     if(isset($_POST["btn_contact"])){
 
         //TODO crear un mail para que lleguen las consultas del apartado sobre nosotros
@@ -26,7 +25,9 @@
         }
     }
 
-    function notifyTeacher($instance, $neg=" "){   
+    function notifyTeacher($instanceID, $neg=" "){   
+      
+        $instance = InstanciaDAO::getById($instanceID);
         
         $to=getTeacherEmail($instance['id']);
         $con= ConsultaDAO::conInfo($instance['consulta_id']);
@@ -36,17 +37,22 @@
                     Le informamos que la consulta programada para la fecha ".$instance['fecha_consulta']. " correspondiente a la materia ".$con['nombre']." de la comisión ".$con['numero']. " ya".$neg."cuenta con alumnos inscriptos. De cambiar esta situación le notificaremos por este mismo medio.
                     
                     Muchas gracias";
-
+        
         mail($to, $subject, $message);
     }
 
-    function notifySubsStudent($instance,$user){
-        $to=$user['legajo'];
+    function notifySubsStudent($instanceID,$user){
+
+         
+        $instance = InstanciaDAO::getById($instanceID);
+        
+        $to=$user['nombre_completo'];
         $con= ConsultaDAO::conInfo($instance['consulta_id']);
         $subject = "Consulta UTN Frro";
 
-        $message="Le informamos que usted acaba de suscribirse a la consulta de la materia ".$con['nombre']." de la comisión ".$con['numero']. "programada para la fecha ".$instance['fecha_consulta']. ". Le recordamos que tiene hasta 24hs para dar de baja la suscripción.";
-
+        $message="Le informamos que usted acaba de suscribirse a la consulta de la materia ".$con['nombre']." de la comisión ".$con['numero']. " programada para la fecha ".$instance['fecha_consulta']. ". Le recordamos que tiene hasta 24hs para dar de baja la suscripción.";
+        
+        
         mail($to, $subject, $message);
     }
 
@@ -60,7 +66,7 @@
         $subject = "Consulta UTN Frro";
 
         $warning="";
-        if(count($subs)>$cupo)
+        if(count($subs)>$cupo && $cupo!=0)
             $warning=" Sin embargo, tenga en cuenta que la cantidad actual de estudiantes inscriptos supera al cupo establecido por el docente, por lo que se recomienda cambiar de consulta, en caso de ser posible."; 
 
         $instance=InstanciaDAO::getById($idInstance);
@@ -69,11 +75,12 @@
             .$con['nombre']
             ." de la comisión "
             .$con['numero']
-            . "programada para la fecha "
+            . " programada para la fecha "
             .$instance['fecha_consulta']
-            . "acaba de ser confirmada por el docente."
+            . " acaba de ser confirmada por el docente."
             .$warning;
         
+        var_dump('Para '.$to.' Mensaje: '.$message);die;   
         mail($to, $subject, $message);        
     }
 
