@@ -46,13 +46,13 @@
          
         $instance = InstanciaDAO::getById($instanceID);
         
-        $to=$user['nombre_completo'];
+        $to=$user['correo'];
         $con= ConsultaDAO::conInfo($instance['consulta_id']);
         $subject = "Consulta UTN Frro";
 
         $message="Le informamos que usted acaba de suscribirse a la consulta de la materia ".$con['nombre']." de la comisión ".$con['numero']. " programada para la fecha ".$instance['fecha_consulta']. ". Le recordamos que tiene hasta 24hs para dar de baja la suscripción.";
         
-        
+        var_dump($to. ' '.$message);die;
         mail($to, $subject, $message);
     }
 
