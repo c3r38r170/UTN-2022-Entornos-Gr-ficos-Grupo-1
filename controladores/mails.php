@@ -9,7 +9,7 @@
     if(isset($_POST["btn_contact"])){
 
         //TODO crear un mail para que lleguen las consultas del apartado sobre nosotros
-        $to = "frangiangiordano@gmail.com";
+        $to = "entornosgraficos2023@gmail.com";
         $name = $_POST["name"];
         $description = $_POST["description"];
         $mail = $_POST["mail"];
