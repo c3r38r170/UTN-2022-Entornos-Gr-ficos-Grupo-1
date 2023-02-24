@@ -4,9 +4,7 @@ require_once 'controladores/consultas.php';
 require_once 'controladores/periodos.php';
 require_once 'utils/getDate.php';
 
-?>
-
-<!DOCTYPE html>
+?><!DOCTYPE html>
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
@@ -14,7 +12,7 @@ require_once 'utils/getDate.php';
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" type="image/x-icon" href="img/favicon.png">	    
     <link rel="stylesheet" type="text/css" href="css/_consultas.css">
-	<title>Consultas</title>	       
+	<title>Consultas</title>
 </head>
 <body>
 <?php 

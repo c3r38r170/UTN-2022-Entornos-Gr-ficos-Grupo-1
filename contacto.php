@@ -1,5 +1,5 @@
 <?php
-
+	session_start(['read_and_close'=>true]);
 ?><!DOCTYPE html>
 <html lang="en">
 <head>
