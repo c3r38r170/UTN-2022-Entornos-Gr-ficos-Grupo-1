@@ -163,12 +163,15 @@ require_once 'utils/getDate.php';
 			>
 			<!-- TODO volver a la búsqueda de donde se vino. Conservar search y offset -->
 			<p class="form_parrafo"><a href="consultas.php" class="form_link">Regresar al listado</a></p>
-<?php
-	if(isset($_GET['error']) && !empty($_GET["error"])){
-		$error=json_decode(urldecode($_GET['error']),true);
-		if(!empty($error))
+<?php		
+	
+	if(isset($_GET['errores']) && !empty($_GET["errores"])){
+		$errores=json_decode(urldecode($_GET['errores']),true);
+		foreach ($errores as $error) {
 			echo "<span class=formulario_error>$error</span>";
+		}
 	}
+
 	if(isset($_GET["success"]) && !empty($_GET["success"])){
 		$success = urldecode($_GET['success']);
 		echo "<span>$success</span>";

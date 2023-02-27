@@ -180,13 +180,13 @@ class InstanciaDAO{
 
   static function updateInstance($instance){
     $db=new MysqliWrapper();
-    if(!isset($instance['id']) || !empty($instance["id"])){      
+    if(!isset($instance['id'])){            
       return ['Datos inválidos.'];
     }
     try{
         if(!sessionEsProfesor() || ConsultaDAO::getById($instance['consultaID'])['profesor_id'] != $_SESSION['id'])
             return ['No tiene permisos para realizar esta acción.'];
-    }catch(Exception $e){      
+    }catch(Exception $e){            
         return ['Datos inválidos.'];
         die;
     }

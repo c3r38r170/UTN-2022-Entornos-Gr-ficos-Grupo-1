@@ -54,6 +54,13 @@ if(empty($apellido))
 $email=trim($_POST['email']);
 if(empty($email))
 	$errores[]= "El correo electrónico no debe estar vacio.";
+	
+if(!preg_match('/^[a-zA-Z0-9áéíóúñÑ]+$/u', $nombre))          
+	$errores[]= "El campo Nombre debe ser alfanumerico";
+	
+
+if(!preg_match('/^[a-zA-Z0-9áéíóúñÑ]+$/u', $apellido))          
+	$errores[]= "El campo Apellido debe ser alfanumerico";
 
 if(count($errores)){
 	header("Location: ../registro.php?errores=".urlencode(json_encode($errores)));
