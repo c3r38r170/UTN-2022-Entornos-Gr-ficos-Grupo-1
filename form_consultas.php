@@ -50,7 +50,7 @@ require_once 'utils/getDate.php';
 											blocking: (document.getElementById('blocking').checked)
 										};														
 				let oldDate = { date: "<?= isset($instancia['id']) ? $instancia['fecha_consulta'] : getWeekDate($consulta['dia_de_la_semana']) ?>",
-												hour: "<?= isset($instancia['id']) ? $instancia['hora_nueva'] : $consulta['hora_desde']?>".substr(0, 5),
+												hour: "<?= isset($instancia['hora_nueva']) ? $instancia['hora_nueva'] : $consulta['hora_desde']?>".substr(0, 5),
 												reason: "<?= isset($instancia['motivo']) ? $instancia['motivo'] : ''?>"};
 	
 				
