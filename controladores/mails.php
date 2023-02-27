@@ -8,6 +8,19 @@
     //para enviar el correo en "sobre nosotros"
     if(isset($_POST["btn_contact"])){
 
+        $nombre=trim($_POST['name']);
+        if(!preg_match('/^[a-zA-Z0-9áéíóúñÑ]+$/u', $nombre))          
+	        $errores[]= "El campo Nombre debe ser alfanumerico";
+            
+        $email=trim($_POST['email']);
+        if(!preg_match('/^[a-zA-Z0-9áéíóúñÑ]+$/u', $email))          
+            $errores[]= "El campo Email debe ser alfanumerico";
+
+        if(count($errores)){
+            header("Location: ../contacto.php?errores=".urlencode(json_encode($errores)));
+            exit;
+        }
+
         //TODO crear un mail para que lleguen las consultas del apartado sobre nosotros
         $to = "entornosgraficos2023@gmail.com";
         $name = $_POST["name"];
@@ -22,7 +35,7 @@
                    window.location.href='../contacto.php';</script>";
         }
         else{
-            echo "<script>alert('Error! La consulta no fue enviada');
+            echo "<script>alert('Error! La consulta no fue enviada, asegurese que la direccion de correo es correcta');
                    window.location.href='../contacto.php';</script>";
         }
     }

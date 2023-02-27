@@ -32,12 +32,20 @@
 		<p class="subtittle">Complete el siguiente formulario para contactarse con nosotros</p>
 		<p class="form_campos_requeridos"> * Campos requeridos</p>
 
-		<input type="text" name="mail" placeholder="Email * " class="campo" required >
+		<input type="email" name="mail" placeholder="Email * " class="campo" required >
 		<input type="text" name="name" placeholder="Nombre * " class="campo" required>
 		<textarea name="description" placeholder="Descripcion * " required></textarea>
 
 		<input type="submit" value="Enviar" name="btn_contact"  class="btn_enviar">
 		
+		<?php
+			if(isset($_GET['errores']) && !empty($_GET["errores"])){
+				$errores=json_decode(urldecode($_GET['errores']),true);
+				foreach ($errores as $error) {
+					echo "<span class=formulario_error>$error</span><br>";
+				}
+			}
+		?>	
 	</form> 
 	<div class="info_form">
 		<p class="texts_university">

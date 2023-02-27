@@ -1,6 +1,7 @@
 @import '_general.css';
 @import '_breadcrumbs.css';
 @import 'tooltips.css';
+@import '_formulario.css';
 /* @import '_formulario.css'; */
 
 .container_form{
@@ -90,6 +91,16 @@ span{
     font-weight: 700;
     margin-left: 20px;
 }
+
+#error{
+	display: flex;
+    justify-content: center;
+    align-items: center;
+	font-size: larger;
+	font-weight: bold;
+	color: rgb(219, 25, 25);
+}
+
 
 
 @media (max-width: 1200px) {
