@@ -1,4 +1,26 @@
-<!DOCTYPE html>
+<?php
+
+session_start(['read_and_close'=>true]);
+
+if(isset($_SESSION['id'])){
+	require_once $_SERVER['DOCUMENT_ROOT'].'/utils/usuario-tipos.php';
+	switch ($_SESSION['tipo']) {
+	case UsuarioTipos::ESTUDIANTE:
+		$pagina='estudiante.php';
+		break;
+	case UsuarioTipos::PROFESOR:
+		$pagina='profesor.php';
+		break;
+	case UsuarioTipos::ADMINISTRACION:
+		//TODO agregar redireccion a un archivo administracion.php
+		$pagina='administrador.php';
+		break;
+	}
+	header('Location: '.$pagina);
+	die;
+}
+
+?><!DOCTYPE html>
 <html lang="en">
 
 <head>
