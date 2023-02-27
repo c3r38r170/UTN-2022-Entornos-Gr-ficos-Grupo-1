@@ -43,7 +43,7 @@
 				<label for="pass">Apellido/s<span class="campos_requeridos"> * </span> </label>
 			</div>
 			<div class="formulario_grupo">
-				<input type="text" name="email" placeholder="" required>
+				<input type="email" name="email" placeholder="" required>
 				<label for="pass">E-mail <span class="campos_requeridos"> * </span></label>
 			</div>
 	
