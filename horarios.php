@@ -35,20 +35,21 @@
 	  <p> Este apartado se encuentra dedicado a la carga mediante un archivo Excel (cualquiera de sus respectivas versiones/formatos)
 		de los horarios de consulta de los docentes del Departamento de ISI.
 	  </p>
-	  <p>
-		Para facilitar el uso y carga del mismo, proporcionamos una planilla con el formato adecuado, la cual debe descargar,
-		completar y subir, mediante el siguiente enlace:
-	  </p>
-	  <a href="./docs/horarios.xlsx" download="Plantilla Horarios de Consulta.xlsx"> Descargar Planilla Horarios de Consulta</a>
-	  <div class="drop_box">
+		<p><a href="./docs/horarios.xlsx" download="Plantilla Horarios de Consulta.xlsx">Descargar <strong>Plantilla Vacía</strong> de la Planilla Horarios de Consulta</a></p>
+		<?php
+			$rutaUltimoArchivoSubido="./docs/horarios_ultimo.xlsx";
+			if(file_exists($rutaUltimoArchivoSubido)){
+				$cuando=date("d/m/Y",filectime($rutaUltimoArchivoSubido));
+		?>
+		<p><a href="<?=$rutaUltimoArchivoSubido?>" download="Horarios de Consulta.xlsx">Descargar <strong>Última Versión</strong> de los Horarios de Consulta (<?=$cuando?>)</a></p>
+		<?php
+			}
+		?>
+		<div class="drop_box">
 		  <h4>Selecciona un archivo aqui:</h4>
 		    <p>Importante: solo se soportan archivos <b>Excel 2007+</b> (.xlsx)</p>
 		    <form action="controladores/horarios.php" enctype="multipart/form-data" method="post">
 			    <input type="file" name="file" accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" required>
-			    <!--
-                 TODO: Limpiar horarios.xlsx para que sea una plantilla sin datos
-                 TODO: Testear que el archivo se suba correctamente
-                -->
 			     <input type="submit" class="btn" value="Subir Archivo">
 		    </form>
             <?php

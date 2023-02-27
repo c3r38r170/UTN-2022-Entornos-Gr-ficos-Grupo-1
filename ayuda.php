@@ -50,10 +50,10 @@ if(sessionEsAdministracion()){
 	<details>
     <summary>¿Cómo cargo los Horarios de Consulta?</summary>
       <p>Seleccioná la opción Gestionar en el menú principal y luego la opcion Horarios de Consulta.<br> 
-        Descargá la Plantilla con los horarios mediante el link proporcionado en dicha página.<br> 
-        Una vez realizado el paso anterior, procedé a presionar el boton Seleccionar archivo para elegirlo de su computadora.<br>
-        Hace click en Subir achivo para poder subir los horarios de la consulta .<br>
-        ¡Listo! Los horarios de las consultas han sido cargados.
+        Descargá la Planilla con los horarios mediante el link proporcionado en dicha página. En esta planilla deberán actualizarse los horarios.<br>
+        <em>Nota: Todos los cambios hechos a los profesores, materias o comisiones hechos en el archivo, se verán reflejados en el sistema tras la carga.</em><br>
+        Una vez actualizada la planilla, debe usar el botón "Examinar..." para elegirlo de su computadora, y hacer click en "Subir Archivo".<br>
+        ¡Listo! Los horarios de las consultas han sido cargados, y el archivo estará disponible como su última versión.
       </p>
   </details>
   <details>
@@ -63,7 +63,7 @@ if(sessionEsAdministracion()){
         Seleccioná el botón deseado (cargar / editar / eliminar) del listado.<br> 
         Luego, completá el formulario con los datos requeridos según lo seleccionado y presioná el botón Guardar.<br> 
         Tener en cuenta que deberá respetar la forma en la que se le solicitan los datos proporcionados por el formulario.<br>
-        En caso que desee eliminar, no debera completar ningun formulario, solo aceptar la alerta de confirmacion de eliminacion.<br>
+        En caso que desee eliminar, no deberá completar ningun formulario, solo aceptar la alerta de confirmacion de eliminacion.<br>
         ¡Listo! La/s materias han sido actualizadas.
       </p>
   </details>

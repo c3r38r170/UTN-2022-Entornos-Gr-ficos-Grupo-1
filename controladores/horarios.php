@@ -8,9 +8,11 @@ if(!is_uploaded_file($_FILES['file']['tmp_name'])){
 
 require_once '../libs/SimpleXLSX.php';
 require_once('../utils/db.php');
+define('DR',$_SERVER['DOCUMENT_ROOT']);
 
+move_uploaded_file($_FILES['file']['tmp_name'],DR.'/docs/horarios_ultimo.xlsx');
 
-if( $excel=Shuchkin\SimpleXLSX::parse($_FILES['file']['tmp_name'],false) ){
+if( $excel=Shuchkin\SimpleXLSX::parse(DR.'/docs/horarios_ultimo.xlsx',false) ){
 	$rows=$excel->rows();
 	
 	define('LEGAJO',0); // * Equivalente en JS: const LEGAJO = 0;

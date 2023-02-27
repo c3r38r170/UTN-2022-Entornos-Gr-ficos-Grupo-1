@@ -7,7 +7,7 @@
 			,'Comisiones'=>'comisiones.php'
 			,'Materias'=>'materias.php'
 			,'Consultas'=>'consultas.php'
-			,'Horarios Consultas'=>'horarios.php'
+			,'Horarios de Consultas'=>'horarios.php'
 			,'Períodos de Actividad'=>'periodos.php'
 		]
 		,'Sobre Nosotros'=>'contacto.php'
