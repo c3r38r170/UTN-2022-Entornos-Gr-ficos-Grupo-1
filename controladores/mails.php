@@ -18,10 +18,12 @@
         $sms = $description."\n Atentamente: ".$name."\n Correo Electronico: ".$mail;
 
         if(mail($to, $subject, $sms)){
-            echo "<script>alert('Consulta enviada exitosamente')</script>";
+            echo "<script>alert('Consulta enviada exitosamente');
+                   window.location.href='../contacto.php';</script>";
         }
         else{
-            echo "<script>alert('Error! La consulta no fue enviada')</script>";
+            echo "<script>alert('Error! La consulta no fue enviada');
+                   window.location.href='../contacto.php';</script>";
         }
     }
 
