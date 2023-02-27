@@ -36,12 +36,14 @@ if(isset($_POST['delete'])){
 			,`legajo`
 			,`contrasenia`
 			,`tipo_id`
+			,`baja`
 		) VALUES (
 			?
 			,?
 			,?
 			,'".password_hash($_POST['contrasenia'],PASSWORD_DEFAULT)."'
 			,".(int)$_POST['tipo_id']."
+			,0
 		)"
 		,[
 			$_POST['nombre_completo']
