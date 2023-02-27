@@ -31,7 +31,8 @@ require_once 'utils/getDate.php';
 			document.querySelector('tbody').prepend(df);
 			df.innerHTML=`
 						<td>
-							<input type=date name="inicio" form=nuevo required oninput="document.getElementById('fin').min=this.value">
+							<input type=date name="inicio" form=nuevo required oninput="document.getElementById('fin').min=this.value"
+							min="<?= date('Y-m-d')?>">
 							<span class=campos_requeridos></span>
 						</td>
 						<td>
