@@ -1,6 +1,8 @@
 <?php
 
 require_once '../utils/db.php';
+require_once(realpath(dirname(__FILE__) . '/../utils/DAOs/usuarioDAO.php'));
+
 
 if(isset($_POST['delete'])){
 	// * baja lógica
@@ -21,6 +23,12 @@ if(isset($_POST['delete'])){
 		header("Location: ../usuarios.php");        
 
 }elseif(isset($_POST['create'])){
+
+    if(UsuarioDAO::getOne($_POST['legajo'])){
+		header("Location: ../form_usuarios.php?error=".urlencode('Ya existe un usuario con ese legajo'));
+		exit;
+	}
+	    
 	$res=$db->prepared(
 		"INSERT INTO usuarios (
 			`nombre_completo`

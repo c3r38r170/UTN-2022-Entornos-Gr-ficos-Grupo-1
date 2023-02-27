@@ -1,5 +1,4 @@
 <?php
-
 require_once $_SERVER['DOCUMENT_ROOT'].'/utils/db.php';
 
 class UsuarioDAO{
@@ -49,6 +48,30 @@ class UsuarioDAO{
             
         return $coms;
     }
+
+    function getOne($legajo){
+ 
+        $db=new MysqliWrapper();
+       
+        $sql = "SELECT * FROM usuarios WHERE legajo=?";
+        $resultado = $db->prepared($sql,[$legajo]);
+        $registros = mysqli_num_rows($resultado);
+        
+        if($registros > 0){
+            return true;
+        }else{
+            return false;
+        }
+    }
+    
+    
+    function insertUsuario($nombre, $apellido, $email, $legajo, $contrasenia, $tipoNumero){
+        $db=new MysqliWrapper();
+        $db->prepared(
+            "INSERT INTO `usuarios` (`nombre_completo`,`correo`,`legajo`,`contrasenia`,`tipo_id`,`baja`) VALUES (?,?,?,?,?,?)"
+            ,[$nombre.' '.$apellido,$email,$legajo,$contrasenia,$tipoNumero,0]
+        );
+      }
 }
 
 ?>

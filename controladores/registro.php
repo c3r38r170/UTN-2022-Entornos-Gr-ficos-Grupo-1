@@ -2,6 +2,8 @@
 
 require_once '../utils/usuario-tipos.php';
 require_once '../utils/db.php';
+require_once(realpath(dirname(__FILE__) . '/../utils/DAOs/usuarioDAO.php'));
+
 
 if(!(
 	isset($_POST['tipo'])
@@ -57,37 +59,14 @@ if(count($errores)){
 	header("Location: ../registro.php?errores=".urlencode(json_encode($errores)));
 	die;
 }else{
-	if(getOne($legajo)){
+	if(UsuarioDAO::getOne($legajo)){
 		$errores[]= "El usuario ya existe.";
 		header("Location: ../registro.php?errores=".urlencode(json_encode($errores)));
 	} else{
-		insertUsuario($nombre, $apellido, $email, $legajo, $contrasenia, $tipoNumero);
+		UsuarioDAO::insertUsuario($nombre, $apellido, $email, $legajo, $contrasenia, $tipoNumero);
 		$success = "¡Usuario registrado con exito! Se encuentra listo para iniciar sesión ";
         header("Location: ../registro.php?success=".urlencode($success));
 	}
 }
 
-
-function getOne($legajo){
-    $db=new MysqliWrapper();
-   
-    $sql = "SELECT * FROM usuarios WHERE legajo=? ";
-    $resultado = $db->prepared($sql,[$legajo]);
-    $registros = mysqli_num_rows($resultado);
-
-	if($registros == 1){
-		return true;
-	}else{
-		return false;
-	}
-}
-
-
-function insertUsuario($nombre, $apellido, $email, $legajo, $contrasenia, $tipoNumero){
-	$db=new MysqliWrapper();
-	$db->prepared(
-		"INSERT INTO `usuarios` (`nombre_completo`,`correo`,`legajo`,`contrasenia`,`tipo_id`,`baja`) VALUES (?,?,?,?,?,?)"
-		,[$nombre.' '.$apellido,$email,$legajo,$contrasenia,$tipoNumero,0]
-	);
-  }
 ?>
