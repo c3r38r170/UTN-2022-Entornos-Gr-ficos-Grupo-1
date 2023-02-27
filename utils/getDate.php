@@ -30,4 +30,8 @@ function getSaturday($weekday) {
     return date('Y-m-d', $saturday);
   }
 
+function formatDate($date){    
+    return date("d-m-Y", strtotime($date));    
+}  
+
 ?>
