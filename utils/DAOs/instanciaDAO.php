@@ -120,6 +120,11 @@ class InstanciaDAO{
         INNER JOIN suscripciones s ON s.estudiante_id=? AND s.instancia_id=i.id        
     WHERE i.fecha_consulta>=CURDATE()
     AND u.`baja`<>1
+    AND i.estado_id!=3
+    AND c.fecha  = (
+      SELECT MAX(fecha)
+      FROM consultas 
+    )	
     LIMIT $limit OFFSET $offset";
 
     $rs_result = $db->prepared($sql,[$id]);
