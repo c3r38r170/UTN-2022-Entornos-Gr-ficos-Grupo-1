@@ -36,7 +36,8 @@ require_once 'utils/getDate.php';
 							<span class=campos_requeridos></span>
 						</td>
 						<td>
-							<input type=date name="fin" id="fin" form=nuevo required>
+							<input type=date name="fin" id="fin" form=nuevo required
+							min="<?= date('Y-m-d')?>">
 							<span class=campos_requeridos></span>
 						</td>
 						<td>
