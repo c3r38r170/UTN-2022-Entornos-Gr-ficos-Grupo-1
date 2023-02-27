@@ -199,6 +199,21 @@ if(isset($_POST['ins'])){
 
 if(isset($_POST['edit'])){
     
+    $errores=[];
+
+    if(!preg_match('/^[a-zA-Z0-9áéíóúñÑ]+$/u', $_POST['aula'])){
+        $errores[] = "El campo Aula debe ser alfanumerico";                        
+    }   
+    
+    if(!preg_match("/^(http:\/\/|https:\/\/)/", $_POST['enlace'])){
+        $errores[] = "El enlace ingresado no tiene un formato valido";                        
+    }
+
+    if(count($errores)){
+        header("Location: ".$_SERVER['HTTP_REFERER']."&errores=".urlencode(json_encode($errores)));        
+        exit;
+    }
+
     $errores=InstanciaDAO::updateInstance($_POST);
     
     // TODO DRY
