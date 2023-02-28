@@ -107,6 +107,10 @@
 		display: block;
 		width: 100%;
 	}
+	.usuario_logueado{
+		display: none;
+	}
+	
 	@media screen and (min-aspect-ratio: 13/9) { /* Pantalla horizontal */
 		nav{
 			border-radius: 10px;
@@ -130,8 +134,34 @@
 		nav input:checked + label {color:white}
 		nav input:checked + label:before {content:"\00d7"}
 		nav input:checked ~ ul {display:block}
+
+		.usuario_logueado{
+		display: flex;
+		margin-top: 10px;
+		justify-content: center;
+		font-weight: bold;
+		font-size:16px;
+		align-items:center;
+		}
+
+		.usuario_logueado .user{
+			margin-top: 10px;
+		}
+
 	}
 </style>
+<div class="usuario_logueado">
+<?php
+	if(isset($_SESSION['id'])){
+	?>
+	<div class="user">
+	<img src="img/usuarioResponsive.png" alt="Imagen Usuario">
+	</div>
+	<p><?=isset($_SESSION['id'])?"Ingresó como: {$_SESSION['nombre_completo']}":''?></p>
+	<?php
+	}
+	?>
+</div>
 <nav-container>
 	<img src="img/utn_icono1.png" alt="Logo UTN">
 	<h2>UTN Frro</h2>	
