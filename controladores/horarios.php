@@ -90,7 +90,7 @@ if( $excel=Shuchkin\SimpleXLSX::parse(DR.'/docs/horarios_ultimo.xlsx',false) ){
 		$nuevaMateria=false;
 		$materiaID=$db
 			->prepared("SELECT id FROM materia WHERE nombre = ?",[$materia]);
-		if($materiaID){
+		if($materiaID && $materiaID->num_rows){
 			$materiaID=$materiaID->fetch_assoc()['id'];
 		}else{
 			$db->prepared(
