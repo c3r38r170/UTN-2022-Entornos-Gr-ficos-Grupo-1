@@ -75,7 +75,7 @@ if($editando){
 				   <div class="formulario_grupo">
 				   <input type="<?= $editando ? 'hidden' : 'password' ?>" id="rep_pass" name="repetir_contrasenia" placeholder="" required>				   <label for="rep_pass">Repetir contraseña <span class="campos_requeridos"> * </span></label>
 				   </div>			
-				   <button style="background:none; border:none" type="button" id="boton_visibilidad" onclick="alternarVisibilidad()"><i class='fa-solid fa-eye-slash'></i></button>
+				   <button style="background:none; border:none" type="button" id="boton_visibilidad2" onclick="alternarVisibilidad2()"><i class='fa-solid fa-eye-slash'></i></button>
 			</div>		
 			<div class="formulario_grupo">
 				<!-- TODO estilos de select -->
@@ -118,6 +118,17 @@ if($editando){
 function alternarVisibilidad() {
     var input = document.getElementById("pass");
     var boton = document.getElementById("boton_visibilidad");
+    if (input.type === "password") {
+        input.type = "text";
+        boton.innerHTML = "<i class='fa-solid fa-eye'></i>";
+    } else {
+        input.type = "password";
+        boton.innerHTML = "<i class='fa-solid fa-eye-slash'></i>";
+    }
+}
+function alternarVisibilidad2() {
+    var input = document.getElementById("rep_pass");
+    var boton = document.getElementById("boton_visibilidad2");
     if (input.type === "password") {
         input.type = "text";
         boton.innerHTML = "<i class='fa-solid fa-eye'></i>";
