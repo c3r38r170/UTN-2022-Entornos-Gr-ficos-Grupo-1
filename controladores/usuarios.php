@@ -38,6 +38,10 @@ if(isset($_POST['delete'])){
 
 	$errores = [];
 
+	if(!ctype_digit($_POST['legajo'])){
+		$errores[]= "El campo Legajo debe ser numerico";
+	}
+
 	if(!isset($_POST['contrasenia']) || !($contrasenia=trim($_POST["contrasenia"]))){
 		$errores[] = 'Ingrese contraseña.';
 	}else if (strlen($contrasenia) <= 6){
