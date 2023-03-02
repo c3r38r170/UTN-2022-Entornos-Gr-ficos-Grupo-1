@@ -13,7 +13,7 @@ if(isset($_POST['delete'])){
 	$errores = [];
 
 	if(!preg_match('/^[a-zA-ZáéíóúñÑ ]+$/u', $_POST['nombre_completo'])){          
-		$errores[]= "El campo Nombre Completo debe ser alfanumerico";
+		$errores[]= "El campo Nombre Completo no debe contener letras";
 	}
 
 	if(count($errores)){
@@ -45,7 +45,7 @@ if(isset($_POST['delete'])){
 	}
 
 	if(!preg_match('/^[a-zA-ZáéíóúñÑ ]+$/u', $_POST['nombre_completo'])){          
-		$errores[]= "El campo Nombre Completo debe ser alfanumerico";
+		$errores[]= "El campo Nombre Completo no debe contener letras";
 	}
 
 	if(count($errores)){
