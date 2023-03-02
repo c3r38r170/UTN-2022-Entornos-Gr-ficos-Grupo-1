@@ -9,6 +9,18 @@ if(isset($_POST['delete'])){
 	$db->prepared("UPDATE `usuarios` SET `baja`=1 WHERE `id`=?",[$_POST['id']]);
 	header('Location: ../usuarios.php');
 }elseif(isset($_POST['edit'])){
+
+	$errores = [];
+
+	if(!preg_match('/^[a-zA-Z0-9áéíóúñÑ]+$/u', $_POST['nombre_completo'])){          
+		$errores[]= "El campo Nombre Completo debe ser alfanumerico";
+	}
+
+	if(count($errores)){
+		header("Location: ../form_usuarios.php?id=".$_POST['id']."&errores=".urlencode(json_encode($errores)));
+		exit;
+	}
+
 	$db->prepared(
 		"UPDATE `usuarios`
 		SET
@@ -24,11 +36,28 @@ if(isset($_POST['delete'])){
 
 }elseif(isset($_POST['create'])){
 
-    if(UsuarioDAO::getOne($_POST['legajo'])){
-		header("Location: ../form_usuarios.php?error=".urlencode('Ya existe un usuario con ese legajo'));
+	$errores = [];
+
+	if(!isset($_POST['contrasenia']) || !($contrasenia=trim($_POST["contrasenia"]))){
+		$errores[] = 'Ingrese contraseña.';
+	}else if (strlen($contrasenia) <= 6){
+		$errores[]= "La contraseña es demasiado corta. Debe contener mas de 6 caracteres";
+	}
+
+	if(!preg_match('/^[a-zA-Z0-9áéíóúñÑ]+$/u', $_POST['nombre_completo'])){          
+		$errores[]= "El campo Nombre Completo debe ser alfanumerico";
+	}
+
+	if(count($errores)){
+		header("Location: ../form_usuarios.php?errores=".urlencode(json_encode($errores)));
 		exit;
 	}
-	    
+
+    if(UsuarioDAO::getOne($_POST['legajo'])){
+		header("Location: ../form_usuarios.php?errores=".urlencode(json_encode(['Ya existe un usuario con ese legajo'])));
+		exit;
+	}
+
 	$res=$db->prepared(
 		"INSERT INTO usuarios (
 			`nombre_completo`

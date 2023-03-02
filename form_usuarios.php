@@ -19,6 +19,11 @@ if(!sessionEsAdministracion()){
 	<link rel="shortcut icon" type="image/x-icon" href="img/favicon.png">
 	<link rel="stylesheet" type="text/css" href="css/ingreso.css">
 	<title>Usuario</title>	
+	<style>
+      .oculto {
+        display: none;
+      }
+	</style>
 </head>
 <body>
 <?php 
@@ -49,15 +54,23 @@ if($editando){
 		<div class="formulario_contenedor">
 			<div class="formulario_grupo">
 				<input type="text" id="leg" name="legajo" class="form_input" placeholder="" value="<?= $editando ? $usuario['legajo'] : "" ?>" required <?= $editando ? "disabled" : "" ?>>
-				<label for="leg" class="form_label">Legajo <span class="campos_requeridos"> * </span></label>
+				<label for="leg" class="form_label">Legajo <span class="campos_requeridos"> * </span></label>				
 			</div>
 			<div class="formulario_grupo">
 				<input type="text" id="nombre" name="nombre_completo" class="form_input" placeholder="" value="<?= $editando ? $usuario['nombre_completo'] : "" ?>" required>
 				<label for="nombre" class="form_label">Nombre Completo <span class="campos_requeridos"> * </span></label>
 			</div>
 			<div class="formulario_grupo">
-				<input type="text" id="correo" name="correo" class="form_input" placeholder="" value="<?= $editando ? $usuario['correo'] : "" ?>" required>
+				<input type="email" id="correo" name="correo" class="form_input" placeholder="" value="<?= $editando ? $usuario['correo'] : "" ?>" required>
 				<label for="correo" class="form_label">Correo Electrónico <span class="campos_requeridos"> * </span></label>
+			</div>
+			<div class="formulario_grupo <?= $editando ? 'oculto' : '' ?>">
+				<input type="<?= $editando ? 'hidden' : 'password' ?>" id="pass" name="contrasenia" placeholder="" required >
+				<label for="pass">Contraseña <span class="campos_requeridos"> * </span></label>
+			</div>
+			<div class="formulario_grupo <?= $editando ? 'oculto' : '' ?>">
+				<input type="<?= $editando ? 'hidden' : 'password' ?>" id="rep_pass" name="repetir_contrasenia" placeholder="" required>
+				<label for="rep_pass">Repetir contraseña <span class="campos_requeridos"> * </span></label>
 			</div>
 			<div class="formulario_grupo">
 				<!-- TODO estilos de select -->
@@ -81,9 +94,11 @@ if($editando){
 			<!-- TODO volver a la búsqueda de donde se vino. Conservar search y offset -->
 			<p class="form_parrafo"><a href="usuarios.php" class="form_link">Regresar al listado</a></p>
 <?php
-	if(isset($_GET['error'])){
-		$error=$_GET['error'];
-		echo "<span class=formulario_error>$error</span>";
+	if(isset($_GET['errores']) && !empty($_GET["errores"])){
+		$errores=json_decode(urldecode($_GET['errores']),true);
+		foreach ($errores as $error) {
+			echo "<span class=formulario_error>$error</span>";
+		}
 	}
 	if(isset($_GET["success"]) && !empty($_GET["success"])){
 		$success = urldecode($_GET["success"]);
