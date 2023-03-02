@@ -30,10 +30,13 @@
 				<input type="text" id="leg" name="legajo" placeholder="" required>
 				<label for="leg">Legajo <span class="campos_requeridos"> * </span></label>
 			</div>
-			<div class="formulario_grupo">
-				<input type="password" id="pass" name="contrasenia" placeholder="" required>
-				<label for="pass">Contraseña <span class="campos_requeridos"> * </span></label>
-			</div>
+			<div class="password_grupo">
+				   <div class="formulario_grupo">
+				   <input type="password" id="pass" name="contrasenia" placeholder="" required > </input>
+				   <label for="pass">Contraseña <span class="campos_requeridos"> * </span></label>
+				   </div>			
+				   <button style="background:none; border:none" type="button" id="boton_visibilidad" onclick="alternarVisibilidad()"><i class='fa-solid fa-eye-slash'></i></button>
+			</div>	
 			<div class="formulario_grupo">
 				<input type="text" name="nombre" placeholder="" required>
 				<label for="pass">Nombre/s <span class="campos_requeridos"> * </span></label>
@@ -69,6 +72,21 @@ if(isset($_GET["success"]) && !empty($_GET["success"])){
 </div>
 
 <?php require_once 'template/footer.php'; ?>
+
+<script>
+function alternarVisibilidad() {
+    var input = document.getElementById("pass");
+    var boton = document.getElementById("boton_visibilidad");
+    if (input.type === "password") {
+        input.type = "text";
+        boton.innerHTML = "<i class='fa-solid fa-eye'></i>";
+    } else {
+        input.type = "password";
+        boton.innerHTML = "<i class='fa-solid fa-eye-slash'></i>";
+    }
+}
+</script>
+
 </body>
 
 </html>

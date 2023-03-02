@@ -64,14 +64,19 @@ if($editando){
 				<input type="email" id="correo" name="correo" class="form_input" placeholder="" value="<?= $editando ? $usuario['correo'] : "" ?>" required>
 				<label for="correo" class="form_label">Correo Electrónico <span class="campos_requeridos"> * </span></label>
 			</div>
-			<div class="formulario_grupo <?= $editando ? 'oculto' : '' ?>">
-				<input type="<?= $editando ? 'hidden' : 'password' ?>" id="pass" name="contrasenia" placeholder="" required >
-				<label for="pass">Contraseña <span class="campos_requeridos"> * </span></label>
-			</div>
-			<div class="formulario_grupo <?= $editando ? 'oculto' : '' ?>">
-				<input type="<?= $editando ? 'hidden' : 'password' ?>" id="rep_pass" name="repetir_contrasenia" placeholder="" required>
-				<label for="rep_pass">Repetir contraseña <span class="campos_requeridos"> * </span></label>
-			</div>
+			 <div class="password_grupo <?= $editando ? 'oculto' : '' ?>">
+				   <div class="formulario_grupo">
+				   <input type="<?= $editando ? 'hidden' : 'password' ?>" id="pass" name="contrasenia" placeholder="" required > </input>
+				   <label for="pass">Contraseña <span class="campos_requeridos"> * </span></label>	
+				   </div>			
+				   <button style="background:none; border:none" type="button" id="boton_visibilidad" onclick="alternarVisibilidad()"><i class='fa-solid fa-eye-slash'></i></button>
+			</div>			
+			<div class="password_grupo <?= $editando ? 'oculto' : '' ?>">
+				   <div class="formulario_grupo">
+				   <input type="<?= $editando ? 'hidden' : 'password' ?>" id="rep_pass" name="repetir_contrasenia" placeholder="" required>				   <label for="rep_pass">Repetir contraseña <span class="campos_requeridos"> * </span></label>
+				   </div>			
+				   <button style="background:none; border:none" type="button" id="boton_visibilidad" onclick="alternarVisibilidad()"><i class='fa-solid fa-eye-slash'></i></button>
+			</div>		
 			<div class="formulario_grupo">
 				<!-- TODO estilos de select -->
 				<select id="tipo" name="tipo_id" class="form_input" required <?= $editando ? "disabled" : "" ?>>
@@ -108,6 +113,21 @@ if($editando){
 		</div>
 	</form>
 </div>
+
+<script>
+function alternarVisibilidad() {
+    var input = document.getElementById("pass");
+    var boton = document.getElementById("boton_visibilidad");
+    if (input.type === "password") {
+        input.type = "text";
+        boton.innerHTML = "<i class='fa-solid fa-eye'></i>";
+    } else {
+        input.type = "password";
+        boton.innerHTML = "<i class='fa-solid fa-eye-slash'></i>";
+    }
+}
+</script>
+<script src="https://kit.fontawesome.com/f452b46f6c.js" crossorigin="anonymous"></script>
 
 <?php require_once 'template/footer.php'; ?>
 </body>

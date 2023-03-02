@@ -83,3 +83,18 @@
     font-weight: 400;
     color: #000;
 }
+
+
+.password_grupo{
+	display: flex;
+}
+
+.password_grupo > div{
+	width: 100%;
+	background: none;
+	color: #706c6c;
+	font-size: 1rem;
+	padding: .6em .3em;
+	border: none;
+	outline: none;
+}
