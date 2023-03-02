@@ -12,10 +12,6 @@
         if(!preg_match('/^[a-zA-Z0-9áéíóúñÑ]+$/u', $nombre))          
 	        $errores[]= "El campo Nombre debe ser alfanumerico";
             
-        $email=trim($_POST['email']);
-        if(!preg_match('/^[a-zA-Z0-9áéíóúñÑ]+$/u', $email))          
-            $errores[]= "El campo Email debe ser alfanumerico";
-
         if(count($errores)){
             header("Location: ../contacto.php?errores=".urlencode(json_encode($errores)));
             exit;
