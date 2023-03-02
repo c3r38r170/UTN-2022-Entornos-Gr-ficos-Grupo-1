@@ -8,6 +8,8 @@
     //para enviar el correo en "sobre nosotros"
     if(isset($_POST["btn_contact"])){
 
+	$errores = [];
+	    
         $nombre=trim($_POST['name']);
         if(!preg_match('/^[a-zA-Z0-9áéíóúñÑ]+$/u', $nombre))          
 	        $errores[]= "El campo Nombre debe ser alfanumerico";
