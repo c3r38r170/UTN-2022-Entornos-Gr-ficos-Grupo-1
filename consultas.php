@@ -125,11 +125,17 @@ echo consultasBreadcrumbs();
                     <br>
                     <span><!-- Aula --> Aula: </span> <?=$instance['aula_nueva']??$row['aula']?>
                     <?php
-                        if(sessionEsProfesor() && $instance['estado_id']==2){
+                        if(sessionEsProfesor()){
                     ?>
                     <br>
+                        <?php if($instance['cupo']){ ?>
                     <span> Suscritos: </span> <?=$instance['suscritos']?> / <?=$instance['cupo']?>
-                    <?php
+                        <?php
+                            }else{
+                        ?>   
+                    <span> Suscritos: </span> <?=$instance['cupo']?>    
+                        <?php     
+                            }    
                         }
                     ?>
 
