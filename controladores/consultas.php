@@ -201,7 +201,7 @@ if(isset($_POST['edit'])){
     
     $errores=[];
 
-    if(!preg_match('/^[a-zA-Z0-9áéíóúñÑ]+$/u', $_POST['aula'])){
+    if(!preg_match('/^[a-zA-Z0-9áéíóúñÑ ]+$/u', $_POST['aula'])){
         $errores[] = "El campo Aula debe ser alfanumerico";                        
     }   
     

@@ -12,7 +12,7 @@ if(isset($_POST['delete'])){
 
 	$errores = [];
 
-	if(!preg_match('/^[a-zA-Z0-9áéíóúñÑ]+$/u', $_POST['nombre_completo'])){          
+	if(!preg_match('/^[a-zA-Z0-9áéíóúñÑ ]+$/u', $_POST['nombre_completo'])){          
 		$errores[]= "El campo Nombre Completo debe ser alfanumerico";
 	}
 
@@ -44,7 +44,7 @@ if(isset($_POST['delete'])){
 		$errores[]= "La contraseña es demasiado corta. Debe contener mas de 6 caracteres";
 	}
 
-	if(!preg_match('/^[a-zA-Z0-9áéíóúñÑ]+$/u', $_POST['nombre_completo'])){          
+	if(!preg_match('/^[a-zA-Z0-9áéíóúñÑ ]+$/u', $_POST['nombre_completo'])){          
 		$errores[]= "El campo Nombre Completo debe ser alfanumerico";
 	}
 
