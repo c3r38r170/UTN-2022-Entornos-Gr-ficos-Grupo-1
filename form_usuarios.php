@@ -25,7 +25,7 @@ if(!sessionEsAdministracion()){
       }
 	</style>
 </head>
-<body>
+<body>	
 <?php 
 	require_once 'template/header.php';
     require_once 'template/navs/administracion.php';
@@ -33,6 +33,18 @@ if(!sessionEsAdministracion()){
     echo formUserBreadcrumbs();
 ?>
 
+<script>
+		addEventListener('DOMContentLoaded',e=>{
+			document.forms[0].onsubmit=function (params) {
+				if(this['contrasenia'].value!=this['repetir_contrasenia'].value) {
+					e.preventDefault();
+					alert('Las contraseñas no coinciden.');
+					return false;
+				}
+			}
+		});
+</script>
+	
 <?php
 
 $editando=isset($_GET['id']) && !empty($_GET['id']);
