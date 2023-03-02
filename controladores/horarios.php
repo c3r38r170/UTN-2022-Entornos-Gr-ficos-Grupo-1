@@ -137,7 +137,7 @@ if( $excel=Shuchkin\SimpleXLSX::parse(DR.'/docs/horarios_ultimo.xlsx',false) ){
 					,?
 					,?
 					,?
-					,now()
+					,substr(NOW(), 1, 16)
 					,?
 				)"
 			,[
