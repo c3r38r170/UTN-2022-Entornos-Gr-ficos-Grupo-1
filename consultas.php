@@ -133,7 +133,7 @@ echo consultasBreadcrumbs();
                         <?php
                             }else{
                         ?>   
-                    <span> Suscritos: </span> <?=$instance['cupo']?>    
+                    <span> Suscritos: </span> <?=$instance['cupo']?$instance['cupo'] : 'Sin inscriptos'?>    
                         <?php     
                             }    
                         }
