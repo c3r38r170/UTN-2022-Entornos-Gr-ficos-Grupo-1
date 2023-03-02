@@ -49,7 +49,7 @@ class UsuarioDAO{
         return $coms;
     }
 
-    function getOne($legajo){
+    static function getOne($legajo){
  
         $db=new MysqliWrapper();
        
@@ -65,7 +65,7 @@ class UsuarioDAO{
     }
     
     
-    function insertUsuario($nombre, $apellido, $email, $legajo, $contrasenia, $tipoNumero){
+    static function insertUsuario($nombre, $apellido, $email, $legajo, $contrasenia, $tipoNumero){
         $db=new MysqliWrapper();
         $db->prepared(
             "INSERT INTO `usuarios` (`nombre_completo`,`correo`,`legajo`,`contrasenia`,`tipo_id`,`baja`) VALUES (?,?,?,?,?,?)"
