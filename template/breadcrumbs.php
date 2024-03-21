@@ -150,4 +150,11 @@ function ayudaBreadcrumbs(){
 
 	return generateBreadcrumbs($breadcrumbs);
 }
+
+function panelBreadcrumbs(){
+	if(sessionEsAdministracion())
+		$breadcrumbs = [array("link" => "administrador.php","text" => "Home"), array("link" => "#","text" => "Panel de control")] ;
+	return generateBreadcrumbs($breadcrumbs);
+}
 ?>
+

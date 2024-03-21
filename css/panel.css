@@ -1,0 +1,85 @@
+@import "_general.css";
+
+.cards {
+  width: 97%;
+  padding: 35px 20px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 40px;
+  margin-bottom: 70%;
+}
+.cards .card {
+  padding: 5px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #fff;
+  border: 2px solid rgb(37, 150, 226);
+  border-radius: 10px;
+  box-shadow: 0 7px 25px rgba(0, 0, 0, 0.08);
+}
+.number {
+  font-size: 25px;
+  font-weight: 450;
+  color: #087cf4;
+}
+.card-name {
+  color: #000000;
+  font-weight: 600;
+  margin-top: 10px;
+}
+
+/* Estilos para el combobox */
+#year-select {
+  padding: 5px;
+  border: 2px solid #087cf4;
+  border-radius: 5px;
+  background-color: #fff;
+  color: #000000;
+  font-size: 16px;
+  margin-right: 10px;
+  max-width: 80px;
+}
+
+/* Estilos para el botón */
+.btn-total-c {
+  padding: 5px;
+  background-color: #087cf4;
+  color: #ffffff;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.btn-total-c:hover {
+  background-color: #065c9a;
+}
+
+.label-combo {
+  margin-top: 5px;
+  display: flex;
+}
+
+.label-c {
+  width: 150px;
+  margin-top: 6px;
+}
+
+/*media querys*/
+
+@media (max-width: 880px) {
+  .cards {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 500px) {
+  .cards {
+    width: 90%;
+    grid-template-columns: 1fr;
+  }
+  #year-select {
+    width: 80px;
+  }
+}

@@ -1,5 +1,5 @@
 <?php
-require_once $_SERVER['DOCUMENT_ROOT'].'/utils/db.php';
+require_once(dirname(__DIR__,1) . '/db.php');
 
 class UsuarioDAO{
     static function getUser($leg){
