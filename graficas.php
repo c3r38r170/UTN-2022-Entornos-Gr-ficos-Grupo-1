@@ -16,6 +16,8 @@ require_once 'controladores/panel-control.php';
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <?php include_once 'graficos/chart1.php'; ?> 
     <?php include_once 'graficos/chart2.php'; ?> 
+    <?php include_once 'graficos/chart3.php'; ?>
+    <?php include_once 'graficos/chart4.php'; ?>  
     <style>
         .container {
             display: flex; 
@@ -30,6 +32,9 @@ require_once 'controladores/panel-control.php';
         }
 
         @media screen and (max-width: 600px) {
+        }
+
+        @media screen and (max-width: 768px) {
             .graps {
                 width: 100%; 
             }
@@ -40,6 +45,10 @@ require_once 'controladores/panel-control.php';
     <div class="container">
         <div id="piechart" class="graps"></div>
         <div id="donutchart" class="graps"></div>
+    </div>
+    <div class="container">
+        <div id="barchart" class="graps"></div>
+        <div id="linechart" class="graps"></div>
     </div>
 </body>
 </html>

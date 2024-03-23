@@ -22,6 +22,14 @@ function getConsultasComisiones(){
    return PanelDAO::getConsultasComisiones();
 }
 
+function getEstadosConsultas(){
+   return PanelDAO::getEstadosConsultas();
+}
+
+function getConsultasPorMes(){
+   return PanelDAO::getConsultasPorMes();
+}
+
  if (isset($_GET['year'])) {
     $year = $_GET['year'];
     $count = PanelDAO::countConsultasPorAnio($year);
