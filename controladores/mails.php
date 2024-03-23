@@ -6,7 +6,7 @@
     require_once(realpath(dirname(__FILE__) . '/../utils/DAOs/instanciaDAO.php'));
 
     //para enviar el correo en "sobre nosotros"
-    if(isset($_POST["btn_contact"])){
+    if(isset($_POST["btn_contact"])){ 
 
         $errores = [];
 

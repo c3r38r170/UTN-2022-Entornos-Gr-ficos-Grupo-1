@@ -28,10 +28,6 @@ require_once 'controladores/panel-control.php';
         .graps {
             width: 600px;
             height: 400px;
-            margin: 10px; /
-        }
-
-        @media screen and (max-width: 600px) {
         }
 
         @media screen and (max-width: 768px) {

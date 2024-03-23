@@ -1,22 +1,23 @@
 <?php
-    session_start(['read_and_close'=>true]);
-    require_once 'utils/usuario-tipos.php';
-    if(!sessionEsAdministracion()){
-        header('Location: index.php');
-        die;
-    }
-    require_once 'controladores/panel-control.php';
-    //obtener el año seleccionado del formulario
-    $selectedYear = isset($_GET['year']) ? $_GET['year'] : null;
-    //obtener el total de consultas por año 
-    function obtenerTotalConsultasPorAnio($year) {
-        return PanelDAO::countConsultasPorAnio($year);
-    }
-    // obtener el total de consultas para el año seleccionado
-    $totalConsultas = null;
-    if ($selectedYear !== null) {
-        $totalConsultas = obtenerTotalConsultasPorAnio($selectedYear);
-    }
+session_start(['read_and_close'=>true]);
+require_once 'utils/usuario-tipos.php';
+if(!sessionEsAdministracion()){
+    header('Location: index.php');
+    die;
+}
+require_once 'controladores/panel-control.php';
+
+//obtener el año seleccionado del formulario
+$selectedYear = isset($_GET['year']) ? $_GET['year'] : null;
+//obtener el total de consultas por año 
+function obtenerTotalConsultasPorAnio($year) {
+    return PanelDAO::countConsultasPorAnio($year);
+}
+// obtener el total de consultas para el año seleccionado
+$totalConsultas = null;
+if ($selectedYear !== null) {
+    $totalConsultas = obtenerTotalConsultasPorAnio($selectedYear);
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -26,30 +27,36 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="css/panel.css">
     <link rel="shortcut icon" type="image/x-icon" href="img/favicon.png">
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <?php include_once 'graficos/chart1.php'; ?> 
+    <?php include_once 'graficos/chart2.php'; ?> 
+    <?php include_once 'graficos/chart3.php'; ?>
+    <?php include_once 'graficos/chart4.php'; ?>  
     <title>Panel de control</title>
     
     <link rel="stylesheet" type="text/css" href="css/contacto.css">
+
 </head>
 <body>
 <?php 
-    require_once 'template/header.php';
-    require_once 'utils/usuario-tipos.php';
-    if(sessionEsAdministracion())
-        require_once 'template/navs/administracion.php';
-    else if (sessionEsEstudiante())
-        require_once 'template/navs/estudiante.php';
-    else if (sessionEsProfesor())
-        require_once 'template/navs/profesor.php';
-    else require_once 'template/navs/landing.php';
-    require_once 'template/breadcrumbs.php'; 
-    echo panelBreadcrumbs();
+require_once 'template/header.php';
+require_once 'utils/usuario-tipos.php';
+if(sessionEsAdministracion())
+    require_once 'template/navs/administracion.php';
+else if (sessionEsEstudiante())
+    require_once 'template/navs/estudiante.php';
+else if (sessionEsProfesor())
+    require_once 'template/navs/profesor.php';
+else require_once 'template/navs/landing.php';
+require_once 'template/breadcrumbs.php'; 
+echo panelBreadcrumbs();
 ?>
 <?php
-    $cardInfo = [
-        ['count' => countAlumnos(), 'title' => 'Alumnos activos', 'icon' => 'fa-users'],
-        ['count' => countDocentes(), 'title' => 'Docentes activos', 'icon' => 'fa-users'],
-        ['count' => $totalConsultas, 'title' => 'Consultas solicitadas', 'icon' => 'fas fa-question-circle'],
-    ];
+$cardInfo = [
+    ['count' => countAlumnos(), 'title' => 'Alumnos activos', 'icon' => 'fa-users'],
+    ['count' => countDocentes(), 'title' => 'Docentes activos', 'icon' => 'fa-users'],
+    ['count' => $totalConsultas, 'title' => 'Consultas solicitadas', 'icon' => 'fas fa-question-circle'],
+];
 ?>
 <div class="cards">
     <?php foreach ($cardInfo as $card): ?>
@@ -80,6 +87,16 @@
             </div>  
         </div>
     <?php endforeach; ?>
+</div>
+<div class="container-g">
+<div class="container">
+    <div id="piechart" class="graps"></div>
+    <div id="donutchart" class="graps"></div>
+</div>
+<div class="container">
+    <div id="barchart" class="graps"></div>
+    <div id="linechart" class="graps"></div>
+</div>
 </div>
 <?php require_once 'template/footer.php'; ?>
 </body>
