@@ -18,6 +18,10 @@ function countDocentes(){
    return PanelDAO::getConsultasMaterias();
 }
 
+function getConsultasComisiones(){
+   return PanelDAO::getConsultasComisiones();
+}
+
  if (isset($_GET['year'])) {
     $year = $_GET['year'];
     $count = PanelDAO::countConsultasPorAnio($year);

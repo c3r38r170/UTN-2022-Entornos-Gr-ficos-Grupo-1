@@ -74,5 +74,18 @@ class PanelDAO{
     else throw new Exception("No es posible mostrar la cantidad de suscripciones a consulta por materias");     
     return $materias;
   }
+
+  static function getConsultasComisiones(){    
+
+    $db=new MysqliWrapper();
+    $sql = "SELECT COUNT(*) as cantidad, com.numero as numero FROM comision com INNER JOIN materia_x_comision mc ON com.id = mc.materia_id INNER JOIN consultas c ON mc.id = c.materia_x_comision_id INNER JOIN instancias i ON c.id = i.consulta_id INNER JOIN suscripciones s ON i.id = s.instancia_id GROUP BY com.numero;
+    "; 
+    if($resultado = $db->query($sql)){    
+      $materias = $resultado->fetch_all(MYSQLI_ASSOC); 
+      mysqli_free_result($resultado);
+    }
+    else throw new Exception("No es posible mostrar la cantidad de suscripciones a consulta por comisiones");     
+    return $materias;
+  }
  }
 ?>

@@ -1,45 +1,45 @@
 <?php
-	session_start(['read_and_close'=>true]);
-	
-	require_once 'utils/usuario-tipos.php';
-	if(!sessionEsAdministracion()){
-		header('Location: index.php');
-		die;
-	}
+session_start(['read_and_close'=>true]);
 
-    require_once 'controladores/panel-control.php';
+require_once 'utils/usuario-tipos.php';
+if(!sessionEsAdministracion()){
+    header('Location: index.php');
+    die;
+}
+
+require_once 'controladores/panel-control.php';
 
 ?>
+
 <html>
-  <head>
+<head>
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-    <script type="text/javascript">
-      google.charts.load('current', {'packages':['corechart']});
-      google.charts.setOnLoadCallback(drawChart);
+    <?php include_once 'graficos/chart1.php'; ?> 
+    <?php include_once 'graficos/chart2.php'; ?> 
+    <style>
+        .container {
+            display: flex; 
+            flex-wrap: wrap; 
+            justify-content: center;
+        }
 
-      function drawChart() {
+        .graps {
+            width: 600px;
+            height: 400px;
+            margin: 10px; /
+        }
 
-        var data = google.visualization.arrayToDataTable([
-          ['Task', 'Hours per Day'],
-          <?php
-      $materias = getConsultasMaterias();
-      foreach ($materias as $materia) {
-          echo "['" . $materia['nombre'] . "', " . $materia['cantidad'] . "],";
-      }
-      ?>
-        ]);
-
-        var options = {
-          title: 'Cantidad de alumnos que han solicitado consulta por materia'
-        };
-
-        var chart = new google.visualization.PieChart(document.getElementById('piechart'));
-
-        chart.draw(data, options);
-      }
-    </script>
-  </head>
-  <body>
-    <div id="piechart" style="width: 900px; height: 500px;"></div>
-  </body>
+        @media screen and (max-width: 600px) {
+            .graps {
+                width: 100%; 
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div id="piechart" class="graps"></div>
+        <div id="donutchart" class="graps"></div>
+    </div>
+</body>
 </html>

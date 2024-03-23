@@ -3,7 +3,6 @@
 session_start(['read_and_close'=>true]);
 
 if(isset($_SESSION['id'])){
-	//require_once $_SERVER['DOCUMENT_ROOT'].'/utils/usuario-tipos.php';
 	require_once './utils/usuario-tipos.php';
 	switch ($_SESSION['tipo']) {
 	case UsuarioTipos::ESTUDIANTE:
@@ -13,7 +12,6 @@ if(isset($_SESSION['id'])){
 		$pagina='profesor.php';
 		break;
 	case UsuarioTipos::ADMINISTRACION:
-		//TODO agregar redireccion a un archivo administracion.php
 		$pagina='administrador.php';
 		break;
 	}
