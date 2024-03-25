@@ -92,7 +92,6 @@ $cardInfo = [
     <div class="container">
         <div class="graph-container">
             <div id="piechart" class="graps"></div>
-            <!-- <div id="donutchart" class="graps"></div> -->
         </div>
         <div class="search-container">
             <form method="GET" class="label-combo-m" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
@@ -111,10 +110,13 @@ $cardInfo = [
             </form>
         </div>
     </div>
+    <div class="container">
+        <div id="donutchart" class="graps"></div>
+        <div id="linechart" class="graps"></div>
+    </div>
 
     <div class="container">
         <div id="barchart" class="graps"></div>
-        <div id="linechart" class="graps"></div>
     </div>
 </div>
 
