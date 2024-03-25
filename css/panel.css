@@ -29,7 +29,7 @@
 }
 
 /* Estilos para el combobox */
-#year-select {
+.combo-select {
   padding: 5px;
   border: 2px solid #087cf4;
   border-radius: 5px;
@@ -59,6 +59,10 @@
   margin-top: 5px;
   display: flex;
 }
+.label-combo-m {
+  margin-top: 5px;
+  display: flex;
+}
 
 .label-c {
   width: 150px;
@@ -78,8 +82,24 @@
     width: 90%;
     grid-template-columns: 1fr;
   }
-  #year-select {
+  .combo-select {
     width: 80px;
+  }
+  .label-combo {
+    display: block;
+  }
+  .label-combo-m {
+    display: block;
+    margin-left: -50px;
+  }
+  .btn-total-m {
+    margin-top: 10px;
+  }
+  .label-c {
+    margin-top: 10px;
+  }
+  .combo-select-m {
+    width: 250px;
   }
 }
 
@@ -90,6 +110,37 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  align-items: center;
+}
+
+.search-container {
+  text-align: center; /* Alinea los elementos del formulario al centro */
+}
+
+.combo-select-m {
+  padding: 5px;
+  border: 2px solid #087cf4;
+  border-radius: 5px;
+  background-color: #fff;
+  color: #000000;
+  font-size: 16px;
+  margin-right: 10px;
+  max-width: auto;
+}
+
+.btn-total-m {
+  padding: 5px;
+  background-color: #087cf4;
+  color: #ffffff;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  height: 35px;
+}
+
+.btn-total-c:hover {
+  background-color: #065c9a;
 }
 
 .graps {
@@ -107,4 +158,14 @@
   .container-g {
     margin-bottom: 70%;
   }
+}
+
+#piechart {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#piechart p {
+  text-align: center;
 }

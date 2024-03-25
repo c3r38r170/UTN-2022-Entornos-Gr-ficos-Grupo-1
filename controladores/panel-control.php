@@ -14,8 +14,12 @@ function countDocentes(){
     return PanelDAO::countConsultas2024();
  }
 
- function getConsultasMaterias(){
-   return PanelDAO::getConsultasMaterias();
+function getConsultasMaterias($materiasSeleccionadas){
+    return PanelDAO::getConsultasMaterias($materiasSeleccionadas);
+}
+
+function getConsultasMateriass(){
+   return PanelDAO::getConsultasMateriass();
 }
 
 function getConsultasComisiones(){
@@ -30,9 +34,8 @@ function getConsultasPorMes(){
    return PanelDAO::getConsultasPorMes();
 }
 
- if (isset($_GET['year'])) {
-    $year = $_GET['year'];
-    $count = PanelDAO::countConsultasPorAnio($year);
- } 
+function countConsultasPorAnio($year){
+   return PanelDAO::countConsultasPorAnio($year);
+}
 
 ?>

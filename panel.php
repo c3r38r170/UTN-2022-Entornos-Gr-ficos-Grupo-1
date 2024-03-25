@@ -5,42 +5,7 @@ if(!sessionEsAdministracion()){
     header('Location: index.php');
     die;
 }
-require_once 'controladores/panel-control.php';
-
-//obtener el año seleccionado del formulario
-$selectedYear = isset($_GET['year']) ? $_GET['year'] : null;
-//obtener el total de consultas por año 
-function obtenerTotalConsultasPorAnio($year) {
-    return PanelDAO::countConsultasPorAnio($year);
-}
-// obtener el total de consultas para el año seleccionado
-$totalConsultas = null;
-if ($selectedYear !== null) {
-    $totalConsultas = obtenerTotalConsultasPorAnio($selectedYear);
-}
-?>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="css/panel.css">
-    <link rel="shortcut icon" type="image/x-icon" href="img/favicon.png">
-    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-    <?php include_once 'graficos/chart1.php'; ?> 
-    <?php include_once 'graficos/chart2.php'; ?> 
-    <?php include_once 'graficos/chart3.php'; ?>
-    <?php include_once 'graficos/chart4.php'; ?>  
-    <title>Panel de control</title>
-    
-    <link rel="stylesheet" type="text/css" href="css/contacto.css">
-
-</head>
-<body>
-<?php 
 require_once 'template/header.php';
-require_once 'utils/usuario-tipos.php';
 if(sessionEsAdministracion())
     require_once 'template/navs/administracion.php';
 else if (sessionEsEstudiante())
@@ -50,8 +15,47 @@ else if (sessionEsProfesor())
 else require_once 'template/navs/landing.php';
 require_once 'template/breadcrumbs.php'; 
 echo panelBreadcrumbs();
+
+require_once 'controladores/panel-control.php';
+require_once 'controladores/materias.php';
+
+include_once 'graficos/chart1.php'; 
+include_once 'graficos/chart2.php'; 
+include_once 'graficos/chart3.php'; 
+include_once 'graficos/chart4.php'; 
+
+$selectedYear = isset($_GET['year']) ? $_GET['year'] : null;
+$totalConsultas = null;
+if ($selectedYear !== null) {
+    $totalConsultas = countConsultasPorAnio($selectedYear);
+}
+
 ?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="css/panel.css">
+    <link rel="stylesheet" type="text/css" href="css/contacto.css">
+    <link rel="shortcut icon" type="image/x-icon" href="img/favicon.png">
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <title>Panel de control</title>
+</head>
+<body>
 <?php
+$consultasMaterias = [];
+
+if (isset($_GET['materia']) && !empty($_GET['materia'])) {
+    $materiasSeleccionadas = $_GET['materia'];
+    foreach ($materiasSeleccionadas as $materiaSeleccionada) {
+        $consultasMaterias = array_merge($consultasMaterias, getConsultasMaterias($materiaSeleccionada));
+    }
+} else {
+    $consultasMaterias = getConsultasMateriass();
+}
+
 $cardInfo = [
     ['count' => countAlumnos(), 'title' => 'Alumnos activos', 'icon' => 'fa-users'],
     ['count' => countDocentes(), 'title' => 'Docentes activos', 'icon' => 'fa-users'],
@@ -68,17 +72,12 @@ $cardInfo = [
                     <div>
                         <form method="GET" class="label-combo" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
                             <label for="year-select" class="label-c">Seleccione un año:</label>
-                            <select id="year-select" name="year">
+                            <select class="combo-select" name="year">
                                 <option value="2024" <?php if ($selectedYear == '2024') echo 'selected'; ?>>2024</option>
                                 <option value="2023" <?php if ($selectedYear == '2023') echo 'selected'; ?>>2023</option>
                             </select>
                             <input type="submit" class="btn-total-c" value="Consultar">
                         </form>
-                        <!-- Div para mostrar el total de consultas 
-                        <?php if ($totalConsultas !== null): ?>
-                            <div>Total de consultas para <?php echo $selectedYear; ?>: <?php echo $totalConsultas; ?></div>
-                        <?php endif; ?>
-					    -->
                     </div>
                 <?php endif; ?>
             </div>  
@@ -88,16 +87,37 @@ $cardInfo = [
         </div>
     <?php endforeach; ?>
 </div>
+
 <div class="container-g">
-<div class="container">
-    <div id="piechart" class="graps"></div>
-    <div id="donutchart" class="graps"></div>
+    <div class="container">
+        <div class="graph-container">
+            <div id="piechart" class="graps"></div>
+            <!-- <div id="donutchart" class="graps"></div> -->
+        </div>
+        <div class="search-container">
+            <form method="GET" class="label-combo-m" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
+                <label for="materia-select" class="label-c">Seleccione una o varias materias:</label>
+                <select class="combo-select-m" name="materia[]" multiple> 
+                    <?php
+                    $materias = getAllMat();
+                    foreach ($materias as $materia) {
+                        ?>
+                        <option value="<?php echo $materia['nombre']; ?>"><?php echo $materia['nombre']; ?></option>
+                        <?php
+                    }
+                    ?>
+                </select>
+                <input type="submit" class="btn-total-m" value="Consultar">
+            </form>
+        </div>
+    </div>
+
+    <div class="container">
+        <div id="barchart" class="graps"></div>
+        <div id="linechart" class="graps"></div>
+    </div>
 </div>
-<div class="container">
-    <div id="barchart" class="graps"></div>
-    <div id="linechart" class="graps"></div>
-</div>
-</div>
+
 <?php require_once 'template/footer.php'; ?>
 </body>
 </html>

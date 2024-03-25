@@ -15,6 +15,18 @@ class MateriaDAO{
     return $materias;
   }
 
+  static function getAllMat() {    
+    $db = new MysqliWrapper();
+    $sql = "SELECT * FROM materia"; 
+    if ($resultado = $db->query($sql)) {    
+        $materias = $resultado->fetch_all(MYSQLI_ASSOC); 
+        mysqli_free_result($resultado);
+    } else {
+        throw new Exception("No es posible mostrar el listado de materias");     
+    }
+    return $materias;
+}
+
   
   static function getOneMateria($id){
 

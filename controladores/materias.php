@@ -56,6 +56,15 @@ function getAllMaterias($offset=0,$limit=10){
  }
 }
 
+function getAllMat(){
+  try{
+    return MateriaDAO::getAllMat();   
+  }catch(Exception $e){   
+    echo '<script type="text/javascript">alert("'.$e->getMessage().'");
+          window.location.href="'.$_SERVER['HTTP_REFERER'].'";
+          </script>';      
+ }
+}
 
 ?>
 

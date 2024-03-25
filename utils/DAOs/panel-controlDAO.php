@@ -63,17 +63,42 @@ class PanelDAO{
       }
   }
 
-  static function getConsultasMaterias(){    
+  static function getConsultasMaterias($materiasSeleccinadas) {    
 
-    $db=new MysqliWrapper();
-    $sql = "SELECT COUNT(*)as cantidad, m.nombre as nombre FROM materia m INNER JOIN materia_x_comision mc ON m.id = mc.materia_id INNER JOIN consultas c ON mc.id = c.materia_x_comision_id INNER JOIN instancias i ON c.id = i.consulta_id INNER JOIN suscripciones s ON i.id = s.instancia_id GROUP BY m.nombre"; 
-    if($resultado = $db->query($sql)){    
-      $materias = $resultado->fetch_all(MYSQLI_ASSOC); 
-      mysqli_free_result($resultado);
+    $db = new MysqliWrapper();
+    $materiasNames = is_array($materiasSeleccinadas) ? "'" . implode("','", $materiasSeleccinadas) . "'" : "'" . $materiasSeleccinadas . "'";
+
+    $sql = "SELECT COUNT(*) as cantidad, m.nombre as nombre 
+            FROM materia m 
+            INNER JOIN materia_x_comision mc ON m.id = mc.materia_id 
+            INNER JOIN consultas c ON mc.id = c.materia_x_comision_id 
+            INNER JOIN instancias i ON c.id = i.consulta_id 
+            INNER JOIN suscripciones s ON i.id = s.instancia_id 
+            WHERE m.nombre IN ($materiasNames) 
+            GROUP BY m.nombre"; 
+
+    if ($resultado = $db->query($sql)) {    
+        $materias = $resultado->fetch_all(MYSQLI_ASSOC); 
+        mysqli_free_result($resultado);
+    } else {
+        throw new Exception("No es posible mostrar la cantidad de suscripciones a consulta por materias");     
     }
-    else throw new Exception("No es posible mostrar la cantidad de suscripciones a consulta por materias");     
     return $materias;
+}
+
+static function getConsultasMateriass(){    
+
+  $db=new MysqliWrapper();
+  $sql = "SELECT COUNT(*)as cantidad, m.nombre as nombre FROM materia m INNER JOIN materia_x_comision mc ON m.id = mc.materia_id INNER JOIN consultas c ON mc.id = c.materia_x_comision_id INNER JOIN instancias i ON c.id = i.consulta_id INNER JOIN suscripciones s ON i.id = s.instancia_id GROUP BY m.nombre"; 
+  if($resultado = $db->query($sql)){    
+    $materias = $resultado->fetch_all(MYSQLI_ASSOC); 
+    mysqli_free_result($resultado);
   }
+  else throw new Exception("No es posible mostrar la cantidad de suscripciones a consulta por materias");     
+  return $materias;
+}
+
+
 
   static function getConsultasComisiones(){    
 
