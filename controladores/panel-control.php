@@ -10,10 +10,6 @@ function countDocentes(){
     return PanelDAO::countDocentes();
  }
 
- function countConsultas2024(){
-    return PanelDAO::countConsultas2024();
- }
-
 function getConsultasMaterias($materiasSeleccionadas){
     return PanelDAO::getConsultasMaterias($materiasSeleccionadas);
 }

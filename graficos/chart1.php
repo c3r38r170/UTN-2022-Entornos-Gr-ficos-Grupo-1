@@ -27,7 +27,7 @@ if (isset($_GET['materia']) && !empty($_GET['materia'])) {
 
     function drawChart() {
         <?php if (empty($consultasMaterias)) { ?>
-            document.getElementById('piechart').innerHTML = '<p>No hay materias.</p>';
+            document.getElementById('piechart').innerHTML = '<p>No hay consultas.</p>';
         <?php } else { ?>
             var data = google.visualization.arrayToDataTable([
                 ['Materia', 'Consultas'],
