@@ -169,3 +169,88 @@
 #piechart p {
   text-align: center;
 }
+
+/* para los pdf*/
+
+.max-container {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.container-metricas {
+  max-width: 600px;
+  width: 90%;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border: 2px solid rgb(37, 150, 226);
+}
+
+.row-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.text-container {
+  flex: 1;
+  margin-right: 10px;
+}
+
+.download-button {
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.download-button:hover {
+  background-color: #0056b3;
+}
+
+@media only screen and (max-width: 768px) {
+  .container {
+    width: 90%;
+  }
+
+  .download-button-pdf {
+    margin-left: 0;
+  }
+}
+
+.download-button-pdf {
+  padding: 5px 10px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-left: 100px;
+}
+
+.form-graps {
+  margin-left: 100px;
+}
+
+.search-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.search-container form {
+  display: flex;
+  flex-direction: column;
+}
+
+.search-container form select,
+.search-container form input[type="submit"] {
+  margin-bottom: 10px;
+}

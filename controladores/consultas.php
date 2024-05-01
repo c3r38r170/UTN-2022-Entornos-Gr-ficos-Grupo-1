@@ -197,16 +197,16 @@ if(isset($_POST['ins'])){
     header('Location: ../consultas.php'); 
  }
 
-if(isset($_POST['edit'])){
-    
+ if(isset($_POST['edit'])){
+
     $errores=[];
 
     if(!preg_match('/^[a-zA-Z0-9áéíóúñÑ ]+$/u', $_POST['aula'])){
         $errores[] = "El campo Aula debe ser alfanumerico";                        
     }   
     
-    if(!preg_match("/^(http:\/\/|https:\/\/)/", $_POST['enlace'])){
-        $errores[] = "El enlace ingresado no tiene un formato valido";                        
+    if (!empty($_POST['enlace']) && !preg_match("/^(http:\/\/|https:\/\/)/", $_POST['enlace'])) {
+        $errores[] = "El enlace ingresado no tiene un formato válido";
     }
 
     if(count($errores)){
@@ -225,5 +225,6 @@ if(isset($_POST['edit'])){
     }
     die;  
 }
+
 
 ?>

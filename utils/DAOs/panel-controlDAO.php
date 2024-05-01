@@ -42,33 +42,10 @@ class PanelDAO{
       }
     }
 
-    static function getConsultasMaterias($materiasSeleccinadas) {    
-
-      $db = new MysqliWrapper();
-      $materiasNames = is_array($materiasSeleccinadas) ? "'" . implode("','", $materiasSeleccinadas) . "'" : "'" . $materiasSeleccinadas . "'";
-
-      $sql = "SELECT COUNT(*) as cantidad, m.nombre as nombre 
-              FROM materia m 
-              INNER JOIN materia_x_comision mc ON m.id = mc.materia_id 
-              INNER JOIN consultas c ON mc.id = c.materia_x_comision_id 
-              INNER JOIN instancias i ON c.id = i.consulta_id 
-              INNER JOIN suscripciones s ON i.id = s.instancia_id 
-              WHERE m.nombre IN ($materiasNames) 
-              GROUP BY m.nombre"; 
-
-      if ($resultado = $db->query($sql)) {    
-          $materias = $resultado->fetch_all(MYSQLI_ASSOC); 
-          mysqli_free_result($resultado);
-      } else {
-          throw new Exception("No es posible mostrar la cantidad de suscripciones a consulta por materias");     
-      }
-      return $materias;
-    }
-
-    static function getConsultasMateriass(){    
+    static function getConsultasMaterias(){    
 
       $db=new MysqliWrapper();
-      $sql = "SELECT COUNT(*)as cantidad, m.nombre as nombre FROM materia m INNER JOIN materia_x_comision mc ON m.id = mc.materia_id INNER JOIN consultas c ON mc.id = c.materia_x_comision_id INNER JOIN instancias i ON c.id = i.consulta_id INNER JOIN suscripciones s ON i.id = s.instancia_id GROUP BY m.nombre"; 
+      $sql = "SELECT COUNT(*)as cantidad, m.nombre as nombre FROM materia m INNER JOIN materia_x_comision mc ON m.id = mc.materia_id INNER JOIN consultas c ON mc.id = c.materia_x_comision_id INNER JOIN instancias i ON c.id = i.consulta_id INNER JOIN suscripciones s ON i.id = s.instancia_id  GROUP BY m.nombre"; 
       if($resultado = $db->query($sql)){    
         $materias = $resultado->fetch_all(MYSQLI_ASSOC); 
         mysqli_free_result($resultado);
@@ -77,6 +54,19 @@ class PanelDAO{
       return $materias;
     }
 
+    static function getConsultasMateriass($year){    
+
+      $db=new MysqliWrapper();
+      $sql = "SELECT COUNT(*)as cantidad, m.nombre as nombre FROM materia m INNER JOIN materia_x_comision mc ON m.id = mc.materia_id INNER JOIN consultas c ON mc.id = c.materia_x_comision_id INNER JOIN instancias i ON c.id = i.consulta_id INNER JOIN suscripciones s ON i.id = s.instancia_id  WHERE YEAR(s.fecha_hora) = ? GROUP BY m.nombre"; 
+      if ($stmt = $db->prepared($sql, array($year))) {     
+        $materias = $stmt->fetch_all(MYSQLI_ASSOC); 
+        mysqli_free_result($stmt);
+      }
+      else throw new Exception("No es posible mostrar la cantidad de suscripciones a consulta por materias");     
+      return $materias;
+    }
+
+
     static function getConsultasComisiones(){    
 
       $db=new MysqliWrapper();
@@ -84,6 +74,18 @@ class PanelDAO{
       if($resultado = $db->query($sql)){    
         $materias = $resultado->fetch_all(MYSQLI_ASSOC); 
         mysqli_free_result($resultado);
+      }
+      else throw new Exception("No es posible mostrar la cantidad de suscripciones a consulta por comisiones");     
+      return $materias;
+    }
+
+    static function getConsultasComisioness($year){    
+
+      $db=new MysqliWrapper();
+      $sql = "SELECT COUNT(*) as cantidad, com.numero as numero FROM comision com INNER JOIN materia_x_comision mc ON com.id = mc.materia_id INNER JOIN consultas c ON mc.id = c.materia_x_comision_id INNER JOIN instancias i ON c.id = i.consulta_id INNER JOIN suscripciones s ON i.id = s.instancia_id WHERE YEAR(s.fecha_hora) = ? GROUP BY com.numero"; 
+      if ($stmt = $db->prepared($sql, array($year))) {     
+        $materias = $stmt->fetch_all(MYSQLI_ASSOC); 
+        mysqli_free_result($stmt);
       }
       else throw new Exception("No es posible mostrar la cantidad de suscripciones a consulta por comisiones");     
       return $materias;
@@ -116,6 +118,27 @@ class PanelDAO{
       if ($resultado = $db->query($sql)) {    
           $consultas = $resultado->fetch_all(MYSQLI_ASSOC); 
           mysqli_free_result($resultado);
+      } else {
+          throw new Exception("No es posible mostrar la cantidad de consultas por estado");
+      }
+      return $consultas;
+    }
+
+    static function getConsultasPorMess($year){    
+      $db = new MysqliWrapper();
+      $sql = "SET lc_time_names = 'es_ES';";
+      $db->query($sql); // Configurar el idioma para los nombres de los meses en español
+
+      $sql = "SELECT COUNT(*) as cantidad, MONTHNAME(s.fecha_hora) as mes 
+              FROM consultas c 
+              INNER JOIN instancias i ON c.id = i.consulta_id 
+              INNER JOIN suscripciones s ON i.id = s.instancia_id
+              WHERE YEAR(s.fecha_hora) = ?
+              GROUP BY MONTH(s.fecha_hora)";
+      
+      if ($stmt = $db->prepared($sql, array($year))) {     
+        $consultas = $stmt->fetch_all(MYSQLI_ASSOC); 
+        mysqli_free_result($stmt);
       } else {
           throw new Exception("No es posible mostrar la cantidad de consultas por estado");
       }

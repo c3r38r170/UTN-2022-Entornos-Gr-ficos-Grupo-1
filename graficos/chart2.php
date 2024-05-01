@@ -1,11 +1,33 @@
+<?php
+//session_start(['read_and_close'=>true]);
+require_once 'utils/usuario-tipos.php';
+if(!sessionEsAdministracion()){
+    header('Location: index.php');
+    die;
+}
+require_once 'controladores/panel-control.php';
+require_once 'controladores/comisiones.php';
+
+$comisiones = [];
+$selectedYear = isset($_GET['year']) ? $_GET['year'] : null;
+if ($selectedYear !== null) {
+    $comisiones = getConsultasComisioness($selectedYear);
+}
+else{
+    $comisiones = getConsultasComisiones();
+}
+?>
 <script type="text/javascript">
 google.charts.load("current", {packages:["corechart"]});
       google.charts.setOnLoadCallback(drawChart);
+
       function drawChart() {
+        <?php if (empty($comisiones)) { ?>
+            document.getElementById('donutchart').innerHTML = '<p>No hay consultas.</p>';
+        <?php } else { ?>
         var data = google.visualization.arrayToDataTable([
             ['Comisiones', 'Consultas'],
           <?php
-      $comisiones = getConsultasComisiones();
       foreach ($comisiones as $comision) {
           echo "['" . $comision['numero'] . "', " . $comision['cantidad'] . "],";
       }
@@ -19,6 +41,8 @@ google.charts.load("current", {packages:["corechart"]});
 
         var chart = new google.visualization.PieChart(document.getElementById('donutchart'));
         chart.draw(data, options);
+        <?php } ?>
       }
+      
     </script>
 

@@ -9,15 +9,28 @@ require_once 'controladores/panel-control.php';
 require_once 'controladores/materias.php';
 
 $consultasMaterias = [];
+$selectedYear = isset($_GET['year']) ? $_GET['year'] : null;
+$totalConsultas = null;
+if ($selectedYear !== null) {
+    $totalConsultas = countConsultasPorAnio($selectedYear);
+    $consultasMaterias = getConsultasMateriass($selectedYear);
+}
+else{
+    $consultasMaterias = getConsultasMaterias();
+}
+
+/*
+$consultasMaterias = [];
 
 if (isset($_GET['materia']) && !empty($_GET['materia'])) {
     $materiasSeleccionadas = $_GET['materia'];
     foreach ($materiasSeleccionadas as $materiaSeleccionada) {
-        $consultasMaterias = array_merge($consultasMaterias, getConsultasMaterias($materiaSeleccionada));
+        $consultasMaterias = array_merge($consultasMaterias, getConsultasMaterias($materiaSeleccionada, $selectedYear));
     }
 } else {
-    $consultasMaterias = getConsultasMateriass();
+    $consultasMaterias = getConsultasMateriass($selectedYear);
 }
+*/
 ?>
 
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
@@ -47,4 +60,6 @@ if (isset($_GET['materia']) && !empty($_GET['materia'])) {
         <?php } ?>
     }
 </script>
+
+
 

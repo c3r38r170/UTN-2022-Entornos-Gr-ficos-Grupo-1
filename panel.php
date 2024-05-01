@@ -45,16 +45,6 @@ if ($selectedYear !== null) {
 </head>
 <body>
 <?php
-$consultasMaterias = [];
-
-if (isset($_GET['materia']) && !empty($_GET['materia'])) {
-    $materiasSeleccionadas = $_GET['materia'];
-    foreach ($materiasSeleccionadas as $materiaSeleccionada) {
-        $consultasMaterias = array_merge($consultasMaterias, getConsultasMaterias($materiaSeleccionada));
-    }
-} else {
-    $consultasMaterias = getConsultasMateriass();
-}
 
 $cardInfo = [
     ['count' => countAlumnos(), 'title' => 'Alumnos activos', 'icon' => 'fa-users'],
@@ -88,14 +78,38 @@ $cardInfo = [
     <?php endforeach; ?>
 </div>
 
+<div class="max-container">
+<div class="container-metricas">
+        <div class="row-container">
+            <div class="text-container">Estadísticas de Bloqueos de Consultas por Docentes</div>
+            <button class="download-button">Descargar PDF</button>
+        </div>
+        <div class="row-container">
+            <div class="text-container">Estadísticas de Motivos de Consultas por Alumnos</div>
+            <button class="download-button">Descargar PDF</button>
+        </div>
+        <div class="row-container">
+            <div class="text-container">Texto 3</div>
+            <button class="download-button">Descargar PDF</button>
+        </div>
+</div>
+</div>
+
 <div class="container-g">
     <div class="container">
         <div class="graph-container">
             <div id="piechart" class="graps"></div>
+            <button class="download-button-pdf"> Descargar</button>
         </div>
+        <div class="graph-container">
+        <div id="barchart" class="graps">
+        </div>
+        <button class="download-button-pdf"> Descargar</button>
+    </div>
+        <!-- 
         <div class="search-container">
             <form method="GET" class="label-combo-m" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
-                <label for="materia-select" class="label-c">Seleccione una o varias materias:</label>
+                <label for="materia-select" class="label-c">Seleccione materia/s:</label>
                 <select class="combo-select-m" name="materia[]" multiple> 
                     <?php
                     $materias = getAllMat();
@@ -109,15 +123,25 @@ $cardInfo = [
                 <input type="submit" class="btn-total-m" value="Consultar">
             </form>
         </div>
+                -->
     </div>
     <div class="container">
+    <div class="graph-container">
         <div id="donutchart" class="graps"></div>
-        <div id="linechart" class="graps"></div>
+        <button class="download-button-pdf"> Descargar</button>
     </div>
-
-    <div class="container">
+    <div class="graph-container">
+        <div id="linechart" class="graps"></div>
+        <button class="download-button-pdf"> Descargar</button>
+    </div>
+</div>
+<!--
+<div class="container">
+    <div class="graph-container">
         <div id="barchart" class="graps"></div>
     </div>
+</div>
+                -->
 </div>
 
 <?php require_once 'template/footer.php'; ?>

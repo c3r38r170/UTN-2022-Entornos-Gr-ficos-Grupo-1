@@ -190,7 +190,7 @@ class InstanciaDAO{
         return ['Datos inválidos.'];
         die;
     }
-
+    $enlace = isset($instance['enlace']) ? $instance['enlace'] : '';
     
     $fechaConsulta=substr($instance['fecha-hora'],0,10);
     $hora=substr($instance['fecha-hora'],11,15);
@@ -229,7 +229,7 @@ class InstanciaDAO{
             $fechaConsulta
             ,$hora
             ,$instance['aula']
-            ,trim($instance['enlace'])?:NULL
+            ,$enlace
             ,$instance['cupo']
             ,trim($instance['motivo'])?:NULL
             ,$state
@@ -261,7 +261,7 @@ class InstanciaDAO{
                 $fechaConsulta
                 ,$hora
                 ,$instance['aula']
-                ,trim($instance['enlace'])?:NULL
+                ,$enlace
                 ,trim($instance['motivo'])?:NULL
                 ,$state
                 ,$instance['consultaID']

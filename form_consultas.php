@@ -117,10 +117,14 @@ require_once 'utils/getDate.php';
 					<option value="1" <?= ($virtual) ? "selected" : "" ?>>Virtual</option>
 				</select>
 				<script>
-					document.getElementById('modalidad').oninput=function(){
-						this.parentNode.classList[(+this.value)?'add':'remove']('mostrar-enlace');
-					};
-				</script>
+    document.getElementById('modalidad').oninput=function(){
+        // Si se selecciona "Presencial", establecer el enlace como una cadena vacía
+        if (this.value === "0") {
+            document.getElementById('enlace').value = '';
+        }
+        this.parentNode.classList[(+this.value)?'add':'remove']('mostrar-enlace');
+    };
+</script>
 			</div>
 			<div class="formulario_grupo" style="display:none;">
 				<input type="text" id="enlace" name="enlace" class="form_input" placeholder="" value="<?= $instancia['enlace'] ?? $consulta['enlace']?:'' ?>">

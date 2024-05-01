@@ -10,16 +10,20 @@ function countDocentes(){
     return PanelDAO::countDocentes();
  }
 
-function getConsultasMaterias($materiasSeleccionadas){
-    return PanelDAO::getConsultasMaterias($materiasSeleccionadas);
+function getConsultasMaterias(){
+    return PanelDAO::getConsultasMaterias();
 }
 
-function getConsultasMateriass(){
-   return PanelDAO::getConsultasMateriass();
+function getConsultasMateriass($year){
+   return PanelDAO::getConsultasMateriass($year);
 }
 
 function getConsultasComisiones(){
    return PanelDAO::getConsultasComisiones();
+}
+
+function getConsultasComisioness($year){
+   return PanelDAO::getConsultasComisioness($year);
 }
 
 function getEstadosConsultas(){
@@ -29,6 +33,11 @@ function getEstadosConsultas(){
 function getConsultasPorMes(){
    return PanelDAO::getConsultasPorMes();
 }
+
+function getConsultasPorMess($year){
+   return PanelDAO::getConsultasPorMess($year);
+}
+
 
 function countConsultasPorAnio($year){
    return PanelDAO::countConsultasPorAnio($year);
