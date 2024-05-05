@@ -38,6 +38,7 @@
   font-size: 16px;
   margin-right: 10px;
   max-width: 80px;
+  height: 35px;
 }
 
 /* Estilos para el botón */
@@ -49,6 +50,7 @@
   border-radius: 5px;
   font-size: 16px;
   cursor: pointer;
+  height: 35px;
 }
 
 .btn-total-c:hover {
@@ -126,6 +128,7 @@
   font-size: 16px;
   margin-right: 10px;
   max-width: auto;
+  height: 74px;
 }
 
 .btn-total-m {
@@ -151,12 +154,18 @@
 @media screen and (max-width: 768px) {
   .graps {
     width: 100%;
-    max-width: 300;
+    max-width: 200px;
     height: auto;
   }
 
   .container-g {
     margin-bottom: 70%;
+  }
+
+  .combo-select-m {
+    height: 50px;
+    width: 225px;
+    margin-bottom: 10px;
   }
 }
 
@@ -182,7 +191,7 @@
 }
 
 .container-metricas {
-  max-width: 600px;
+  max-width: 700px;
   width: 90%;
   padding: 20px;
   background-color: #fff;
@@ -206,10 +215,12 @@
 .download-button {
   padding: 10px 20px;
   background-color: #007bff;
-  color: #fff;
+  color: #ffffff !important;
   border: none;
   border-radius: 5px;
   cursor: pointer;
+  text-decoration: none;
+  font-size: 13px;
 }
 
 .download-button:hover {
@@ -223,6 +234,10 @@
 
   .download-button-pdf {
     margin-left: 0;
+  }
+
+  .container-metricas {
+    max-width: 300px;
   }
 }
 

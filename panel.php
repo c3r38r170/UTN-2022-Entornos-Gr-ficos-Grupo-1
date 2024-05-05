@@ -24,6 +24,8 @@ include_once 'graficos/chart2.php';
 include_once 'graficos/chart3.php'; 
 include_once 'graficos/chart4.php'; 
 
+
+
 $selectedYear = isset($_GET['year']) ? $_GET['year'] : null;
 $totalConsultas = null;
 if ($selectedYear !== null) {
@@ -81,16 +83,45 @@ $cardInfo = [
 <div class="max-container">
 <div class="container-metricas">
         <div class="row-container">
-            <div class="text-container">Estadísticas de Bloqueos de Consultas por Docentes</div>
-            <button class="download-button">Descargar PDF</button>
+            <div class="text-container">Estadísticas de Consultas por Docentes</div>
+            <form method="GET" class="label-combo" action="./libs/fpdf/reporteDocente.php" target="_blank">
+                <select class="combo-select-m" name="docente[]" multiple> 
+                    <?php
+                    $docentes = getAllDocentes();
+                    foreach ($docentes as $docente) {
+                        ?>
+                        <option value="<?php echo $docente['nombre_completo']; ?>"><?php echo $docente['nombre_completo']; ?></option>
+                        <?php
+                    }
+                    ?>
+                </select>
+                <select class="combo-select" name="year">
+                    <option value="2024" <?php if ($selectedYear == '2024') echo 'selected'; ?>>2024</option>
+                    <option value="2023" <?php if ($selectedYear == '2023') echo 'selected'; ?>>2023</option>
+                </select>
+                <input type="submit" class="btn-total-c" value="Consultar">
+            </form>
         </div>
+        <hr>
         <div class="row-container">
-            <div class="text-container">Estadísticas de Motivos de Consultas por Alumnos</div>
-            <button class="download-button">Descargar PDF</button>
-        </div>
-        <div class="row-container">
-            <div class="text-container">Texto 3</div>
-            <button class="download-button">Descargar PDF</button>
+            <div class="text-container">Estadísticas de Consultas por Alumnos</div>
+            <form method="GET" class="label-combo" action="./libs/fpdf/reporteAlumno.php" target="_blank">
+                <select class="combo-select-m" name="alumno[]" multiple> 
+                    <?php
+                    $alumnos = getAllAlumnos();
+                    foreach ($alumnos as $alumno) {
+                        ?>
+                        <option value="<?php echo $alumno['nombre_completo']; ?>"><?php echo $alumno['nombre_completo']; ?></option>
+                        <?php
+                    }
+                    ?>
+                </select>
+                <select class="combo-select" name="year">
+                    <option value="2024" <?php if ($selectedYear == '2024') echo 'selected'; ?>>2024</option>
+                    <option value="2023" <?php if ($selectedYear == '2023') echo 'selected'; ?>>2023</option>
+                </select>
+                <input type="submit" class="btn-total-c" value="Consultar">
+            </form>
         </div>
 </div>
 </div>
@@ -99,12 +130,12 @@ $cardInfo = [
     <div class="container">
         <div class="graph-container">
             <div id="piechart" class="graps"></div>
-            <button class="download-button-pdf"> Descargar</button>
+            <!-- <button class="download-button-pdf"> Descargar</button> -->
         </div>
         <div class="graph-container">
         <div id="barchart" class="graps">
         </div>
-        <button class="download-button-pdf"> Descargar</button>
+        <!-- <button class="download-button-pdf"> Descargar</button> -->
     </div>
         <!-- 
         <div class="search-container">
@@ -128,11 +159,11 @@ $cardInfo = [
     <div class="container">
     <div class="graph-container">
         <div id="donutchart" class="graps"></div>
-        <button class="download-button-pdf"> Descargar</button>
+        <!-- <button class="download-button-pdf"> Descargar</button> -->
     </div>
     <div class="graph-container">
         <div id="linechart" class="graps"></div>
-        <button class="download-button-pdf"> Descargar</button>
+       <!-- <button class="download-button-pdf"> Descargar</button> -->
     </div>
 </div>
 <!--
