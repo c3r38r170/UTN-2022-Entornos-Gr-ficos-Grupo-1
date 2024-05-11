@@ -10,10 +10,10 @@ require_once 'controladores/panel-control.php';
 $estados = [];
 $selectedYear = isset($_GET['year']) ? $_GET['year'] : null;
 if ($selectedYear !== null) {
-    $estados = getEstadosConsultass($selectedYear);
+    $estados = getEstadosConsultas($selectedYear);
 }
 else{
-    $estados = getEstadosConsultas();
+    $estados = getEstadosConsultas($selectedYear = null);
 }
 ?>
 <script type="text/javascript">

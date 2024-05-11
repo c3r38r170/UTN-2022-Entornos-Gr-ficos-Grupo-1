@@ -11,10 +11,10 @@ require_once 'controladores/comisiones.php';
 $comisiones = [];
 $selectedYear = isset($_GET['year']) ? $_GET['year'] : null;
 if ($selectedYear !== null) {
-    $comisiones = getConsultasComisioness($selectedYear);
+    $comisiones = getConsultasComisiones($selectedYear);
 }
 else{
-    $comisiones = getConsultasComisiones();
+    $comisiones = getConsultasComisiones($selectedYear = null);
 }
 ?>
 <script type="text/javascript">

@@ -10,10 +10,10 @@ require_once 'controladores/panel-control.php';
 $consultas = [];
 $selectedYear = isset($_GET['year']) ? $_GET['year'] : null;
 if ($selectedYear !== null) {
-    $consultas = getConsultasPorMess($selectedYear);
+    $consultas = getConsultasPorMes($selectedYear);
 }
 else{
-    $consultas = getConsultasPorMes();
+    $consultas = getConsultasPorMes($selectedYear = null);
 }
 ?>
 <script type="text/javascript">

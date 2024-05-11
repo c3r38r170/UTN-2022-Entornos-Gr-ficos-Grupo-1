@@ -13,12 +13,11 @@ $ultimasSuscripciones = [];
 $selectedYear = isset($_GET['year']) ? $_GET['year'] : null;
 if (isset($_GET['alumno']) && !empty($_GET['alumno'])) {
     $alumnoSeleccionado = $_GET['alumno'];
-    $suscripciones = getAlumnosSuscripcioness($alumnoSeleccionado, $selectedYear);
-    $ultimasSuscripciones = getAlumnosUltimasSuscripcioness($alumnoSeleccionado, $selectedYear);
+    $suscripciones = getAlumnosSuscripciones($selectedYear, $alumnoSeleccionado);
+    $ultimasSuscripciones = getAlumnosUltimasSuscripciones($selectedYear, $alumnoSeleccionado);
 } else {
-    $suscripciones = getAlumnosSuscripciones($selectedYear);
-    $ultimasSuscripciones = getAlumnosUltimasSuscripciones($selectedYear);
-
+    $suscripciones = getAlumnosSuscripciones($selectedYear,$alumnoSeleccionado = null);
+    $ultimasSuscripciones = getAlumnosUltimasSuscripciones($selectedYear, $alumnoSeleccionado = null);
 }
 class PDF extends FPDF
 {
@@ -29,28 +28,12 @@ class PDF extends FPDF
            parent::__construct();
            $this->selectedYear = isset($_GET['year']) ? $_GET['year'] : null; // Asigna el valor del año
        }
-   // Cabecera de página
-   function Header()
-   {
-   }
-
-   // Pie de página
-   function Footer()
-   {
-      $this->SetY(-15); // Posición: a 1,5 cm del final
-      $this->SetFont('Arial', 'I', 8); //tipo fuente, negrita(B-I-U-BIU), tamañoTexto
-      $this->Cell(0, 10, utf8_decode('Página ') . $this->PageNo() . '/{nb}', 0, 0, 'C'); //pie de pagina(numero de pagina)
-
-      $this->SetY(-15); // Posición: a 1,5 cm del final
-      $this->SetFont('Arial', 'I', 8); //tipo fuente, cursiva, tamañoTexto
-      $hoy = date('d/m/Y');
-      $this->Cell(355, 10, utf8_decode($hoy), 0, 0, 'C'); // pie de pagina(fecha de pagina)
-   }
 }
 
+//pag 1
 $pdf = new FPDF();
-$pdf->AddPage(); /* aquí entran dos para parámetros (orientación, tamaño)V->portrait H->landscape tamaño (A3, A4, A5, letter, legal) */
-$pdf->AliasNbPages(); // muestra la página / y total de páginas
+$pdf->AddPage(); 
+$pdf->AliasNbPages(); 
 
 $i = 0;
 $pdf->SetFont('Arial', '', 10);
@@ -99,7 +82,7 @@ foreach ($suscripciones as $suscripcion) {
 }
 }
 
-
+//Pag 2
 $pdf->AddPage();
 $pdf->AliasNbPages(); // muestra la página / y total de páginas
 
@@ -151,10 +134,3 @@ foreach ($ultimasSuscripciones as $ultimaSuscripcion) {
 
 
 $pdf->Output('reporteAlumno.pdf', 'I'); // nombreDescarga, Visor(I->visualizar - D->descargar)
-
-
-
-
-
-
-

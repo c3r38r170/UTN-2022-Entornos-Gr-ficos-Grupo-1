@@ -1,5 +1,4 @@
 <?php
-//session_start(['read_and_close'=>true]);
 require_once 'utils/usuario-tipos.php';
 if(!sessionEsAdministracion()){
     header('Location: index.php');
@@ -13,24 +12,11 @@ $selectedYear = isset($_GET['year']) ? $_GET['year'] : null;
 $totalConsultas = null;
 if ($selectedYear !== null) {
     $totalConsultas = countConsultasPorAnio($selectedYear);
-    $consultasMaterias = getConsultasMateriass($selectedYear);
+    $consultasMaterias = getConsultasMaterias($selectedYear);
 }
 else{
-    $consultasMaterias = getConsultasMaterias();
+    $consultasMaterias = getConsultasMaterias($selectedYear = null);
 }
-
-/*
-$consultasMaterias = [];
-
-if (isset($_GET['materia']) && !empty($_GET['materia'])) {
-    $materiasSeleccionadas = $_GET['materia'];
-    foreach ($materiasSeleccionadas as $materiaSeleccionada) {
-        $consultasMaterias = array_merge($consultasMaterias, getConsultasMaterias($materiaSeleccionada, $selectedYear));
-    }
-} else {
-    $consultasMaterias = getConsultasMateriass($selectedYear);
-}
-*/
 ?>
 
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>

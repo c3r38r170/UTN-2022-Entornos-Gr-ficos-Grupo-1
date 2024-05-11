@@ -15,19 +15,16 @@ $consultasCambios = [];
 $selectedYear = isset($_GET['year']) ? $_GET['year'] : null;
 if (isset($_GET['docente']) && !empty($_GET['docente'])) {
     $docenteSeleccionado = $_GET['docente'];
-    foreach ($docenteSeleccionado as $docente) {
-        $bloqueos = array_merge($bloqueos, getBloqueosPorDocentess($docente, $selectedYear));
-    }
-    $bloqueos = getBloqueosPorDocentess($docenteSeleccionado, $selectedYear);
-    $consultas = getBloquedasVsConfirmadass($docenteSeleccionado, $selectedYear);
-    $consultasVirPres = getVirtualesVsPresencialess($docenteSeleccionado, $selectedYear);
-    $consultasCambios = getCambiosConsultass($docenteSeleccionado, $selectedYear);
+    $bloqueos = getBloqueosPorDocentes($selectedYear, $docenteSeleccionado);
+    $consultas = getBloquedasVsConfirmadas($selectedYear, $docenteSeleccionado);
+    $consultasVirPres = getVirtualesVsPresenciales($selectedYear, $docenteSeleccionado);
+    $consultasCambios = getCambiosConsultas($selectedYear, $docenteSeleccionado);
 
 } else {
-    $bloqueos = getBloqueosPorDocentes($selectedYear);
-    $consultas = getBloquedasVsConfirmadas($selectedYear);
-    $consultasVirPres = getVirtualesVsPresenciales($selectedYear);
-    $consultasCambios = getCambiosConsultas($selectedYear);
+    $bloqueos = getBloqueosPorDocentes($selectedYear, $docenteSeleccionado = null);
+    $consultas = getBloquedasVsConfirmadas($selectedYear, $docenteSeleccionado = null);
+    $consultasVirPres = getVirtualesVsPresenciales($selectedYear, $docenteSeleccionado = null);
+    $consultasCambios = getCambiosConsultas($selectedYear, $docenteSeleccionado = null);
 
 }
 class PDF extends FPDF
@@ -39,28 +36,13 @@ class PDF extends FPDF
            parent::__construct();
            $this->selectedYear = isset($_GET['year']) ? $_GET['year'] : null; // Asigna el valor del año
        }
-   // Cabecera de página
-   function Header()
-   {
-   }
-
-   // Pie de página
-   function Footer()
-   {
-      $this->SetY(-15); // Posición: a 1,5 cm del final
-      $this->SetFont('Arial', 'I', 8); //tipo fuente, negrita(B-I-U-BIU), tamañoTexto
-      $this->Cell(0, 10, utf8_decode('Página ') . $this->PageNo() . '/{nb}', 0, 0, 'C'); //pie de pagina(numero de pagina)
-
-      $this->SetY(-15); // Posición: a 1,5 cm del final
-      $this->SetFont('Arial', 'I', 8); //tipo fuente, cursiva, tamañoTexto
-      $hoy = date('d/m/Y');
-      $this->Cell(355, 10, utf8_decode($hoy), 0, 0, 'C'); // pie de pagina(fecha de pagina)
-   }
+   
 }
 
+//Pag1
 $pdf = new FPDF();
-$pdf->AddPage(); /* aquí entran dos para parámetros (orientación, tamaño)V->portrait H->landscape tamaño (A3, A4, A5, letter, legal) */
-$pdf->AliasNbPages(); // muestra la página / y total de páginas
+$pdf->AddPage();
+$pdf->AliasNbPages(); 
 
 $i = 0;
 $pdf->SetFont('Arial', '', 10);
@@ -123,8 +105,10 @@ foreach ($bloqueos as $bloqueo) {
 }
 }
 
+
+//Pag 2
 $pdf->AddPage();
-$pdf->AliasNbPages(); // muestra la página / y total de páginas
+$pdf->AliasNbPages(); 
 
 $i = 0;
 $pdf->SetFont('Arial', '', 10);
@@ -171,9 +155,9 @@ foreach ($consultas as $consulta) {
 }
 
 
-
-$pdf->AddPage(); /* aquí entran dos para parámetros (orientación, tamaño)V->portrait H->landscape tamaño (A3, A4, A5, letter, legal) */
-$pdf->AliasNbPages(); // muestra la página / y total de páginas
+//Pag 3
+$pdf->AddPage();
+$pdf->AliasNbPages(); 
 
 $i = 0;
 $pdf->SetFont('Arial', '', 10);
@@ -220,9 +204,9 @@ foreach ($consultasVirPres as $consultaVirPres) {
 }
 }
 
-
+//Pag 4
 $pdf->AddPage('L');
-$pdf->AliasNbPages(); // muestra la página / y total de páginas
+$pdf->AliasNbPages(); 
 
 $i = 0;
 $pdf->SetFont('Arial', '', 10);
